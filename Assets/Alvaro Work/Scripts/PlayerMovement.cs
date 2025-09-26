@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    // Update is called once per frame
+    // Update is called once per frames
     void Update()
     {
         movement_amount = move_action.ReadValue<Vector2>();
