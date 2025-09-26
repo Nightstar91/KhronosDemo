@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Parameter")]
     [SerializeField] float rotation = 5f;
     [SerializeField] float speed = 10f;
-    [SerializeField] float jump_force = 5f;
+    [SerializeField] float jump_force = 1f;
 
 
     [SerializeField] GameObject player_object;
@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         jump_action = InputSystem.actions.FindAction("Jump");
     }
 
+    
 
     // Update is called once per frame
     void Update()
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         movement_amount = move_action.ReadValue<Vector2>();
         look_amount = look_action.ReadValue<Vector2>();
 
-        if (jump_action.WasPressedThisFrame())
+        if (jump_action.IsPressed())
         {
             Jump();
         }
