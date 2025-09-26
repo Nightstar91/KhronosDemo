@@ -12,8 +12,10 @@ public class FPSController : MonoBehaviour
     private InputAction jumpAction;
 
     [Header("Movement Parameters")]
-    [SerializeField] private float walkSpeed = 3f;
-    [SerializeField] private float gravity = 30f;
+    [SerializeField] float walkSpeed = 3f;
+    [SerializeField] float gravity = 30f;
+    [SerializeField] float maxSpeed = 15f;
+    [SerializeField] float jumpHeight = 10f;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] private float lookSpeedX = 2f;
@@ -31,9 +33,9 @@ public class FPSController : MonoBehaviour
 
     private float originalWalkSpeed;
     private const float sprintSpeed = 0.075f;
-    private const float maxSpeed = 15f;
 
     public bool isMoving = false;
+    public bool isGrounded = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,6 +53,11 @@ public class FPSController : MonoBehaviour
     {
         if (canMove)
         {
+            if (jumpAction.IsPressed())
+            {
+                Jump();
+            }
+
             HandleMouseLock();
             HandleMovementInput();
             ApplyFinalMovements();
@@ -133,5 +140,11 @@ public class FPSController : MonoBehaviour
         else
             walkSpeed = originalWalkSpeed;
 
+    }
+
+
+    private void Jump()
+    {
+        moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
     }
 }
