@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -463,13 +462,16 @@ MonoBehaviour:
   walkSpeed: 3
   gravity: 30
   maxSpeed: 15
-  jumpHeight: 10
+  jumpHeight: 1
   lookSpeedX: 2
   lookSpeedY: 2
   upperLookLimit: 80
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
   isMoving: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   isGrounded: 0
 --- !u!143 &338853500
 CharacterController:

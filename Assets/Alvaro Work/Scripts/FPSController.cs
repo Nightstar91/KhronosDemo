@@ -14,8 +14,8 @@ public class FPSController : MonoBehaviour
     [Header("Movement Parameters")]
     [SerializeField] float walkSpeed = 3f;
     [SerializeField] float gravity = 30f;
-    [SerializeField] float maxSpeed = 15f;
-    [SerializeField] float jumpHeight = 10f;
+    [SerializeField] float maxSpeed = 12f;
+    [SerializeField] float jumpHeight = 1f;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] private float lookSpeedX = 2f;
@@ -35,6 +35,8 @@ public class FPSController : MonoBehaviour
     private const float sprintSpeed = 0.075f;
 
     public bool isMoving = false;
+
+    public LayerMask groundLayer;
     public bool isGrounded = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +47,7 @@ public class FPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         originalWalkSpeed = walkSpeed;
+        groundLayer = LayerMask.GetMask("Ground");
     }
 
 
@@ -53,7 +56,7 @@ public class FPSController : MonoBehaviour
     {
         if (canMove)
         {
-            if (jumpAction.IsPressed())
+            if (jumpAction.IsPressed() && isGrounded)
             {
                 Jump();
             }
@@ -64,6 +67,11 @@ public class FPSController : MonoBehaviour
         }
 
 
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = CheckIfGrounded();
     }
 
 
@@ -146,5 +154,15 @@ public class FPSController : MonoBehaviour
     private void Jump()
     {
         moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
+    }
+
+    private bool CheckIfGrounded()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up * -1), out hit, 1.1f, groundLayer))
+            return true;
+        else
+            return false;
     }
 }
