@@ -142,7 +142,7 @@ public class FPSController : MonoBehaviour
         if (walkSpeed < maxSpeed && isMoving)
             walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed,ref sprintSpeed, 0.5f);
 
-        else if (walkSpeed >= maxSpeed && isMoving)
+        else if (walkSpeed > maxSpeed && isMoving)
             walkSpeed = maxSpeed;
 
         else
