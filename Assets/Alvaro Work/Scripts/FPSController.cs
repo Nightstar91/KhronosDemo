@@ -16,6 +16,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float gravity = 30f;
     [SerializeField] float maxSpeed = 12f;
     [SerializeField] float jumpHeight = 1f;
+    [SerializeField] float sprintSpeed = 0.09f;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] private float lookSpeedX = 2f;
@@ -32,7 +33,6 @@ public class FPSController : MonoBehaviour
     private float rotationX = 0f;
 
     private float originalWalkSpeed;
-    private const float sprintSpeed = 0.075f;
 
     public bool isMoving = false;
 
@@ -140,7 +140,7 @@ public class FPSController : MonoBehaviour
     private void GainSpeedCheck()
     {
         if (walkSpeed < maxSpeed && isMoving)
-            walkSpeed += sprintSpeed;
+            walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed,ref sprintSpeed, 0.5f);
 
         else if (walkSpeed >= maxSpeed && isMoving)
             walkSpeed = maxSpeed;

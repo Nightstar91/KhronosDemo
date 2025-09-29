@@ -461,8 +461,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   gravity: 30
-  maxSpeed: 15
+  maxSpeed: 12
   jumpHeight: 1
+  sprintSpeed: 0.009
   lookSpeedX: 2
   lookSpeedY: 2
   upperLookLimit: 80
