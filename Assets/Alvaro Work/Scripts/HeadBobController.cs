@@ -3,34 +3,47 @@ using UnityEngine.Rendering;
 
 public class HeadBobController : MonoBehaviour
 {
-    [Range(0.001f, 0.01f)] public float amount = 0.002f;
-    [Range(1f, 30f)] public float frequency = 10.0f;
+    [Header("Camera Sway Parameters")]
+    [Range(0.001f, 0.01f)] public float amount = 0.1f;
+    [Range(1f, 30f)] public float frequency = 15.0f;
     [Range(10f, 100f)] public float smooth = 10.0f;
 
-    Vector3 startPos;
+    [Header("Camera Tilt Parameters")]
+    [Range(0f, 1f)] public float tiltAmount = 0.5f;
+    [Range(0f, 1f)] public float tiltSpeed = 0.4f;
+    [Range(0f, 3f)] public float tiltResetSpeed = 1.5f;
+
+    Vector3 startPosition;
+    Quaternion startRotation;
 
     private void Awake()
     {
-        startPos = transform.localPosition;
+        startPosition = transform.localPosition;
+        startRotation = transform.localRotation;
     }
 
 
     void Update()
     {
-        CheckForHeadbobTrigger();
+        CheckForInput();
         StopHeadbob();
+        StopSwayCamera();
     }
 
 
-    private void CheckForHeadbobTrigger()
+    private void CheckForInput()
     {
         float inputMagnitide = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).magnitude;
-    
+        float horizontalAxis = Input.GetAxis("Horizontal");
+        StartSwayCamera(horizontalAxis);
+
         if (inputMagnitide > 0)
         {
             StartHeadbob();
         }
     }
+
+
 
     
     private Vector3 StartHeadbob()
@@ -47,7 +60,30 @@ public class HeadBobController : MonoBehaviour
 
     private void StopHeadbob()
     {
-        if (transform.localPosition == startPos) return;
-        transform.localPosition = Vector3.Lerp(transform.localPosition, startPos, 1 * Time.deltaTime);
+        if (transform.localPosition == startPosition) return;
+        transform.localPosition = Vector3.Lerp(transform.localPosition, startPosition, 1 * Time.deltaTime);
+    }
+
+
+    private Quaternion StartSwayCamera(float horizontal)
+    {
+        Quaternion rot = Quaternion.identity;
+        if(horizontal > 0)
+            rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount, Time.deltaTime * tiltSpeed);
+        else if (horizontal < 0)
+            rot.z = Mathf.Lerp(transform.localRotation.z, -Mathf.Abs(tiltAmount), Time.deltaTime * tiltSpeed);
+        else
+            return rot;
+
+            transform.localRotation = rot;
+
+        return rot;
+    }
+
+
+    private void StopSwayCamera()
+    {
+        if (transform.localRotation == startRotation) return;
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, startRotation, tiltResetSpeed * Time.deltaTime);
     }
 }
