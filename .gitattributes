@@ -1,0 +1,36 @@
+# Force text files to use LF line endings
+* text=auto eol=lf
+
+# Unity project files
+*.cs     text diff=csharp
+*.shader text
+*.cginc  text
+*.compute text
+*.json   text
+*.xml    text
+*.yaml   text
+*.yml    text
+*.txt    text
+*.asmdef text
+*.asmref text
+*.meta   text
+
+# FMOD binaries (don’t touch line endings)
+*.bundle binary
+*.dll    binary
+*.so     binary
+*.a      binary
+*.dylib  binary
+
+# Audio assets
+*.bank binary
+*.wav  binary
+*.ogg  binary
+*.mp3  binary
+
+# Images
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.tga  binary
+*.psd  binary
