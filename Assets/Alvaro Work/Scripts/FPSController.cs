@@ -7,9 +7,9 @@ public class FPSController : MonoBehaviour
 {
     public bool canMove { get; private set; } = true;
 
-    private InputAction moveAction;
-    private InputAction lookAction;
-    private InputAction jumpAction;
+    public InputAction moveAction;
+    public InputAction lookAction;
+    public InputAction jumpAction;
 
     [Header("Movement Parameters")]
     [SerializeField] float walkSpeed = 3f;
@@ -151,12 +151,12 @@ public class FPSController : MonoBehaviour
     }
 
 
-    private void Jump()
+    public void Jump()
     {
         moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
     }
 
-    private bool CheckIfGrounded()
+    public bool CheckIfGrounded()
     {
         RaycastHit hit;
 
