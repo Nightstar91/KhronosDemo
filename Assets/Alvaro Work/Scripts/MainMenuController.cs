@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     [Header("For scene name watch out for capitalization!")]
-    [SerializeField] public string sceneName;
-    [SerializeField] public float sensitivityAmount = 2;
+    [SerializeField] public string sceneName = "LevelDemo";
+    
 
     private GameObject playButton;
     private GameObject settingButton;
@@ -31,14 +31,16 @@ public class MainMenuController : MonoBehaviour
         sensitivitySlider = GameObject.Find("SensSlider");
         sensitivityText = GameObject.Find("SettingSensAmountText");
         sensitivityLabel = GameObject.Find("SettingSensLabel");
+    }
 
+    private void Start()
+    {
         // For all setting related UI
         settingPanel.SetActive(false);
         sensitivitySlider.SetActive(false);
         sensitivityText.SetActive(false);
         sensitivityLabel.SetActive(false);
         settingBackButton.SetActive(false);
-        
     }
 
     public void PlayButton()
@@ -64,34 +66,18 @@ public class MainMenuController : MonoBehaviour
 
     public void SettingBackButton()
     {
+
         playButton.SetActive(true);
         settingButton.SetActive(true);
         exitButton.SetActive(true);
 
         // For all setting related UI
         settingPanel.SetActive(false);
-        sensitivitySlider.SetActive(false);
-        sensitivityText.SetActive(false);
-        sensitivityLabel.SetActive(false);
         settingBackButton.SetActive(false);
     }
 
 
-    public void UpdateSensitivity()
-    {
-        // Assigning the value of sensitivity based on the value of the slider
-        sensitivityAmount = Convert.ToInt32(sensitivitySlider.GetComponent<Slider>().value);
-
-        // Displaying the text based on the value
-        sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
-    }
-
-
-    [ContextMenu("Save")]
-    private void SaveSensitivity()
-    {
-        PlayerPrefs.SetFloat("Sensitivity", sensitivityAmount);
-    }
+    
 
 
     public void ExitButton()

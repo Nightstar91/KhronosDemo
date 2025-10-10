@@ -9,7 +9,7 @@ public class CameraEffect : MonoBehaviour
     [Range(10f, 100f)] public float smooth = 10.0f;
 
     [Header("Camera Tilt Parameters")]
-    [Range(0f, 1f)] public float tiltAmount = 0.5f;
+    [Range(0f, 0.5f)] public float tiltAmount = 0.5f;
     [Range(0f, 1f)] public float tiltSpeed = 0.4f;
     [Range(0f, 3f)] public float tiltResetSpeed = 1.5f;
 

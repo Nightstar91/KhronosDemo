@@ -10,6 +10,7 @@ public class FPSController : MonoBehaviour
     public InputAction moveAction;
     public InputAction lookAction;
     public InputAction jumpAction;
+    public InputAction pauseAction;
 
     [Header("Movement Parameters")]
     [SerializeField] float walkSpeed = 3f;
@@ -80,6 +81,11 @@ public class FPSController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        pauseAction = InputSystem.actions.FindAction("Pause");
+
+
+        lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
+        lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
     }
 
 
@@ -88,6 +94,7 @@ public class FPSController : MonoBehaviour
         moveAction.Enable();
         lookAction.Enable();
         jumpAction.Enable();
+        pauseAction.Enable();
     }
 
 
@@ -96,6 +103,7 @@ public class FPSController : MonoBehaviour
         moveAction.Disable();
         lookAction.Disable();
         jumpAction.Disable();
+        pauseAction.Disable();
     }
 
 
@@ -164,5 +172,10 @@ public class FPSController : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void PausingGame()
+    {
+
     }
 }
