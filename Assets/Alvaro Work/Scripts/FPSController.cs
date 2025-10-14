@@ -20,8 +20,8 @@ public class FPSController : MonoBehaviour
     [SerializeField] float sprintSpeed = 0.09f;
 
     [Header("Look Parameters")]
-    [SerializeField, Range(1, 10)] private float lookSpeedX = 2f;
-    [SerializeField, Range(1, 10)] private float lookSpeedY = 2f;
+    [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
+    [SerializeField, Range(1, 10)] public float lookSpeedY = 2f;
     [SerializeField, Range(1, 100)] private float upperLookLimit = 80f;
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 

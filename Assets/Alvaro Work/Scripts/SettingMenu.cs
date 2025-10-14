@@ -39,4 +39,10 @@ public class SettingMenu : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Sensitivity", sensitivityAmount);
     }
+
+    
+    public float GetSensitivity()
+    {
+        return sensitivityAmount;
+    }
 }

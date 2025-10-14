@@ -6,6 +6,7 @@ public class PlayerHud : MonoBehaviour
 {
     [SerializeField] public string sceneName = "Main Menu";
     [SerializeField] public FPSController playerController;
+    [SerializeField] private SettingMenu settingMenu;
     public GameObject pauseMenu;
     public bool isPaused = false;
 
@@ -19,12 +20,16 @@ public class PlayerHud : MonoBehaviour
     void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<FPSController>();
+        settingMenu = GetComponent<SettingMenu>();
+
         pauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
         if(playerController.pauseAction.triggered)
         {
             if(!isPaused)
@@ -54,6 +59,10 @@ public class PlayerHud : MonoBehaviour
 
     public void ResumeGame()
     {
+        // Updating the Sensitivity
+        playerController.lookSpeedX = settingMenu.GetSensitivity();
+        playerController.lookSpeedY = settingMenu.GetSensitivity();
+
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
         isPaused = false;
