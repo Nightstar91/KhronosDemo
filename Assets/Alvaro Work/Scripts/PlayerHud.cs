@@ -43,6 +43,8 @@ public class PlayerHud : MonoBehaviour
         }
     }
 
+
+
     public void PauseGame()
     {
         pauseMenu.SetActive(true);

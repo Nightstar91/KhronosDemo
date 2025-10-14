@@ -40,6 +40,9 @@ public class FPSController : MonoBehaviour
     public LayerMask groundLayer;
     public bool isGrounded = false;
 
+    // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION
+    private PlayerHud playerHud;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,13 +52,15 @@ public class FPSController : MonoBehaviour
         Cursor.visible = false;
         originalWalkSpeed = walkSpeed;
         groundLayer = LayerMask.GetMask("Ground");
+
+        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (canMove && playerHud.isPaused != true)
         {
             if (jumpAction.IsPressed() && isGrounded)
             {
