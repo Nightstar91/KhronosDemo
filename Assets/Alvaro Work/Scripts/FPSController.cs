@@ -41,7 +41,7 @@ public class FPSController : MonoBehaviour
     public bool isGrounded = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION
-    private PlayerHud playerHud;
+    public PlayerHud playerHud;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

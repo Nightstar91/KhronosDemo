@@ -39,18 +39,22 @@ public class CameraEffect : MonoBehaviour
 
     void Update()
     {
-        CheckForInput();
-        _camera.LookAt(FocusTarget());
-        StopHeadbob();
-        StopSwayCamera();
-
-        if (!FPSController.isGrounded)
+        if(!FPSController.playerHud.isPaused)
         {
-            if(FPSController.isGrounded)
+            CheckForInput();
+            _camera.LookAt(FocusTarget());
+            StopHeadbob();
+            StopSwayCamera();
+
+            if (!FPSController.isGrounded)
             {
-                StartCoroutine(CameraShakeEvent());
+                if (FPSController.isGrounded)
+                {
+                    StartCoroutine(CameraShakeEvent());
+                }
             }
         }
+        
     }
 
 
