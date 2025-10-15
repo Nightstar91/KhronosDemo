@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerHud : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerHud : MonoBehaviour
     [SerializeField] public string sceneName = "Main Menu";
     [SerializeField] public FPSController playerController;
     [SerializeField] private SettingMenu settingMenu;
+    [SerializeField] public Slider speedoSlider;
+
     public GameObject pauseMenu;
     public bool isPaused = false;
 
@@ -21,6 +24,7 @@ public class PlayerHud : MonoBehaviour
     {
         playerController = GameObject.Find("Player").GetComponent<FPSController>();
         settingMenu = GetComponent<SettingMenu>();
+        speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
         pauseMenu.SetActive(false);
     }
@@ -28,7 +32,7 @@ public class PlayerHud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        UpdateSpeedometer();
 
         if(playerController.pauseAction.triggered)
         {
@@ -43,6 +47,12 @@ public class PlayerHud : MonoBehaviour
         }
     }
 
+
+    public void UpdateSpeedometer()
+    {
+        speedoSlider.value = playerController.walkSpeed;
+    }
+        
 
 
     public void PauseGame()

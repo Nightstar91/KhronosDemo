@@ -13,7 +13,7 @@ public class FPSController : MonoBehaviour
     public InputAction pauseAction;
 
     [Header("Movement Parameters")]
-    [SerializeField] float walkSpeed = 3f;
+    [SerializeField] public float walkSpeed = 3f;
     [SerializeField] float gravity = 30f;
     [SerializeField] float maxSpeed = 12f;
     [SerializeField] float jumpHeight = 1f;
