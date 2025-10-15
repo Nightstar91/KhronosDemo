@@ -50,7 +50,7 @@ public class PlayerHud : MonoBehaviour
 
     public void UpdateSpeedometer()
     {
-        speedoSlider.value = playerController.walkSpeed;
+        speedoSlider.value = playerController.characterController.velocity.magnitude;
     }
         
 

@@ -26,7 +26,7 @@ public class FPSController : MonoBehaviour
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
-    private CharacterController characterController;
+    public CharacterController characterController;
 
     private Vector3 moveDirection;
     private Vector2 currentInput;
@@ -40,7 +40,7 @@ public class FPSController : MonoBehaviour
     public LayerMask groundLayer;
     public bool isGrounded = false;
 
-    // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION
+    // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     public PlayerHud playerHud;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
