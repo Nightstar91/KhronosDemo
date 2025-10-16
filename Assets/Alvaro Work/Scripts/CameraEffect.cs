@@ -4,13 +4,13 @@ using UnityEngine.Rendering;
 
 public class CameraEffect : MonoBehaviour
 {
-    [Header("Camera Sway Parameters")]
-    [Range(0, 0.1f)] public float amount = 0.01f;
-    [Range(1f, 30f)] public float frequency = 15.0f;
-    [Range(10f, 100f)] public float smooth = 10.0f;
+    [Header("Camera Bob Parameters")]
+    [Range(0, 0.1f)] public float amount = 0.008f;
+    [Range(1f, 30f)] public float frequency = 12f;
+    [Range(10f, 100f)] public float smooth = 20f;
 
     [Header("Camera Tilt Parameters")]
-    [Range(0f, 0.5f)] public float tiltAmount = 0.1f;
+    [Range(0f, 0.5f)] public float tiltAmount = 0.07f;
     [Range(0f, 1f)] public float tiltSpeed = 0.4f;
     [Range(0f, 3f)] public float tiltResetSpeed = 1.5f;
 
@@ -34,6 +34,8 @@ public class CameraEffect : MonoBehaviour
         startPosition = transform.localPosition;
         startRotation = transform.localRotation;
         FPSController = GetComponentInParent<FPSController>();
+        _camera = GameObject.Find("Main Camera").GetComponent<Transform>();
+        _cameraHolder = GameObject.Find("Cam Holder").GetComponent<Transform>();
     }
 
 
@@ -42,7 +44,7 @@ public class CameraEffect : MonoBehaviour
         if(!FPSController.playerHud.isPaused)
         {
             CheckForInput();
-            _camera.LookAt(FocusTarget());
+            
             StopHeadbob();
             StopSwayCamera();
 
