@@ -10,22 +10,23 @@ public class FPSController : MonoBehaviour
     public InputAction moveAction;
     public InputAction lookAction;
     public InputAction jumpAction;
+    public InputAction pauseAction;
 
     [Header("Movement Parameters")]
-    [SerializeField] float walkSpeed = 3f;
+    [SerializeField] public float walkSpeed = 3f;
     [SerializeField] float gravity = 30f;
     [SerializeField] float maxSpeed = 12f;
     [SerializeField] float jumpHeight = 1f;
     [SerializeField] float sprintSpeed = 0.09f;
 
     [Header("Look Parameters")]
-    [SerializeField, Range(1, 10)] private float lookSpeedX = 2f;
-    [SerializeField, Range(1, 10)] private float lookSpeedY = 2f;
+    [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
+    [SerializeField, Range(1, 10)] public float lookSpeedY = 2f;
     [SerializeField, Range(1, 100)] private float upperLookLimit = 80f;
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
-    private CharacterController characterController;
+    public CharacterController characterController;
 
     private Vector3 moveDirection;
     private Vector2 currentInput;
@@ -39,22 +40,30 @@ public class FPSController : MonoBehaviour
     public LayerMask groundLayer;
     public bool isGrounded = false;
 
+    // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
+    public PlayerHud playerHud;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         originalWalkSpeed = walkSpeed;
         groundLayer = LayerMask.GetMask("Ground");
+
+        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
+
+        lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
+        lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
+        playerCamera.fieldOfView = PlayerPrefs.GetFloat("Fov", 50);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (canMove && playerHud.isPaused != true)
         {
             if (jumpAction.IsPressed() && isGrounded)
             {
@@ -80,6 +89,9 @@ public class FPSController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        pauseAction = InputSystem.actions.FindAction("Pause");
+
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
 
@@ -88,6 +100,7 @@ public class FPSController : MonoBehaviour
         moveAction.Enable();
         lookAction.Enable();
         jumpAction.Enable();
+        pauseAction.Enable();
     }
 
 
@@ -96,6 +109,7 @@ public class FPSController : MonoBehaviour
         moveAction.Disable();
         lookAction.Disable();
         jumpAction.Disable();
+        pauseAction.Disable();
     }
 
 
@@ -164,5 +178,10 @@ public class FPSController : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void PausingGame()
+    {
+
     }
 }

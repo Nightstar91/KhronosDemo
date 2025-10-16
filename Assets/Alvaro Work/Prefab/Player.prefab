@@ -177,6 +177,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 71fe4c30-b2a8-45c7-af58-0203bebdb8b2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   walkSpeed: 3
   gravity: 30
   maxSpeed: 12
@@ -244,7 +253,16 @@ MonoBehaviour:
   tiltSpeed: 0.75
   tiltResetSpeed: 2
   shakeDuration: 0.5
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   shakeIntensity: 10
+  _camera: {fileID: 0}
+  _cameraHolder: {fileID: 0}
+  start: 0
 --- !u!1 &8787107069329399089
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 8787107069329399089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06312206, y: -0.5514555, z: 0.38171086}
+  m_LocalPosition: {x: -0.06312206, y: -0.5514555, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -312,7 +330,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 50
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -387,4 +405,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 8787107069329399089}
