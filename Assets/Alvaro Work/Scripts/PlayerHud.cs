@@ -10,6 +10,7 @@ public class PlayerHud : MonoBehaviour
     [SerializeField] private SettingMenu settingMenu;
     [SerializeField] public Slider speedoSlider;
 
+
     public GameObject pauseMenu;
     public bool isPaused = false;
 
@@ -74,6 +75,9 @@ public class PlayerHud : MonoBehaviour
         // Updating the Sensitivity
         playerController.lookSpeedX = settingMenu.GetSensitivity();
         playerController.lookSpeedY = settingMenu.GetSensitivity();
+
+        // Updating the Sensitivity
+        playerController.playerCamera.fieldOfView = settingMenu.GetFOV();
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;

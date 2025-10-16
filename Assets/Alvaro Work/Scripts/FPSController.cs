@@ -46,7 +46,6 @@ public class FPSController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -54,6 +53,10 @@ public class FPSController : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
 
         playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
+
+        lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
+        lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
+        playerCamera.fieldOfView = PlayerPrefs.GetFloat("Fov", 50);
     }
 
 
@@ -88,9 +91,7 @@ public class FPSController : MonoBehaviour
         jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
 
-
-        lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
-        lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
 
