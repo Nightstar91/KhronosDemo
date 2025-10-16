@@ -27,6 +27,9 @@ public class SettingMenu : MonoBehaviour
         fovText = GameObject.Find("SettingFOVAmountText");
         fovAmount = PlayerPrefs.GetFloat("Fov", 50);
 
+        sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
+        fovText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", fovAmount);
+
         sensitivitySlider.GetComponent<Slider>().value = sensitivityAmount;
         fovSlider.GetComponent<Slider>().value = fovAmount; 
     }
