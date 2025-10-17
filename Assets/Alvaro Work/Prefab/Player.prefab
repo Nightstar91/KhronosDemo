@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8340166573191863754}
   - component: {fileID: 5343704855654314083}
   - component: {fileID: 808400893573334708}
+  - component: {fileID: 4355310851019915651}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -196,11 +197,46 @@ MonoBehaviour:
   upperLookLimit: 80
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
+  characterController: {fileID: 0}
   isMoving: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
+  playerHud: {fileID: 0}
+--- !u!114 &4355310851019915651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823678222901918087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b03d4b7fded2f444bbfc64dc0f40c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepEvent:
+    Guid:
+      Data1: 283896238
+      Data2: 1078871290
+      Data3: 1916043709
+      Data4: -274348632
+    Path: event:/PlayerCharacter/Footsteps
+  landEvent:
+    Guid:
+      Data1: 1121565953
+      Data2: 1186490800
+      Data3: 1585328540
+      Data4: 2064574844
+    Path: event:/PlayerCharacter/Landings
+  surfaceParameterName: SurfaceTerrain
+  stepInterval: 0.35
+  minMoveSpeed: 0.1
+  raycastDistance: 1.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7931322091484532706
 GameObject:
   m_ObjectHideFlags: 0
