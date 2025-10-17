@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3314384000610109812}
         m_TargetAssemblyTypeName: PlayerHud, Assembly-CSharp
         m_MethodName: GoToMainMenu
         m_Mode: 1
@@ -164,6 +164,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8584872058598587145}
   - {fileID: 6804887143961391430}
   - {fileID: 7435869090644434232}
   m_Father: {fileID: 0}
@@ -468,7 +469,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3314384000610109812}
         m_TargetAssemblyTypeName: PlayerHud, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -1573,7 +1574,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4516166964313213698, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
         m_TargetAssemblyTypeName: PlayerHud, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -2439,6 +2440,90 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &1392645125903270518
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8517356215903777306}
+    m_Modifications:
+    - target: {fileID: 735544679832271817, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_Name
+      value: HudController
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.575977
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3928053
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.88482434
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+--- !u!114 &3314384000610109812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4516166964313213698, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+  m_PrefabInstance: {fileID: 1392645125903270518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba4d051a3e440d4da79d2eec7fd0858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5773508681639571826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4849308981617128196, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+  m_PrefabInstance: {fileID: 1392645125903270518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b500c0ae046af3c4b856d8f540a1b7d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &8584872058598587145 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7237351646116002175, guid: 25808a446c7587e468fdea988e6d3e15, type: 3}
+  m_PrefabInstance: {fileID: 1392645125903270518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6945918666057701683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2579,6 +2664,10 @@ PrefabInstance:
       propertyPath: m_MinValue
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 6473261517370943284, guid: 2c8f88a01b08b74449916f75b046afb6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5773508681639571826}
     - target: {fileID: 6473261517370943284, guid: 2c8f88a01b08b74449916f75b046afb6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpdateFov
@@ -2724,6 +2813,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6473261517370943284, guid: 2c8f88a01b08b74449916f75b046afb6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5773508681639571826}
     - target: {fileID: 6473261517370943284, guid: 2c8f88a01b08b74449916f75b046afb6, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpdateSensitivity
