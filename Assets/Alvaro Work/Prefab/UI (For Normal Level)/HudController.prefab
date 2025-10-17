@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba4d051a3e440d4da79d2eec7fd0858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  sceneName: Main Menu
   playerController: {fileID: 0}
   settingMenu: {fileID: 0}
   speedoSlider: {fileID: 0}
