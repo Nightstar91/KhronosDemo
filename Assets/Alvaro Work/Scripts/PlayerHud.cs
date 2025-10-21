@@ -96,9 +96,4 @@ public class PlayerHud : MonoBehaviour
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1.0f;
     }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
 }
