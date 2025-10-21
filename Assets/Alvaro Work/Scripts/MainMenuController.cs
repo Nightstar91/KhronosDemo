@@ -8,7 +8,8 @@ public class MainMenuController : MonoBehaviour
 {
     [Header("For scene name watch out for capitalization!")]
     [SerializeField] public string sceneName = "LevelDemo";
-    
+
+    public Boolean exitConfirmCheck;
 
     private GameObject playButton;
     private GameObject settingButton;
@@ -17,17 +18,21 @@ public class MainMenuController : MonoBehaviour
 
     private GameObject sensitivitySlider;
     private GameObject settingPanel;
+    private GameObject exitConfirmationPanel;
     private GameObject sensitivityText;
     private GameObject sensitivityLabel;
 
     private void Awake()
     {
+        exitConfirmCheck = false;
+
         playButton = GameObject.Find("PlayButton");
         settingButton = GameObject.Find("SettingButton");
         settingBackButton = GameObject.Find("SettingBackButton");
         exitButton = GameObject.Find("ExitButton");
 
         settingPanel = GameObject.Find("SettingPanel");
+        exitConfirmationPanel = GameObject.Find("ExitGameConfirmationPanel");
         sensitivitySlider = GameObject.Find("SensSlider");
         sensitivityText = GameObject.Find("SettingSensAmountText");
         sensitivityLabel = GameObject.Find("SettingSensLabel");
@@ -41,6 +46,7 @@ public class MainMenuController : MonoBehaviour
         sensitivityText.SetActive(false);
         sensitivityLabel.SetActive(false);
         settingBackButton.SetActive(false);
+        exitConfirmationPanel.SetActive(false);
     }
 
     public void PlayButton()
@@ -77,11 +83,27 @@ public class MainMenuController : MonoBehaviour
     }
 
 
-    
-
-
     public void ExitButton()
     {
+        if(!exitConfirmCheck)
+        {
+            exitConfirmCheck = true;
+            exitConfirmationPanel.SetActive(true);
+            exitButton.SetActive(false);
+        }
+    }
+
+
+    public void ConfirmExitButton()
+    {
         Application.Quit();
+    }
+
+
+    public void CancelExitButton()
+    {
+        exitConfirmCheck = false;
+        exitConfirmationPanel.SetActive(false);
+        exitButton.SetActive(true);
     }
 }
