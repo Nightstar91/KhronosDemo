@@ -22,6 +22,8 @@ public class CameraEffect : MonoBehaviour
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraHolder;
 
+    private const float dampHeadBobAmount = 3000f;
+
     public bool start = false;
 
     Vector3 startPosition;
@@ -76,8 +78,8 @@ public class CameraEffect : MonoBehaviour
     private Vector3 StartHeadbob()
     {
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Sin(Time.time * frequency) * amount;
-        pos.x += Mathf.Cos(Time.time * frequency / 3) * amount;
+        pos.y += Mathf.Sin(Time.time * frequency) * (amount + FPSController.walkSpeed / dampHeadBobAmount);
+        pos.x += Mathf.Cos(Time.time * frequency / 3) * (amount + FPSController.walkSpeed / dampHeadBobAmount);
 
         transform.localPosition += pos;
 
