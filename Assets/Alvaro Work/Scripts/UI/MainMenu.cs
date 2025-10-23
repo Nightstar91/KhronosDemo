@@ -6,59 +6,41 @@ using UnityEngine.UI;
 
 public class MainMenu : BasicMenu
 {
-    [Header("For scene name watch out for capitalization!")]
-    [SerializeField] public string sceneName = "LevelDemo";
-
-    private BasicMenu basicMenu;
-
-    private GameObject settingBackButton;
-
-    private GameObject sensitivitySlider;
-    private GameObject sensitivityText;
-    private GameObject sensitivityLabel;
-
-    private void Awake()
+    public override void Awake()
     {
-        basicMenu = new BasicMenu();
-
-
-        settingBackButton = GameObject.Find("SettingBackButton");
-
-        sensitivitySlider = GameObject.Find("SensSlider");
-        sensitivityText = GameObject.Find("SettingSensAmountText");
-        sensitivityLabel = GameObject.Find("SettingSensLabel");
+        base.Awake();
     }
 
     private void Start()
     {
         // For all setting related UI
-        basicMenu.settingPanel.SetActive(false);
+        settingPanel.SetActive(false);
+        exitGameConfirmationPanel.SetActive(false);
 
         settingBackButton.SetActive(false);
-        basicMenu.exitGameConfirmationPanel.SetActive(false);
     }
 
 
-    public void OpenSettingPanel()
+    /*public void OpenSettingPanel()
     {
-        basicMenu.playGameButton.SetActive(false);
-        basicMenu.settingButton.SetActive(false);
-        basicMenu.exitGameButton.SetActive(false);
+        playGameButton.SetActive(false);
+        settingButton.SetActive(false);
+        exitGameButton.SetActive(false);
 
         // For all setting related UI
-        basicMenu.settingPanel.SetActive(true);
+        settingPanel.SetActive(true);
     }
 
 
     public void SettingBackButton()
     {
 
-        basicMenu.playGameButton.SetActive(true);
-        basicMenu.settingButton.SetActive(true);
-        basicMenu.exitGameButton.SetActive(true);
+        playGameButton.SetActive(true);
+        settingButton.SetActive(true);
+        exitGameButton.SetActive(true);
 
         // For all setting related UI
         settingPanel.SetActive(false);
         settingBackButton.SetActive(false);
-    }
+    }*/
 }
