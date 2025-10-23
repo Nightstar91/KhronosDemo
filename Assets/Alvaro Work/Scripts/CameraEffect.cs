@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 public class CameraEffect : MonoBehaviour
 {
     [Header("Camera Bob Parameters")]
-    [Range(0, 0.1f)] public float amount = 0.008f;
+    [Range(0, 0.1f)] public float amount = 0.005f;
     [Range(1f, 30f)] public float frequency = 12f;
     [Range(10f, 100f)] public float smooth = 20f;
 

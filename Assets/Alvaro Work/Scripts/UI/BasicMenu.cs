@@ -45,7 +45,7 @@ public class BasicMenu : MonoBehaviour
     }
 
 
-    public void CloseSetting()
+    public virtual void CloseSetting()
     {
         settingPanel.SetActive(false);
 
@@ -56,7 +56,7 @@ public class BasicMenu : MonoBehaviour
     }
 
 
-    public void OpenSetting()
+    public virtual void OpenSetting()
     {
         settingPanel.SetActive(true);
 
@@ -67,19 +67,19 @@ public class BasicMenu : MonoBehaviour
     }
 
 
-    public void OpenExitConfirmation()
+    public virtual void OpenExitConfirmation()
     {
         exitConfirmCheck = true;
         exitGameConfirmationPanel.SetActive(true);
-        exitGameButton.SetActive(true);
+        exitGameButton.SetActive(false);
     }
 
 
-    public void CloseExitConfirmation()
+    public virtual void CloseExitConfirmation()
     {
         exitConfirmCheck = false;
         exitGameConfirmationPanel.SetActive(false);
-        exitGameButton.SetActive(false);
+        exitGameButton.SetActive(true);
     }
 
 
