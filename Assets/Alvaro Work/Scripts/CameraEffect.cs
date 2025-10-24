@@ -22,7 +22,7 @@ public class CameraEffect : MonoBehaviour
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraHolder;
 
-    private const float dampenHeadBobAmount = 8f;
+    private const float dampenHeadBobAmount = 9f;
 
     public bool start = false;
 
