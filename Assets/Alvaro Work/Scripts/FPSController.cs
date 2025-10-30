@@ -165,10 +165,12 @@ public class FPSController : MonoBehaviour
     }
 
 
-    public void Jump()
+    private void SpeedControl()
     {
-        moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
+        Vector3 flatVel = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
     }
+
+
 
     public bool CheckIfGrounded()
     {
@@ -180,7 +182,13 @@ public class FPSController : MonoBehaviour
             return false;
     }
 
-    public void PausingGame()
+    public void Jump()
+    {
+        moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
+    }
+
+
+    public void Slide()
     {
 
     }
