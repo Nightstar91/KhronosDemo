@@ -8,7 +8,6 @@ public class OLDFPSController : MonoBehaviour
     public bool canMove { get; private set; } = true;
 
     public InputAction moveAction;
-    public InputAction lookAction;
     public InputAction jumpAction;
     public InputAction pauseAction;
 
@@ -91,7 +90,6 @@ public class OLDFPSController : MonoBehaviour
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
-        lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
 
@@ -102,7 +100,6 @@ public class OLDFPSController : MonoBehaviour
     private void OnEnable()
     {
         moveAction.Enable();
-        lookAction.Enable();
         jumpAction.Enable();
         pauseAction.Enable();
     }
@@ -111,7 +108,6 @@ public class OLDFPSController : MonoBehaviour
     private void OnDisable()
     {
         moveAction.Disable();
-        lookAction.Disable();
         jumpAction.Disable();
         pauseAction.Disable();
     }
@@ -143,8 +139,6 @@ public class OLDFPSController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
-
-
     }
 
 

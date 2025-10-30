@@ -28,7 +28,6 @@ public class PlayerHud : BasicMenu
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<OLDFPSController>();
         settingMenu = GetComponent<SettingMenu>();
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
@@ -74,7 +73,7 @@ public class PlayerHud : BasicMenu
         Cursor.visible = true;
 
         playerController.moveAction.Disable();
-        playerController.lookAction.Disable();
+
         playerController.jumpAction.Disable();
     }
 
@@ -96,7 +95,7 @@ public class PlayerHud : BasicMenu
         Cursor.visible = false;
 
         playerController.moveAction.Enable();
-        playerController.lookAction.Enable();
+
         playerController.jumpAction.Enable();
     }
 

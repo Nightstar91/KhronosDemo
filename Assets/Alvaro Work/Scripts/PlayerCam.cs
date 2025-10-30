@@ -3,15 +3,23 @@ using UnityEngine.InputSystem;
 
 public class PlayerCam : MonoBehaviour
 {
-    public float sensX;
-    public float sensY;
+    [Header("Look Parameters")]
+    [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
+    [SerializeField, Range(1, 10)] public float lookSpeedY = 2f;
+    [SerializeField, Range(1, 100)] private float upperLookLimit = 80f;
+    [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Transform orientation;
+    public Camera playerCamera;
 
-    float xRotation;
-    float yRotation;
+    float rotationX;
+    float rotationY;
 
-    public InputAction lookAction;
+    public InputActionAsset mouseAction;
+
+    public InputAction m_lookAction;
+
+    private Vector2 lookAmount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,25 +28,40 @@ public class PlayerCam : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void Awake()
+    {
+        m_lookAction = InputSystem.actions.FindAction("Look");
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
+
+
     // Update is called once per frame
     void Update()
     {
-        //float mouseX = lookAction.
+        HandleMouseLock();
     }
 
-    private void Awake()
-    {
-        lookAction = InputSystem.actions.FindAction("Look");
-    }
 
     private void OnEnable()
     {
-        lookAction.Enable();
+        mouseAction.FindActionMap("PlayerMovement").Enable();
     }
 
 
     private void OnDisable()
     {
-        lookAction.Disable();
+        mouseAction.FindActionMap("PlayerMovement").Disable();    
+    }
+
+
+    private void HandleMouseLock()
+    {
+        lookAmount = m_lookAction.ReadValue<Vector2>();
+
+        rotationX -= lookAmount.x * lookSpeedY;
+        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+
+        transform.rotation *= Quaternion.Euler(0, lookAmount.x * lookSpeedX, 0);
     }
 }
