@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHud : BasicMenu
 {
     public string sceneName = "Main Menu";
-    public FPSController playerController;
+    public OLDFPSController playerController;
     private SettingMenu settingMenu;
     private Slider speedoSlider;
 
@@ -28,7 +28,7 @@ public class PlayerHud : BasicMenu
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<FPSController>();
+        playerController = GameObject.Find("Player").GetComponent<OLDFPSController>();
         settingMenu = GetComponent<SettingMenu>();
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 

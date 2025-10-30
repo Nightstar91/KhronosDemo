@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
 
-public class FPSController : MonoBehaviour
+public class OLDFPSController : MonoBehaviour
 {
     public bool canMove { get; private set; } = true;
 
@@ -29,6 +29,7 @@ public class FPSController : MonoBehaviour
     public CharacterController characterController;
 
     private Vector3 moveDirection;
+    Vector3 horizontalVelocity;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
@@ -52,6 +53,8 @@ public class FPSController : MonoBehaviour
         originalWalkSpeed = walkSpeed;
         groundLayer = LayerMask.GetMask("Ground");
 
+        Vector3 horizontalVelocity = characterController.velocity;
+
         playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
 
         lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
@@ -70,6 +73,7 @@ public class FPSController : MonoBehaviour
                 Jump();
             }
 
+            
             HandleMouseLock();
             HandleMovementInput();
             ApplyFinalMovements();
@@ -123,6 +127,8 @@ public class FPSController : MonoBehaviour
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
         moveDirection.y = moveDirectionY;
 
+        // Limit velocity to max speed
+
         if (moveAction.IsPressed())
             isMoving = true;
         else
@@ -163,13 +169,6 @@ public class FPSController : MonoBehaviour
             walkSpeed = originalWalkSpeed;
 
     }
-
-
-    private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
-    }
-
 
 
     public bool CheckIfGrounded()
