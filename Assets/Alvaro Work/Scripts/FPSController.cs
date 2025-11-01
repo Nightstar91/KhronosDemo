@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
 
-public class OLDFPSController : MonoBehaviour
+public class FPSController : MonoBehaviour
 {
     public bool canMove { get; private set; } = true;
 

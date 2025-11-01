@@ -6,11 +6,11 @@ public class CameraEffect : MonoBehaviour
 {
     [Header("Camera Bob Parameters")]
     [Range(0, 0.1f)] public float amount = 0.005f;
-    [Range(1f, 30f)] public float frequency = 12f;
+    [Range(1f, 30f)] public float frequency = 16f;
     [Range(10f, 100f)] public float smooth = 20f;
 
     [Header("Camera Tilt Parameters")]
-    [Range(0f, 0.5f)] public float tiltAmount = 0.07f;
+    [Range(0f, 0.5f)] public float tiltAmount = 0.075f;
     [Range(0f, 1f)] public float tiltSpeed = 0.4f;
     [Range(0f, 3f)] public float tiltResetSpeed = 1.5f;
 
@@ -29,13 +29,13 @@ public class CameraEffect : MonoBehaviour
     Vector3 startPosition;
     Quaternion startRotation;
 
-    private OLDFPSController FPSController;
+    private FPSController FPSController;
 
     private void Awake()
     {
         startPosition = transform.localPosition;
         startRotation = transform.localRotation;
-        FPSController = GetComponentInParent<OLDFPSController>();
+        FPSController = GetComponentInParent<FPSController>();
         _camera = GameObject.Find("Main Camera").GetComponent<Transform>();
         _cameraHolder = GameObject.Find("Cam Holder").GetComponent<Transform>();
     }
