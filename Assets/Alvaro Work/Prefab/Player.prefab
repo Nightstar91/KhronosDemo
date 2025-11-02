@@ -231,7 +231,7 @@ MonoBehaviour:
       Data4: 2064574844
     Path: event:/PlayerCharacter/Landings
   surfaceParameterName: SurfaceTerrain
-  stepInterval: 0.35
+  stepInterval: 0.45
   minMoveSpeed: 0.1
   raycastDistance: 1.2
   groundMask:
