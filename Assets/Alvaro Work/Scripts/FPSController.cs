@@ -5,6 +5,21 @@ using UnityEngine.InputSystem;
 
 public class FPSController : MonoBehaviour
 {
+    public enum PlayerState
+    {
+        STATE_IDLE,
+        STATE_RUNNING,
+        STATE_JUMP,
+        STATE_INAIR,
+        STATE_SLIDE,
+        STATE_WALLRUN,
+        STATE_PAUSE,
+        STATE_DEAD
+    }
+    
+    public PlayerState currentState = PlayerState.STATE_IDLE;
+    public PlayerState previousState;
+
     public bool canMove { get; private set; } = true;
 
     public InputAction moveAction;
@@ -28,17 +43,17 @@ public class FPSController : MonoBehaviour
     public CharacterController characterController;
 
     private Vector3 moveDirection;
-    Vector3 horizontalVelocity;
+    //Vector3 horizontalVelocity;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
 
     private float originalWalkSpeed;
 
-    public bool isMoving = false;
-
     public LayerMask groundLayer;
     public bool isGrounded = false;
+    public bool isMoving = false;
+    public bool isInAir = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     public PlayerHud playerHud;
@@ -62,10 +77,117 @@ public class FPSController : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+    // Updatwasddawdgfe is called once per frame
     void Update()
     {
-        if (canMove && playerHud.isPaused != true)
+        switch(currentState)
+        {
+
+            case PlayerState.STATE_IDLE:
+                // Camera control
+                HandleMouseLock();
+                HandleMovementInput();
+
+                // Once moving go to running state to apply velocity limit
+                if (isMoving)
+                {
+                    currentState = PlayerState.STATE_RUNNING;
+                }
+
+                // Conditional to get to the jump state
+                if (jumpAction.IsPressed() && isGrounded)
+                {
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
+                // Conditional to transition to the pause state
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
+
+                break;
+
+            case PlayerState.STATE_RUNNING:
+                HandleMouseLock();
+                HandleMovementInput();
+                ApplyFinalMovements();
+
+                if (!isMoving)
+                {
+                    currentState = PlayerState.STATE_IDLE;
+                }
+
+                // Conditional for jumping to got to jump state 
+                if (jumpAction.IsPressed() && isGrounded)
+                {
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
+                break;
+
+            // TODO: See if can make it so that air movement can be lessen
+            // TODO: how do you implement jumping in state??
+            case PlayerState.STATE_JUMP:
+                HandleMouseLock();
+                HandleMovementInput(); // change to air movement
+                ApplyFinalMovements();
+                
+
+                if(isGrounded)
+                {
+                    isInAir = true;
+                    currentState = PlayerState.STATE_INAIR;
+                }
+                break;
+
+            case PlayerState.STATE_INAIR:
+                HandleMouseLock();
+                HandleMovementInput(); // change to air movement
+                ApplyFinalMovements();
+
+                if(isGrounded && isInAir)
+                {
+                    isInAir = false;
+                    currentState = PlayerState.STATE_RUNNING;
+                }
+                break;
+
+            case PlayerState.STATE_SLIDE:
+
+                break;
+
+            case PlayerState.STATE_WALLRUN:
+
+                break;
+
+            case PlayerState.STATE_PAUSE:
+                if(playerHud.isPaused)
+                {
+                    playerHud.PauseGame();
+
+                    if(pauseAction.WasPressedThisFrame())
+                    {
+                        playerHud.isPaused = false;
+                    }
+                }
+                else
+                {
+                    playerHud.ResumeGame();
+                    currentState = previousState;
+                    previousState = PlayerState.STATE_IDLE;
+                }
+                    break;  
+
+            case PlayerState.STATE_DEAD:
+
+                break;
+        }
+    }
+
+    /*if (playerHud.isPaused != true)
         {
             if (jumpAction.IsPressed() && isGrounded)
             {
@@ -76,10 +198,7 @@ public class FPSController : MonoBehaviour
             HandleMouseLock();
             HandleMovementInput();
             ApplyFinalMovements();
-        }
-
-
-    }
+        }*/
 
     private void FixedUpdate()
     {

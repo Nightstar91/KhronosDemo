@@ -16,7 +16,7 @@ public class PlayerHud : BasicMenu
     public GameObject resumeButton;
     public bool isPaused = false;
 
-    public virtual void Awake()
+    public override void Awake()
     {
         base.Awake();
         pauseMenu = GameObject.Find("Pausemenu");
@@ -42,18 +42,6 @@ public class PlayerHud : BasicMenu
     void Update()
     {
         UpdateSpeedometer();
-
-        if(playerController.pauseAction.triggered)
-        {
-            if(!isPaused)
-            {
-                PauseGame();
-            }
-            else
-            {
-                ResumeGame();
-            }
-        }
     }
 
 
@@ -68,13 +56,11 @@ public class PlayerHud : BasicMenu
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         playerController.moveAction.Disable();
-
         playerController.jumpAction.Disable();
     }
 
@@ -90,13 +76,13 @@ public class PlayerHud : BasicMenu
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
-        isPaused = false;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        playerController.moveAction.Enable();
+        isPaused = false;
 
+        playerController.moveAction.Enable();
         playerController.jumpAction.Enable();
     }
 
