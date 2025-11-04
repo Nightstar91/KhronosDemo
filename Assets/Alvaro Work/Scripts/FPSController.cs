@@ -32,10 +32,9 @@ public class FPSController : MonoBehaviour
     [SerializeField] float sprintSpeed = 0.09f;
 
     [Header("Jumping Parameters")]
-    [SerializeField] float gravity = 9.81f;
+    [SerializeField] float gravity = 30f;
     [SerializeField] float gravityScale = 1f;
-    [SerializeField] float jumpHeight = 3f;
-    [SerializeField] float downwardVelocity;
+    [SerializeField] float jumpHeight = 1.5f;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
@@ -51,7 +50,7 @@ public class FPSController : MonoBehaviour
 
     private float rotationX = 0f;
 
-    private float originalWalkSpeed;
+    private const float originalWalkSpeed = 0f;
 
     public LayerMask groundLayer;
     public bool isGrounded = false;
@@ -67,7 +66,6 @@ public class FPSController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        originalWalkSpeed = walkSpeed;
         groundLayer = LayerMask.GetMask("Ground");
 
         Vector3 horizontalVelocity = characterController.velocity;
@@ -83,6 +81,7 @@ public class FPSController : MonoBehaviour
     // Updatwasddawdgfe is called once per frame
     void Update()
     {
+        ApplyFinalMovements();
         switch (currentState)
         {
             case PlayerState.STATE_IDLE:
@@ -187,8 +186,6 @@ public class FPSController : MonoBehaviour
 
                 break;
         }
-
-        ApplyFinalMovements();
     }
 
 
@@ -221,6 +218,12 @@ public class FPSController : MonoBehaviour
 
     private void HandleMovementInput()
     {
+        // Limit velocity to max speed
+        if (moveAction.IsPressed())
+            isMoving = true;
+        else
+            isMoving = false;
+
         GainSpeedCheck();
 
         currentInput = new Vector2(walkSpeed * Input.GetAxis("Vertical"), walkSpeed * Input.GetAxis("Horizontal"));
@@ -228,12 +231,6 @@ public class FPSController : MonoBehaviour
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
         moveDirection.y = moveDirectionY;
-
-        // Limit velocity to max speed
-        if (moveAction.IsPressed())
-            isMoving = true;
-        else
-            isMoving = false;
     }
 
 
