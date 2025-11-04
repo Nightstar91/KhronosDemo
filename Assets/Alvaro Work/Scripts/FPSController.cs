@@ -28,10 +28,14 @@ public class FPSController : MonoBehaviour
 
     [Header("Movement Parameters")]
     [SerializeField] public float walkSpeed = 3f;
-    [SerializeField] float gravity = 30f;
     [SerializeField] float maxSpeed = 12f;
-    [SerializeField] float jumpHeight = 1f;
     [SerializeField] float sprintSpeed = 0.09f;
+
+    [Header("Jumping Parameters")]
+    [SerializeField] float gravity = 9.81f;
+    [SerializeField] float gravityScale = 1f;
+    [SerializeField] float jumpHeight = 3f;
+    [SerializeField] float downwardVelocity;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
@@ -43,7 +47,6 @@ public class FPSController : MonoBehaviour
     public CharacterController characterController;
 
     private Vector3 moveDirection;
-    //Vector3 horizontalVelocity;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
@@ -80,16 +83,13 @@ public class FPSController : MonoBehaviour
     // Updatwasddawdgfe is called once per frame
     void Update()
     {
-        switch(currentState)
+        switch (currentState)
         {
-
             case PlayerState.STATE_IDLE:
-                // Camera control
                 HandleMouseLock();
-                HandleMovementInput();
 
                 // Once moving go to running state to apply velocity limit
-                if (isMoving)
+                if (moveAction.triggered)
                 {
                     currentState = PlayerState.STATE_RUNNING;
                 }
@@ -113,7 +113,6 @@ public class FPSController : MonoBehaviour
             case PlayerState.STATE_RUNNING:
                 HandleMouseLock();
                 HandleMovementInput();
-                ApplyFinalMovements();
 
                 if (!isMoving)
                 {
@@ -126,29 +125,32 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_JUMP;
                 }
 
+                // Conditional to transition to the pause state
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
+
                 break;
 
             // TODO: See if can make it so that air movement can be lessen
             // TODO: how do you implement jumping in state??
             case PlayerState.STATE_JUMP:
-                HandleMouseLock();
-                HandleMovementInput(); // change to air movement
-                ApplyFinalMovements();
-                
 
-                if(isGrounded)
-                {
-                    isInAir = true;
-                    currentState = PlayerState.STATE_INAIR;
-                }
+                Jump();
+
+                isInAir = true;
+                currentState = PlayerState.STATE_INAIR;
+
                 break;
 
             case PlayerState.STATE_INAIR:
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
-                ApplyFinalMovements();
 
-                if(isGrounded && isInAir)
+                if (isGrounded && isInAir)
                 {
                     isInAir = false;
                     currentState = PlayerState.STATE_RUNNING;
@@ -185,25 +187,10 @@ public class FPSController : MonoBehaviour
 
                 break;
         }
+
+        ApplyFinalMovements();
     }
 
-    /*if (playerHud.isPaused != true)
-        {
-            if (jumpAction.IsPressed() && isGrounded)
-            {
-                Jump();
-            }
-
-            
-            HandleMouseLock();
-            HandleMovementInput();
-            ApplyFinalMovements();
-        }*/
-
-    private void FixedUpdate()
-    {
-        isGrounded = CheckIfGrounded();
-    }
 
 
     private void Awake()
@@ -243,7 +230,6 @@ public class FPSController : MonoBehaviour
         moveDirection.y = moveDirectionY;
 
         // Limit velocity to max speed
-
         if (moveAction.IsPressed())
             isMoving = true;
         else
@@ -267,6 +253,8 @@ public class FPSController : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);
+
+        isGrounded = CheckIfGrounded();
     }
 
 

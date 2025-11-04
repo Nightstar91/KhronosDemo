@@ -5091,6 +5091,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: gravity
+      value: 9.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: jumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: gravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: jumpAction.m_Id
+      value: 83bb8c00-3b5b-4737-9d12-bd678e547531
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: moveAction.m_Id
+      value: ffada133-e1f3-4e07-9ac0-c69d0c4266d8
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: pauseAction.m_Id
+      value: 06eb21e7-70d0-44f5-8686-5b51b8a748c8
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: jumpAction.m_Name
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: moveAction.m_Name
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 808400893573334708, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
+      propertyPath: pauseAction.m_Name
+      value: Pause
+      objectReference: {fileID: 0}
     - target: {fileID: 3303891852685891152, guid: 0954504a557d5f248b8f265a484dd03c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.1577635
