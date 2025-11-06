@@ -29,13 +29,13 @@ public class CameraEffect : MonoBehaviour
     Vector3 startPosition;
     Quaternion startRotation;
 
-    private FPSController FPSController;
+    [SerializeField] FPSController FPSController;
 
     private void Awake()
     {
         startPosition = transform.localPosition;
         startRotation = transform.localRotation;
-        FPSController = GetComponentInParent<FPSController>();
+        FPSController = GameObject.Find("Player").GetComponentInParent<FPSController>();
         _camera = GameObject.Find("Main Camera").GetComponent<Transform>();
         _cameraHolder = GameObject.Find("Cam Holder").GetComponent<Transform>();
     }

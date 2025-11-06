@@ -20,7 +20,7 @@ public class FPSController : MonoBehaviour
     public PlayerState currentState = PlayerState.STATE_IDLE;
     public PlayerState previousState;
 
-    public bool canMove { get; private set; } = true;
+    public bool CanMove { get; private set; } = true;
 
     public InputAction moveAction;
     public InputAction jumpAction;
@@ -30,6 +30,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] public float walkSpeed = 3f;
     [SerializeField] float maxSpeed = 12f;
     [SerializeField] float sprintSpeed = 0.09f;
+    [SerializeField] float decelerateSpeed = 0.75f;
 
     [Header("Jumping Parameters")]
     [SerializeField] float gravity = 30f;
@@ -52,13 +53,13 @@ public class FPSController : MonoBehaviour
 
     private const float originalWalkSpeed = 0f;
 
-    public LayerMask groundLayer;
+    private LayerMask groundLayer;
     public bool isGrounded = false;
     public bool isMoving = false;
     public bool isInAir = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
-    public PlayerHud playerHud;
+    [SerializeField] public PlayerHud playerHud;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -78,10 +79,9 @@ public class FPSController : MonoBehaviour
     }
 
 
-    // Updatwasddawdgfe is called once per frame
     void Update()
     {
-        ApplyFinalMovements();
+        
         switch (currentState)
         {
             case PlayerState.STATE_IDLE:
@@ -110,6 +110,8 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_RUNNING:
+                                
+
                 HandleMouseLock();
                 HandleMovementInput();
 
@@ -186,6 +188,9 @@ public class FPSController : MonoBehaviour
 
                 break;
         }
+
+        // To make sure gravity is applied constantly
+        ApplyFinalMovements();
     }
 
 
@@ -218,7 +223,6 @@ public class FPSController : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        // Limit velocity to max speed
         if (moveAction.IsPressed())
             isMoving = true;
         else
@@ -258,14 +262,20 @@ public class FPSController : MonoBehaviour
     private void GainSpeedCheck()
     {
         if (walkSpeed < maxSpeed && isMoving)
-            walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed,ref sprintSpeed, 0.5f);
+            walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed, ref sprintSpeed, 0.5f);
 
         else if (walkSpeed > maxSpeed && isMoving)
             walkSpeed = maxSpeed;
 
         else
             walkSpeed = originalWalkSpeed;
+    }
 
+
+    private void SpeedDecelerate()
+    {
+            
+        
     }
 
 
@@ -278,6 +288,7 @@ public class FPSController : MonoBehaviour
         else
             return false;
     }
+
 
     public void Jump()
     {
