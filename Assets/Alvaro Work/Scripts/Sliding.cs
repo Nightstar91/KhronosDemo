@@ -1,51 +1,54 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Sliding : MonoBehaviour
 {
     [Header("References")]
-    public Transform orientation;
     public Transform playerObj;
     private CharacterController cc;
     private FPSController pm;
 
     [Header("Sliding")]
     public float maxSlideTime;
-    public float slideForce;
+    [Range(1,30)] public float slideForce;
     private float slideTimer;
 
     public float slideYScale;
     private float startYScale;
 
     [Header("Input")]
-    public InputAction slideAction;
     private float horizontalInput;
     private float verticalInput;
 
-    private bool isSliding;
+    public bool isSliding;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isSliding = false;
+        startYScale = playerObj.localScale.y;
+        slideForce = 3f;
+    }
+
+
+    private void Awake()
+    {
         cc = GetComponent<CharacterController>();
         pm = GetComponent<FPSController>();
-
-        startYScale = playerObj.localScale.y;
+        playerObj = GameObject.Find("Player").GetComponent<Transform>();
     }
 
 
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        if(slideAction.IsPressed() && (horizontalInput != 0 || verticalInput != 0))
+        if(pm.slideAction.IsPressed() && (horizontalInput != 0 || verticalInput != 0))
         {
             StartSlide();
         }
 
-        if(slideAction.WasReleasedThisFrame() && isSliding)
+        if(pm.slideAction.WasReleasedThisFrame() && isSliding)
         {
             StopSlide();
         }
@@ -58,41 +61,31 @@ public class Sliding : MonoBehaviour
     }
 
 
-    private void StartSlide()
+    public void StartSlide()
     {
         isSliding = true;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
     }
 
-    private void SlidingMovement()
+
+    public void SlidingMovement()
     {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 inputDirection = playerObj.forward * verticalInput + playerObj.right * horizontalInput;
+
+        if (!cc.isGrounded)
+            inputDirection.y -= pm.gravity * Time.deltaTime;
+
+        cc.Move(inputDirection.normalized * slideForce * Time.deltaTime);
     }
 
 
-    private void StopSlide()
+    public void StopSlide()
     {
+        isSliding = false;
 
+        playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
 
-
-    private void Awake()
-    {
-        slideAction = InputSystem.actions.FindAction("Slide");
-    }
-
-
-    private void OnEnable()
-    {
-        slideAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        slideAction.Disable();
-    }
-
-
-    
+ 
 }

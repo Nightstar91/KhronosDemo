@@ -25,6 +25,7 @@ public class FPSController : MonoBehaviour
     public InputAction moveAction;
     public InputAction jumpAction;
     public InputAction pauseAction;
+    public InputAction slideAction;
 
     [Header("Movement Parameters")]
     [SerializeField] public float walkSpeed = 3f;
@@ -33,7 +34,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] float decelerateSpeed = 0.75f;
 
     [Header("Jumping Parameters")]
-    [SerializeField] float gravity = 30f;
+    [SerializeField] public float gravity = 30f;
     [SerializeField] float gravityScale = 1f;
     [SerializeField] float jumpHeight = 1.5f;
 
@@ -61,6 +62,7 @@ public class FPSController : MonoBehaviour
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     [SerializeField] public PlayerHud playerHud;
+    [SerializeField] public Sliding slide;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -135,6 +137,12 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_PAUSE;
                 }
 
+                //Condtional to transition to the slide state
+                if (slideAction.IsPressed())
+                {
+                    currentState = PlayerState.STATE_SLIDE;
+                }
+
                 break;
 
             // TODO: See if can make it so that air movement can be lessen
@@ -160,6 +168,26 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_SLIDE:
+
+                if(slideAction.IsPressed() && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+                {
+                    slide.StartSlide();
+                }
+
+                if (slide.isSliding)
+                {
+                    slide.SlidingMovement();
+                }
+
+                if (slideAction.WasReleasedThisFrame() && slide.isSliding)
+                {
+                    slide.StopSlide();
+                }
+
+                if (!slide.isSliding)
+                {
+                    currentState = PlayerState.STATE_RUNNING;
+                }
 
                 break;
 
@@ -201,8 +229,10 @@ public class FPSController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
+        slideAction = InputSystem.actions.FindAction("Slide");
 
         playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        slide = GetComponent<Sliding>();
     }
 
 
@@ -211,6 +241,7 @@ public class FPSController : MonoBehaviour
         moveAction.Enable();
         jumpAction.Enable();
         pauseAction.Enable();
+        slideAction.Enable();
     }
 
 
@@ -219,6 +250,7 @@ public class FPSController : MonoBehaviour
         moveAction.Disable();
         jumpAction.Disable();
         pauseAction.Disable();
+        slideAction.Disable();
     }
 
 
