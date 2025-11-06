@@ -45,6 +45,7 @@ public class FPSController : MonoBehaviour
 
     public Camera playerCamera;
     public CharacterController characterController;
+    [SerializeField] public GameObject orientation;
 
     private Vector3 moveDirection;
     private Vector2 currentInput;
@@ -245,6 +246,9 @@ public class FPSController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
+
+        // rotate the player object
+        transform.Rotate(0f, Input.GetAxis("Mouse X") * lookSpeedX, 0f);
     }
 
 
