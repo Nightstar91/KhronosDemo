@@ -156,9 +156,10 @@ GameObject:
   - component: {fileID: 8931464223423538438}
   - component: {fileID: 3671276085193965672}
   - component: {fileID: 4512657051378185625}
+  - component: {fileID: 3532926395716396089}
   - component: {fileID: 8730293828885063798}
   m_Layer: 0
-  m_Name: Player (OLD)
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,6 +300,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  slideAction:
+    m_Name: Slide
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e53d8690-99c8-4790-abdb-35ea6832e5e2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   walkSpeed: 3
   maxSpeed: 12
   sprintSpeed: 0.09
@@ -312,10 +322,29 @@ MonoBehaviour:
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
   characterController: {fileID: 0}
+  orientation: {fileID: 0}
   isGrounded: 0
   isMoving: 0
   isInAir: 0
   playerHud: {fileID: 0}
+  slide: {fileID: 0}
+--- !u!114 &3532926395716396089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a26cabe0681c78488e69eb0095e097c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObj: {fileID: 0}
+  maxSlideTime: 0
+  slideForce: 0
+  slideYScale: 0
+  isSliding: 0
 --- !u!114 &8730293828885063798
 MonoBehaviour:
   m_ObjectHideFlags: 0
