@@ -15,5 +15,6 @@ EditorBuildSettings:
     path: Assets/Alvaro Work/Scenes/LevelDemo.unity
     guid: 58ba1fe773adbb0408697ee68d0b470e
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: f04ff6965bbfdd84199b5305cf3d233c, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

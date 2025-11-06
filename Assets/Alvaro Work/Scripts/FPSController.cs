@@ -5,19 +5,38 @@ using UnityEngine.InputSystem;
 
 public class FPSController : MonoBehaviour
 {
-    public bool canMove { get; private set; } = true;
+    public enum PlayerState
+    {
+        STATE_IDLE,
+        STATE_RUNNING,
+        STATE_JUMP,
+        STATE_INAIR,
+        STATE_SLIDE,
+        STATE_WALLRUN,
+        STATE_PAUSE,
+        STATE_DEAD
+    }
+    
+    public PlayerState currentState = PlayerState.STATE_IDLE;
+    public PlayerState previousState;
+
+    public bool CanMove { get; private set; } = true;
 
     public InputAction moveAction;
-    public InputAction lookAction;
     public InputAction jumpAction;
     public InputAction pauseAction;
+    public InputAction slideAction;
 
     [Header("Movement Parameters")]
     [SerializeField] public float walkSpeed = 3f;
-    [SerializeField] float gravity = 30f;
     [SerializeField] float maxSpeed = 12f;
-    [SerializeField] float jumpHeight = 1f;
     [SerializeField] float sprintSpeed = 0.09f;
+    [SerializeField] float decelerateSpeed = 0.75f;
+
+    [Header("Jumping Parameters")]
+    [SerializeField] public float gravity = 30f;
+    [SerializeField] float gravityScale = 1f;
+    [SerializeField] float jumpHeight = 1.5f;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
@@ -27,21 +46,23 @@ public class FPSController : MonoBehaviour
 
     public Camera playerCamera;
     public CharacterController characterController;
+    [SerializeField] public GameObject orientation;
 
     private Vector3 moveDirection;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
 
-    private float originalWalkSpeed;
+    private const float originalWalkSpeed = 0f;
 
-    public bool isMoving = false;
-
-    public LayerMask groundLayer;
+    private LayerMask groundLayer;
     public bool isGrounded = false;
+    public bool isMoving = false;
+    public bool isInAir = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
-    public PlayerHud playerHud;
+    [SerializeField] public PlayerHud playerHud;
+    [SerializeField] public Sliding slide;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,8 +70,9 @@ public class FPSController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        originalWalkSpeed = walkSpeed;
         groundLayer = LayerMask.GetMask("Ground");
+
+        Vector3 horizontalVelocity = characterController.velocity;
 
         playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
 
@@ -60,61 +82,185 @@ public class FPSController : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
-        if (canMove && playerHud.isPaused != true)
+        
+        switch (currentState)
         {
-            if (jumpAction.IsPressed() && isGrounded)
-            {
-                Jump();
-            }
+            case PlayerState.STATE_IDLE:
+                HandleMouseLock();
 
-            HandleMouseLock();
-            HandleMovementInput();
-            ApplyFinalMovements();
+                // Once moving go to running state to apply velocity limit
+                if (moveAction.triggered)
+                {
+                    currentState = PlayerState.STATE_RUNNING;
+                }
+
+                // Conditional to get to the jump state
+                if (jumpAction.IsPressed() && isGrounded)
+                {
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
+                // Conditional to transition to the pause state
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
+
+                break;
+
+            case PlayerState.STATE_RUNNING:
+                                
+
+                HandleMouseLock();
+                HandleMovementInput();
+
+                if (!isMoving)
+                {
+                    currentState = PlayerState.STATE_IDLE;
+                }
+
+                // Conditional for jumping to got to jump state 
+                if (jumpAction.IsPressed() && isGrounded)
+                {
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
+                // Conditional to transition to the pause state
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
+
+                //Condtional to transition to the slide state
+                if (slideAction.IsPressed())
+                {
+                    currentState = PlayerState.STATE_SLIDE;
+                }
+
+                break;
+
+            // TODO: See if can make it so that air movement can be lessen
+            // TODO: how do you implement jumping in state??
+            case PlayerState.STATE_JUMP:
+
+                Jump();
+
+                isInAir = true;
+                currentState = PlayerState.STATE_INAIR;
+
+                break;
+
+            case PlayerState.STATE_INAIR:
+                HandleMouseLock();
+                HandleMovementInput(); // change to air movement
+
+                if (isGrounded && isInAir)
+                {
+                    isInAir = false;
+                    currentState = PlayerState.STATE_RUNNING;
+                }
+                break;
+
+            case PlayerState.STATE_SLIDE:
+
+                if(slideAction.IsPressed() && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+                {
+                    slide.StartSlide();
+                }
+
+                if (slide.isSliding)
+                {
+                    slide.SlidingMovement();
+                }
+
+                if (slideAction.WasReleasedThisFrame() && slide.isSliding)
+                {
+                    slide.StopSlide();
+                }
+
+                if (!slide.isSliding)
+                {
+                    currentState = PlayerState.STATE_RUNNING;
+                }
+
+                break;
+
+            case PlayerState.STATE_WALLRUN:
+
+                break;
+
+            case PlayerState.STATE_PAUSE:
+                if(playerHud.isPaused)
+                {
+                    playerHud.PauseGame();
+
+                    if(pauseAction.WasPressedThisFrame())
+                    {
+                        playerHud.isPaused = false;
+                    }
+                }
+                else
+                {
+                    playerHud.ResumeGame();
+                    currentState = previousState;
+                    previousState = PlayerState.STATE_IDLE;
+                }
+                    break;  
+
+            case PlayerState.STATE_DEAD:
+
+                break;
         }
 
-
+        // To make sure gravity is applied constantly
+        ApplyFinalMovements();
     }
 
-    private void FixedUpdate()
-    {
-        isGrounded = CheckIfGrounded();
-    }
 
 
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
-        lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
+        slideAction = InputSystem.actions.FindAction("Slide");
 
         playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        slide = GetComponent<Sliding>();
     }
 
 
     private void OnEnable()
     {
         moveAction.Enable();
-        lookAction.Enable();
         jumpAction.Enable();
         pauseAction.Enable();
+        slideAction.Enable();
     }
 
 
     private void OnDisable()
     {
         moveAction.Disable();
-        lookAction.Disable();
         jumpAction.Disable();
         pauseAction.Disable();
+        slideAction.Disable();
     }
 
 
     private void HandleMovementInput()
     {
+        if (moveAction.IsPressed())
+            isMoving = true;
+        else
+            isMoving = false;
+
         GainSpeedCheck();
 
         currentInput = new Vector2(walkSpeed * Input.GetAxis("Vertical"), walkSpeed * Input.GetAxis("Horizontal"));
@@ -122,11 +268,6 @@ public class FPSController : MonoBehaviour
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
         moveDirection.y = moveDirectionY;
-
-        if (moveAction.IsPressed())
-            isMoving = true;
-        else
-            isMoving = false;
     }
 
 
@@ -138,7 +279,8 @@ public class FPSController : MonoBehaviour
 
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
 
-
+        // rotate the player object
+        transform.Rotate(0f, Input.GetAxis("Mouse X") * lookSpeedX, 0f);
     }
 
 
@@ -148,27 +290,30 @@ public class FPSController : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);
+
+        isGrounded = CheckIfGrounded();
     }
 
 
     private void GainSpeedCheck()
     {
         if (walkSpeed < maxSpeed && isMoving)
-            walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed,ref sprintSpeed, 0.5f);
+            walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed, ref sprintSpeed, 0.5f);
 
         else if (walkSpeed > maxSpeed && isMoving)
             walkSpeed = maxSpeed;
 
         else
             walkSpeed = originalWalkSpeed;
-
     }
 
 
-    public void Jump()
+    private void SpeedDecelerate()
     {
-        moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
+            
+        
     }
+
 
     public bool CheckIfGrounded()
     {
@@ -180,7 +325,14 @@ public class FPSController : MonoBehaviour
             return false;
     }
 
-    public void PausingGame()
+
+    public void Jump()
+    {
+        moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
+    }
+
+
+    public void Slide()
     {
 
     }
