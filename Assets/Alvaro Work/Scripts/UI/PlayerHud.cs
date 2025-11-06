@@ -3,20 +3,25 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class PlayerHud : MonoBehaviour
+public class PlayerHud : BasicMenu
 {
-    [SerializeField] public string sceneName = "Main Menu";
-    [SerializeField] public FPSController playerController;
-    [SerializeField] private SettingMenu settingMenu;
-    [SerializeField] public Slider speedoSlider;
+    public string sceneName = "Main Menu";
+    public FPSController playerController;
+    private SettingMenu settingMenu;
+    private Slider speedoSlider;
 
 
     public GameObject pauseMenu;
+    public GameObject mainMenuButton;
+    public GameObject resumeButton;
     public bool isPaused = false;
 
-    private void Awake()
+    public virtual void Awake()
     {
+        base.Awake();
         pauseMenu = GameObject.Find("Pausemenu");
+        mainMenuButton = GameObject.Find("MainMenuButton");
+        resumeButton = GameObject.Find("ResumeButton");
     }
 
 
@@ -27,7 +32,10 @@ public class PlayerHud : MonoBehaviour
         settingMenu = GetComponent<SettingMenu>();
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
+        settingPanel.SetActive(false);
+        exitGameConfirmationPanel.SetActive(false);
         pauseMenu.SetActive(false);
+        settingBackButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,6 +78,7 @@ public class PlayerHud : MonoBehaviour
         playerController.jumpAction.Disable();
     }
 
+
     public void ResumeGame()
     {
         // Updating the Sensitivity
@@ -91,14 +100,45 @@ public class PlayerHud : MonoBehaviour
         playerController.jumpAction.Enable();
     }
 
+    public override void OpenSetting()
+    {
+        settingPanel.SetActive(true);
+
+        settingButton.SetActive(false);
+        exitGameButton.SetActive(false);
+        settingBackButton.SetActive(true);
+    }
+
+    public override void CloseSetting()
+    {
+        settingPanel.SetActive(false);
+
+        settingButton.SetActive(true);
+        exitGameButton.SetActive(true);
+        settingBackButton.SetActive(false);
+    }
+
+    public override void OpenExitConfirmation()
+    {
+        exitConfirmCheck = true;
+        exitGameConfirmationPanel.SetActive(true);
+        resumeButton.SetActive(false);
+        exitGameButton.SetActive(false);
+    }
+
+
+    public override void CloseExitConfirmation()
+    {
+        exitConfirmCheck = true;
+        exitGameConfirmationPanel.SetActive(false);
+        resumeButton.SetActive(true);
+        exitGameButton.SetActive(true);
+    }
+
+
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1.0f;
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
     }
 }

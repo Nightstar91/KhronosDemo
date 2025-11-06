@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 public class CameraEffect : MonoBehaviour
 {
     [Header("Camera Bob Parameters")]
-    [Range(0, 0.1f)] public float amount = 0.008f;
+    [Range(0, 0.1f)] public float amount = 0.005f;
     [Range(1f, 30f)] public float frequency = 12f;
     [Range(10f, 100f)] public float smooth = 20f;
 
@@ -21,6 +21,8 @@ public class CameraEffect : MonoBehaviour
 
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraHolder;
+
+    private const float dampenHeadBobAmount = 9f;
 
     public bool start = false;
 
@@ -76,8 +78,8 @@ public class CameraEffect : MonoBehaviour
     private Vector3 StartHeadbob()
     {
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Sin(Time.time * frequency) * amount;
-        pos.x += Mathf.Cos(Time.time * frequency / 3) * amount;
+        pos.y += Mathf.Sin(Time.time * frequency) * (amount * FPSController.characterController.velocity.magnitude / dampenHeadBobAmount);
+        pos.x += Mathf.Cos(Time.time * frequency / 3) * (amount * FPSController.characterController.velocity.magnitude / dampenHeadBobAmount);
 
         transform.localPosition += pos;
 
