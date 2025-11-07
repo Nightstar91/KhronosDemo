@@ -16,7 +16,7 @@ public class PlayerFootstepAudio : MonoBehaviour
     [SerializeField] private float stepInterval = 0.5f;     // Time between footsteps while moving
     [SerializeField] private float minMoveSpeed = 0.1f;     // Minimum player movement speed required to trigger footsteps
     [SerializeField] private float raycastDistance = 1.2f;  // How far below the player to check for ground
-    [SerializeField] private LayerMask groundMask;          // Which layers count as “ground” for surface detection
+    [SerializeField] private LayerMask groundMask;          // Which layers count as ground for surface detection
 
     // ===== INTERNAL STATE =====
     private CharacterController controller;  // Reference to the player’s CharacterController
@@ -25,36 +25,32 @@ public class PlayerFootstepAudio : MonoBehaviour
     private bool wasGrounded;                // Tracks if the player was grounded in the previous frame
     private int currentSurfaceIndex;         // Stores the current detected surface type (FMOD parameter value)
 
-    // ===== INITIALIZATION =====
     void Start()
     {
-        controller = GetComponent<CharacterController>();  // Grab CharacterController for movement/ground checks
-        previousPosition = transform.position;             // Store initial position
-        stepTimer = stepInterval;                          // Initialize the step timer
+        controller = GetComponent<CharacterController>();
+        previousPosition = transform.position;
+        stepTimer = stepInterval;
     }
 
-    // ===== MAIN UPDATE LOOP =====
     void Update()
     {
-        bool isGrounded = controller.isGrounded;  // Check if player is standing on ground
-        float speed = Vector3.Distance(transform.position, previousPosition) / Time.deltaTime;  // Calculate current move speed
+        bool isGrounded = controller.isGrounded;
+        float speed = Vector3.Distance(transform.position, previousPosition) / Time.deltaTime;
 
-        DetectSurface();  // Update surface type by raycasting downward
+        DetectSurface();  // Detect which surface the player is on
 
         // --- LANDING SOUND ---
-        // If the player just became grounded this frame (was in air last frame), play a landing sound
         if (isGrounded && !wasGrounded)
         {
             PlayLandingSound();
         }
 
         // --- FOOTSTEP LOOP ---
-        // If grounded and moving faster than minMoveSpeed, count down the timer
-        if (isGrounded && speed > minMoveSpeed)
+        // Only play footsteps if grounded, moving fast enough, and player is giving input
+        if (isGrounded && speed > minMoveSpeed && IsPlayerWalking())
         {
             stepTimer -= Time.deltaTime;
 
-            // When timer hits zero, play a footstep and reset timer
             if (stepTimer <= 0f)
             {
                 PlayFootstepSound();
@@ -63,22 +59,32 @@ public class PlayerFootstepAudio : MonoBehaviour
         }
         else
         {
-            // Reset timer when player stops or is in air (so footsteps don’t carry over)
+            // Reset timer when player stops or is in air
             stepTimer = stepInterval;
         }
 
-        // Store current state for next frame comparison
         wasGrounded = isGrounded;
         previousPosition = transform.position;
     }
 
-    // ===== GROUND / SURFACE DETECTION =====
+    // ===== INPUT CHECK =====
+    private bool IsPlayerWalking()
+    {
+        // Detect movement input (WASD / Arrow keys)
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputZ = Input.GetAxisRaw("Vertical");
+
+        // Player is "walking" if there's movement input
+        return inputX != 0f || inputZ != 0f;
+    }
+
+    // ===== SURFACE DETECTION =====
     private void DetectSurface()
     {
         // Raycast slightly below player to detect what surface they’re standing on
         if (Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, out RaycastHit hit, raycastDistance, groundMask))
         {
-            string tag = hit.collider.tag;  // Get the tag of the object we hit
+            string tag = hit.collider.tag;
 
             // Assign an index based on tag (used by FMOD parameter)
             switch (tag)
@@ -87,7 +93,7 @@ public class PlayerFootstepAudio : MonoBehaviour
                     currentSurfaceIndex = 0;
                     break;
 
-                // Undefined surfaces for now (you can fill these in later)
+                // Undefined surfaces for now
                 case "UndefinedSurface1":
                     currentSurfaceIndex = 1;
                     break;
@@ -101,23 +107,16 @@ public class PlayerFootstepAudio : MonoBehaviour
                     break;
             }
 
-            // Visualize the ray in the Scene view for debugging
             Debug.DrawLine(transform.position + Vector3.up * 0.2f, hit.point, Color.green);
-            // Debug.Log($"Surface: {tag} | Index: {currentSurfaceIndex}");
         }
     }
 
     // ===== PLAY FOOTSTEP SOUND =====
     private void PlayFootstepSound()
     {
-        // Create a new FMOD event instance for the footstep
         EventInstance stepInstance = RuntimeManager.CreateInstance(footstepEvent);
-
-        // Attach 3D position and parameter data
         stepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
         stepInstance.setParameterByName(surfaceParameterName, (float)currentSurfaceIndex);
-
-        // Play and release immediately (since it’s a one-shot)
         stepInstance.start();
         stepInstance.release();
     }
@@ -125,14 +124,9 @@ public class PlayerFootstepAudio : MonoBehaviour
     // ===== PLAY LANDING SOUND =====
     private void PlayLandingSound()
     {
-        // Create a new FMOD event instance for the landing
         EventInstance landInstance = RuntimeManager.CreateInstance(landEvent);
-
-        // Attach 3D position and parameter data
         landInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
         landInstance.setParameterByName(surfaceParameterName, (float)currentSurfaceIndex);
-
-        // Play and release immediately (since it’s a one-shot)
         landInstance.start();
         landInstance.release();
     }
