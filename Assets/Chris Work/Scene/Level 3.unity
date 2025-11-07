@@ -2937,17 +2937,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a26cabe0681c78488e69eb0095e097c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObj: {fileID: 0}
-  cc: {fileID: 0}
-  pm: {fileID: 0}
-  maxSlideTime: 0
-  slideForce: 1
-  slideTimer: 0
-  slideYScale: 0
-  startYScale: 0
-  horizontalInput: 0
-  verticalInput: 0
-  isSliding: 0
 --- !u!114 &355491196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2970,7 +2959,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   lookAction:
-    m_Name: 
+    m_Name: Look
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 1b0b5ae4-0691-4dd0-86dd-40077b9d7407
@@ -16200,7 +16189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5ec719f843f6ddb4b842f0cda1d44d79, type: 2}
+  - {fileID: 2100000, guid: 18d926cbeb546d44c9b1e5b09c0349f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
