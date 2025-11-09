@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CameraEffect : MonoBehaviour
 {
@@ -45,10 +46,14 @@ public class CameraEffect : MonoBehaviour
     {
         if(!FPSController.playerHud.isPaused)
         {
-            CheckForInput();
+            if(FPSController.currentState != FPSController.PlayerState.STATE_SLIDE)
+            {
+                CheckForInput();
+
+                StopHeadbob();
+                StopSwayCamera();
+            }
             
-            StopHeadbob();
-            StopSwayCamera();
 
             if (!FPSController.isGrounded)
             {
@@ -118,7 +123,7 @@ public class CameraEffect : MonoBehaviour
     }
 
 
-    private Quaternion StartSwayCamera(float horizontal)
+    public Quaternion StartSwayCamera(float horizontal)
     {
         Quaternion rot = Quaternion.identity;
         if(horizontal < 0)
@@ -129,6 +134,16 @@ public class CameraEffect : MonoBehaviour
             return rot;
 
             transform.localRotation = rot;
+
+        return rot;
+    }
+
+
+    public Quaternion StartSlidingCameraTilt()
+    {
+        Quaternion rot = Quaternion.identity;
+        rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount, Time.deltaTime * tiltSpeed);
+        transform.localRotation = rot;
 
         return rot;
     }

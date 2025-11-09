@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class FPSController : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class FPSController : MonoBehaviour
     }
     
     public PlayerState currentState = PlayerState.STATE_IDLE;
-    public PlayerState previousState;
+    public PlayerState previousState = PlayerState.STATE_IDLE;
 
     public bool CanMove { get; private set; } = true;
 
@@ -45,6 +45,7 @@ public class FPSController : MonoBehaviour
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
+    public GameObject playerCameraHolder;
     public CharacterController characterController;
     [SerializeField] public GameObject orientation;
 
@@ -61,20 +62,20 @@ public class FPSController : MonoBehaviour
     public bool isInAir = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
-    [SerializeField] public PlayerHud playerHud;
-    [SerializeField] public Sliding slide;
+    public PlayerHud playerHud;
+    private Sliding slide;
+    private CameraEffect cameraEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerCameraHolder = GameObject.Find("Cam Holder");
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         groundLayer = LayerMask.GetMask("Ground");
 
         Vector3 horizontalVelocity = characterController.velocity;
-
-        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
 
         lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
         lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
@@ -143,7 +144,7 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_SLIDE;
                 }
 
-                break;
+                break; 
 
             // TODO: See if can make it so that air movement can be lessen
             // TODO: how do you implement jumping in state??
@@ -176,6 +177,7 @@ public class FPSController : MonoBehaviour
 
                 if (slide.isSliding)
                 {
+                    cameraEffect.StartSwayCamera(10f);
                     slide.SlidingMovement();
                 }
 
@@ -232,7 +234,10 @@ public class FPSController : MonoBehaviour
         slideAction = InputSystem.actions.FindAction("Slide");
 
         playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
         slide = GetComponent<Sliding>();
+        cameraEffect = GameObject.Find("Cam Holder").GetComponent<CameraEffect>();
+
     }
 
 
