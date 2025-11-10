@@ -18,7 +18,7 @@ public class CameraEffect : MonoBehaviour
     [Header("Camera Shake Parameters")]
     [Range(0f, 1f)] public float shakeDuration = 0.5f;
     public AnimationCurve curve;
-    [Range(10f, 100f)] public float shakeIntensity;
+    [Range(0f, 1f)] public float shakeIntensity = 0.2f;
 
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraHolder;
@@ -53,15 +53,7 @@ public class CameraEffect : MonoBehaviour
                 StopHeadbob();
                 StopSwayCamera();
             }
-            
-
-            if (!FPSController.isGrounded)
-            {
-                if (FPSController.isGrounded)
-                {
-                    StartCoroutine(CameraShakeEvent());
-                }
-            }
+  
         }
         
     }
@@ -153,5 +145,17 @@ public class CameraEffect : MonoBehaviour
     {
         if (transform.localRotation == startRotation) return;
         transform.localRotation = Quaternion.Lerp(transform.localRotation, startRotation, tiltResetSpeed * Time.deltaTime);
+    }
+
+    public void ShakeCamera()
+    {
+       if (FPSController.currentState == FPSController.PlayerState.STATE_SLIDE)
+        {
+            transform.localPosition = Random.insideUnitSphere * shakeIntensity;
+        }
+        else
+        {
+            transform.position = startPosition;
+        }
     }
 }

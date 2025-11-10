@@ -178,6 +178,7 @@ public class FPSController : MonoBehaviour
                 if (slide.isSliding)
                 {
                     cameraEffect.StartSwayCamera(10f);
+                    cameraEffect.ShakeCamera();
                     slide.SlidingMovement();
                 }
 
