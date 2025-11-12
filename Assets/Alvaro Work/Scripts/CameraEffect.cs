@@ -18,7 +18,7 @@ public class CameraEffect : MonoBehaviour
     [Header("Camera Shake Parameters")]
     [Range(0f, 1f)] public float shakeDuration = 0.5f;
     public AnimationCurve curve;
-    [Range(0f, 1f)] public float shakeIntensity = 0.2f;
+    [Range(0f, 1f)] public float shakeIntensity = 0.05f;
 
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraHolder;

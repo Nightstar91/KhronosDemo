@@ -11,9 +11,12 @@ public class Sliding : MonoBehaviour
     private FPSController pm;
 
     [Header("Sliding")]
-    public float maxSlideTime;
-    [Range(1,30)] public float slideForce;
-    private float slideTimer;
+    private float originalSlideTimer;
+    private float originalSlideCooldown;
+    [Range(0f,4f)] public float slideTimer = 1.5f;
+    [Range(0f, 4f)] public float slideCooldown = 3f;
+    [Range(1, 30)] public float slideForce;
+
 
     public float slideYScale;
     private float startYScale;
@@ -23,13 +26,17 @@ public class Sliding : MonoBehaviour
     private float verticalInput;
 
     public bool isSliding;
+    public bool slideReady;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isSliding = false;
+        slideReady = true;
         startYScale = playerObj.localScale.y;
         slideForce = 3f;
+        originalSlideTimer = slideTimer;
+        originalSlideCooldown = slideCooldown;
     }
 
 
@@ -38,26 +45,6 @@ public class Sliding : MonoBehaviour
         cc = GetComponent<CharacterController>();
         pm = GetComponent<FPSController>();
         playerObj = GameObject.Find("Player").GetComponent<Transform>();
-    }
-
-
-    void Update()
-    {
-        if(pm.slideAction.IsPressed() && (horizontalInput != 0 || verticalInput != 0))
-        {
-            StartSlide();
-        }
-
-        if(pm.slideAction.WasReleasedThisFrame() && isSliding)
-        {
-            StopSlide();
-        }
-
-        if(isSliding)
-        {
-            SlidingMovement();
-        }
-        
     }
 
 
@@ -80,9 +67,38 @@ public class Sliding : MonoBehaviour
     }
 
 
+    public void SlideCountdown()
+    {
+        if (slideTimer >= 0)
+        {
+            slideTimer -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            isSliding = false;
+        }
+    }
+
+
+    public void HandleSlideCooldown()
+    {
+        if (slideCooldown >= 0 && !slideReady)
+        {
+            slideCooldown -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            slideCooldown = originalSlideCooldown;
+            slideReady = true;
+        }
+    }
+
+
     public void StopSlide()
     {
-        isSliding = false;
+        slideTimer = originalSlideTimer;
+
+        slideReady = false;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }

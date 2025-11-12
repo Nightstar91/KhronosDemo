@@ -90,6 +90,7 @@ public class FPSController : MonoBehaviour
         {
             case PlayerState.STATE_IDLE:
                 HandleMouseLock();
+                slide.HandleSlideCooldown();
 
                 // Once moving go to running state to apply velocity limit
                 if (moveAction.triggered)
@@ -114,10 +115,10 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_RUNNING:
-                                
-
                 HandleMouseLock();
                 HandleMovementInput();
+
+                slide.HandleSlideCooldown();
 
                 if (!isMoving)
                 {
@@ -139,7 +140,7 @@ public class FPSController : MonoBehaviour
                 }
 
                 //Condtional to transition to the slide state
-                if (slideAction.IsPressed())
+                if (slideAction.IsPressed() && slide.slideReady)
                 {
                     currentState = PlayerState.STATE_SLIDE;
                 }
@@ -149,7 +150,6 @@ public class FPSController : MonoBehaviour
             // TODO: See if can make it so that air movement can be lessen
             // TODO: how do you implement jumping in state??
             case PlayerState.STATE_JUMP:
-
                 Jump();
 
                 isInAir = true;
@@ -160,6 +160,7 @@ public class FPSController : MonoBehaviour
             case PlayerState.STATE_INAIR:
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
+                slide.HandleSlideCooldown();
 
                 if (isGrounded && isInAir)
                 {
@@ -170,7 +171,7 @@ public class FPSController : MonoBehaviour
 
             case PlayerState.STATE_SLIDE:
 
-                if(slideAction.IsPressed() && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+                if(slideAction.IsPressed())
                 {
                     slide.StartSlide();
                 }
@@ -180,15 +181,13 @@ public class FPSController : MonoBehaviour
                     cameraEffect.StartSwayCamera(10f);
                     cameraEffect.ShakeCamera();
                     slide.SlidingMovement();
+                    slide.SlideCountdown();
                 }
 
-                if (slideAction.WasReleasedThisFrame() && slide.isSliding)
+                if (slideAction.WasReleasedThisFrame() || !slide.isSliding)
                 {
                     slide.StopSlide();
-                }
 
-                if (!slide.isSliding)
-                {
                     currentState = PlayerState.STATE_RUNNING;
                 }
 
@@ -337,9 +336,4 @@ public class FPSController : MonoBehaviour
         moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
     }
 
-
-    public void Slide()
-    {
-
-    }
 }
