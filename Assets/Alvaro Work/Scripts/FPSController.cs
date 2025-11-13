@@ -56,7 +56,7 @@ public class FPSController : MonoBehaviour
 
     private const float originalWalkSpeed = 0f;
 
-    private LayerMask groundLayer;
+    public LayerMask groundLayer;
     public bool isGrounded = false;
     public bool isMoving = false;
     public bool isInAir = false;

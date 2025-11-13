@@ -9,6 +9,8 @@ public class Sliding : MonoBehaviour
     public Transform playerObj;
     private CharacterController cc;
     private FPSController pm;
+    private Transform playerOrientation;
+    private Quaternion startPlayerRotation;
 
     [Header("Sliding")]
     private float originalSlideTimer;
@@ -34,6 +36,7 @@ public class Sliding : MonoBehaviour
         isSliding = false;
         slideReady = true;
         startYScale = playerObj.localScale.y;
+        playerOrientation = GameObject.Find("SlopeOrientation").GetComponent<Transform>();
         slideForce = 3f;
         originalSlideTimer = slideTimer;
         originalSlideCooldown = slideCooldown;
@@ -58,10 +61,14 @@ public class Sliding : MonoBehaviour
 
     public void SlidingMovement()
     {
+        
+
         Vector3 inputDirection = playerObj.forward * verticalInput + playerObj.right * horizontalInput;
 
         if (!cc.isGrounded)
             inputDirection.y -= pm.gravity * Time.deltaTime;
+
+        CalculateAngle();
 
         cc.Move(inputDirection.normalized * slideForce * Time.deltaTime);
     }
@@ -101,7 +108,19 @@ public class Sliding : MonoBehaviour
         slideReady = false;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
+        playerOrientation.rotation = startPlayerRotation;
     }
 
+    public void CalculateAngle()
+    {
+        startPlayerRotation = playerOrientation.transform.rotation;
+
+        RaycastHit hit;
+
+        if (Physics.SphereCast(transform.position, 0.5f, -(transform.up), out hit, 1, pm.groundLayer))
+        {
+            playerOrientation.transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, hit.normal));
+        }
+    }
  
 }
