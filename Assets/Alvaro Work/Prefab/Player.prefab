@@ -342,7 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 0}
   maxSlideTime: 0
-  slideForce: 0
+  slideForce: 1
   slideYScale: 0
   isSliding: 0
 --- !u!114 &8730293828885063798
