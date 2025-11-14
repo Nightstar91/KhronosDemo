@@ -15,13 +15,15 @@ public class Sliding : MonoBehaviour
     [Header("Sliding")]
     private float originalSlideTimer;
     private float originalSlideCooldown;
+    private float originalSlideForce;
     [Range(0f,4f)] public float slideTimer = 1.5f;
-    [Range(0f, 4f)] public float slideCooldown = 3f;
+    [Range(0f, 4f)] public float slideCooldown = 3;
     [Range(1, 30)] public float slideForce;
 
 
     public float slideYScale;
     private float startYScale;
+    private const float slopeDamp = 2f;
 
     [Header("Input")]
     private float horizontalInput;
@@ -37,7 +39,8 @@ public class Sliding : MonoBehaviour
         slideReady = true;
         startYScale = playerObj.localScale.y;
         playerOrientation = GameObject.Find("SlopeOrientation").GetComponent<Transform>();
-        slideForce = 3f;
+        //slideForce = 3f;
+        slideForce = originalSlideForce;
         originalSlideTimer = slideTimer;
         originalSlideCooldown = slideCooldown;
     }
@@ -61,16 +64,15 @@ public class Sliding : MonoBehaviour
 
     public void SlidingMovement()
     {
-        
-
         Vector3 inputDirection = playerObj.forward * verticalInput + playerObj.right * horizontalInput;
+
+        CalculateAngle();
+        SlopeBasedAcceleration();
 
         if (!cc.isGrounded)
             inputDirection.y -= pm.gravity * Time.deltaTime;
 
-        CalculateAngle();
-
-        cc.Move(inputDirection.normalized * slideForce * Time.deltaTime);
+        cc.Move(inputDirection * slideForce * Time.deltaTime);
     }
 
 
@@ -104,12 +106,14 @@ public class Sliding : MonoBehaviour
     public void StopSlide()
     {
         slideTimer = originalSlideTimer;
+        slideForce = originalSlideForce;
 
         slideReady = false;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
         playerOrientation.rotation = startPlayerRotation;
     }
+
 
     public void CalculateAngle()
     {
@@ -122,5 +126,18 @@ public class Sliding : MonoBehaviour
             playerOrientation.transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, hit.normal));
         }
     }
- 
+
+
+    private void SlopeBasedAcceleration()
+    {
+        float angle;
+
+        angle = Quaternion.Angle(transform.rotation, playerOrientation.rotation);
+
+        if(angle != 0)
+        {
+            slideForce = angle / slopeDamp;
+            Debug.Log(string.Format("slide force = {0}", slideForce));
+        }
+    }
 }

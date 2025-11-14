@@ -43,6 +43,8 @@ public class SettingMenu : MonoBehaviour
         // Displaying the text based on the value
         sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
 
+        sensitivityAmount = sensitivityAmount / 100;
+
         SaveSensitivity();
     }
 

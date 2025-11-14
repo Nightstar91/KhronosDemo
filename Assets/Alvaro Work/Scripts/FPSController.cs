@@ -23,6 +23,7 @@ public class FPSController : MonoBehaviour
     public bool CanMove { get; private set; } = true;
 
     public InputAction moveAction;
+    public InputAction lookAction;
     public InputAction jumpAction;
     public InputAction pauseAction;
     public InputAction slideAction;
@@ -39,8 +40,8 @@ public class FPSController : MonoBehaviour
     [SerializeField] float jumpHeight = 1.5f;
 
     [Header("Look Parameters")]
-    [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
-    [SerializeField, Range(1, 10)] public float lookSpeedY = 2f;
+    [SerializeField, Range(0.1f, 1)] public float lookSpeedX = 0.2f;
+    [SerializeField, Range(0.1f, 1)] public float lookSpeedY = 0.2f;
     [SerializeField, Range(1, 100)] private float upperLookLimit = 80f;
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
@@ -49,7 +50,7 @@ public class FPSController : MonoBehaviour
     public CharacterController characterController;
     [SerializeField] public GameObject orientation;
 
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
@@ -123,6 +124,11 @@ public class FPSController : MonoBehaviour
                 if (!isMoving)
                 {
                     currentState = PlayerState.STATE_IDLE;
+                }
+
+                if(isInAir)
+                {
+                    currentState = PlayerState.STATE_INAIR;
                 }
 
                 // Conditional for jumping to got to jump state 
@@ -229,6 +235,7 @@ public class FPSController : MonoBehaviour
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
         slideAction = InputSystem.actions.FindAction("Slide");
@@ -244,6 +251,7 @@ public class FPSController : MonoBehaviour
     private void OnEnable()
     {
         moveAction.Enable();
+        lookAction.Enable();
         jumpAction.Enable();
         pauseAction.Enable();
         slideAction.Enable();
@@ -253,6 +261,7 @@ public class FPSController : MonoBehaviour
     private void OnDisable()
     {
         moveAction.Disable();
+        lookAction.Disable();
         jumpAction.Disable();
         pauseAction.Disable();
         slideAction.Disable();
@@ -278,6 +287,18 @@ public class FPSController : MonoBehaviour
 
     private void HandleMouseLock()
     {
+        rotationX -= lookAction.ReadValue<Vector2>().y * lookSpeedY;
+        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+
+        transform.rotation *= Quaternion.Euler(0, lookAction.ReadValue<Vector2>().x * lookSpeedX, 0);
+
+        // rotate the player object
+        transform.Rotate(0f, lookAction.ReadValue<Vector2>().x * lookSpeedX, 0f);
+    }
+
+    /*private void HandleMouseLock()
+    {
         rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
         rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
@@ -286,7 +307,7 @@ public class FPSController : MonoBehaviour
 
         // rotate the player object
         transform.Rotate(0f, Input.GetAxis("Mouse X") * lookSpeedX, 0f);
-    }
+    }*/
 
 
     private void ApplyFinalMovements()
