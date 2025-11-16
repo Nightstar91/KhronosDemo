@@ -7,6 +7,7 @@ public class SettingMenu : MonoBehaviour
 {
     // Sensitivity
     [SerializeField] public float sensitivityAmount;
+    private float convertedSensitivityAmount;
     public GameObject sensitivitySlider;
     public GameObject sensitivityText;
 
@@ -21,7 +22,7 @@ public class SettingMenu : MonoBehaviour
     {
         sensitivitySlider = GameObject.Find("SensSlider");
         sensitivityText = GameObject.Find("SettingSensAmountText");
-        sensitivityAmount = PlayerPrefs.GetFloat("Sensitivity", 2);
+        sensitivityAmount = PlayerPrefs.GetFloat("Sensitivity", 0.02f) ;
 
         fovSlider = GameObject.Find("FOVSlider");
         fovText = GameObject.Find("SettingFOVAmountText");
@@ -30,7 +31,7 @@ public class SettingMenu : MonoBehaviour
         sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
         fovText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", fovAmount);
 
-        sensitivitySlider.GetComponent<Slider>().value = sensitivityAmount;
+        sensitivitySlider.GetComponent<Slider>().value = sensitivityAmount * 100;
         fovSlider.GetComponent<Slider>().value = fovAmount; 
     }
 
@@ -40,10 +41,10 @@ public class SettingMenu : MonoBehaviour
         // Assigning the value of sensitivity based on the value of the slider
         sensitivityAmount = Convert.ToInt32(sensitivitySlider.GetComponent<Slider>().value);
 
-        // Displaying the text based on the value
-        sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
-
         sensitivityAmount = sensitivityAmount / 100;
+
+        // Displaying the text based on the value
+        sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", (sensitivityAmount * 100));
 
         SaveSensitivity();
     }
