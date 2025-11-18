@@ -9,7 +9,9 @@ public class PlayerFootstepAudio : MonoBehaviour
     [Header("FMOD Events")]
     [SerializeField] private EventReference footstepEvent;  // The FMOD event for footsteps (event:/Player/Footsteps)
     [SerializeField] private EventReference landEvent;      // The FMOD event for landings (event:/Player/Land)
+    [SerializeField] private EventReference slideEvent;      // slide SFX event
     [SerializeField] private string surfaceParameterName = "SurfaceTerrain";  // Name of the FMOD parameter that defines surface type
+   
 
     // ===== SETTINGS =====
     [Header("Settings")]
@@ -19,10 +21,12 @@ public class PlayerFootstepAudio : MonoBehaviour
     [SerializeField] private LayerMask groundMask;          // Which layers count as ground for surface detection
 
     // ===== INTERNAL STATE =====
+    [SerializeField] private FPSController playerController;
     private CharacterController controller;  // Reference to the player’s CharacterController
     private Vector3 previousPosition;        // Used to measure player movement between frames
     private float stepTimer;                 // Counts down between footsteps
     private bool wasGrounded;                // Tracks if the player was grounded in the previous frame
+    private bool wasSliding;
     private int currentSurfaceIndex;         // Stores the current detected surface type (FMOD parameter value)
 
     void Start()
@@ -36,6 +40,7 @@ public class PlayerFootstepAudio : MonoBehaviour
     {
         bool isGrounded = controller.isGrounded;
         float speed = Vector3.Distance(transform.position, previousPosition) / Time.deltaTime;
+        bool isSliding = IsPlayerSliding();
 
         DetectSurface();  // Detect which surface the player is on
 
@@ -45,22 +50,36 @@ public class PlayerFootstepAudio : MonoBehaviour
             PlayLandingSound();
         }
 
-        // --- FOOTSTEP LOOP ---
-        // Only play footsteps if grounded, moving fast enough, and player is giving input
-        if (isGrounded && speed > minMoveSpeed && IsPlayerWalking())
-        {
-            stepTimer -= Time.deltaTime;
 
-            if (stepTimer <= 0f)
-            {
-                PlayFootstepSound();
-                stepTimer = stepInterval;
-            }
+        // ===== SLIDE SOUND =====
+        if (isGrounded && isSliding)
+        {
+            // Only trigger slide when state changes
+            if (!wasSliding)
+                PlaySlideSound();
+
+            wasSliding = true;
+            ResetFootstepTimer();
         }
         else
         {
-            // Reset timer when player stops or is in air
-            stepTimer = stepInterval;
+            wasSliding = false;
+
+            // ===== FOOTSTEPS =====
+            if (isGrounded && speed > minMoveSpeed && IsPlayerWalking())
+            {
+                stepTimer -= Time.deltaTime;
+
+                if (stepTimer <= 0f)
+                {
+                    PlayFootstepSound();
+                    stepTimer = stepInterval;
+                }
+            }
+            else
+            {
+                ResetFootstepTimer();
+            }
         }
 
         wasGrounded = isGrounded;
@@ -68,6 +87,16 @@ public class PlayerFootstepAudio : MonoBehaviour
     }
 
     // ===== INPUT CHECK =====
+    private void ResetFootstepTimer()
+    {
+        stepTimer = stepInterval;
+    }
+
+    // ===== YOUR SLIDE CHECK HERE =====
+    private bool IsPlayerSliding()
+    {
+        return playerController.slide.isSliding;
+    }
     private bool IsPlayerWalking()
     {
         // Detect movement input (WASD / Arrow keys)
@@ -129,5 +158,14 @@ public class PlayerFootstepAudio : MonoBehaviour
         landInstance.setParameterByName(surfaceParameterName, (float)currentSurfaceIndex);
         landInstance.start();
         landInstance.release();
+    }
+    // ===== SLIDE SOUND =====
+    private void PlaySlideSound()
+    {
+        EventInstance slideInstance = RuntimeManager.CreateInstance(slideEvent);
+        slideInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+        slideInstance.setParameterByName(surfaceParameterName, currentSurfaceIndex);
+        slideInstance.start();
+        slideInstance.release();
     }
 }
