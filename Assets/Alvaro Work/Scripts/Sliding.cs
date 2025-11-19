@@ -23,7 +23,7 @@ public class Sliding : MonoBehaviour
     private const float speedCap = 30f;
     private Vector3 slideVelocity;
     [Range(0f,4f)] public float slideTimer = 1.5f;
-    [Range(0f, 4f)] public float slideCooldown = 3;
+    [Range(0f, 4f)] public float slideCooldown = 1.8f;
     [Range(1, 30)] public float slideForce;
 
 
@@ -88,15 +88,14 @@ public class Sliding : MonoBehaviour
 
     public void SlideCountdown()
     {
-        if (slideTimer >= 0)
+        if (slideTimer >= 0 && angle == 0)
         {
             slideTimer -= 1 * Time.deltaTime;
         }
-        //else if(slideTimer >= 0 && angle)
-        //{
-
-        //}
-
+        else if (slideTimer >= 0 && angle >= 5f)
+        {
+            slideTimer = 1.5f;
+        }
         else
         {
             isSliding = false;
@@ -135,7 +134,8 @@ public class Sliding : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2))
         {
             slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
-            return Vector3.Angle(hit.normal, Vector3.up) > 0f;
+            angle = Vector3.Angle(hit.normal, Vector3.up);
+            return angle > 0f;
         }
 
         slopeDirection = Vector3.zero;

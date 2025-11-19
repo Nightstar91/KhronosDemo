@@ -128,7 +128,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: slideForce
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: slideTimer
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: slideCooldown
-      value: 3
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 3579688081978202162, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_Name
