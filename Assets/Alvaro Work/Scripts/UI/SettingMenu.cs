@@ -7,7 +7,6 @@ public class SettingMenu : MonoBehaviour
 {
     // Sensitivity
     [SerializeField] public float sensitivityAmount;
-    private float convertedSensitivityAmount;
     public GameObject sensitivitySlider;
     public GameObject sensitivityText;
 

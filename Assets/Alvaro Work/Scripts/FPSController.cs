@@ -173,6 +173,13 @@ public class FPSController : MonoBehaviour
                     isInAir = false;
                     currentState = PlayerState.STATE_RUNNING;
                 }
+
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
                 break;
 
             case PlayerState.STATE_SLIDE:
