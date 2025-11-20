@@ -342,7 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 0}
   maxSlideTime: 0
-  slideForce: 0
+  slideForce: 1
   slideYScale: 0
   isSliding: 0
 --- !u!114 &8730293828885063798
@@ -371,6 +371,13 @@ MonoBehaviour:
       Data3: 1585328540
       Data4: 2064574844
     Path: event:/PlayerCharacter/Landings
+  slideEvent:
+    Guid:
+      Data1: 449505555
+      Data2: 1115534005
+      Data3: -747630150
+      Data4: -483591106
+    Path: event:/UI/UI_Confirm
   surfaceParameterName: SurfaceTerrain
   stepInterval: 0.35
   minMoveSpeed: 0.1
@@ -378,6 +385,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  playerController: {fileID: 4512657051378185625}
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0
