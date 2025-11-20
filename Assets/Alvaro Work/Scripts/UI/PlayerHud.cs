@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHud : BasicMenu
 {
     public string sceneName = "Main Menu";
-    public FPSController playerController;
+    public FPSController player;
     private SettingMenu settingMenu;
     private Slider speedoSlider;
 
@@ -28,7 +28,7 @@ public class PlayerHud : BasicMenu
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<FPSController>();
+        player = GameObject.Find("Player").GetComponent<FPSController>();
         settingMenu = GetComponent<SettingMenu>();
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
@@ -47,7 +47,7 @@ public class PlayerHud : BasicMenu
 
     public void UpdateSpeedometer()
     {
-        speedoSlider.value = playerController.characterController.velocity.magnitude;
+        speedoSlider.value = player.characterController.velocity.magnitude;
     }
         
 
@@ -60,19 +60,19 @@ public class PlayerHud : BasicMenu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        playerController.moveAction.Disable();
-        playerController.jumpAction.Disable();
+        player.moveAction.Disable();
+        player.jumpAction.Disable();
     }
 
 
     public void ResumeGame()
     {
         // Updating the Sensitivity
-        playerController.lookSpeedX = settingMenu.GetSensitivity();
-        playerController.lookSpeedY = settingMenu.GetSensitivity();
+        player.lookSpeedX = settingMenu.GetSensitivity();
+        player.lookSpeedY = settingMenu.GetSensitivity();
 
         // Updating the Sensitivity
-        playerController.playerCamera.fieldOfView = settingMenu.GetFOV();
+        player.playerCamera.fieldOfView = settingMenu.GetFOV();
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
@@ -82,8 +82,8 @@ public class PlayerHud : BasicMenu
 
         isPaused = false;
 
-        playerController.moveAction.Enable();
-        playerController.jumpAction.Enable();
+        player.moveAction.Enable();
+        player.jumpAction.Enable();
     }
 
     public override void OpenSetting()
