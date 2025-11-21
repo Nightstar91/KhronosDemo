@@ -66,7 +66,7 @@ public class FPSController : MonoBehaviour
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     public PlayerHud playerHud;
-    private Sliding slide;
+    public Sliding slide;
     private CameraEffect cameraEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
