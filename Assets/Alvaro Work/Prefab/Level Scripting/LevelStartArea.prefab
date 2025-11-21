@@ -374,7 +374,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &6768416723074582586
@@ -386,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1332771696461993469}
-  - component: {fileID: 4788681128936176945}
+  - component: {fileID: 8540141100603231985}
   m_Layer: 6
   m_Name: LevelStartAreaCollision
   m_TagString: Untagged
@@ -409,8 +409,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1193764263008121432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &4788681128936176945
-MeshCollider:
+--- !u!65 &8540141100603231985
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -427,7 +427,6 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -3124,7 +3124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5903487836260568066, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: levelTimer
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5903487836260568066, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: objectiveType
@@ -3201,7 +3201,7 @@ PrefabInstance:
       objectReference: {fileID: 1499655731}
     - target: {fileID: 8807052540129163771, guid: d820e1336bfb98e48b7dd611f494b6f6, type: 3}
       propertyPath: m_VersionIndex
-      value: 2419
+      value: 2440
       objectReference: {fileID: 0}
     - target: {fileID: 9045158648116978980, guid: d820e1336bfb98e48b7dd611f494b6f6, type: 3}
       propertyPath: m_Mesh
@@ -3278,7 +3278,7 @@ PrefabInstance:
       objectReference: {fileID: 2061475828}
     - target: {fileID: 9074873286135986319, guid: 2d05d03caf90276498210205d69b82bc, type: 3}
       propertyPath: m_VersionIndex
-      value: 2428
+      value: 2458
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3296,5 +3296,5 @@ SceneRoots:
   - {fileID: 1767185740}
   - {fileID: 1272555310}
   - {fileID: 1377291012}
-  - {fileID: 479622493382541802}
   - {fileID: 377433316}
+  - {fileID: 479622493382541802}

@@ -61,6 +61,8 @@ public class FPSController : MonoBehaviour
     public bool isGrounded = false;
     public bool isMoving = false;
     public bool isInAir = false;
+    public bool playerFailed = false;
+    public bool playerSucceed = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     public PlayerHud playerHud;

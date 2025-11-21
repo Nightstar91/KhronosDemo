@@ -14,6 +14,7 @@ public class PlayerHud : BasicMenu
     public GameObject pauseMenu;
     public GameObject mainMenuButton;
     public GameObject resumeButton;
+    public GameObject resultPanel;
     public bool isPaused = false;
 
     public override void Awake()
@@ -22,6 +23,7 @@ public class PlayerHud : BasicMenu
         pauseMenu = GameObject.Find("Pausemenu");
         mainMenuButton = GameObject.Find("MainMenuButton");
         resumeButton = GameObject.Find("ResumeButton");
+        resultPanel = GameObject.Find("ResultPanel");
     }
 
 
@@ -32,6 +34,7 @@ public class PlayerHud : BasicMenu
         settingMenu = GetComponent<SettingMenu>();
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
+        resultPanel.SetActive(false);
         settingPanel.SetActive(false);
         exitGameConfirmationPanel.SetActive(false);
         pauseMenu.SetActive(false);
@@ -50,7 +53,6 @@ public class PlayerHud : BasicMenu
         speedoSlider.value = player.characterController.velocity.magnitude;
     }
         
-
 
     public void PauseGame()
     {
@@ -119,6 +121,12 @@ public class PlayerHud : BasicMenu
         exitGameConfirmationPanel.SetActive(false);
         resumeButton.SetActive(true);
         exitGameButton.SetActive(true);
+    }
+
+
+    public void OpenResultPanel()
+    {
+        
     }
 
 
