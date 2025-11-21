@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CameraEffect : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class CameraEffect : MonoBehaviour
     [Header("Camera Shake Parameters")]
     [Range(0f, 1f)] public float shakeDuration = 0.5f;
     public AnimationCurve curve;
-    [Range(10f, 100f)] public float shakeIntensity;
+    [Range(0f, 1f)] public float shakeIntensity = 0.05f;
 
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraHolder;
@@ -45,18 +46,14 @@ public class CameraEffect : MonoBehaviour
     {
         if(!FPSController.playerHud.isPaused)
         {
-            CheckForInput();
-            
-            StopHeadbob();
-            StopSwayCamera();
-
-            if (!FPSController.isGrounded)
+            if(FPSController.currentState != FPSController.PlayerState.STATE_SLIDE)
             {
-                if (FPSController.isGrounded)
-                {
-                    StartCoroutine(CameraShakeEvent());
-                }
+                CheckForInput();
+
+                StopHeadbob();
+                StopSwayCamera();
             }
+  
         }
         
     }
@@ -118,7 +115,7 @@ public class CameraEffect : MonoBehaviour
     }
 
 
-    private Quaternion StartSwayCamera(float horizontal)
+    public Quaternion StartSwayCamera(float horizontal)
     {
         Quaternion rot = Quaternion.identity;
         if(horizontal < 0)
@@ -134,9 +131,31 @@ public class CameraEffect : MonoBehaviour
     }
 
 
+    public Quaternion StartSlidingCameraTilt()
+    {
+        Quaternion rot = Quaternion.identity;
+        rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount, Time.deltaTime * tiltSpeed);
+        transform.localRotation = rot;
+
+        return rot;
+    }
+
+
     private void StopSwayCamera()
     {
         if (transform.localRotation == startRotation) return;
         transform.localRotation = Quaternion.Lerp(transform.localRotation, startRotation, tiltResetSpeed * Time.deltaTime);
+    }
+
+    public void ShakeCamera()
+    {
+       if (FPSController.currentState == FPSController.PlayerState.STATE_SLIDE)
+        {
+            transform.localPosition = Random.insideUnitSphere * shakeIntensity;
+        }
+        else
+        {
+            transform.position = startPosition;
+        }
     }
 }

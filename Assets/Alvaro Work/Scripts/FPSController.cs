@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class FPSController : MonoBehaviour
 {
@@ -18,11 +18,12 @@ public class FPSController : MonoBehaviour
     }
     
     public PlayerState currentState = PlayerState.STATE_IDLE;
-    public PlayerState previousState;
+    public PlayerState previousState = PlayerState.STATE_IDLE;
 
     public bool CanMove { get; private set; } = true;
 
     public InputAction moveAction;
+    public InputAction lookAction;
     public InputAction jumpAction;
     public InputAction pauseAction;
     public InputAction slideAction;
@@ -39,42 +40,45 @@ public class FPSController : MonoBehaviour
     [SerializeField] float jumpHeight = 1.5f;
 
     [Header("Look Parameters")]
-    [SerializeField, Range(1, 10)] public float lookSpeedX = 2f;
-    [SerializeField, Range(1, 10)] public float lookSpeedY = 2f;
+    [SerializeField, Range(0.1f, 1)] public float lookSpeedX = 0.2f;
+    [SerializeField, Range(0.1f, 1)] public float lookSpeedY = 0.2f;
     [SerializeField, Range(1, 100)] private float upperLookLimit = 80f;
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
+    public GameObject playerCameraHolder;
     public CharacterController characterController;
     [SerializeField] public GameObject orientation;
 
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
 
     private const float originalWalkSpeed = 0f;
 
-    private LayerMask groundLayer;
+    public LayerMask groundLayer;
     public bool isGrounded = false;
     public bool isMoving = false;
     public bool isInAir = false;
+    public bool playerFailed = false;
+    public bool playerSucceed = false;
 
     // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
-    [SerializeField] public PlayerHud playerHud;
-    [SerializeField] public Sliding slide;
+    public PlayerHud playerHud;
+    private Sliding slide;
+    private CameraEffect cameraEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerCameraHolder = GameObject.Find("Cam Holder");
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         groundLayer = LayerMask.GetMask("Ground");
 
         Vector3 horizontalVelocity = characterController.velocity;
-
-        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
 
         lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
         lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
@@ -89,6 +93,7 @@ public class FPSController : MonoBehaviour
         {
             case PlayerState.STATE_IDLE:
                 HandleMouseLock();
+                slide.HandleSlideCooldown();
 
                 // Once moving go to running state to apply velocity limit
                 if (moveAction.triggered)
@@ -113,14 +118,19 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_RUNNING:
-                                
-
                 HandleMouseLock();
                 HandleMovementInput();
+
+                slide.HandleSlideCooldown();
 
                 if (!isMoving)
                 {
                     currentState = PlayerState.STATE_IDLE;
+                }
+
+                if(isInAir)
+                {
+                    currentState = PlayerState.STATE_INAIR;
                 }
 
                 // Conditional for jumping to got to jump state 
@@ -138,17 +148,16 @@ public class FPSController : MonoBehaviour
                 }
 
                 //Condtional to transition to the slide state
-                if (slideAction.IsPressed())
+                if (slideAction.IsPressed() && slide.slideReady)
                 {
                     currentState = PlayerState.STATE_SLIDE;
                 }
 
-                break;
+                break; 
 
             // TODO: See if can make it so that air movement can be lessen
             // TODO: how do you implement jumping in state??
             case PlayerState.STATE_JUMP:
-
                 Jump();
 
                 isInAir = true;
@@ -159,34 +168,49 @@ public class FPSController : MonoBehaviour
             case PlayerState.STATE_INAIR:
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
+                slide.HandleSlideCooldown();
 
                 if (isGrounded && isInAir)
                 {
                     isInAir = false;
                     currentState = PlayerState.STATE_RUNNING;
                 }
+
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
                 break;
 
             case PlayerState.STATE_SLIDE:
 
-                if(slideAction.IsPressed() && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+                if(slideAction.IsPressed())
                 {
                     slide.StartSlide();
                 }
 
                 if (slide.isSliding)
                 {
+                    cameraEffect.StartSwayCamera(10f);
+                    cameraEffect.ShakeCamera();
                     slide.SlidingMovement();
+                    slide.SlideCountdown();
                 }
 
-                if (slideAction.WasReleasedThisFrame() && slide.isSliding)
+                if (slideAction.WasReleasedThisFrame() || !slide.isSliding)
                 {
                     slide.StopSlide();
+
+                    currentState = PlayerState.STATE_RUNNING;
                 }
 
-                if (!slide.isSliding)
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
                 {
-                    currentState = PlayerState.STATE_RUNNING;
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
                 }
 
                 break;
@@ -227,18 +251,23 @@ public class FPSController : MonoBehaviour
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
         slideAction = InputSystem.actions.FindAction("Slide");
 
         playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
         slide = GetComponent<Sliding>();
+        cameraEffect = GameObject.Find("Cam Holder").GetComponent<CameraEffect>();
+
     }
 
 
     private void OnEnable()
     {
         moveAction.Enable();
+        lookAction.Enable();
         jumpAction.Enable();
         pauseAction.Enable();
         slideAction.Enable();
@@ -248,6 +277,7 @@ public class FPSController : MonoBehaviour
     private void OnDisable()
     {
         moveAction.Disable();
+        lookAction.Disable();
         jumpAction.Disable();
         pauseAction.Disable();
         slideAction.Disable();
@@ -273,6 +303,18 @@ public class FPSController : MonoBehaviour
 
     private void HandleMouseLock()
     {
+        rotationX -= lookAction.ReadValue<Vector2>().y * lookSpeedY;
+        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+
+        transform.rotation *= Quaternion.Euler(0, lookAction.ReadValue<Vector2>().x * lookSpeedX, 0);
+
+        // rotate the player object
+        transform.Rotate(0f, lookAction.ReadValue<Vector2>().x * lookSpeedX, 0f);
+    }
+
+    /*private void HandleMouseLock()
+    {
         rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
         rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
@@ -281,7 +323,7 @@ public class FPSController : MonoBehaviour
 
         // rotate the player object
         transform.Rotate(0f, Input.GetAxis("Mouse X") * lookSpeedX, 0f);
-    }
+    }*/
 
 
     private void ApplyFinalMovements()
@@ -331,9 +373,4 @@ public class FPSController : MonoBehaviour
         moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
     }
 
-
-    public void Slide()
-    {
-
-    }
 }
