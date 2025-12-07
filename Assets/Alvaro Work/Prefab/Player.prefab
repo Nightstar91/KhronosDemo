@@ -314,6 +314,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  lookAction:
+    m_Name: Look
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fd8f1699-d1fc-4574-906e-5471d4896037
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   jumpAction:
     m_Name: Jump
     m_Type: 0
@@ -348,21 +357,25 @@ MonoBehaviour:
   gravity: 30
   gravityScale: 1
   jumpHeight: 1.5
-  lookSpeedX: 2
-  lookSpeedY: 2
+  lookSpeedX: 1
+  lookSpeedY: 1
   upperLookLimit: 80
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
   playerCameraHolder: {fileID: 0}
   characterController: {fileID: 0}
   orientation: {fileID: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
   isMoving: 0
   isInAir: 0
+  playerFailed: 0
+  playerSucceed: 0
   playerHud: {fileID: 0}
+  slide: {fileID: 0}
 --- !u!114 &3532926395716396089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObj: {fileID: 0}
-  maxSlideTime: 0
+  angle: 0
+  slideTimer: 1.5
+  slideCooldown: 1.8
   slideForce: 1
   slideYScale: 0
   isSliding: 0
@@ -409,11 +424,11 @@ MonoBehaviour:
     Path: event:/PlayerCharacter/Landings
   slideEvent:
     Guid:
-      Data1: 449505555
-      Data2: 1115534005
-      Data3: -747630150
-      Data4: -483591106
-    Path: event:/UI/UI_Confirm
+      Data1: 1297378047
+      Data2: 1182619826
+      Data3: 574209458
+      Data4: -640744004
+    Path: event:/PlayerCharacter/Slide
   surfaceParameterName: SurfaceTerrain
   stepInterval: 0.35
   minMoveSpeed: 0.1
@@ -480,7 +495,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeIntensity: 10
+  shakeIntensity: 1
   _camera: {fileID: 0}
   _cameraHolder: {fileID: 0}
   start: 0

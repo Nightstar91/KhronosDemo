@@ -199,12 +199,20 @@ public class FPSController : MonoBehaviour
                     slide.SlideCountdown();
                 }
 
-                if (slideAction.WasReleasedThisFrame() || !slide.isSliding)
+                if (slideAction.WasReleasedThisFrame())
                 {
+                    slide.isSliding = false;   // slide state off
                     slide.StopSlide();
-
                     currentState = PlayerState.STATE_RUNNING;
                 }
+
+                else if (!slide.isSliding)
+                {
+                    // natural slide finish
+                    slide.StopSlide();
+                    currentState = PlayerState.STATE_RUNNING;
+                }
+
 
                 if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
                 {
