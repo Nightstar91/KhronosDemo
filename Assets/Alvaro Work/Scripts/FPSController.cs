@@ -64,7 +64,6 @@ public class FPSController : MonoBehaviour
     public bool playerFailed = false;
     public bool playerSucceed = false;
 
-    // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     public PlayerHud playerHud;
     public Sliding slide;
     private CameraEffect cameraEffect;
@@ -156,7 +155,6 @@ public class FPSController : MonoBehaviour
                 break; 
 
             // TODO: See if can make it so that air movement can be lessen
-            // TODO: how do you implement jumping in state??
             case PlayerState.STATE_JUMP:
                 Jump();
 
