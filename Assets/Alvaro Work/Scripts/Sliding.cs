@@ -19,6 +19,7 @@ public class Sliding : MonoBehaviour
     private float originalSlideTimer;
     private float originalSlideCooldown;
     private float originalSlideForce;
+    float slopeAlignment;
     public float angle;
     private float currentSlideSpeed; // Track current speed (AI)
     [Range(5f, 15f)] public float baseSlideSpeed = 10f; // Base sliding speed (AI)
@@ -90,14 +91,16 @@ public class Sliding : MonoBehaviour
                 // Decay over time
                 currentSlideSpeed = Mathf.Lerp(currentSlideSpeed, baseSlideSpeed, Time.deltaTime * 1f);
             }
-        }
 
-        // Apply gravity
+            
+        }
         moveDirection.y -= pm.gravity * Time.deltaTime;
 
-        // Move the character - DON'T normalize here!
+        pm.SetVelocity(moveDirection );
+
         cc.Move(moveDirection * Time.deltaTime);
     }
+
 
     private void ApplySlopeAcceleration(float slopeAngle)
     {
@@ -108,25 +111,25 @@ public class Sliding : MonoBehaviour
             Vector3 slopeDir = Vector3.ProjectOnPlane(Vector3.down, GetSlopeNormal()).normalized;
             float slopeAlignment = Vector3.Dot(playerObj.forward, slopeDir);
 
-            if (slopeAlignment > 0.1f) // Moving downhill
+            // Accelerating downhill
+            if (slopeAlignment > 0.1f)
             {
-                // Accelerate based on slope angle
                 float accelerationAmount = (slopeAngle / 45f) * downhillAcceleration;
                 currentSlideSpeed += accelerationAmount * Time.deltaTime;
             }
-            else if (slopeAlignment < -0.1f) // Moving uphill
+            // Decelerating on uphill
+            else if (slopeAlignment < -0.1f) 
             {
-                // Decelerate based on slope angle
                 float decelerationAmount = (slopeAngle / 45f) * uphillDeceleration;
                 currentSlideSpeed -= decelerationAmount * Time.deltaTime;
             }
 
-            // Clamp speed to reasonable values
             currentSlideSpeed = Mathf.Clamp(currentSlideSpeed, baseSlideSpeed * 0.5f, maxSlideSpeed);
 
             Debug.Log($"Slope: {slopeAngle:F1}° | Speed: {currentSlideSpeed:F1} | Alignment: {slopeAlignment:F2}");
         }
     }
+
 
     public void SlideCountdown()
     {
@@ -144,6 +147,7 @@ public class Sliding : MonoBehaviour
         }
     }
 
+
     public void HandleSlideCooldown()
     {
         if (slideCooldown >= 0 && !slideReady)
@@ -157,16 +161,19 @@ public class Sliding : MonoBehaviour
         }
     }
 
+
     public void StopSlide()
     {
         slideTimer = originalSlideTimer;
         slideForce = originalSlideForce;
         currentSlideSpeed = baseSlideSpeed; 
         slideReady = false;
+        angle = 0;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
         playerOrientation.rotation = startPlayerRotation;
     }
+
 
     private bool OnSlope(out Vector3 slopeDirection, out float slopeAngle)
     {
@@ -190,6 +197,7 @@ public class Sliding : MonoBehaviour
         return false;
     }
 
+
     // Helper method to get slope normal
     private Vector3 GetSlopeNormal()
     {
@@ -199,6 +207,7 @@ public class Sliding : MonoBehaviour
         }
         return Vector3.up;
     }
+
 
     public void CalculateAngle()
     {

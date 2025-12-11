@@ -50,7 +50,7 @@ public class PlayerHud : BasicMenu
 
     public void UpdateSpeedometer()
     {
-        speedoSlider.value = player.characterController.velocity.magnitude;
+        speedoSlider.value = player.GetVelocity();
     }
         
 
