@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -24,7 +25,7 @@ public class Sliding : MonoBehaviour
     private Vector3 slideVelocity;
     [Range(0f,4f)] public float slideTimer = 1.5f;
     [Range(0f, 4f)] public float slideCooldown = 1.8f;
-    [Range(1, 30)] public float slideForce;
+    [SerializeField] public float slideForce;
 
 
     public float slideYScale;
@@ -71,18 +72,21 @@ public class Sliding : MonoBehaviour
 
     public void SlidingMovement()
     {
-        Vector3 inputDirection = playerObj.forward * verticalInput + playerObj.right * horizontalInput;
+        Vector3 inputDirection = playerObj.forward * verticalInput * slideForce + playerObj.right * horizontalInput * slideForce;
 
         if (OnSlope(out Vector3 slopeDirection))
         {
-            slideVelocity += slopeDirection * speedAcceleration * Time.deltaTime;
-            slideVelocity = Vector3.ClampMagnitude(slideVelocity, speedAcceleration);
-            cc.Move(slideVelocity * Time.deltaTime);
+            inputDirection = slopeDirection;
+
+            CalculateAngle();
+            SlopeBasedAcceleration();
+
+            inputDirection = slopeDirection * slideForce * Time.deltaTime;
         }
-        else
-        {
-            cc.Move(inputDirection.normalized * Time.deltaTime);
-        }
+
+        inputDirection.y -= pm.gravity * Time.deltaTime;
+
+        cc.Move(inputDirection.normalized * Time.deltaTime);
     }
 
 
@@ -92,7 +96,7 @@ public class Sliding : MonoBehaviour
         {
             slideTimer -= 1 * Time.deltaTime;
         }
-        else if (slideTimer >= 0 && angle >= 5f)
+        else if (slideTimer >= 0 && angle > 3f)
         {
             slideTimer = 1.5f;
         }
@@ -131,14 +135,22 @@ public class Sliding : MonoBehaviour
 
     private bool OnSlope(out Vector3 slopeDirection)
     {
+        slopeDirection = Vector3.zero;
+        angle = 0;
+
         if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2))
         {
-            slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
             angle = Vector3.Angle(hit.normal, Vector3.up);
-            return angle > 0f;
+
+            if(angle == 3f)
+            {
+                return false;
+            }
+
+            slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
+            return true;
         }
 
-        slopeDirection = Vector3.zero;
         return false;
     }
 
@@ -160,11 +172,18 @@ public class Sliding : MonoBehaviour
     {
         angle = Quaternion.Angle(transform.rotation, playerOrientation.rotation);
 
+
         if(angle != 0)
         {
-            slideForce += angle / slopeDamp;
-            slideForce = Mathf.Clamp(slideForce, 0, 100);
+            speedAcceleration = angle + (angle * 0.25f);
+
+            slideForce = Mathf.Lerp(slideForce, speedAcceleration, 1f);
+            slideForce = Mathf.Clamp(slideForce, 0, 30);
             Debug.Log(string.Format("slideforce = {0}", slideForce));
+
+            return;
         }
+
+        return;
     }
 }
