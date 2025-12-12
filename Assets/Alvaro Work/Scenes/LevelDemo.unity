@@ -139,6 +139,10 @@ PrefabInstance:
       value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
+      propertyPath: baseSlideSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: uphillDeceleration
       value: 45
       objectReference: {fileID: 0}

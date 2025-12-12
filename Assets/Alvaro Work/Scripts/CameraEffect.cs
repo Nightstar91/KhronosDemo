@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CameraEffect : MonoBehaviour
@@ -147,6 +148,8 @@ public class CameraEffect : MonoBehaviour
         transform.localRotation = Quaternion.Lerp(transform.localRotation, startRotation, tiltResetSpeed * Time.deltaTime);
     }
 
+
+    // To be used for sliding
     public void ShakeCamera()
     {
        if (FPSController.currentState == FPSController.PlayerState.STATE_SLIDE)
@@ -157,5 +160,21 @@ public class CameraEffect : MonoBehaviour
         {
             transform.position = startPosition;
         }
+    }
+
+    public void ShakeCamera(float velocity)
+    {
+        Vector3 pos = Vector3.zero;
+
+        if (FPSController.currentState != FPSController.PlayerState.STATE_INAIR)
+        {
+            pos.y += Mathf.Sin(Time.time * frequency) * (amount * FPSController.characterController.velocity.magnitude / dampenHeadBobAmount);
+            transform.localPosition += pos;
+        }
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, startPosition, smooth * Time.deltaTime);
+        }
+
     }
 }

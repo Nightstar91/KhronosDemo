@@ -169,8 +169,10 @@ public class FPSController : MonoBehaviour
                 HandleMovementInput(); // change to air movement
                 slide.HandleSlideCooldown();
 
+                // Player landing
                 if (isGrounded && isInAir)
                 {
+                    //cameraEffect.ShakeCamera(characterController.velocity.magnitude);
                     isInAir = false;
                     currentState = PlayerState.STATE_RUNNING;
                 }
@@ -367,13 +369,13 @@ public class FPSController : MonoBehaviour
     public void SetVelocity(Vector3 movement)
     {
         velocity = movement;
-        Debug.Log($"SetVelocity called: {velocity.magnitude}");
+        //Debug.Log($"SetVelocity called: {velocity.magnitude}");
     }
 
     public void SetVelocity(Vector3 movement, Vector3 movement2)
     {
         velocity = movement + movement2;
-        Debug.Log($"SetVelocity called: {velocity.magnitude}");
+        //Debug.Log($"SetVelocity called: {velocity.magnitude}");
     }
 
 

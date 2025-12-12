@@ -474,10 +474,34 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1907104084841116113, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 22d2bbc0382dfec4aa29dbf1f6b863b2, type: 2}
+    - target: {fileID: 1907104084841116113, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8198684418346914394, guid: 22d2bbc0382dfec4aa29dbf1f6b863b2, type: 2}
+    - target: {fileID: 1907104084841116113, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432442253633637409, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2846707717252500186, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 910224806}
+    - target: {fileID: 2846707717252500186, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136057133281188895, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3653943146163881844, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -489,6 +513,18 @@ PrefabInstance:
     - target: {fileID: 3653943146163881844, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462426738332399083, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537112828627193274, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655502026262168059, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5993663305748631878, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -538,6 +574,10 @@ PrefabInstance:
       propertyPath: m_MaxValue
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8933626236853467777, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9080466439185461733, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_Name
       value: MainMenuCanvas
@@ -572,6 +612,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9090722622525228616, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090722622525228616, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090722622525228616, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090722622525228616, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9090722622525228616, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
@@ -621,6 +673,10 @@ PrefabInstance:
     - target: {fileID: 9090722622525228616, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145027840784653315, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
