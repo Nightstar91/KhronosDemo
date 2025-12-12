@@ -5,7 +5,6 @@ public class WallRunning : MonoBehaviour
 {
     [Header("Wallrunning")]
     public LayerMask whatIsWall;
-    public LayerMask whatIsGround;
     public float wallrunForce;
     public float maxWallRunTime;
     public float wallRunTimer;
@@ -24,19 +23,16 @@ public class WallRunning : MonoBehaviour
 
     [Header("Detection")]
     public Transform orientation;
-    private PlayerMovement pm;
-    private Rigidbody rb;
+    private FPSController pm;
+    private CharacterController cc;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        whatIsWall = LayerMask.GetMask("Wall");
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        
+
     }
 }

@@ -50,6 +50,7 @@ public class FPSController : MonoBehaviour
     public CharacterController characterController;
     [SerializeField] public GameObject orientation;
 
+    private Vector3 velocity { get; set; }
     public Vector3 moveDirection;
     private Vector2 currentInput;
 
@@ -64,7 +65,6 @@ public class FPSController : MonoBehaviour
     public bool playerFailed = false;
     public bool playerSucceed = false;
 
-    // DELETE ALL INSTANCE OF PLAYER HUD LATER, FOR REFACTORING PLAYER MOVEMENT TO USE INPUTACTION FOR PAUSING
     public PlayerHud playerHud;
     public Sliding slide;
     private CameraEffect cameraEffect;
@@ -156,7 +156,6 @@ public class FPSController : MonoBehaviour
                 break; 
 
             // TODO: See if can make it so that air movement can be lessen
-            // TODO: how do you implement jumping in state??
             case PlayerState.STATE_JUMP:
                 Jump();
 
@@ -170,8 +169,10 @@ public class FPSController : MonoBehaviour
                 HandleMovementInput(); // change to air movement
                 slide.HandleSlideCooldown();
 
+                // Player landing
                 if (isGrounded && isInAir)
                 {
+                    //cameraEffect.ShakeCamera(characterController.velocity.magnitude);
                     isInAir = false;
                     currentState = PlayerState.STATE_RUNNING;
                 }
@@ -306,6 +307,8 @@ public class FPSController : MonoBehaviour
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
         moveDirection.y = moveDirectionY;
+
+        SetVelocity(currentInput);
     }
 
 
@@ -320,18 +323,6 @@ public class FPSController : MonoBehaviour
         // rotate the player object
         transform.Rotate(0f, lookAction.ReadValue<Vector2>().x * lookSpeedX, 0f);
     }
-
-    /*private void HandleMouseLock()
-    {
-        rotationX -= Input.GetAxis("Mouse Y") * lookSpeedY;
-        rotationX = Mathf.Clamp(rotationX, -upperLookLimit, lowerLookLimit);
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
-
-        // rotate the player object
-        transform.Rotate(0f, Input.GetAxis("Mouse X") * lookSpeedX, 0f);
-    }*/
 
 
     private void ApplyFinalMovements()
@@ -358,13 +349,6 @@ public class FPSController : MonoBehaviour
     }
 
 
-    private void SpeedDecelerate()
-    {
-            
-        
-    }
-
-
     public bool CheckIfGrounded()
     {
         RaycastHit hit;
@@ -381,4 +365,22 @@ public class FPSController : MonoBehaviour
         moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
     }
 
+
+    public void SetVelocity(Vector3 movement)
+    {
+        velocity = movement;
+        //Debug.Log($"SetVelocity called: {velocity.magnitude}");
+    }
+
+    public void SetVelocity(Vector3 movement, Vector3 movement2)
+    {
+        velocity = movement + movement2;
+        //Debug.Log($"SetVelocity called: {velocity.magnitude}");
+    }
+
+
+    public float GetVelocity()
+    {
+        return velocity.magnitude;
+    }
 }

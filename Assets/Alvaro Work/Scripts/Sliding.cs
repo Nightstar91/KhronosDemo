@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -18,18 +19,19 @@ public class Sliding : MonoBehaviour
     private float originalSlideTimer;
     private float originalSlideCooldown;
     private float originalSlideForce;
+    float slopeAlignment;
     public float angle;
-    private float speedAcceleration;
-    private const float speedCap = 30f;
-    private Vector3 slideVelocity;
-    [Range(0f,4f)] public float slideTimer = 1.5f;
+    private float currentSlideSpeed; // Track current speed (AI)
+    [Range(5f, 15f)] public float baseSlideSpeed = 10f; // Base sliding speed (AI)
+    [Range(0f, 50f)] public float maxSlideSpeed = 30f; // Maximum slide speed (AI)
+    [Range(0f, 100f)] public float downhillAcceleration = 5f; // Acceleration going downhill (AI)
+    [Range(0f, 100f)] public float uphillDeceleration = 8f; // Deceleration going uphill (AI)
+    [Range(0f, 4f)] public float slideTimer = 1.5f;
     [Range(0f, 4f)] public float slideCooldown = 1.8f;
-    [Range(1, 30)] public float slideForce;
-
+    [SerializeField] public float slideForce;
 
     public float slideYScale;
     private float startYScale;
-    private const float slopeDamp = 2f;
 
     [Header("Input")]
     private float horizontalInput;
@@ -38,7 +40,6 @@ public class Sliding : MonoBehaviour
     public bool isSliding;
     public bool slideReady;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isSliding = false;
@@ -50,8 +51,8 @@ public class Sliding : MonoBehaviour
         slideForce = originalSlideForce;
         originalSlideTimer = slideTimer;
         originalSlideCooldown = slideCooldown;
+        currentSlideSpeed = baseSlideSpeed; // (AI)
     }
-
 
     private void Awake()
     {
@@ -60,28 +61,72 @@ public class Sliding : MonoBehaviour
         playerObj = GameObject.Find("Player").GetComponent<Transform>();
     }
 
-
     public void StartSlide()
     {
         isSliding = true;
-
+        currentSlideSpeed = baseSlideSpeed; // Initialize speed when starting slide (AI)
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
     }
 
-
     public void SlidingMovement()
     {
-        Vector3 inputDirection = playerObj.forward * verticalInput + playerObj.right * horizontalInput;
+        Vector3 moveDirection;
 
-        if (OnSlope(out Vector3 slopeDirection))
+        if (OnSlope(out Vector3 slopeDirection, out float slopeAngle))
         {
-            slideVelocity += slopeDirection * speedAcceleration * Time.deltaTime;
-            slideVelocity = Vector3.ClampMagnitude(slideVelocity, speedAcceleration);
-            cc.Move(slideVelocity * Time.deltaTime);
+            // Calculate angle and adjust speed based on slope
+            CalculateAngle();
+            ApplySlopeAcceleration(slopeAngle);
+
+            // Move in the direction of the slope
+            moveDirection = slopeDirection * currentSlideSpeed;
         }
         else
         {
-            cc.Move(inputDirection.normalized * Time.deltaTime);
+            // Flat ground - use input direction
+            moveDirection = (playerObj.forward * verticalInput + playerObj.right * horizontalInput) * currentSlideSpeed;
+
+            if (currentSlideSpeed > baseSlideSpeed)
+            {
+                // Decay over time
+                currentSlideSpeed = Mathf.Lerp(currentSlideSpeed, baseSlideSpeed, Time.deltaTime * 1f);
+            }
+
+            
+        }
+        moveDirection.y -= pm.gravity * Time.deltaTime;
+
+        pm.SetVelocity(moveDirection );
+
+        cc.Move(moveDirection * Time.deltaTime);
+    }
+
+
+    private void ApplySlopeAcceleration(float slopeAngle)
+    {
+        // Determine if going downhill or uphill based on slope angle
+        if (slopeAngle > 3f) // On a noticeable slope
+        {
+            // Check if moving downhill (slope direction points down relative to player forward)
+            Vector3 slopeDir = Vector3.ProjectOnPlane(Vector3.down, GetSlopeNormal()).normalized;
+            float slopeAlignment = Vector3.Dot(playerObj.forward, slopeDir);
+
+            // Accelerating downhill
+            if (slopeAlignment > 0.1f)
+            {
+                float accelerationAmount = (slopeAngle / 45f) * downhillAcceleration;
+                currentSlideSpeed += accelerationAmount * Time.deltaTime;
+            }
+            // Decelerating on uphill
+            else if (slopeAlignment < -0.1f) 
+            {
+                float decelerationAmount = (slopeAngle / 45f) * uphillDeceleration;
+                currentSlideSpeed -= decelerationAmount * Time.deltaTime;
+            }
+
+            currentSlideSpeed = Mathf.Clamp(currentSlideSpeed, baseSlideSpeed * 0.5f, maxSlideSpeed);
+
+            Debug.Log($"Slope: {slopeAngle:F1}° | Speed: {currentSlideSpeed:F1} | Alignment: {slopeAlignment:F2}");
         }
     }
 
@@ -92,7 +137,7 @@ public class Sliding : MonoBehaviour
         {
             slideTimer -= 1 * Time.deltaTime;
         }
-        else if (slideTimer >= 0 && angle >= 5f)
+        else if (slideTimer >= 0 && angle > 3f)
         {
             slideTimer = 1.5f;
         }
@@ -121,25 +166,46 @@ public class Sliding : MonoBehaviour
     {
         slideTimer = originalSlideTimer;
         slideForce = originalSlideForce;
-
+        currentSlideSpeed = baseSlideSpeed; 
         slideReady = false;
+        angle = 0;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
         playerOrientation.rotation = startPlayerRotation;
     }
 
 
-    private bool OnSlope(out Vector3 slopeDirection)
+    private bool OnSlope(out Vector3 slopeDirection, out float slopeAngle)
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2))
+        slopeDirection = Vector3.zero;
+        slopeAngle = 0;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
         {
+            slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+            if (slopeAngle < 3f) 
+            {
+                return false;
+            }
+
             slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
-            angle = Vector3.Angle(hit.normal, Vector3.up);
-            return angle > 0f;
+            angle = slopeAngle; 
+            return true;
         }
 
-        slopeDirection = Vector3.zero;
         return false;
+    }
+
+
+    // Helper method to get slope normal
+    private Vector3 GetSlopeNormal()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+        {
+            return hit.normal;
+        }
+        return Vector3.up;
     }
 
 
@@ -152,19 +218,6 @@ public class Sliding : MonoBehaviour
         if (Physics.SphereCast(transform.position, 0.5f, -(transform.up), out hit, 1, pm.groundLayer))
         {
             playerOrientation.transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, hit.normal));
-        }
-    }
-
-
-    private void SlopeBasedAcceleration()
-    {
-        angle = Quaternion.Angle(transform.rotation, playerOrientation.rotation);
-
-        if(angle != 0)
-        {
-            slideForce += angle / slopeDamp;
-            slideForce = Mathf.Clamp(slideForce, 0, 100);
-            Debug.Log(string.Format("slideforce = {0}", slideForce));
         }
     }
 }
