@@ -19,7 +19,7 @@ public class PlayerFootstepAudio : MonoBehaviour
     [SerializeField] private float minMoveSpeed = 0.1f;     // Minimum player movement speed required to trigger footsteps
     [SerializeField] private float raycastDistance = 1.2f;  // How far below the player to check for ground
     [SerializeField] private LayerMask groundMask;          // Which layers count as ground for surface detection
-
+    private const float minAirTimeForLanding = 0.1f;
     // ===== INTERNAL STATE =====
     [SerializeField] private FPSController playerController;
     private CharacterController controller;  // Reference to the player’s CharacterController
@@ -28,6 +28,10 @@ public class PlayerFootstepAudio : MonoBehaviour
     private bool wasGrounded;                // Tracks if the player was grounded in the previous frame
     private bool wasSliding;
     private int currentSurfaceIndex;         // Stores the current detected surface type (FMOD parameter value)
+    private EventInstance slideInstance;
+    private bool slideSoundPlaying;
+    private float airTime = 0f;
+    
 
     void Start()
     {
@@ -44,27 +48,42 @@ public class PlayerFootstepAudio : MonoBehaviour
 
         DetectSurface();  // Detect which surface the player is on
 
-        // --- LANDING SOUND ---
-        if (isGrounded && !wasGrounded)
+           // ===== LAND SOUND =====
+        if (!isGrounded)
         {
-            PlayLandingSound();
+            airTime += Time.deltaTime;
         }
+        else
+        {
+            // Just grounded this frame?
+            if (!wasGrounded && airTime > minAirTimeForLanding)
+            {
+                Debug.Log("Landing sound triggered");
+                PlayLandingSound();
+            }
+
+            airTime = 0f; // Reset air timer because we are grounded
+        }
+
 
 
         // ===== SLIDE SOUND =====
         if (isGrounded && isSliding)
         {
-            // Only trigger slide when state changes
-            if (!wasSliding)
-                PlaySlideSound();
+            if (!slideSoundPlaying)
+                StartSlideSound();
 
-            wasSliding = true;
+            slideSoundPlaying = true;
+
             ResetFootstepTimer();
         }
         else
         {
             wasSliding = false;
+            if (slideSoundPlaying)
+                StopSlideSound();
 
+            slideSoundPlaying = false;
             // ===== FOOTSTEPS =====
             if (isGrounded && speed > minMoveSpeed && IsPlayerWalking())
             {
@@ -160,12 +179,17 @@ public class PlayerFootstepAudio : MonoBehaviour
         landInstance.release();
     }
     // ===== SLIDE SOUND =====
-    private void PlaySlideSound()
+    private void StartSlideSound()
     {
-        EventInstance slideInstance = RuntimeManager.CreateInstance(slideEvent);
+        slideInstance = RuntimeManager.CreateInstance(slideEvent);
         slideInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
         slideInstance.setParameterByName(surfaceParameterName, currentSurfaceIndex);
         slideInstance.start();
+    }
+
+    private void StopSlideSound()
+    {
+        slideInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         slideInstance.release();
     }
 }
