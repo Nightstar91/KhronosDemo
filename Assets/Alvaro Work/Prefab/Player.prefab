@@ -493,11 +493,11 @@ MonoBehaviour:
     Path: event:/PlayerCharacter/Landings
   slideEvent:
     Guid:
-      Data1: 449505555
-      Data2: 1115534005
-      Data3: -747630150
-      Data4: -483591106
-    Path: event:/UI/UI_Confirm
+      Data1: 1297378047
+      Data2: 1182619826
+      Data3: 574209458
+      Data4: -640744004
+    Path: event:/PlayerCharacter/Slide
   surfaceParameterName: SurfaceTerrain
   stepInterval: 0.35
   minMoveSpeed: 0.1
@@ -564,7 +564,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeIntensity: 10
+  shakeIntensity: 1
   _camera: {fileID: 0}
   _cameraHolder: {fileID: 0}
   start: 0
