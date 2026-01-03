@@ -52,6 +52,7 @@ public class FPSController : MonoBehaviour
 
     private Vector3 velocity { get; set; }
     public Vector3 moveDirection;
+    public Vector3 input;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
@@ -303,6 +304,7 @@ public class FPSController : MonoBehaviour
         GainSpeedCheck();
 
         currentInput = new Vector2(walkSpeed * Input.GetAxis("Vertical"), walkSpeed * Input.GetAxis("Horizontal"));
+        
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
@@ -366,11 +368,19 @@ public class FPSController : MonoBehaviour
     }
 
 
+
+    public void IncreaseBaseSpeed(float speedAmount)
+    {
+        walkSpeed += speedAmount;
+    }
+
+
     public void SetVelocity(Vector3 movement)
     {
         velocity = movement;
         //Debug.Log($"SetVelocity called: {velocity.magnitude}");
     }
+
 
     public void SetVelocity(Vector3 movement, Vector3 movement2)
     {

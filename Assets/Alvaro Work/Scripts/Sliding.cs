@@ -96,7 +96,7 @@ public class Sliding : MonoBehaviour
         }
         moveDirection.y -= pm.gravity * Time.deltaTime;
 
-        pm.SetVelocity(moveDirection );
+        pm.SetVelocity(moveDirection);
 
         cc.Move(moveDirection * Time.deltaTime);
     }
