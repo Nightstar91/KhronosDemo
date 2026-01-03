@@ -22,6 +22,8 @@ public class FPSController : MonoBehaviour
 
     public bool CanMove { get; private set; } = true;
 
+    public InputActionReference playerMovement;
+
     public InputAction moveAction;
     public InputAction lookAction;
     public InputAction jumpAction;
@@ -257,7 +259,6 @@ public class FPSController : MonoBehaviour
     }
 
 
-
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -303,8 +304,7 @@ public class FPSController : MonoBehaviour
 
         GainSpeedCheck();
 
-        currentInput = new Vector2(walkSpeed * Input.GetAxis("Vertical"), walkSpeed * Input.GetAxis("Horizontal"));
-        
+        currentInput = new Vector2(walkSpeed * moveAction.ReadValue<Vector2>().y, walkSpeed * moveAction.ReadValue<Vector2>().x);
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
