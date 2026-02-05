@@ -70,6 +70,7 @@ public class FPSController : MonoBehaviour
 
     public PlayerHud playerHud;
     public Sliding slide;
+    public WallRunning wallrun;
     private CameraEffect cameraEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -186,6 +187,7 @@ public class FPSController : MonoBehaviour
                     previousState = currentState;
                     currentState = PlayerState.STATE_PAUSE;
                 }
+
                 break;
 
             case PlayerState.STATE_SLIDE:

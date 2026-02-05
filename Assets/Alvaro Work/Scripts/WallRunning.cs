@@ -44,7 +44,7 @@ public class WallRunning : MonoBehaviour
     }
 
 
-    private void CheckWallRun()
+    public void CheckWallRun()
     {
         onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, wallLayer);
         onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, wallLayer);
@@ -62,7 +62,21 @@ public class WallRunning : MonoBehaviour
 
     private void WallRunMovement()
     {
-        
+        Vector3 moveTemp = Vector3.zero;
+
+        if (pm.moveAction.ReadValue<Vector2>().x > (forwardDirection.z - 10f) && pm.moveAction.ReadValue<Vector2>().x < (forwardDirection.z +10f))
+        {
+            moveTemp += forwardDirection;
+        }
+        else if (pm.moveAction.ReadValue<Vector2>().x < (forwardDirection.z - 10f) && pm.moveAction.ReadValue<Vector2>().x > (forwardDirection.z + 10f))
+        {
+            moveTemp.x = 0f;
+            moveTemp.z = 0f;
+            ExitWallRun();
+        }
+
+        moveTemp = Vector3.ClampMagnitude(moveTemp, pm.walkSpeed);
+        pm.characterController.Move(moveTemp);
     }
 
 
