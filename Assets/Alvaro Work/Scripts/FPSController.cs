@@ -22,6 +22,8 @@ public class FPSController : MonoBehaviour
 
     public bool CanMove { get; private set; } = true;
 
+    public InputActionReference playerMovement;
+
     public InputAction moveAction;
     public InputAction lookAction;
     public InputAction jumpAction;
@@ -52,6 +54,7 @@ public class FPSController : MonoBehaviour
 
     private Vector3 velocity { get; set; }
     public Vector3 moveDirection;
+    public Vector3 input;
     private Vector2 currentInput;
 
     private float rotationX = 0f;
@@ -67,6 +70,7 @@ public class FPSController : MonoBehaviour
 
     public PlayerHud playerHud;
     public Sliding slide;
+    public WallRunning wallrun;
     private CameraEffect cameraEffect;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -183,6 +187,7 @@ public class FPSController : MonoBehaviour
                     previousState = currentState;
                     currentState = PlayerState.STATE_PAUSE;
                 }
+
                 break;
 
             case PlayerState.STATE_SLIDE:
@@ -256,7 +261,6 @@ public class FPSController : MonoBehaviour
     }
 
 
-
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -302,7 +306,7 @@ public class FPSController : MonoBehaviour
 
         GainSpeedCheck();
 
-        currentInput = new Vector2(walkSpeed * Input.GetAxis("Vertical"), walkSpeed * Input.GetAxis("Horizontal"));
+        currentInput = new Vector2(walkSpeed * moveAction.ReadValue<Vector2>().y, walkSpeed * moveAction.ReadValue<Vector2>().x);
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
@@ -366,11 +370,19 @@ public class FPSController : MonoBehaviour
     }
 
 
+
+    public void IncreaseBaseSpeed(float speedAmount)
+    {
+        walkSpeed += speedAmount;
+    }
+
+
     public void SetVelocity(Vector3 movement)
     {
         velocity = movement;
         //Debug.Log($"SetVelocity called: {velocity.magnitude}");
     }
+
 
     public void SetVelocity(Vector3 movement, Vector3 movement2)
     {

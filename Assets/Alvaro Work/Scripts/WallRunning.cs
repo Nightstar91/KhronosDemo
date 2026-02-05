@@ -1,38 +1,104 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class WallRunning : MonoBehaviour
 {
     [Header("Wallrunning")]
-    public LayerMask whatIsWall;
+    public LayerMask wallLayer;
+    public bool isWallRunning;
     public float wallrunForce;
     public float maxWallRunTime;
     public float wallRunTimer;
+    public int jumpCharge;
 
     [Header("Input")]
     private float horizontalInput;
     private float verticalInput;
 
     [Header("Detection")]
-    public float wallCheckDistance;
-    public float minJumpHeight;
+    Vector3 wallNormal;
+    Vector3 yVelocity;
+    Vector3 forwardDirection;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
-    private bool wallLeft;
-    private bool wallRight;
+    public bool onLeftWall;
+    public bool onRightWall;
 
     [Header("Detection")]
     public Transform orientation;
     private FPSController pm;
     private CharacterController cc;
 
+    private void Awake()
+    {
+        cc = GetComponent<CharacterController>();
+        pm = GetComponent<FPSController>();
+        orientation = GameObject.Find("Player").GetComponent<Transform>();
+    }
+
+
     private void Start()
     {
-        whatIsWall = LayerMask.GetMask("Wall");
+        wallLayer = LayerMask.GetMask("Wall");
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit)
+
+    public void CheckWallRun()
     {
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, wallLayer);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, wallLayer);
 
+        if((onRightWall || onLeftWall) && !isWallRunning)
+        {
+            StartWallRun();
+        }
+        if((!onRightWall || !onLeftWall) && isWallRunning)
+        {
+            ExitWallRun();
+        }
     }
+
+
+    private void WallRunMovement()
+    {
+        Vector3 moveTemp = Vector3.zero;
+
+        if (pm.moveAction.ReadValue<Vector2>().x > (forwardDirection.z - 10f) && pm.moveAction.ReadValue<Vector2>().x < (forwardDirection.z +10f))
+        {
+            moveTemp += forwardDirection;
+        }
+        else if (pm.moveAction.ReadValue<Vector2>().x < (forwardDirection.z - 10f) && pm.moveAction.ReadValue<Vector2>().x > (forwardDirection.z + 10f))
+        {
+            moveTemp.x = 0f;
+            moveTemp.z = 0f;
+            ExitWallRun();
+        }
+
+        moveTemp = Vector3.ClampMagnitude(moveTemp, pm.walkSpeed);
+        pm.characterController.Move(moveTemp);
+    }
+
+
+    private void StartWallRun()
+    {
+        isWallRunning = true;
+        jumpCharge = 1;
+        pm.IncreaseBaseSpeed(5f); 
+        yVelocity = new Vector3 (0f, 0f, 0f);
+
+        wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
+        forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
+
+        if(Vector3.Dot(forwardDirection, transform.forward) < 0)
+        {
+            forwardDirection = -forwardDirection;
+        }
+    }
+
+    private void ExitWallRun()
+    {
+        isWallRunning = false;
+    }
+
 }
