@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Workspace" id="{bc386275-f689-4800-92be-cd24312ddc55}">
+		<property name="builtBanksOutputDirectory">
+			<value>../../GitHub/KhronosDemo/Assets/Marcus Work/FMODBanks</value>
+		</property>
+		<relationship name="masterEventFolder">
+			<destination>{2c07caed-fd73-49d9-8264-05fbb5a72fb8}</destination>
+		</relationship>
+		<relationship name="masterTagFolder">
+			<destination>{28a6fad0-0ad5-4383-9353-22af94b69662}</destination>
+		</relationship>
+		<relationship name="masterEffectPresetFolder">
+			<destination>{d015a6a5-987f-49e6-a928-cd5d1b38d9c0}</destination>
+		</relationship>
+		<relationship name="masterParameterPresetFolder">
+			<destination>{81d2f805-0451-4fe2-bf21-8c8461dfe4ba}</destination>
+		</relationship>
+		<relationship name="masterBankFolder">
+			<destination>{b993fb8e-dbc0-4def-8de0-8858c053f34d}</destination>
+		</relationship>
+		<relationship name="masterSandboxFolder">
+			<destination>{cd890298-bdec-4b87-9747-6a54b705a0c0}</destination>
+		</relationship>
+		<relationship name="masterAssetFolder">
+			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{f29e2a4c-161b-439a-9c9d-9e5af1664de5}</destination>
+		</relationship>
+		<relationship name="profilerSessionFolder">
+			<destination>{aa440b1c-6a91-4faa-a391-33d98ca432a3}</destination>
+		</relationship>
+		<relationship name="platforms">
+			<destination>{502198f8-13e2-44aa-99b1-2ebf452c898c}</destination>
+		</relationship>
+	</object>
+</objects>
