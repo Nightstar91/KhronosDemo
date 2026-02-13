@@ -7,8 +7,8 @@ public class WallRunning : MonoBehaviour
     [Header("Wallrunning")]
     public LayerMask wallLayer;
     public bool isWallRunning;
-    public float wallrunForce = 0.25f;
-    public float wallrunGravity = 0.1f;
+    public float wallrunForce = 0.15f;
+    public float wallrunGravity = 0.075f;
     private float maxWallRunCooldown = 1f;
     private float maxWallRunTime = 2f;
     [SerializeField] public float wallRunCooldown;

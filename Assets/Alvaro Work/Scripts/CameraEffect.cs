@@ -115,14 +115,18 @@ public class CameraEffect : MonoBehaviour
         transform.localPosition = Vector3.Lerp(transform.localPosition, startPosition, smooth * Time.deltaTime);
     }
 
-
+/// <summary>
+/// To sway left: make sure amount is negative. To sway right: make sure amount is positive. amount influence the degree in which the camera will sway.
+/// </summary>
+/// <param name="horizontal"></param>
+/// <returns></returns>
     public Quaternion StartSwayCamera(float horizontal)
     {
         Quaternion rot = Quaternion.identity;
         if(horizontal < 0)
-            rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount, Time.deltaTime * tiltSpeed);
+            rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount * horizontal, Time.deltaTime * tiltSpeed);
         else if (horizontal > 0)
-            rot.z = Mathf.Lerp(transform.localRotation.z, -Mathf.Abs(tiltAmount), Time.deltaTime * tiltSpeed);
+            rot.z = Mathf.Lerp(transform.localRotation.z, -Mathf.Abs(tiltAmount * horizontal), Time.deltaTime * tiltSpeed);
         else
             return rot;
 
