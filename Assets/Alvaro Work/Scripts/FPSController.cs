@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -50,7 +49,7 @@ public class FPSController : MonoBehaviour
     public Camera playerCamera;
     public GameObject playerCameraHolder;
     public CharacterController characterController;
-    [SerializeField] public GameObject orientation;
+    [SerializeField] public Vector3 forwardOrientation;
 
     private Vector3 velocity { get; set; }
     public Vector3 moveDirection;
@@ -63,8 +62,8 @@ public class FPSController : MonoBehaviour
 
     public LayerMask groundLayer;
     public bool isGrounded = false;
-    public bool isMoving = false;
-    public bool isInAir = false;
+    private bool isMoving = false;
+    private bool isInAir = false;
     public bool playerFailed = false;
     public bool playerSucceed = false;
 
@@ -89,10 +88,27 @@ public class FPSController : MonoBehaviour
         playerCamera.fieldOfView = PlayerPrefs.GetFloat("Fov", 50);
     }
 
+    private void Awake()
+    {
+        moveAction = InputSystem.actions.FindAction("Move");
+        lookAction = InputSystem.actions.FindAction("Look");
+        jumpAction = InputSystem.actions.FindAction("Jump");
+        pauseAction = InputSystem.actions.FindAction("Pause");
+        slideAction = InputSystem.actions.FindAction("Slide");
+
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
+        slide = GetComponent<Sliding>();
+        wallrun = GetComponent<WallRunning>();
+        cameraEffect = GameObject.Find("Cam Holder").GetComponent<CameraEffect>();
+
+    }
+
 
     void Update()
     {
-        
+        forwardOrientation = transform.forward;
+
         switch (currentState)
         {
             case PlayerState.STATE_IDLE:
@@ -172,6 +188,7 @@ public class FPSController : MonoBehaviour
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
                 slide.HandleSlideCooldown();
+                wallrun.CheckWallRun();
 
                 // Player landing
                 if (isGrounded && isInAir)
@@ -181,6 +198,12 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_RUNNING;
                 }
 
+                if (wallrun.isWallRunning)
+                {
+                    currentState = PlayerState.STATE_WALLRUN;
+                }
+
+                // Pausing
                 if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
                 {
                     playerHud.isPaused = true;
@@ -231,6 +254,22 @@ public class FPSController : MonoBehaviour
 
             case PlayerState.STATE_WALLRUN:
 
+                if (wallrun.isWallRunning)
+                {
+                    wallrun.CommenceWallRun();
+                }
+                else
+                {
+                    isInAir = true;
+                    currentState = PlayerState.STATE_INAIR;
+                }
+
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
                 break;
 
             case PlayerState.STATE_PAUSE:
@@ -258,22 +297,6 @@ public class FPSController : MonoBehaviour
 
         // To make sure gravity is applied constantly
         ApplyFinalMovements();
-    }
-
-
-    private void Awake()
-    {
-        moveAction = InputSystem.actions.FindAction("Move");
-        lookAction = InputSystem.actions.FindAction("Look");
-        jumpAction = InputSystem.actions.FindAction("Jump");
-        pauseAction = InputSystem.actions.FindAction("Pause");
-        slideAction = InputSystem.actions.FindAction("Slide");
-
-        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
-        slide = GetComponent<Sliding>();
-        cameraEffect = GameObject.Find("Cam Holder").GetComponent<CameraEffect>();
-
     }
 
 
