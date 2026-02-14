@@ -222,7 +222,7 @@ public class FPSController : MonoBehaviour
 
                 if (slide.isSliding)
                 {
-                    cameraEffect.StartSwayCamera(5f);
+                    cameraEffect.StartSwayCamera(2.5f);
                     cameraEffect.ShakeCamera();
                     slide.SlidingMovement();
                     slide.SlideCountdown();
@@ -260,11 +260,18 @@ public class FPSController : MonoBehaviour
 
                     if(wallrun.onLeftWall) // sway camera to the right
                     {
-                        cameraEffect.StartSwayCamera(40f);
+                        cameraEffect.StartSwayCamera(5f);
                     }
-                    else // sway camera to the left
+                    else if (wallrun.onRightWall) // sway camera to the left
                     {
-                        cameraEffect.StartSwayCamera(-40f);
+                        cameraEffect.StartSwayCamera(-5f);
+                    }
+
+                    if(jumpAction.WasPressedThisFrame())
+                    {
+                        Debug.Log("BOUNCE!");
+                        wallrun.BounceOffWall();
+                        wallrun.ExitWallRun();
                     }
                 }
                 else

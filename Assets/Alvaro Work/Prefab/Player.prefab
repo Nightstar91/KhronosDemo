@@ -377,7 +377,7 @@ MonoBehaviour:
     m_Name: Move
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 64754fa6-2d07-4e68-b9fe-09636a97357d
+    m_Id: 24831943-2f8a-4d0c-af05-60aa41a0553d
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -386,7 +386,7 @@ MonoBehaviour:
     m_Name: Look
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d0fe3959-b422-4b58-8aaf-d688e98f69f9
+    m_Id: 997807ea-1858-4823-b2e9-13b1001cedcf
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -395,7 +395,7 @@ MonoBehaviour:
     m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 4f3ce7f9-83ea-4022-a939-13a0525c0c6f
+    m_Id: 4c48b453-1d48-4c8a-a5e6-90667232732c
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -404,7 +404,7 @@ MonoBehaviour:
     m_Name: Pause
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d84a4e83-6ee1-471b-b91b-8bb8c8d2fda8
+    m_Id: a24145b7-427e-4fe3-b3f1-f132f1e49237
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Name: Slide
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e53d8690-99c8-4790-abdb-35ea6832e5e2
+    m_Id: 189e115b-c1e4-4cb0-88f5-ab4cea1c921a
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -425,22 +425,20 @@ MonoBehaviour:
   gravity: 30
   gravityScale: 1
   jumpHeight: 1.5
-  lookSpeedX: 1
-  lookSpeedY: 1
+  lookSpeedX: 0.2
+  lookSpeedY: 0.2
   upperLookLimit: 80
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
   playerCameraHolder: {fileID: 0}
   characterController: {fileID: 0}
-  orientation: {fileID: 0}
+  forwardOrientation: {x: 0, y: 0, z: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   input: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
-  isMoving: 0
-  isInAir: 0
   playerFailed: 0
   playerSucceed: 0
   playerHud: {fileID: 0}
@@ -466,7 +464,7 @@ MonoBehaviour:
   uphillDeceleration: 8
   slideTimer: 1.5
   slideCooldown: 1.8
-  slideForce: 1
+  slideForce: 0
   slideYScale: 0
   isSliding: 0
   slideReady: 0
@@ -555,15 +553,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   isWallRunning: 0
-  wallrunForce: 0
-  maxWallRunTime: 0
+  wallrunForce: 0.15
+  wallrunGravity: 0.075
+  wallRunCooldown: 0
   wallRunTimer: 0
-  jumpCharge: 0
+  leftWallRunDetector: {fileID: 0}
+  rightWallRunDetector: {fileID: 0}
   onLeftWall: 0
   onRightWall: 0
-  orientation: {fileID: 0}
+  wallRunReady: 0
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0

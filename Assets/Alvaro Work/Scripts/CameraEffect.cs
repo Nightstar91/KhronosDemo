@@ -47,7 +47,7 @@ public class CameraEffect : MonoBehaviour
     {
         if(!FPSController.playerHud.isPaused)
         {
-            if(FPSController.currentState != FPSController.PlayerState.STATE_SLIDE)
+            if(FPSController.currentState != FPSController.PlayerState.STATE_SLIDE || FPSController.currentState != FPSController.PlayerState.STATE_WALLRUN)
             {
                 CheckForInput();
 
@@ -126,7 +126,7 @@ public class CameraEffect : MonoBehaviour
         if(horizontal < 0)
             rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount * horizontal, Time.deltaTime * tiltSpeed);
         else if (horizontal > 0)
-            rot.z = Mathf.Lerp(transform.localRotation.z, -Mathf.Abs(tiltAmount * horizontal), Time.deltaTime * tiltSpeed);
+            rot.z = Mathf.Lerp(transform.localRotation.z, tiltAmount * horizontal, Time.deltaTime * tiltSpeed);
         else
             return rot;
 

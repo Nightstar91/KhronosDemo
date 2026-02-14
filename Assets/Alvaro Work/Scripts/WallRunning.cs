@@ -6,9 +6,10 @@ public class WallRunning : MonoBehaviour
 {
     [Header("Wallrunning")]
     public LayerMask wallLayer;
+    private const float wallBounceForce = 1f;
     public bool isWallRunning;
-    public float wallrunForce = 0.15f;
-    public float wallrunGravity = 0.075f;
+    public float wallrunForce = 0.05f;
+    public float wallrunGravity = 5f;
     private float maxWallRunCooldown = 1f;
     private float maxWallRunTime = 2f;
     [SerializeField] public float wallRunCooldown;
@@ -82,8 +83,17 @@ public class WallRunning : MonoBehaviour
 
     public void CheckWallRun()
     {
-        onLeftWall = Physics.Raycast(transform.position, -transform.right, out rightWallHit, 0.7f, wallLayer);
-        onRightWall = Physics.Raycast(transform.position, transform.right, out leftWallHit, 0.7f, wallLayer);
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, wallLayer);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, wallLayer);
+
+        if(onRightWall)
+        {
+            wallNormal = rightWallHit.normal;
+        }
+        if(onLeftWall)
+        {
+            wallNormal = leftWallHit.normal;
+        }
 
         if((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded)
         {
@@ -92,6 +102,17 @@ public class WallRunning : MonoBehaviour
         }
 
         return;
+    }
+
+
+    public void BounceOffWall()
+    {
+        Vector3 wallJumpDirection;
+        wallJumpDirection = Vector3.zero;
+
+        
+
+        pm.characterController.Move(wallJumpDirection);
     }
 
 
@@ -104,15 +125,28 @@ public class WallRunning : MonoBehaviour
 
     public void CommenceWallRun()
     {
+        isWallRunning = true;
+
         Vector3 wallRunDirection;
         float wallRunSpeed;
 
-        wallRunSpeed = wallrunForce;
+        Vector2 movementInput = pm.moveAction.ReadValue<Vector2>();
+        float movementX = movementInput.x;
+        float movementY = movementInput.y;
 
+
+        // if player stops moving forward or landed on ground
+        if (movementY <= 0 || pm.isGrounded)
+        {
+            ExitWallRun();
+            return;
+        }
+
+        wallRunSpeed = wallrunForce;
         wallRunDirection = pm.forwardOrientation * wallRunSpeed;
         wallRunDirection.y = wallrunGravity;
 
-        ManageWallRunCountdown();
+        //ManageWallRunCountdown();
 
         pm.characterController.Move(wallRunDirection);
 
