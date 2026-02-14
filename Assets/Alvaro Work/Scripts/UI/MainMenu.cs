@@ -18,6 +18,11 @@ public class MainMenu : BasicMenu
         exitGameConfirmationPanel.SetActive(false);
 
         settingBackButton.SetActive(false);
+        if(PlayerPrefs.GetInt("Scene", 1) == 1)
+        {
+            resumeGameButton.SetActive(false);
+        }
+
     }
 
 

@@ -48,8 +48,9 @@ public class LevelTransition : MonoBehaviour
         }
     }
 
-    void ReturnToMainMenu()
+    public void ReturnToMainMenu()
     {
+        PlayerPrefs.SetInt("Scene", Scene);
         SceneManager.LoadScene(allScenes[0]);
     }
 }

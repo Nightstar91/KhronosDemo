@@ -5,10 +5,12 @@ public class BasicMenu : MonoBehaviour
 {
     public string mainMenuScene;
     public string loadLevelScene;
+    private LevelTransition lvlTrans;
 
     public bool exitConfirmCheck;
 
     public GameObject playGameButton;
+    public GameObject resumeGameButton;
     public GameObject exitGameButton;
     public GameObject settingButton;
     public GameObject settingBackButton;
@@ -21,12 +23,15 @@ public class BasicMenu : MonoBehaviour
 
     public virtual void Awake()
     {
-        mainMenuScene = "Main Menu";
-        loadLevelScene = "Level 1";
+        lvlTrans = GetComponentInParent<LevelTransition>();
+
+        mainMenuScene = lvlTrans.allScenes[0];
+        loadLevelScene = lvlTrans.allScenes[1];
 
         exitConfirmCheck = false;
 
         playGameButton = GameObject.Find("PlayButton");
+        resumeGameButton = GameObject.Find("ResumeButton");
         exitGameButton = GameObject.Find("ExitButton");
         settingButton = GameObject.Find("SettingButton");
         settingBackButton = GameObject.Find("SettingBackButton");
@@ -36,6 +41,8 @@ public class BasicMenu : MonoBehaviour
 
         settingPanel = GameObject.Find("SettingPanel");
         exitGameConfirmationPanel = GameObject.Find("ExitGameConfirmationPanel");
+
+        
     }
 
 
@@ -44,6 +51,10 @@ public class BasicMenu : MonoBehaviour
         SceneManager.LoadScene(loadLevelScene);
     }
 
+    public void ResumeGame()
+    {
+        SceneManager.LoadScene(lvlTrans.allScenes[PlayerPrefs.GetInt("Scene")]);
+    }
 
     public virtual void CloseSetting()
     {

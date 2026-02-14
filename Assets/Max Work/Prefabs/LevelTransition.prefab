@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allScenes:
+  - Main Menu
   - Max-Tutorial
   - Max-Level 1
   - Max-Level 2
