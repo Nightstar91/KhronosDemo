@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Workspace" id="{bc386275-f689-4800-92be-cd24312ddc55}">
 		<property name="builtBanksOutputDirectory">
-			<value>../../GitHub/KhronosDemo/Assets/Marcus Work/FMODBanks</value>
+			<value>../Assets/Marcus Work/FMODBanks</value>
 		</property>
 		<relationship name="masterEventFolder">
 			<destination>{2c07caed-fd73-49d9-8264-05fbb5a72fb8}</destination>

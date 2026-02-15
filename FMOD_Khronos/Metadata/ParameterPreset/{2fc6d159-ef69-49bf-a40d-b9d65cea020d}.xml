@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{2fc6d159-ef69-49bf-a40d-b9d65cea020d}">
+		<property name="name">
+			<value>TurnSpeed</value>
+		</property>
+		<relationship name="folder">
+			<destination>{81d2f805-0451-4fe2-bf21-8c8461dfe4ba}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{8cee7008-b939-48b5-a654-57264c5ed873}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{8cee7008-b939-48b5-a654-57264c5ed873}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
