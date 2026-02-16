@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 3532926395716396089}
   - component: {fileID: 8730293828885063798}
   - component: {fileID: 6527175750275534972}
+  - component: {fileID: 3593205221344130562}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -371,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   previousState: 0
+  playerMovement: {fileID: 0}
   moveAction:
     m_Name: Move
     m_Type: 0
@@ -443,6 +445,7 @@ MonoBehaviour:
   playerSucceed: 0
   playerHud: {fileID: 0}
   slide: {fileID: 0}
+  wallrun: {fileID: 0}
 --- !u!114 &3532926395716396089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,6 +541,31 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3593205221344130562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5db2e99e473794f9419e6960c88de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 4744736380823943419}
+  lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  headTurnEvent:
+    Guid:
+      Data1: -1613674813
+      Data2: 1152456089
+      Data3: 316736698
+      Data4: -798527410
+    Path: event:/PlayerCharacter/Neck Servo
+  parameterName: TurnSpeed
+  minAngularSpeed: 50
+  maxAngularSpeed: 600
+  smoothing: 10
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0
