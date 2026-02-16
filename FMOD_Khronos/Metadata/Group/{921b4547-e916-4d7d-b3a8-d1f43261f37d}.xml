@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{921b4547-e916-4d7d-b3a8-d1f43261f37d}">
+		<property name="name">
+			<value>AMB</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{0e2aa503-240c-47bf-9b00-a87bc2173dfc}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{f7d4ab2d-2105-47c8-98c9-513d0c0d8a66}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{9f21016b-3ac0-44e6-9804-07b0fcd13382}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{0e2aa503-240c-47bf-9b00-a87bc2173dfc}">
+		<relationship name="effects">
+			<destination>{207c9072-ddea-4be2-b56f-8efc6a19f1a0}</destination>
+			<destination>{73e4da18-abd1-421f-8eb7-fb14203f643a}</destination>
+			<destination>{8daadf03-6603-4f1f-98ed-f74a0ac1185d}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{f7d4ab2d-2105-47c8-98c9-513d0c0d8a66}" />
+	<object class="MixerBusFader" id="{207c9072-ddea-4be2-b56f-8efc6a19f1a0}" />
+	<object class="HighpassSimpleEffect" id="{73e4da18-abd1-421f-8eb7-fb14203f643a}">
+		<property name="cutoff">
+			<value>10</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{8daadf03-6603-4f1f-98ed-f74a0ac1185d}">
+		<property name="wetLevel">
+			<value>-80</value>
+		</property>
+	</object>
+</objects>
