@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -129,11 +128,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: wallrunForce
-      value: 0.075
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: wallrunGravity
-      value: 0.001
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
+      propertyPath: wallBounceForce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: wallLayer.m_Bits

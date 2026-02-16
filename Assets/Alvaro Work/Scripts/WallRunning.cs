@@ -6,20 +6,20 @@ public class WallRunning : MonoBehaviour
 {
     [Header("Wallrunning")]
     public LayerMask wallLayer;
-    private const float wallBounceForce = 1f;
     public bool isWallRunning;
-    public float wallrunForce = 0.05f;
+    public float wallrunForce = 7f;
     public float wallrunGravity = 5f;
     private float maxWallRunCooldown = 1f;
     private float maxWallRunTime = 2f;
+    [SerializeField] public float wallBounceForce = 2f;
     [SerializeField] public float wallRunCooldown;
     [SerializeField] public float wallRunTimer;
 
 
     [Header("Detection")]
     Vector3 wallNormal;
-    public Transform leftWallRunDetector;
-    public Transform rightWallRunDetector;
+    public Transform leftWallBouncer;
+    public Transform rightWallBouncer;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
     public bool onLeftWall;
@@ -32,8 +32,8 @@ public class WallRunning : MonoBehaviour
     private void Awake()
     {
         pm = GetComponent<FPSController>();
-        leftWallRunDetector = GameObject.Find("LeftRaycast").GetComponent<Transform>();
-        rightWallRunDetector = GameObject.Find("RightRaycast").GetComponent<Transform>();
+        leftWallBouncer = GameObject.Find("LeftBounce").GetComponent<Transform>();
+        rightWallBouncer = GameObject.Find("RightBounce").GetComponent<Transform>();
 
         wallRunCooldown = maxWallRunCooldown;
         wallRunTimer = maxWallRunTime;
@@ -83,8 +83,8 @@ public class WallRunning : MonoBehaviour
 
     public void CheckWallRun()
     {
-        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, wallLayer);
-        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, wallLayer);
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.75f, wallLayer);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.75f, wallLayer);
 
         if(onRightWall)
         {
@@ -97,7 +97,7 @@ public class WallRunning : MonoBehaviour
 
         if((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded)
         {
-            Debug.Log("SHOULD BE WALLRUNNING");
+            //Debug.Log("SHOULD BE WALLRUNNING");
             CommenceWallRun();
         }
 
@@ -105,14 +105,26 @@ public class WallRunning : MonoBehaviour
     }
 
 
-    public void BounceOffWall()
+    public void BounceOffWall(float forwardDirection)
     {
         Vector3 wallJumpDirection;
         wallJumpDirection = Vector3.zero;
 
-        
+        if(onLeftWall)
+        {
+            wallJumpDirection = leftWallBouncer.transform.position;
+        }
+        else if(onRightWall)
+        {
+            wallJumpDirection= rightWallBouncer.transform.position;
+            
+        }
 
-        pm.characterController.Move(wallJumpDirection);
+        //wallJumpDirection.z = forwardDirection;
+        wallJumpDirection.y = Mathf.Sqrt(wallBounceForce * 2.0f * pm.gravity);
+        pm.moveDirection = wallJumpDirection;
+
+        ExitWallRun();
     }
 
 
@@ -142,13 +154,19 @@ public class WallRunning : MonoBehaviour
             return;
         }
 
+        //if(pm.jumpAction.WasPerformedThisFrame())
+        //{
+        //    BounceOffWall(movementY);
+        //    return;
+        //}
+
         wallRunSpeed = wallrunForce;
         wallRunDirection = pm.forwardOrientation * wallRunSpeed;
         wallRunDirection.y = wallrunGravity;
 
         //ManageWallRunCountdown();
 
-        pm.characterController.Move(wallRunDirection);
+        pm.characterController.Move(wallRunDirection * Time.deltaTime);
 
         return;
     }

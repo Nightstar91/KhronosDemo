@@ -260,17 +260,16 @@ public class FPSController : MonoBehaviour
 
                     if(wallrun.onLeftWall) // sway camera to the right
                     {
-                        cameraEffect.StartSwayCamera(5f);
+                        cameraEffect.StartSwayCamera(-5f);
                     }
                     else if (wallrun.onRightWall) // sway camera to the left
                     {
                         cameraEffect.StartSwayCamera(-5f);
                     }
 
-                    if(jumpAction.WasPressedThisFrame())
+                    if(jumpAction.WasPressedThisFrame() && moveAction.ReadValue<Vector2>().x != 0)
                     {
-                        Debug.Log("BOUNCE!");
-                        wallrun.BounceOffWall();
+                        wallrun.BounceOffWall(moveAction.ReadValue<Vector2>().x);
                         wallrun.ExitWallRun();
                     }
                 }
@@ -368,7 +367,7 @@ public class FPSController : MonoBehaviour
     }
 
 
-    private void ApplyFinalMovements()
+    public void ApplyFinalMovements()
     {
         if (!characterController.isGrounded)
             moveDirection.y -= gravity * Time.deltaTime;
@@ -407,7 +406,6 @@ public class FPSController : MonoBehaviour
     {
         moveDirection.y = Mathf.Sqrt(jumpHeight * 2.0f * gravity);
     }
-
 
 
     public void IncreaseBaseSpeed(float speedAmount)
