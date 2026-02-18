@@ -555,8 +555,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isWallRunning: 0
-  wallrunForce: 0.15
-  wallrunGravity: 0.075
+  wallrunForce: 5
+  wallrunGravity: 7
   wallBounceForce: 1
   wallRunCooldown: 0
   wallRunTimer: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeIntensity: 1
+  shakeIntensity: 0.05
   _camera: {fileID: 0}
   _cameraHolder: {fileID: 0}
   start: 0
