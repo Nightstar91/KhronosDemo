@@ -556,7 +556,7 @@ MonoBehaviour:
     m_Bits: 0
   isWallRunning: 0
   wallrunForce: 5
-  wallrunGravity: 7
+  wallrunGravity: 5
   wallBounceForce: 1
   wallRunCooldown: 0
   wallRunTimer: 0
