@@ -24,6 +24,7 @@ public class PlayerHud : BasicMenu
         mainMenuButton = GameObject.Find("MainMenuButton");
         resumeButton = GameObject.Find("ResumeButton");
         resultPanel = GameObject.Find("ResultPanel");
+
     }
 
 
@@ -34,11 +35,16 @@ public class PlayerHud : BasicMenu
         settingMenu = GetComponent<SettingMenu>();
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
+
         resultPanel.SetActive(false);
         settingPanel.SetActive(false);
         exitGameConfirmationPanel.SetActive(false);
         pauseMenu.SetActive(false);
         settingBackButton.SetActive(false);
+
+        player.moveAction.Enable();
+        player.jumpAction.Enable();
+        player.slideAction.Enable();
     }
 
     // Update is called once per frame
@@ -64,6 +70,7 @@ public class PlayerHud : BasicMenu
 
         player.moveAction.Disable();
         player.jumpAction.Disable();
+        player.slideAction.Disable();
     }
 
 
@@ -124,9 +131,12 @@ public class PlayerHud : BasicMenu
     }
 
 
-    public void OpenResultPanel()
+    public void OpenResultPanel(bool failed)
     {
-        
+        if(failed)
+        {
+            resultPanel.SetActive(true);
+        }
     }
 
 

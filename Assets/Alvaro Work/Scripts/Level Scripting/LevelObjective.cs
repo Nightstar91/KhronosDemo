@@ -12,11 +12,7 @@ public class LevelObjective : MonoBehaviour
     [SerializeField] public bool levelHasTimer;
     [SerializeField] public bool levelHasCoin;
 
-    
-
-    [Header("Scene Parameter")]
-    [Tooltip("Name it the same as the current scene name (WATCH FOR CAP)")]
-    [SerializeField] public string currentLevelScene;
+    [SerializeField] private static string currentLevelScene;
     
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
@@ -39,6 +35,9 @@ public class LevelObjective : MonoBehaviour
 
     private void Awake()
     {
+        Scene scene = SceneManager.GetActiveScene();
+        currentLevelScene = scene.name;
+
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
 
@@ -95,13 +94,19 @@ public class LevelObjective : MonoBehaviour
 
     public void ResetCoin()
     {
-        //coinAmount = coinOriginalAmount;
+        
     }
 
 
     private void StopCountdown()
     {
         hasTimerStopped = true;
+    }
+
+
+    public static void RestartScene()
+    {
+        SceneManager.LoadScene(LevelObjective.currentLevelScene);
     }
 
 
@@ -123,19 +128,14 @@ public class LevelObjective : MonoBehaviour
     private void StartCountdown()
     {
         // Timer is ticking
-        if (!hasTimerCompleted || !hasTimerStopped)
+        if (!hasTimerCompleted && !hasTimerStopped)
         {
             hasTimerCompleted = LevelCountdown();
         }
-        // Timer has reached zero
-        else if (levelHasTimer && hasTimerCompleted)
-        {
-            player.currentState = FPSController.PlayerState.STATE_DEAD;
-        }
-        // Player reached the end of level before timer ran out
+        // Timer reached 0, player has failed
         else
         {
-            return;
+            player.hasFailed = true;
         }
     }
 

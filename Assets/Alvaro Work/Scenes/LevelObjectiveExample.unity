@@ -3100,7 +3100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5903487836260568066, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: levelTimer
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5903487836260568066, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: levelHasTimer

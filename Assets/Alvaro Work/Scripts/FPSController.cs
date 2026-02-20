@@ -47,7 +47,7 @@ public class FPSController : MonoBehaviour
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
-    public GameObject playerCameraHolder;
+    private GameObject playerCameraHolder;
     public CharacterController characterController;
     [SerializeField] public Vector3 forwardOrientation;
 
@@ -64,8 +64,8 @@ public class FPSController : MonoBehaviour
     public bool isGrounded = false;
     private bool isMoving = false;
     private bool isInAir = false;
-    public bool playerFailed = false;
-    public bool playerSucceed = false;
+    public bool hasFailed = false;
+    public bool hasSucceed = false;
 
     public PlayerHud playerHud;
     public Sliding slide;
@@ -306,8 +306,20 @@ public class FPSController : MonoBehaviour
                     break;  
 
             case PlayerState.STATE_DEAD:
-                OnDisable();
+                FreezePlayer();
+                playerHud.OpenResultPanel(hasFailed);
+                if(jumpAction.WasPerformedThisFrame())
+                {
+                    LevelObjective.RestartScene();
+                }
+
                 break;
+        }
+
+        // if at any point player failed the level
+        if (hasFailed)
+        {
+            currentState = PlayerState.STATE_DEAD;
         }
 
         // To make sure gravity is applied constantly
@@ -408,6 +420,12 @@ public class FPSController : MonoBehaviour
     }
 
 
+    private void FreezePlayer()
+    {
+        characterController.Move(Vector3.zero);
+    }
+
+
     public void IncreaseBaseSpeed(float speedAmount)
     {
         walkSpeed += speedAmount;
@@ -432,4 +450,6 @@ public class FPSController : MonoBehaviour
     {
         return velocity.magnitude;
     }
+
+
 }
