@@ -10,7 +10,7 @@ public class LevelObjective : MonoBehaviour
 
     [Header("Level Objective Parameters")]
     [SerializeField] public bool levelHasTimer;
-    [SerializeField] public bool levelHasCoin;
+    //[SerializeField] public bool levelHasCoin;
 
     [SerializeField] private static string currentLevelScene;
     
