@@ -38,7 +38,18 @@ public class LevelTransition : MonoBehaviour
             return;
         }
 
-        if(Scene == allScenes.Length - 1)
+        LoadScene(false);
+    }
+
+    public void LoadScene(bool resuming)
+    {
+        if (resuming)
+        {
+            SceneManager.LoadScene(allScenes[PlayerPrefs.GetInt("Scene", 1)]);
+            return;
+        }
+
+        if (Scene == allScenes.Length - 1)
         {
             SceneManager.LoadScene(allScenes[0]);
         }

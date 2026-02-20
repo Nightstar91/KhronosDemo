@@ -1774,10 +1774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba4d051a3e440d4da79d2eec7fd0858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuScene: 
-  loadLevelScene: 
   exitConfirmCheck: 0
   playGameButton: {fileID: 0}
+  resumeGameButton: {fileID: 0}
   exitGameButton: {fileID: 0}
   settingButton: {fileID: 0}
   settingBackButton: {fileID: 0}
@@ -2662,7 +2661,7 @@ PrefabInstance:
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7863384187396744726}
+      objectReference: {fileID: 0}
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2673,11 +2672,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMainMenu
+      value: ReturnToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: PlayClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelTransition, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
