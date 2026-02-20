@@ -1,3 +1,4 @@
+using System.Threading;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -9,9 +10,9 @@ public class WallRunning : MonoBehaviour
     public bool isWallRunning;
     public float wallrunForce = 7f;
     public float wallrunGravity = 5f;
-    private float maxWallRunCooldown = 1f;
-    private float maxWallRunTime = 2f;
-    [SerializeField] public float wallBounceForce = 2f;
+    private float maxWallRunCooldown;
+    private float maxWallRunTimer;
+    [SerializeField] public float wallBounceForce = 1f;
     [SerializeField] public float wallRunCooldown = 1f;
     [SerializeField] public float wallRunTimer;
 
@@ -35,8 +36,8 @@ public class WallRunning : MonoBehaviour
         leftWallBouncer = GameObject.Find("LeftBounce").GetComponent<Transform>();
         rightWallBouncer = GameObject.Find("RightBounce").GetComponent<Transform>();
 
-        wallRunCooldown = maxWallRunCooldown;
-        wallRunTimer = maxWallRunTime;
+        maxWallRunTimer = wallRunTimer;
+        maxWallRunCooldown = wallRunCooldown;
     }
 
 
@@ -60,22 +61,22 @@ public class WallRunning : MonoBehaviour
         else
         {
             ExitWallRun();
-            wallRunTimer = maxWallRunTime;
+            wallRunTimer = maxWallRunTimer;
         }
     }
 
 
-    private void ManageWallRunCooldown()
+    public void ManageWallRunCooldown()
     {
         // Once the player is off the wall
-        if(!isWallRunning)
+        if(!isWallRunning && !wallRunReady && wallRunCooldown >= 0)
         {
-            wallRunReady = false;
             wallRunCooldown -= 1f * Time.deltaTime;
         }
 
         else
         {
+            wallRunCooldown = maxWallRunCooldown;
             wallRunReady = true;
         }
     }
@@ -95,7 +96,7 @@ public class WallRunning : MonoBehaviour
             wallNormal = leftWallHit.normal;
         }
 
-        if((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded)
+        if((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded && wallRunReady)
         {
             //Debug.Log("SHOULD BE WALLRUNNING");
             CommenceWallRun();
@@ -131,7 +132,7 @@ public class WallRunning : MonoBehaviour
     public void ExitWallRun()
     {
         isWallRunning = false;
-        ManageWallRunCooldown();
+        wallRunReady = false;
     }
 
 
