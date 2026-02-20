@@ -126,101 +126,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: wallrunForce
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: wallrunGravity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: wallBounceForce
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: wallLayer.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: slideForce
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: slideTimer
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: slideCooldown
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: baseSlideSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: uphillDeceleration
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: downhillAcceleration
-      value: 70
-      objectReference: {fileID: 0}
     - target: {fileID: 3579688081978202162, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: jumpHeight
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: lookSpeedX
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: lookSpeedY
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: playerMovement
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: jumpAction.m_Id
-      value: 3f9ce506-7929-46d5-bfd1-99e929c99c6b
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: lookAction.m_Id
-      value: 7f620c08-6507-4b39-87d0-8bd864e8dcfe
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: moveAction.m_Id
-      value: 6dbe92a4-79a6-4ac2-b4b3-d3b5e8cbe8b9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: pauseAction.m_Id
-      value: 6e6edb6c-8e31-49db-8c14-5afa663aab90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: slideAction.m_Id
-      value: 347631e6-e8cb-4711-9a7b-1dca12b27105
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: jumpAction.m_Name
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: lookAction.m_Name
-      value: Look
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: pauseAction.m_Name
-      value: Pause
-      objectReference: {fileID: 0}
-    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: slideAction.m_Name
-      value: Slide
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,10 +169,6 @@ PrefabInstance:
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8081665920663722254, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: shakeIntensity
-      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
