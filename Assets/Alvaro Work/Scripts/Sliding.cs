@@ -27,7 +27,7 @@ public class Sliding : MonoBehaviour
     [Range(0f, 100f)] public float downhillAcceleration = 5f; // Acceleration going downhill (AI)
     [Range(0f, 100f)] public float uphillDeceleration = 8f; // Deceleration going uphill (AI)
     [Range(0f, 4f)] public float slideTimer = 1.5f;
-    [Range(0f, 4f)] public float slideCooldown = 1.8f;
+    [Range(0f, 4f)] public float slideCooldown = 0.8f;
     [SerializeField] public float slideForce;
 
     public float slideYScale;

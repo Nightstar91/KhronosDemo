@@ -449,8 +449,9 @@ public class FPSController : MonoBehaviour
     public float GetVelocity()
     {
         Vector3 horizontalSpeed = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
+        float velocity = horizontalSpeed.magnitude;
 
-        return horizontalSpeed.magnitude;
+        return velocity;
     }
 
 

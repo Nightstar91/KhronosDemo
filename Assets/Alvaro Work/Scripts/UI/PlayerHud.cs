@@ -93,6 +93,7 @@ public class PlayerHud : BasicMenu
 
         player.moveAction.Enable();
         player.jumpAction.Enable();
+        player.slideAction.Enable();
     }
 
     public override void OpenSetting()

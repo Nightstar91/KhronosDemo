@@ -12,7 +12,7 @@ public class WallRunning : MonoBehaviour
     private float maxWallRunCooldown = 1f;
     private float maxWallRunTime = 2f;
     [SerializeField] public float wallBounceForce = 2f;
-    [SerializeField] public float wallRunCooldown;
+    [SerializeField] public float wallRunCooldown = 1f;
     [SerializeField] public float wallRunTimer;
 
 
@@ -68,15 +68,15 @@ public class WallRunning : MonoBehaviour
     private void ManageWallRunCooldown()
     {
         // Once the player is off the wall
-        if(wallRunCooldown >= 0 && !isWallRunning)
+        if(!isWallRunning)
         {
             wallRunReady = false;
             wallRunCooldown -= 1f * Time.deltaTime;
         }
 
-        else if (isWallRunning )
+        else
         {
-            wallRunTimer = maxWallRunCooldown;
+            wallRunReady = true;
         }
     }
 
@@ -131,7 +131,7 @@ public class WallRunning : MonoBehaviour
     public void ExitWallRun()
     {
         isWallRunning = false;
-        //ManageWallRunCooldown();
+        ManageWallRunCooldown();
     }
 
 
@@ -154,11 +154,6 @@ public class WallRunning : MonoBehaviour
             return;
         }
 
-        //if(pm.jumpAction.WasPerformedThisFrame())
-        //{
-        //    BounceOffWall(movementY);
-        //    return;
-        //}
 
         wallRunSpeed = wallrunForce;
         wallRunDirection = pm.forwardOrientation * wallRunSpeed;
