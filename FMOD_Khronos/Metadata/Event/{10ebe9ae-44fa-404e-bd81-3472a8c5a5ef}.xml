@@ -242,5 +242,8 @@
 		<property name="decayTime">
 			<value>1800</value>
 		</property>
+		<property name="wetLevel">
+			<value>-16</value>
+		</property>
 	</object>
 </objects>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{703a8baa-ebb0-4917-b85a-92fa4198f7b3}">
+		<property name="name">
+			<value>WallrunDirection</value>
+		</property>
+		<relationship name="folder">
+			<destination>{81d2f805-0451-4fe2-bf21-8c8461dfe4ba}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{4fbcf4ad-1a28-481a-ab3c-1987a87ad049}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{4fbcf4ad-1a28-481a-ab3c-1987a87ad049}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>NA</value>
+			<value>Right</value>
+			<value>Left</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
