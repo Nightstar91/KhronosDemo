@@ -171,6 +171,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
+      propertyPath: jumpHeight
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: lookSpeedX
       value: 0.2
       objectReference: {fileID: 0}
