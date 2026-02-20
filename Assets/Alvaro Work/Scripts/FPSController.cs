@@ -306,7 +306,7 @@ public class FPSController : MonoBehaviour
                     break;  
 
             case PlayerState.STATE_DEAD:
-
+                OnDisable();
                 break;
         }
 
