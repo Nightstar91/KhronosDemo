@@ -63,9 +63,6 @@
 	<object class="EventAutomatableProperties" id="{cad38365-5e63-473b-b634-f0868f394c71}" />
 	<object class="MarkerTrack" id="{4f25cd38-44d1-475b-89f8-45fff104faa2}" />
 	<object class="GroupTrack" id="{042c8439-0458-4150-9890-1f1e83747ca3}">
-		<relationship name="automationTracks">
-			<destination>{111a5afb-5c74-4a78-9567-7102e3b2fddd}</destination>
-		</relationship>
 		<relationship name="modules">
 			<destination>{2c623687-8884-4fab-a7d3-65b85359ca6a}</destination>
 			<destination>{c1f05d72-0f6a-4cdd-bfec-3973c552f13c}</destination>
@@ -114,11 +111,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1c60c248-2a87-45b2-ab00-7661aa963808}" />
-	<object class="AutomationTrack" id="{111a5afb-5c74-4a78-9567-7102e3b2fddd}">
-		<relationship name="automator">
-			<destination>{65b7740d-3b64-42b9-bdd1-304ba374fec3}</destination>
-		</relationship>
-	</object>
 	<object class="MultiSound" id="{2c623687-8884-4fab-a7d3-65b85359ca6a}">
 		<property name="startOffset">
 			<value>18</value>
