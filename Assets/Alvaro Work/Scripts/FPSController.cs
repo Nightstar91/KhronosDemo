@@ -107,7 +107,6 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
-        wallrun.ManageWallRunCooldown();
         forwardOrientation = transform.forward;
 
         switch (currentState)
@@ -254,6 +253,7 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_WALLRUN:
+                HandleMouseLock();
 
                 if (wallrun.isWallRunning)
                 {
@@ -450,9 +450,8 @@ public class FPSController : MonoBehaviour
     public float GetVelocity()
     {
         Vector3 horizontalSpeed = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
-        float velocity = horizontalSpeed.magnitude;
 
-        return velocity;
+        return horizontalSpeed.magnitude;
     }
 
 
