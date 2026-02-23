@@ -19,6 +19,8 @@ public class PlayerFootstepAudio : MonoBehaviour
     [SerializeField] private float minMoveSpeed = 0.1f;     // Minimum player movement speed required to trigger footsteps
     [SerializeField] private float raycastDistance = 1.2f;  // How far below the player to check for ground
     [SerializeField] private LayerMask groundMask;          // Which layers count as ground for surface detection
+    [SerializeField] private string landingIntensityParameter = "LandingIntensity";
+    [SerializeField] private float maxImpactSpeed = 20f; // speed that equals full intensity
     private const float minAirTimeForLanding = 0.1f;
     // ===== INTERNAL STATE =====
     [SerializeField] private FPSController playerController;
@@ -31,7 +33,8 @@ public class PlayerFootstepAudio : MonoBehaviour
     private EventInstance slideInstance;
     private bool slideSoundPlaying;
     private float airTime = 0f;
-    
+    private float lastVerticalVelocity;
+
 
     void Start()
     {
@@ -47,22 +50,25 @@ public class PlayerFootstepAudio : MonoBehaviour
         bool isSliding = IsPlayerSliding();
 
         DetectSurface();  // Detect which surface the player is on
-
-           // ===== LAND SOUND =====
+        lastVerticalVelocity = controller.velocity.y;
+        // ===== LAND SOUND =====
         if (!isGrounded)
         {
             airTime += Time.deltaTime;
         }
         else
         {
-            // Just grounded this frame?
             if (!wasGrounded && airTime > minAirTimeForLanding)
             {
-                Debug.Log("Landing sound triggered");
-                PlayLandingSound();
+                float impactSpeed = Mathf.Abs(lastVerticalVelocity);
+
+                // Normalize to 0–1 range
+                float normalizedImpact = Mathf.Clamp01(impactSpeed / maxImpactSpeed);
+
+                PlayLandingSound(normalizedImpact);
             }
 
-            airTime = 0f; // Reset air timer because we are grounded
+            airTime = 0f;
         }
 
 
@@ -170,11 +176,17 @@ public class PlayerFootstepAudio : MonoBehaviour
     }
 
     // ===== PLAY LANDING SOUND =====
-    private void PlayLandingSound()
+    private void PlayLandingSound(float intensity)
     {
         EventInstance landInstance = RuntimeManager.CreateInstance(landEvent);
+
         landInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+
         landInstance.setParameterByName(surfaceParameterName, (float)currentSurfaceIndex);
+
+        // Impact-based intensity
+        landInstance.setParameterByName(landingIntensityParameter, intensity);
+
         landInstance.start();
         landInstance.release();
     }

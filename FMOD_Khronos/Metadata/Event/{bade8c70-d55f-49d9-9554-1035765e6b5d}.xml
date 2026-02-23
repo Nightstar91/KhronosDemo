@@ -145,7 +145,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{abb91ffa-c893-4af3-a87e-bbfe46e7c396}">
 		<property name="volume">
-			<value>-11</value>
+			<value>-16.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -285,13 +285,13 @@
 	<object class="SpatialiserEffect" id="{f21514a8-c093-48b2-8dd6-9e180758b71a}" />
 	<object class="AutomationPoint" id="{cc10f031-75c5-4d33-a1ce-da8ee3ac7864}">
 		<property name="position">
-			<value>0.25</value>
+			<value>0.10000000000000001</value>
 		</property>
 		<property name="value">
 			<value>1</value>
 		</property>
 		<property name="curveShape">
-			<value>-0.0944648385</value>
+			<value>-0.466317534</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{22406842-55d5-4d8e-9070-60ee0bd8191c}">
@@ -353,7 +353,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>60</value>
+			<value>85</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{1cdf66e9-2cc4-4b04-8c79-0db786b96cf0}">
@@ -361,7 +361,7 @@
 			<value>2</value>
 		</property>
 		<property name="value">
-			<value>-60</value>
+			<value>-85</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{d22818d7-5891-456c-b21a-1330c82f848a}">
