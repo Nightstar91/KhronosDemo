@@ -87,7 +87,7 @@ public class Sliding : MonoBehaviour
         // Flat ground - use input direction
         else
         {
-            moveDirection = (playerObj.forward * verticalInput + playerObj.right * horizontalInput) * currentSlideSpeed;
+            moveDirection = (pm.forwardOrientation * verticalInput + playerObj.right * horizontalInput) * currentSlideSpeed;
 
             /*if (currentSlideSpeed > baseSlideSpeed)
             {
@@ -110,7 +110,7 @@ public class Sliding : MonoBehaviour
         {
             // Check if moving downhill (slope direction points down relative to player forward)
             Vector3 slopeDir = Vector3.ProjectOnPlane(Vector3.down, GetSlopeNormal()).normalized;
-            float slopeAlignment = Vector3.Dot(playerObj.forward, slopeDir);
+            float slopeAlignment = Vector3.Dot(pm.forwardOrientation, slopeDir);
 
             // Accelerating downhill
             if (slopeAlignment > 0.1f)

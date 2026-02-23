@@ -462,7 +462,7 @@ MonoBehaviour:
   downhillAcceleration: 70
   uphillDeceleration: 45
   slideTimer: 1.5
-  slideCooldown: 1.8
+  slideCooldown: 0.75
   slideForce: 1
   slideYScale: 0
   isSliding: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
   wallrunForce: 7
   wallrunGravity: 5
   wallBounceForce: 1.5
-  wallRunCooldown: 0.3
+  wallRunCooldown: 0.5
   wallRunTimer: 0
   leftWallBouncer: {fileID: 0}
   rightWallBouncer: {fileID: 0}

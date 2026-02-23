@@ -215,7 +215,7 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_SLIDE:
-
+                HandleMouseLock();
                 if(slideAction.IsPressed())
                 {
                     slide.StartSlide();
@@ -262,11 +262,11 @@ public class FPSController : MonoBehaviour
 
                     if(wallrun.onLeftWall) // sway camera to the right
                     {
-                        cameraEffect.StartSwayCamera(-5f);
+                        cameraEffect.StartSwayCamera(-6.5f);
                     }
                     else if (wallrun.onRightWall) // sway camera to the left
                     {
-                        cameraEffect.StartSwayCamera(-5f);
+                        cameraEffect.StartSwayCamera(6.5f);
                     }
 
                     if(jumpAction.WasPressedThisFrame() && moveAction.ReadValue<Vector2>().x != 0)
