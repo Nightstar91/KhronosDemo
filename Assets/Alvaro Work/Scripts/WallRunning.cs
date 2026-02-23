@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.Rendering;
 
 public class WallRunning : MonoBehaviour
@@ -86,16 +87,12 @@ public class WallRunning : MonoBehaviour
         onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.75f, wallLayer);
         onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.75f, wallLayer);
 
-        if(onRightWall)
+        if(!onRightWall && !onLeftWall && isWallRunning)
         {
-            wallNormal = rightWallHit.normal;
-        }
-        if(onLeftWall)
-        {
-            wallNormal = leftWallHit.normal;
+            BounceOffWall(0f);
         }
 
-        if((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded && wallRunReady)
+        if ((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded && wallRunReady)
         {
             //Debug.Log("SHOULD BE WALLRUNNING");
             CommenceWallRun();
@@ -116,8 +113,12 @@ public class WallRunning : MonoBehaviour
         }
         else if(onRightWall)
         {
-            wallJumpDirection= rightWallBouncer.transform.position;
+            wallJumpDirection = rightWallBouncer.transform.position;
             
+        }
+        else
+        {
+            wallJumpDirection = pm.forwardOrientation;
         }
 
         //wallJumpDirection.z = forwardDirection;
@@ -153,12 +154,6 @@ public class WallRunning : MonoBehaviour
             ExitWallRun();
             return;
         }
-
-        //if(pm.jumpAction.WasPerformedThisFrame())
-        //{
-        //    BounceOffWall(movementY);
-        //    return;
-        //}
 
         wallRunSpeed = wallrunForce;
         wallRunDirection = pm.forwardOrientation * wallRunSpeed;

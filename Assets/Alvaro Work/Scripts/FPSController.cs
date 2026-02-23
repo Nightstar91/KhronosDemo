@@ -261,6 +261,7 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_WALLRUN:
+                wallrun.CheckWallRun();
                 HandleMouseLock();
 
                 if (wallrun.isWallRunning)
