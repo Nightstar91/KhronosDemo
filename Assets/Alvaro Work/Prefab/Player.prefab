@@ -254,11 +254,7 @@ GameObject:
   - component: {fileID: 3532926395716396089}
   - component: {fileID: 8730293828885063798}
   - component: {fileID: 6527175750275534972}
-<<<<<<< HEAD
-  - component: {fileID: 1918033911039066532}
-=======
   - component: {fileID: 3593205221344130562}
->>>>>>> Marcus-Work
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -543,11 +539,7 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
-<<<<<<< HEAD
---- !u!114 &1918033911039066532
-=======
 --- !u!114 &3593205221344130562
->>>>>>> Marcus-Work
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -556,7 +548,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3579688081978202162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: 6ed4361d1e9ec2f4ca92519b66b70523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -574,7 +565,6 @@ MonoBehaviour:
   onLeftWall: 0
   onRightWall: 0
   wallRunReady: 0
-=======
   m_Script: {fileID: 11500000, guid: 3a5db2e99e473794f9419e6960c88de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -591,7 +581,6 @@ MonoBehaviour:
   minAngularSpeed: 50
   maxAngularSpeed: 600
   smoothing: 10
->>>>>>> Marcus-Work
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0
