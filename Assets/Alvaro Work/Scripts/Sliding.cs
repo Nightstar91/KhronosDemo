@@ -87,6 +87,8 @@ public class Sliding : MonoBehaviour
         // Flat ground - use input direction
         else
         {
+            angle = 0;
+
             moveDirection = (pm.forwardOrientation * verticalInput + playerObj.right * horizontalInput) * currentSlideSpeed;
 
             /*if (currentSlideSpeed > baseSlideSpeed)

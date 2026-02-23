@@ -80,7 +80,7 @@ public class PlayerHud : BasicMenu
         player.lookSpeedX = settingMenu.GetSensitivity();
         player.lookSpeedY = settingMenu.GetSensitivity();
 
-        // Updating the Sensitivity
+        // Updating the FOV
         player.playerCamera.fieldOfView = settingMenu.GetFOV();
 
         pauseMenu.SetActive(false);

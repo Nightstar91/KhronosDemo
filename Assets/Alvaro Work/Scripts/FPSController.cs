@@ -251,6 +251,13 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_PAUSE;
                 }
 
+                if (jumpAction.WasPressedThisFrame())
+                {
+                    slide.isSliding = false;   // slide state off
+                    slide.StopSlide();
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
                 break;
 
             case PlayerState.STATE_WALLRUN:
