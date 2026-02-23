@@ -107,6 +107,7 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
+        wallrun.ManageWallRunCooldown();
         forwardOrientation = transform.forward;
 
         switch (currentState)
