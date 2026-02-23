@@ -21,7 +21,6 @@ public class WallrunAudio : MonoBehaviour
 
     private const string PARAM_NAME = "WallrunDirection";
 
-    // Parameter Values
     private const float NA = 0f;
     private const float RIGHT = 1f;
     private const float LEFT = 2f;
@@ -36,33 +35,41 @@ public class WallrunAudio : MonoBehaviour
         HandleWallrunAudio();
     }
 
+    private void LateUpdate()
+    {
+        // Keep 3D position updated while playing
+        if (wallrunPlaying)
+        {
+            wallrunInstance.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+        }
+    }
+
     private void HandleWallrunAudio()
     {
         if (wallrun.isWallRunning)
         {
             float directionValue = GetDirectionValue();
 
-            // Start loop if needed
             if (!wallrunPlaying)
             {
                 wallrunInstance = RuntimeManager.CreateInstance(wallrunLoopEvent);
+
+                //   initial 3D attributes BEFORE starting
+                wallrunInstance.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+
                 wallrunInstance.start();
                 wallrunPlaying = true;
             }
 
-            // Update loop parameter
             wallrunInstance.setParameterByName(PARAM_NAME, directionValue);
 
-            // Handle footsteps
             HandleFootsteps(directionValue);
         }
         else
         {
             if (wallrunPlaying)
             {
-                // Reset parameter before stopping
                 wallrunInstance.setParameterByName(PARAM_NAME, NA);
-
                 wallrunInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 wallrunInstance.release();
 
@@ -82,9 +89,14 @@ public class WallrunAudio : MonoBehaviour
             footstepTimer = 0f;
 
             EventInstance footstepInstance = RuntimeManager.CreateInstance(wallFootstepEvent);
+
+            //Set 3D position for one-shot
+            footstepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+
             footstepInstance.setParameterByName(PARAM_NAME, directionValue);
+
             footstepInstance.start();
-            footstepInstance.release(); // one-shot
+            footstepInstance.release();
         }
     }
 
