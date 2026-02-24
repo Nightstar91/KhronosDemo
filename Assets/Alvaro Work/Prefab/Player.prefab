@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8092135723355897266}
   m_Layer: 0
-  m_Name: RightRaycast
+  m_Name: RightBounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541288825585215036}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071065, z: -0, w: 0.7071072}
+  m_LocalRotation: {x: 0.4999993, y: 0.50000036, z: -0.4999997, w: 0.5000006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7032548914788931662}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
 --- !u!1 &2495717661601270359
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 3532926395716396089}
   - component: {fileID: 8730293828885063798}
   - component: {fileID: 6527175750275534972}
+  - component: {fileID: 1918033911039066532}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -371,11 +372,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   previousState: 0
+  playerMovement: {fileID: 0}
   moveAction:
     m_Name: Move
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 64754fa6-2d07-4e68-b9fe-09636a97357d
+    m_Id: 6dbe92a4-79a6-4ac2-b4b3-d3b5e8cbe8b9
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -384,7 +386,7 @@ MonoBehaviour:
     m_Name: Look
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d0fe3959-b422-4b58-8aaf-d688e98f69f9
+    m_Id: 7f620c08-6507-4b39-87d0-8bd864e8dcfe
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -393,7 +395,7 @@ MonoBehaviour:
     m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 4f3ce7f9-83ea-4022-a939-13a0525c0c6f
+    m_Id: 3f9ce506-7929-46d5-bfd1-99e929c99c6b
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -402,7 +404,7 @@ MonoBehaviour:
     m_Name: Pause
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d84a4e83-6ee1-471b-b91b-8bb8c8d2fda8
+    m_Id: 6e6edb6c-8e31-49db-8c14-5afa663aab90
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -411,7 +413,7 @@ MonoBehaviour:
     m_Name: Slide
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e53d8690-99c8-4790-abdb-35ea6832e5e2
+    m_Id: 347631e6-e8cb-4711-9a7b-1dca12b27105
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -422,27 +424,25 @@ MonoBehaviour:
   decelerateSpeed: 0.75
   gravity: 30
   gravityScale: 1
-  jumpHeight: 1.5
-  lookSpeedX: 1
-  lookSpeedY: 1
+  jumpHeight: 1.4
+  lookSpeedX: 0.2
+  lookSpeedY: 0.2
   upperLookLimit: 80
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
-  playerCameraHolder: {fileID: 0}
   characterController: {fileID: 0}
-  orientation: {fileID: 0}
+  forwardOrientation: {x: 0, y: 0, z: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   input: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
-  isMoving: 0
-  isInAir: 0
-  playerFailed: 0
-  playerSucceed: 0
+  hasFailed: 0
+  hasSucceed: 0
   playerHud: {fileID: 0}
   slide: {fileID: 0}
+  wallrun: {fileID: 0}
 --- !u!114 &3532926395716396089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,12 +457,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 0}
   angle: 0
-  baseSlideSpeed: 10
+  baseSlideSpeed: 12
   maxSlideSpeed: 30
-  downhillAcceleration: 5
-  uphillDeceleration: 8
+  downhillAcceleration: 70
+  uphillDeceleration: 45
   slideTimer: 1.5
-  slideCooldown: 1.8
+  slideCooldown: 1
   slideForce: 1
   slideYScale: 0
   isSliding: 0
@@ -538,6 +538,32 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1918033911039066532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed4361d1e9ec2f4ca92519b66b70523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isWallRunning: 0
+  wallrunForce: 7
+  wallrunGravity: 5
+  wallBounceForce: 2
+  wallRunCooldown: 0.5
+  wallRunTimer: 0
+  leftWallBouncer: {fileID: 0}
+  rightWallBouncer: {fileID: 0}
+  onLeftWall: 0
+  onRightWall: 0
+  wallRunReady: 0
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +622,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeIntensity: 1
+  shakeIntensity: 0.05
   _camera: {fileID: 0}
   _cameraHolder: {fileID: 0}
   start: 0
@@ -611,7 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4510683094742029266}
   m_Layer: 0
-  m_Name: LeftRaycast
+  m_Name: LeftBounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,10 +651,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7878565806455106635}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071064, z: -0, w: 0.7071072}
+  m_LocalRotation: {x: 0.5000003, y: -0.49999973, z: 0.49999982, w: 0.5000003}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7032548914788931662}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}

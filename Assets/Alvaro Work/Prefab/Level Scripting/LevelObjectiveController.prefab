@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7be0619962b80f4e8a6e8d3b73334cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelObjective: 0
-  levelTimer: 100
-  coinAmount: 10
-  coinAmountMax: 0
+  levelHasTimer: 0
+  levelHasCoin: 0
+  levelTimer: 5
+  objectiveText: {fileID: 0}

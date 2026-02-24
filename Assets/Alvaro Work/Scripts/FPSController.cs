@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -48,9 +47,9 @@ public class FPSController : MonoBehaviour
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
-    public GameObject playerCameraHolder;
+    private GameObject playerCameraHolder;
     public CharacterController characterController;
-    [SerializeField] public GameObject orientation;
+    [SerializeField] public Vector3 forwardOrientation;
 
     private Vector3 velocity { get; set; }
     public Vector3 moveDirection;
@@ -63,10 +62,10 @@ public class FPSController : MonoBehaviour
 
     public LayerMask groundLayer;
     public bool isGrounded = false;
-    public bool isMoving = false;
-    public bool isInAir = false;
-    public bool playerFailed = false;
-    public bool playerSucceed = false;
+    private bool isMoving = false;
+    private bool isInAir = false;
+    public bool hasFailed = false;
+    public bool hasSucceed = false;
 
     public PlayerHud playerHud;
     public Sliding slide;
@@ -89,10 +88,28 @@ public class FPSController : MonoBehaviour
         playerCamera.fieldOfView = PlayerPrefs.GetFloat("Fov", 50);
     }
 
+    private void Awake()
+    {
+        moveAction = InputSystem.actions.FindAction("Move");
+        lookAction = InputSystem.actions.FindAction("Look");
+        jumpAction = InputSystem.actions.FindAction("Jump");
+        pauseAction = InputSystem.actions.FindAction("Pause");
+        slideAction = InputSystem.actions.FindAction("Slide");
+
+        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
+        slide = GetComponent<Sliding>();
+        wallrun = GetComponent<WallRunning>();
+        cameraEffect = GameObject.Find("Cam Holder").GetComponent<CameraEffect>();
+
+    }
+
 
     void Update()
     {
-        
+        wallrun.ManageWallRunCooldown();
+        forwardOrientation = transform.forward;
+
         switch (currentState)
         {
             case PlayerState.STATE_IDLE:
@@ -172,6 +189,7 @@ public class FPSController : MonoBehaviour
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
                 slide.HandleSlideCooldown();
+                wallrun.CheckWallRun();
 
                 // Player landing
                 if (isGrounded && isInAir)
@@ -181,6 +199,12 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_RUNNING;
                 }
 
+                if (wallrun.isWallRunning)
+                {
+                    currentState = PlayerState.STATE_WALLRUN;
+                }
+
+                // Pausing
                 if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
                 {
                     playerHud.isPaused = true;
@@ -191,7 +215,7 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_SLIDE:
-
+                HandleMouseLock();
                 if(slideAction.IsPressed())
                 {
                     slide.StartSlide();
@@ -199,7 +223,7 @@ public class FPSController : MonoBehaviour
 
                 if (slide.isSliding)
                 {
-                    cameraEffect.StartSwayCamera(10f);
+                    cameraEffect.StartSwayCamera(2.5f);
                     cameraEffect.ShakeCamera();
                     slide.SlidingMovement();
                     slide.SlideCountdown();
@@ -227,10 +251,50 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_PAUSE;
                 }
 
+                if (jumpAction.WasPressedThisFrame())
+                {
+                    slide.isSliding = false;   // slide state off
+                    slide.StopSlide();
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
                 break;
 
             case PlayerState.STATE_WALLRUN:
+                wallrun.CheckWallRun();
+                HandleMouseLock();
 
+                if (wallrun.isWallRunning)
+                {
+                    wallrun.CommenceWallRun();
+
+                    if(wallrun.onLeftWall) // sway camera to the right
+                    {
+                        cameraEffect.StartSwayCamera(-6.5f);
+                    }
+                    else if (wallrun.onRightWall) // sway camera to the left
+                    {
+                        cameraEffect.StartSwayCamera(6.5f);
+                    }
+
+                    if(jumpAction.WasPressedThisFrame() && moveAction.ReadValue<Vector2>().x != 0)
+                    {
+                        wallrun.BounceOffWall(moveAction.ReadValue<Vector2>().x);
+                        wallrun.ExitWallRun();
+                    }
+                }
+                else
+                {
+                    isInAir = true;
+                    currentState = PlayerState.STATE_INAIR;
+                }
+
+                if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
+                {
+                    playerHud.isPaused = true;
+                    previousState = currentState;
+                    currentState = PlayerState.STATE_PAUSE;
+                }
                 break;
 
             case PlayerState.STATE_PAUSE:
@@ -252,28 +316,24 @@ public class FPSController : MonoBehaviour
                     break;  
 
             case PlayerState.STATE_DEAD:
+                FreezePlayer();
+                playerHud.OpenResultPanel(hasFailed);
+                if(jumpAction.WasPerformedThisFrame())
+                {
+                    LevelObjective.RestartScene();
+                }
 
                 break;
         }
 
+        // if at any point player failed the level
+        if (hasFailed)
+        {
+            currentState = PlayerState.STATE_DEAD;
+        }
+
         // To make sure gravity is applied constantly
         ApplyFinalMovements();
-    }
-
-
-    private void Awake()
-    {
-        moveAction = InputSystem.actions.FindAction("Move");
-        lookAction = InputSystem.actions.FindAction("Look");
-        jumpAction = InputSystem.actions.FindAction("Jump");
-        pauseAction = InputSystem.actions.FindAction("Pause");
-        slideAction = InputSystem.actions.FindAction("Slide");
-
-        playerCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        playerHud = GameObject.Find("HudController").GetComponent<PlayerHud>();
-        slide = GetComponent<Sliding>();
-        cameraEffect = GameObject.Find("Cam Holder").GetComponent<CameraEffect>();
-
     }
 
 
@@ -329,7 +389,7 @@ public class FPSController : MonoBehaviour
     }
 
 
-    private void ApplyFinalMovements()
+    public void ApplyFinalMovements()
     {
         if (!characterController.isGrounded)
             moveDirection.y -= gravity * Time.deltaTime;
@@ -370,6 +430,11 @@ public class FPSController : MonoBehaviour
     }
 
 
+    private void FreezePlayer()
+    {
+        characterController.Move(Vector3.zero);
+    }
+
 
     public void IncreaseBaseSpeed(float speedAmount)
     {
@@ -393,6 +458,10 @@ public class FPSController : MonoBehaviour
 
     public float GetVelocity()
     {
-        return velocity.magnitude;
+        Vector3 horizontalSpeed = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
+
+        return horizontalSpeed.magnitude;
     }
+
+
 }

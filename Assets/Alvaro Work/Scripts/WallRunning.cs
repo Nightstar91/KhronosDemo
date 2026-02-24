@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.Rendering;
 
 public class WallRunning : MonoBehaviour
@@ -7,98 +8,161 @@ public class WallRunning : MonoBehaviour
     [Header("Wallrunning")]
     public LayerMask wallLayer;
     public bool isWallRunning;
-    public float wallrunForce;
-    public float maxWallRunTime;
-    public float wallRunTimer;
-    public int jumpCharge;
+    public float wallrunForce = 7f;
+    public float wallrunGravity = 5f;
+    private float maxWallRunCooldown;
+    private float maxWallRunTimer;
+    [SerializeField] public float wallBounceForce = 1.5f;
+    [SerializeField] public float wallRunCooldown;
+    [SerializeField] public float wallRunTimer;
 
-    [Header("Input")]
-    private float horizontalInput;
-    private float verticalInput;
 
     [Header("Detection")]
     Vector3 wallNormal;
-    Vector3 yVelocity;
-    Vector3 forwardDirection;
+    public Transform leftWallBouncer;
+    public Transform rightWallBouncer;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
     public bool onLeftWall;
     public bool onRightWall;
+    public bool wallRunReady;
 
     [Header("Detection")]
-    public Transform orientation;
     private FPSController pm;
-    private CharacterController cc;
 
     private void Awake()
     {
-        cc = GetComponent<CharacterController>();
         pm = GetComponent<FPSController>();
-        orientation = GameObject.Find("Player").GetComponent<Transform>();
+        leftWallBouncer = GameObject.Find("LeftBounce").GetComponent<Transform>();
+        rightWallBouncer = GameObject.Find("RightBounce").GetComponent<Transform>();
+
+        maxWallRunTimer = wallRunTimer;
+        maxWallRunCooldown = wallRunCooldown;
     }
 
 
     private void Start()
     {
         wallLayer = LayerMask.GetMask("Wall");
+
+        wallRunReady = true;
+    }
+
+
+    private void ManageWallRunCountdown()
+    {
+        // While wallrunning
+        if(wallRunTimer >= 0 && isWallRunning)
+        {
+            wallRunTimer -= 1f * Time.deltaTime;
+        }
+
+        // Once Timer is done
+        else
+        {
+            ExitWallRun();
+            wallRunTimer = maxWallRunTimer;
+        }
+    }
+
+
+    public void ManageWallRunCooldown()
+    {
+        // Once the player is off the wall
+        if(!isWallRunning && !wallRunReady && wallRunCooldown >= 0)
+        {
+            wallRunCooldown -= 1f * Time.deltaTime;
+        }
+
+        else
+        {
+            wallRunCooldown = maxWallRunCooldown;
+            wallRunReady = true;
+        }
     }
 
 
     public void CheckWallRun()
     {
-        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, wallLayer);
-        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.7f, wallLayer);
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.75f, wallLayer);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.75f, wallLayer);
 
-        if((onRightWall || onLeftWall) && !isWallRunning)
+        if(!onRightWall && !onLeftWall && isWallRunning)
         {
-            StartWallRun();
+            BounceOffWall(0f);
         }
-        if((!onRightWall || !onLeftWall) && isWallRunning)
+
+        if ((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded && wallRunReady)
         {
-            ExitWallRun();
+            //Debug.Log("SHOULD BE WALLRUNNING");
+            CommenceWallRun();
         }
+
+        return;
     }
 
 
-    private void WallRunMovement()
+    public void BounceOffWall(float forwardDirection)
     {
-        Vector3 moveTemp = Vector3.zero;
+        Vector3 wallJumpDirection;
+        wallJumpDirection = Vector3.zero;
 
-        if (pm.moveAction.ReadValue<Vector2>().x > (forwardDirection.z - 10f) && pm.moveAction.ReadValue<Vector2>().x < (forwardDirection.z +10f))
+        if(onLeftWall)
         {
-            moveTemp += forwardDirection;
+            wallJumpDirection = leftWallBouncer.transform.position;
         }
-        else if (pm.moveAction.ReadValue<Vector2>().x < (forwardDirection.z - 10f) && pm.moveAction.ReadValue<Vector2>().x > (forwardDirection.z + 10f))
+        else if(onRightWall)
         {
-            moveTemp.x = 0f;
-            moveTemp.z = 0f;
-            ExitWallRun();
+            wallJumpDirection = rightWallBouncer.transform.position;
+            
+        }
+        else
+        {
+            wallJumpDirection = pm.forwardOrientation;
         }
 
-        moveTemp = Vector3.ClampMagnitude(moveTemp, pm.walkSpeed);
-        pm.characterController.Move(moveTemp);
+        //wallJumpDirection.z = forwardDirection;
+        wallJumpDirection.y = Mathf.Sqrt(wallBounceForce * 2.0f * pm.gravity);
+        pm.moveDirection = wallJumpDirection;
+
+        ExitWallRun();
     }
 
 
-    private void StartWallRun()
-    {
-        isWallRunning = true;
-        jumpCharge = 1;
-        pm.IncreaseBaseSpeed(5f); 
-        yVelocity = new Vector3 (0f, 0f, 0f);
-
-        wallNormal = onLeftWall ? leftWallHit.normal : rightWallHit.normal;
-        forwardDirection = Vector3.Cross(wallNormal, Vector3.up);
-
-        if(Vector3.Dot(forwardDirection, transform.forward) < 0)
-        {
-            forwardDirection = -forwardDirection;
-        }
-    }
-
-    private void ExitWallRun()
+    public void ExitWallRun()
     {
         isWallRunning = false;
+        wallRunReady = false;
     }
 
+
+    public void CommenceWallRun()
+    {
+        isWallRunning = true;
+
+        Vector3 wallRunDirection;
+        float wallRunSpeed;
+
+        Vector2 movementInput = pm.moveAction.ReadValue<Vector2>();
+        float movementX = movementInput.x;
+        float movementY = movementInput.y;
+
+
+        // if player stops moving forward or landed on ground
+        if (movementY <= 0 || pm.isGrounded)
+        {
+            ExitWallRun();
+            return;
+        }
+
+        wallRunSpeed = wallrunForce;
+        wallRunDirection = pm.forwardOrientation * wallRunSpeed;
+        wallRunDirection.y = wallrunGravity;
+
+        //ManageWallRunCountdown();
+
+        pm.characterController.Move(wallRunDirection * Time.deltaTime);
+
+        return;
+    }
 }
