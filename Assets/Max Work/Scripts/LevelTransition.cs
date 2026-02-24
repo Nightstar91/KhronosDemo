@@ -5,11 +5,10 @@ public class LevelTransition : MonoBehaviour
 {
     public string[] allScenes;
     Scene currentScene;
-    int Scene;
+    public int Scene;
 
     private void Start()
     {
-        currentScene = SceneManager.GetActiveScene();
         Scene = FindScene();
 
         if(Scene == -1)
@@ -18,8 +17,9 @@ public class LevelTransition : MonoBehaviour
         }
     }
 
-    private int FindScene()
+    public int FindScene()
     {
+        currentScene = SceneManager.GetActiveScene();
         int thisScene = -1;
         for (int i = 0; i < allScenes.Length - 1; i++)
         {
