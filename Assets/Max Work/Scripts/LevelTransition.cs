@@ -18,7 +18,7 @@ public class LevelTransition : MonoBehaviour
         }
     }
 
-    private int FindScene()
+    public int FindScene()
     {
         int thisScene = -1;
         for (int i = 0; i < allScenes.Length - 1; i++)

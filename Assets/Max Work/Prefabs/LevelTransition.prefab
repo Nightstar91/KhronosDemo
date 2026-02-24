@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3550003077330088575}
   - component: {fileID: 3155594765603562826}
   - component: {fileID: 8219709407120215120}
+  - component: {fileID: 7918087092984419965}
   m_Layer: 0
   m_Name: LevelTransition
   m_TagString: Untagged
@@ -73,3 +74,25 @@ MonoBehaviour:
   - Max-Level 2
   - Max-Level 3
   - Max-Level 4
+--- !u!114 &7918087092984419965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910049056948311669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7be0619962b80f4e8a6e8d3b73334cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelHasTimer: 000001010101
+  levelTimer: 0
+  lvlTimes:
+  - -1
+  - -1
+  - 60
+  - 70
+  - 80
+  - 90
+  objectiveText: {fileID: 0}

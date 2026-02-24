@@ -9,13 +9,15 @@ public class LevelObjective : MonoBehaviour
 {
 
     [Header("Level Objective Parameters")]
-    [SerializeField] public bool levelHasTimer;
+    [SerializeField] public bool[] levelHasTimer;
     //[SerializeField] public bool levelHasCoin;
 
     [SerializeField] private static string currentLevelScene;
+    [SerializeField] private static int lvlScene;
     
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
+    [SerializeField] public float[] lvlTimes;
     private float levelOriginalTimer;
     private bool hasTimerCompleted; // This flag for failure state 
     private bool hasTimerStopped; // This flag for success state
@@ -29,6 +31,7 @@ public class LevelObjective : MonoBehaviour
 
 
     private FPSController player;
+    private LevelTransition lvlTrans;
 
     [SerializeField] TextMeshProUGUI objectiveText;
     GameObject objectiveHud;
@@ -37,16 +40,17 @@ public class LevelObjective : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
         currentLevelScene = scene.name;
+        lvlScene = lvlTrans.GetComponent<LevelTransition>().FindScene();
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
 
-        if (levelHasTimer)
+        if (levelHasTimer[lvlScene])
         {
             hasTimerCompleted = false;
             hasTimerStopped = false;
             isTimerRunning = true;
-            levelOriginalTimer = levelTimer;
+            levelOriginalTimer = lvlTimes[lvlScene];
         }
         else
         {
@@ -67,7 +71,7 @@ public class LevelObjective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(levelHasTimer)
+        if (levelHasTimer[lvlScene])
         {
             StartCountdown();
         }
@@ -142,7 +146,7 @@ public class LevelObjective : MonoBehaviour
 
     private void DisplayObjectiveUI()
     {
-        if (levelHasTimer)
+        if (levelHasTimer[lvlScene])
         {
             objectiveText.text = string.Format("TIMER: {0:F2}", levelTimer);
         }
