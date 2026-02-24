@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Alvaro Work/Scenes/Main Menu.unity
     guid: a59eef4003d2d8d409cc05d772ab6fc5
   - enabled: 1
-    path: Assets/Chris Work/Scene/Level 1.unity
+    path: Assets/Chris Work/Scene/Level 1 (Old).unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/Alvaro Work/Scenes/LevelDemo.unity
