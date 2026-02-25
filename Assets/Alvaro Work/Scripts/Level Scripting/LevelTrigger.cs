@@ -5,7 +5,6 @@ public class LevelTrigger : MonoBehaviour
 {
     public enum SpecialTriggerType 
     { 
-        None,
         Start,
         Finish
     }
@@ -13,9 +12,9 @@ public class LevelTrigger : MonoBehaviour
 
     [SerializeField] UnityEvent onTriggerEnter;
     [SerializeField] UnityEvent onTriggerExit;
-    [SerializeField] public bool triggerOnce;
+    [SerializeField] SpecialTriggerType triggerType;
+    [SerializeField] public bool triggerOnce = false;
 
-    private sbyte triggerCounter;
 
     LevelObjective levelObjectiveController;
 
@@ -24,49 +23,28 @@ public class LevelTrigger : MonoBehaviour
         levelObjectiveController = GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>();
     }
 
-    [Tooltip("Use this method for reseting trigger with triggeronce")]
+    [Tooltip("Use this method for reseting trigger")]
     public void ResetTrigger()
     {
-        if(triggerOnce)
-        {
-            triggerCounter = 0;
-        }
+        triggerOnce = false;
     }
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnTriggerEnter(Collider other)
     {
         // Validation steps
         if (other.tag != "Player") return;
-        if (triggerOnce && triggerCounter != 0) return;
+        if (triggerOnce) return;
 
-        if (triggerOnce)
+        if (!triggerOnce && triggerType == SpecialTriggerType.Start)
         {
-            triggerCounter++;
-            onTriggerEnter.Invoke();
+            triggerOnce = true;
+            // Event to start the timer
         }
-        else 
+        if (!triggerOnce && triggerType == SpecialTriggerType.Finish)
         {
-            onTriggerEnter.Invoke();
-        }
-            
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // Validation steps
-        if (other.tag != "Player") return;
-        if (triggerOnce && triggerCounter != 0) return;
-
-        if (triggerOnce)
-        {
-            triggerCounter++;
-            onTriggerEnter.Invoke();
-        }
-        else
-        {
-            onTriggerEnter.Invoke();
+            triggerOnce = true;
+            // Event to end the timer
         }
     }
 

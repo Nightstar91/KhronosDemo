@@ -23,6 +23,8 @@ public class LevelObjective : MonoBehaviour
     private bool hasTimerStopped; // This flag for success state
     private bool isTimerRunning;
 
+    public Vector3 playerSpawnPoint;
+
     //[Tooltip("Coin Amount Max will be automatically set by Coin Amount")]
     //[SerializeField] public int coinAmount;
     //private int coinAmountMax;
@@ -38,6 +40,8 @@ public class LevelObjective : MonoBehaviour
 
     private void Awake()
     {
+        playerSpawnPoint = GameObject.Find("Player").GetComponent<Vector3>();
+
         Scene scene = SceneManager.GetActiveScene();
         currentLevelScene = scene.name;
         lvlScene = lvlTrans.GetComponent<LevelTransition>().FindScene();
@@ -49,7 +53,7 @@ public class LevelObjective : MonoBehaviour
         {
             hasTimerCompleted = false;
             hasTimerStopped = false;
-            isTimerRunning = true;
+            isTimerRunning = false;
             levelOriginalTimer = lvlTimes[lvlScene];
         }
         else
@@ -71,9 +75,9 @@ public class LevelObjective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (levelHasTimer[lvlScene])
+        if (levelHasTimer[lvlScene] && isTimerRunning)
         {
-            StartCountdown();
+            TimerCountdown();
         }
         else
         {
@@ -87,6 +91,11 @@ public class LevelObjective : MonoBehaviour
     public void ResetLevelTimer()
     {
         levelTimer = levelOriginalTimer;
+
+        hasTimerCompleted = false;
+        hasTimerStopped = false;
+        isTimerRunning = false;
+        levelOriginalTimer = lvlTimes[lvlScene];
     }
 
 
@@ -108,7 +117,7 @@ public class LevelObjective : MonoBehaviour
     }
 
 
-    public static void RestartScene()
+    public static void RestartPlayerPosition()
     {
         SceneManager.LoadScene(LevelObjective.currentLevelScene);
     }
@@ -129,7 +138,7 @@ public class LevelObjective : MonoBehaviour
     }
 
 
-    private void StartCountdown()
+    private void TimerCountdown()
     {
         // Timer is ticking
         if (!hasTimerCompleted && !hasTimerStopped)
