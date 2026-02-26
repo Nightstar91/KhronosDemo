@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using UnityEditor.Animations;
+using FMODUnity;
+using FMOD.Studio;
 
 public class TempLevelObjective : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class TempLevelObjective : MonoBehaviour
     //private int coinOriginalAmount;
     //private bool allCoinCollected;
 
+    private float goodBoundary;
+    private float aveBoundary;
 
     private FPSController player;
     private GameObject startTrigger;
@@ -155,6 +159,7 @@ public class TempLevelObjective : MonoBehaviour
     public void TriggerLevelEnd()
     {
         StopCountdown();
+        Honor();
     }
 
 
@@ -168,5 +173,29 @@ public class TempLevelObjective : MonoBehaviour
         objectiveText.text = string.Format("OBJECTIVE");
         ResetLevelTimer();
         player.currentState = FPSController.PlayerState.STATE_IDLE;
+    }
+
+    public void GetLvlBounds()
+    {
+        goodBoundary = levelOriginalTimer / 2;
+        aveBoundary = goodBoundary / 2;
+    }
+
+    public void Honor()
+    {
+        if(levelTimer > goodBoundary)
+        {
+            //good dialogue
+            return;
+        }
+        else if (levelTimer > aveBoundary)
+        {
+            //average dialogue
+            return;
+        }
+        else
+        {
+            //bad dialogue
+        }
     }
 }
