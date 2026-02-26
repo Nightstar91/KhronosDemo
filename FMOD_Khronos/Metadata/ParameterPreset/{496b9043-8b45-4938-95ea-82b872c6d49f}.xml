@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{496b9043-8b45-4938-95ea-82b872c6d49f}">
+		<property name="name">
+			<value>LandingIntensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{81d2f805-0451-4fe2-bf21-8c8461dfe4ba}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2aa93964-edf6-4a48-8caf-cfe5b3fa838a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2aa93964-edf6-4a48-8caf-cfe5b3fa838a}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

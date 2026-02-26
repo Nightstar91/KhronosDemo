@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{a25d8574-28f6-4138-8658-2c7f4007399d}">
 		<property name="assetPath">
-			<value>Motors, Servo, Boat Engine, Trim, Movement, Back and Forth 03 SND134209.wav</value>
+			<value>Char/Servos/Motors, Servo, Boat Engine, Trim, Movement, Back and Forth 03 SND134209.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>96</value>
