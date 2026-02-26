@@ -7,7 +7,7 @@ public class WallrunAudio : MonoBehaviour
 {
     [Header("FMOD Events")]
     [SerializeField] private EventReference wallrunLoopEvent;
-    [SerializeField] private EventReference wallFootstepEvent;
+   // [SerializeField] private EventReference wallFootstepEvent;
 
     [Header("Footstep Settings")]
     [SerializeField] private float footstepInterval = 0.35f;
@@ -88,15 +88,15 @@ public class WallrunAudio : MonoBehaviour
         {
             footstepTimer = 0f;
 
-            EventInstance footstepInstance = RuntimeManager.CreateInstance(wallFootstepEvent);
+           // EventInstance footstepInstance = RuntimeManager.CreateInstance(wallFootstepEvent);
 
             //Set 3D position for one-shot
-            footstepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+           // footstepInstance.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
 
-            footstepInstance.setParameterByName(PARAM_NAME, directionValue);
+           // footstepInstance.setParameterByName(PARAM_NAME, directionValue);
 
-            footstepInstance.start();
-            footstepInstance.release();
+           // footstepInstance.start();
+           // footstepInstance.release();
         }
     }
 

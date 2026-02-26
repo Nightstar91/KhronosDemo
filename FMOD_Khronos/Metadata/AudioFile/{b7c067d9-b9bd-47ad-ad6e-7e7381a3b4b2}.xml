@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{f9a1c77c-f6ab-49ef-945b-f22d200a8f96}">
+	<object class="AudioFile" id="{b7c067d9-b9bd-47ad-ad6e-7e7381a3b4b2}">
 		<property name="assetPath">
-			<value>Metal, Movement, Rod, Drag, Scrape On Rusty Metal, Movement Table SND19925.wav</value>
+			<value>Soundly Voice Designer, Elizabeth B.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>96</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>2.7431354166666666</value>
+			<value>4.7642708333333337</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>

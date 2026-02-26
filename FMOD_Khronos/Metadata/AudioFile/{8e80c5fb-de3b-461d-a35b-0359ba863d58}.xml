@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{8e80c5fb-de3b-461d-a35b-0359ba863d58}">
 		<property name="assetPath">
-			<value>Robots, Movement, Industrial Robot, Second Axis Rotating, Fast SND85994 - Pitch 66.wav</value>
+			<value>Char/Servos/Robots, Movement, Industrial Robot, Second Axis Rotating, Fast SND85994 - Pitch 66.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>96</value>

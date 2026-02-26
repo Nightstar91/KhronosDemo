@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{ddbe92be-5867-4624-903d-e0ea06d6fe29}">
+	<object class="AudioFile" id="{1cc4d746-f48e-4786-a17f-af32e3a2cc52}">
 		<property name="assetPath">
-			<value>740244__joonthefloof__servo-6.wav</value>
+			<value>Swooshes, Whoosh, Short, Low Mid Bouncy, Dry SND55456.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>96</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.5</value>
+			<value>0.67972916666666672</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>

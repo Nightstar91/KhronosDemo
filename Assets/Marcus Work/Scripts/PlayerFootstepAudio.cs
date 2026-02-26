@@ -10,6 +10,7 @@ public class PlayerFootstepAudio : MonoBehaviour
     [SerializeField] private EventReference footstepEvent;  // The FMOD event for footsteps (event:/Player/Footsteps)
     [SerializeField] private EventReference landEvent;      // The FMOD event for landings (event:/Player/Land)
     [SerializeField] private EventReference slideEvent;      // slide SFX event
+    [SerializeField] private EventReference jumpEvent;      // jump SFX event
     [SerializeField] private string surfaceParameterName = "SurfaceTerrain";  // Name of the FMOD parameter that defines surface type
    
 
@@ -34,7 +35,7 @@ public class PlayerFootstepAudio : MonoBehaviour
     private bool slideSoundPlaying;
     private float airTime = 0f;
     private float lastVerticalVelocity;
-
+    private FPSController.PlayerState previousState;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class PlayerFootstepAudio : MonoBehaviour
         bool isGrounded = controller.isGrounded;
         float speed = Vector3.Distance(transform.position, previousPosition) / Time.deltaTime;
         bool isSliding = IsPlayerSliding();
+        FPSController.PlayerState currentState = playerController.currentState;
 
         DetectSurface();  // Detect which surface the player is on
         lastVerticalVelocity = controller.velocity.y;
@@ -71,7 +73,21 @@ public class PlayerFootstepAudio : MonoBehaviour
             airTime = 0f;
         }
 
+        // Detect transition into jump state
+        if (currentState == FPSController.PlayerState.STATE_JUMP &&
+            previousState != FPSController.PlayerState.STATE_JUMP)
+        {
+            PlayJumpSound();
+        }
 
+        // Wall jump
+        if (playerController.wallrun.isWallRunning &&
+            playerController.jumpAction.WasPressedThisFrame())
+        {
+            PlayJumpSound();
+        }
+
+        previousState = currentState;
 
         // ===== SLIDE SOUND =====
         if (isGrounded && isSliding)
@@ -203,5 +219,16 @@ public class PlayerFootstepAudio : MonoBehaviour
     {
         slideInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         slideInstance.release();
+    }
+
+    private void PlayJumpSound()
+    {
+        EventInstance jumpInstance = RuntimeManager.CreateInstance(jumpEvent);
+
+        jumpInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+        jumpInstance.setParameterByName(surfaceParameterName, (float)currentSurfaceIndex);
+
+        jumpInstance.start();
+        jumpInstance.release();
     }
 }

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{f67d9538-6d6a-4ff2-ba03-88398fb089ef}">
 		<property name="assetPath">
-			<value>ME_HoverUI_SFX_10302025.wav</value>
+			<value>UI/ME_HoverUI_SFX_10302025.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
