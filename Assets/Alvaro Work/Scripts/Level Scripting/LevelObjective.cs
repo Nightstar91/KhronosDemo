@@ -119,7 +119,7 @@ public class LevelObjective : MonoBehaviour
 
     public static void RestartPlayerPosition()
     {
-        SceneManager.LoadScene(LevelObjective.currentLevelScene);
+        SceneManager.LoadScene(currentLevelScene);
     }
 
 
