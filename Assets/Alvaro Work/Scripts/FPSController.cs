@@ -320,20 +320,17 @@ public class FPSController : MonoBehaviour
                 playerHud.OpenResultPanel(hasFailed);
                 if(jumpAction.WasPerformedThisFrame())
                 {
-                    //LevelObjective.RestartScene();
+                    GameObject.Find("LevelObjectiveController").GetComponent<TempLevelObjective>().TriggerRestart();
                 }
 
                 break;
         }
+        // To make sure gravity is applied constantly
+        ApplyFinalMovements();
 
         // if at any point player failed the level
         if (hasFailed)
-        {
             currentState = PlayerState.STATE_DEAD;
-        }
-
-        // To make sure gravity is applied constantly
-        ApplyFinalMovements();
     }
 
 

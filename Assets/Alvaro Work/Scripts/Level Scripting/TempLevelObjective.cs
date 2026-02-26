@@ -20,7 +20,7 @@ public class TempLevelObjective : MonoBehaviour
     private bool hasTimerStopped; // This flag for success state
     private bool isTimerRunning;
 
-    public Transform playerSpawnPoint;
+    public Vector3 playerSpawnPoint;
 
     //[Tooltip("Coin Amount Max will be automatically set by Coin Amount")]
     //[SerializeField] public int coinAmount;
@@ -41,7 +41,7 @@ public class TempLevelObjective : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<FPSController>();
         startTrigger = GameObject.Find("LevelStartTrigger");
         endTrigger = GameObject.Find("EndStartTrigger");
-        playerSpawnPoint = GameObject.Find("Player").transform; // Get the player position as soon as the scene loads
+        playerSpawnPoint = GameObject.Find("Player").transform.position; // Get the player position as soon as the scene loads
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
@@ -83,29 +83,6 @@ public class TempLevelObjective : MonoBehaviour
     }
 
 
-    public void ResetLevelTimer()
-    {
-        levelTimer = levelOriginalTimer;
-
-        hasTimerCompleted = false;
-        hasTimerStopped = false;
-        isTimerRunning = false;
-        levelTimer = levelOriginalTimer;
-    }
-
-
-    private void StopCountdown()
-    {
-        hasTimerStopped = true;
-    }
-
-
-    private void BeginCountdown()
-    {
-        isTimerRunning = true;
-    }
-
-
     private bool LevelCountdown()
     {
         if (levelTimer >= 0)
@@ -128,15 +105,34 @@ public class TempLevelObjective : MonoBehaviour
         {
             hasTimerCompleted = LevelCountdown();
         }
-        // Timer reached the end before timer stopped
-        else if (!hasTimerCompleted && hasTimerStopped)
-        {
-            return;
-        }
+
         else
         {
-            player.hasFailed = false;
+            player.hasFailed = true;
         }
+    }
+
+
+    public void ResetLevelTimer()
+    {
+        levelTimer = levelOriginalTimer;
+
+        hasTimerCompleted = false;
+        hasTimerStopped = false;
+        isTimerRunning = false;
+        levelTimer = levelOriginalTimer;
+    }
+
+
+    private void StopCountdown()
+    {
+        hasTimerStopped = true;
+    }
+
+
+    private void BeginCountdown()
+    {
+        isTimerRunning = true;
     }
 
 
@@ -165,9 +161,11 @@ public class TempLevelObjective : MonoBehaviour
     public void TriggerRestart()
     {
         ResetLevelTimer();
-        GameObject.Find("Player").transform.position = playerSpawnPoint.transform.position;
+        player.playerHud.CloseResultPanel();
+        GameObject.Find("Player").transform.position = playerSpawnPoint;
         startTrigger.GetComponent<LevelTrigger>().triggerOnce = false;
         endTrigger.GetComponent<LevelTrigger>().triggerOnce = false;
+        player.hasFailed = false;
         player.currentState = FPSController.PlayerState.STATE_IDLE;
     }
 }

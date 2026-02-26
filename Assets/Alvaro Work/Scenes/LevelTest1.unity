@@ -5023,13 +5023,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4512657051378185625, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.41
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9874554
+      value: 2.1124554
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5448,7 +5452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: levelTimer
-      value: 12
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: levelHasTimer
