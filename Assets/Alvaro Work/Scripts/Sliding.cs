@@ -19,6 +19,7 @@ public class Sliding : MonoBehaviour
     private float originalSlideTimer;
     private float originalSlideCooldown;
     private float originalSlideForce;
+    private float additionalSlideForce;
     float slopeAlignment;
     public float angle;
     private float currentSlideSpeed; // Track current speed (AI)
@@ -72,6 +73,7 @@ public class Sliding : MonoBehaviour
     {
         Vector3 moveDirection;
 
+        // Detecting downward slope
         if (OnSlope(out Vector3 slopeDirection, out float slopeAngle))
         {
             // Calculate angle and adjust speed based on slope
@@ -81,18 +83,19 @@ public class Sliding : MonoBehaviour
             // Move in the direction of the slope
             moveDirection = slopeDirection * currentSlideSpeed;
         }
+
+        // Flat ground - use input direction
         else
         {
-            // Flat ground - use input direction
-            moveDirection = (playerObj.forward * verticalInput + playerObj.right * horizontalInput) * currentSlideSpeed;
+            angle = 0;
 
-            if (currentSlideSpeed > baseSlideSpeed)
+            moveDirection = (pm.forwardOrientation * verticalInput + playerObj.right * horizontalInput) * currentSlideSpeed;
+
+            /*if (currentSlideSpeed > baseSlideSpeed)
             {
                 // Decay over time
                 currentSlideSpeed = Mathf.Lerp(currentSlideSpeed, baseSlideSpeed, Time.deltaTime * 1f);
-            }
-
-            
+            }*/
         }
         moveDirection.y -= pm.gravity * Time.deltaTime;
 
@@ -102,32 +105,33 @@ public class Sliding : MonoBehaviour
     }
 
 
-    private void ApplySlopeAcceleration(float slopeAngle)
+    private float ApplySlopeAcceleration(float slopeAngle)
     {
         // Determine if going downhill or uphill based on slope angle
         if (slopeAngle > 3f) // On a noticeable slope
         {
             // Check if moving downhill (slope direction points down relative to player forward)
             Vector3 slopeDir = Vector3.ProjectOnPlane(Vector3.down, GetSlopeNormal()).normalized;
-            float slopeAlignment = Vector3.Dot(playerObj.forward, slopeDir);
+            float slopeAlignment = Vector3.Dot(pm.forwardOrientation, slopeDir);
 
             // Accelerating downhill
             if (slopeAlignment > 0.1f)
             {
                 float accelerationAmount = (slopeAngle / 45f) * downhillAcceleration;
-                currentSlideSpeed += accelerationAmount * Time.deltaTime;
+
+                return accelerationAmount;
             }
             // Decelerating on uphill
-            else if (slopeAlignment < -0.1f) 
+            else
             {
                 float decelerationAmount = (slopeAngle / 45f) * uphillDeceleration;
                 currentSlideSpeed -= decelerationAmount * Time.deltaTime;
+
+                return decelerationAmount;
             }
-
-            currentSlideSpeed = Mathf.Clamp(currentSlideSpeed, baseSlideSpeed * 0.5f, maxSlideSpeed);
-
-            Debug.Log($"Slope: {slopeAngle:F1}° | Speed: {currentSlideSpeed:F1} | Alignment: {slopeAlignment:F2}");
         }
+
+        return 0f;
     }
 
 
