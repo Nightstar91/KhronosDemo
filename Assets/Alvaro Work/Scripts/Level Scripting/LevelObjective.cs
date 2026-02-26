@@ -33,7 +33,7 @@ public class LevelObjective : MonoBehaviour
 
 
     private FPSController player;
-    private LevelTransition lvlTrans;
+    private GameObject lvlTrans;
 
     [SerializeField] TextMeshProUGUI objectiveText;
     GameObject objectiveHud;
@@ -44,7 +44,7 @@ public class LevelObjective : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
         currentLevelScene = scene.name;
-        lvlScene = lvlTrans.GetComponent<LevelTransition>().FindScene();
+        lvlScene = GameObject.Find("LevelTransition").GetComponent<LevelTransition>().FindScene();
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
