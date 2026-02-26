@@ -4887,6 +4887,26 @@ PrefabInstance:
       propertyPath: levelHasTimer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Path
+      value: event:/Dialogue/LevelDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data1
+      value: -699568328
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data2
+      value: 1311523831
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data3
+      value: 131953073
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data4
+      value: 1657139841
+      objectReference: {fileID: 0}
     - target: {fileID: 8322002821754022421, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: m_Name
       value: LevelObjectiveController
