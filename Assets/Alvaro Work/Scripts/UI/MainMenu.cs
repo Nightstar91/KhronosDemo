@@ -18,6 +18,9 @@ public class MainMenu : BasicMenu
         exitGameConfirmationPanel.SetActive(false);
 
         settingBackButton.SetActive(false);
+
+        // Configure the Resume Button
+        ConfigureResume();
     }
 
 

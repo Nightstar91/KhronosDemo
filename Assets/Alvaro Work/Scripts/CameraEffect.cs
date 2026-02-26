@@ -45,7 +45,7 @@ public class CameraEffect : MonoBehaviour
 
     void Update()
     {
-        if(!FPSController.playerHud.isPaused)
+        if(!FPSController.playerHud.isPaused && FPSController.currentState != FPSController.PlayerState.STATE_DEAD)
         {
             if(FPSController.currentState != FPSController.PlayerState.STATE_SLIDE || FPSController.currentState != FPSController.PlayerState.STATE_WALLRUN)
             {

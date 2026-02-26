@@ -2,77 +2,100 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Animations;
+using System.Diagnostics;
 
 public class LevelObjective : MonoBehaviour
 {
 
-    [Header("Level Objective Parameter")]
-    [SerializeField] public bool levelHasTimer;
+    [Header("Level Objective Parameters")]
+    [SerializeField] public bool[] levelHasTimer;
     //[SerializeField] public bool levelHasCoin;
-    //[SerializeField] public bool levelHasKey;
+
+    [SerializeField] private static string currentLevelScene;
+    [SerializeField] private static int lvlScene;
+
+    [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
+    [SerializeField] public float[] lvlTimes;
+    private float levelOriginalTimer;
+    private bool hasTimerCompleted; // This flag for failure state 
+    private bool hasTimerStopped; // This flag for success state
+    private bool isTimerRunning;
+
+    public Vector3 playerSpawnPoint;
+
     //[Tooltip("Coin Amount Max will be automatically set by Coin Amount")]
     //[SerializeField] public int coinAmount;
-    [Tooltip("Name it the same as the current scene name (WATCH FOR CAP)")]
-    [SerializeField] public string currentLevelScene;
-    [Tooltip("Name for next scene name (WATCH FOR CAP)")]
-    [SerializeField] public string nextLevelScene;
+    //private int coinAmountMax;
+    //private int coinOriginalAmount;
+    //private bool allCoinCollected;
 
-    private int coinAmountMax;
-    private int coinOriginalAmount;
-    private float levelOriginalTimer;
-
-    private bool hasTimerCompleted;
-    private bool hasTimerStarted;
-    private bool hasTimerStopped;
-
-    private bool allCoinCollected;
-
-    private bool hasKeyCollected;
 
     private FPSController player;
-    private MeshCollider levelStartCollider;
-    private MeshCollider levelEndCollider;
+    private GameObject lvlTrans;
 
-    GameObject objectiveText;
+    [SerializeField] TextMeshProUGUI objectiveText;
+    GameObject objectiveHud;
 
     private void Awake()
     {
-        if (!levelHasTimer)
+        playerSpawnPoint = GameObject.Find("Player").transform.position;
+
+        Scene scene = SceneManager.GetActiveScene();
+        currentLevelScene = scene.name;
+        lvlScene = GameObject.Find("LevelTransition").GetComponent<LevelTransition>().FindScene();
+
+        objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
+        objectiveHud = GameObject.Find("ObjectiveHUD");
+
+        if (levelHasTimer[lvlScene])
         {
-            levelTimer = 9999f;
+            hasTimerCompleted = false;
+            hasTimerStopped = false;
+            isTimerRunning = false;
+            levelOriginalTimer = lvlTimes[lvlScene];
         }
-
-        hasTimerCompleted = false;
-        hasTimerStopped = false;
-        hasTimerStarted = false;
-
-        levelOriginalTimer = levelTimer;
+        else
+        {
+            objectiveHud.gameObject.SetActive(false); // turning off objective ui if there is no objective
+            levelTimer = -1;
+            isTimerRunning = false;
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<FPSController>();
-        levelStartCollider = GameObject.Find("LevelStartAreaCollision").GetComponent<MeshCollider>();
-        levelEndCollider = GameObject.Find("LevelEndAreaCollision").GetComponent<MeshCollider>();
-        objectiveText = GameObject.Find("TimerText");
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if(hasTimerStarted)
+        if (levelHasTimer[lvlScene] && isTimerRunning)
         {
-            StartCountdown();
+            TimerCountdown();
         }
+        else
+        {
+            return;
+        }
+
+        DisplayObjectiveUI();
     }
 
 
     public void ResetLevelTimer()
     {
         levelTimer = levelOriginalTimer;
+
+        hasTimerCompleted = false;
+        hasTimerStopped = false;
+        isTimerRunning = false;
+        levelOriginalTimer = lvlTimes[lvlScene];
     }
 
 
@@ -84,24 +107,19 @@ public class LevelObjective : MonoBehaviour
 
     public void ResetCoin()
     {
-        //coinAmount = coinOriginalAmount;
+
     }
 
-
-    public void ResetLevel()
-    {
-        SceneManager.LoadScene(currentLevelScene);
-    }
-
-
-    public void NextLevel()
-    {
-        SceneManager.LoadScene(nextLevelScene);
-    }
 
     private void StopCountdown()
     {
         hasTimerStopped = true;
+    }
+
+
+    public static void RestartPlayerPosition()
+    {
+        SceneManager.LoadScene(currentLevelScene);
     }
 
 
@@ -120,25 +138,28 @@ public class LevelObjective : MonoBehaviour
     }
 
 
-    private void StartCountdown()
+    private void TimerCountdown()
     {
         // Timer is ticking
         if (!hasTimerCompleted && !hasTimerStopped)
         {
             hasTimerCompleted = LevelCountdown();
         }
-        // Timer has reached zero
-        else if (levelHasTimer && hasTimerCompleted)
-        {
-            player.currentState = FPSController.PlayerState.STATE_DEAD;
-        }
-        // Player reached the end of level before timer ran out
+        // Timer reached 0, player has failed
         else
         {
-            return;
+            player.hasFailed = true;
         }
     }
 
 
+    private void DisplayObjectiveUI()
+    {
+        if (levelHasTimer[lvlScene])
+        {
+            objectiveText.text = string.Format("TIMER: {0:F2}", levelTimer);
+        }
 
+        return;
+    }
 }
