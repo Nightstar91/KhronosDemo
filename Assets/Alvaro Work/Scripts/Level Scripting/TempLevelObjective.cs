@@ -15,7 +15,7 @@ public class TempLevelObjective : MonoBehaviour
 
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
-    private float levelOriginalTimer;
+    public float levelOriginalTimer;
     private bool hasTimerCompleted; // This flag for failure state 
     private bool hasTimerStopped; // This flag for success state
     private bool isTimerRunning;
@@ -120,7 +120,6 @@ public class TempLevelObjective : MonoBehaviour
         hasTimerCompleted = false;
         hasTimerStopped = false;
         isTimerRunning = false;
-        levelTimer = levelOriginalTimer;
     }
 
 
@@ -158,14 +157,16 @@ public class TempLevelObjective : MonoBehaviour
         StopCountdown();
     }
 
+
     public void TriggerRestart()
     {
-        ResetLevelTimer();
         player.playerHud.CloseResultPanel();
         GameObject.Find("Player").transform.position = playerSpawnPoint;
-        startTrigger.GetComponent<LevelTrigger>().triggerOnce = false;
-        endTrigger.GetComponent<LevelTrigger>().triggerOnce = false;
+        startTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        endTrigger.GetComponent<LevelTrigger>().ResetTrigger();
         player.hasFailed = false;
+        objectiveText.text = string.Format("OBJECTIVE");
+        ResetLevelTimer();
         player.currentState = FPSController.PlayerState.STATE_IDLE;
     }
 }

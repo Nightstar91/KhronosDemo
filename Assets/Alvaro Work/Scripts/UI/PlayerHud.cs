@@ -140,6 +140,7 @@ public class PlayerHud : BasicMenu
         }
     }
 
+
     public void CloseResultPanel()
     {
         resultPanel.SetActive(false);
