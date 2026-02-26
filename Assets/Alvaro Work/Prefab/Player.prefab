@@ -254,7 +254,9 @@ GameObject:
   - component: {fileID: 3532926395716396089}
   - component: {fileID: 8730293828885063798}
   - component: {fileID: 6527175750275534972}
-  - component: {fileID: 3593205221344130562}
+  - component: {fileID: 1918033911039066532}
+  - component: {fileID: 7092659191918380624}
+  - component: {fileID: 6923052254329296428}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -501,12 +503,21 @@ MonoBehaviour:
       Data4: -640744004
     Path: event:/PlayerCharacter/Slide
   surfaceParameterName: SurfaceTerrain
+  jumpEvent:
+    Guid:
+      Data1: -1274552257
+      Data2: 1275829600
+      Data3: -1897926010
+      Data4: -1026365580
+    Path: event:/PlayerCharacter/Jump
   stepInterval: 0.35
   minMoveSpeed: 0.1
   raycastDistance: 1.2
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  landingIntensityParameter: LandingIntensity
+  maxImpactSpeed: 20
   playerController: {fileID: 4512657051378185625}
 --- !u!114 &6527175750275534972
 MonoBehaviour:
@@ -538,7 +549,7 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3593205221344130562
+--- !u!114 &1918033911039066532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -564,6 +575,15 @@ MonoBehaviour:
   onLeftWall: 0
   onRightWall: 0
   wallRunReady: 0
+--- !u!114 &7092659191918380624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a5db2e99e473794f9419e6960c88de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -577,9 +597,29 @@ MonoBehaviour:
       Data4: -798527410
     Path: event:/PlayerCharacter/Neck Servo
   parameterName: TurnSpeed
-  minAngularSpeed: 50
-  maxAngularSpeed: 600
+  turnThreshold: 100
+  maxTurnSpeed: 600
   smoothing: 10
+--- !u!114 &6923052254329296428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8d5c811e33abb4a8371c5b9cc6f308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallrunLoopEvent:
+    Guid:
+      Data1: -1159820176
+      Data2: 1239012703
+      Data3: 890262677
+      Data4: 1567317622
+    Path: event:/PlayerCharacter/Wallrun
+  footstepInterval: 0.35
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0

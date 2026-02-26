@@ -320,7 +320,7 @@ public class FPSController : MonoBehaviour
                 
                 if(jumpAction.WasPerformedThisFrame())
                 {
-                  
+                    
                 }
 
                 break;

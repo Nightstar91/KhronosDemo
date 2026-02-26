@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{51b4519e-a7b8-4a18-9189-42dfb9b5c062}">
 		<property name="assetPath">
-			<value>Robots, Movement, Footsteps, Medium Robot 03 SND117287 4.wav</value>
+			<value>Char/Servos/Robots, Movement, Footsteps, Medium Robot 03 SND117287 4.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>96</value>
