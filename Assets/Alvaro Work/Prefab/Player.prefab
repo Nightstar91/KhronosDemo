@@ -377,7 +377,7 @@ MonoBehaviour:
     m_Name: Move
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 24831943-2f8a-4d0c-af05-60aa41a0553d
+    m_Id: 6dbe92a4-79a6-4ac2-b4b3-d3b5e8cbe8b9
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -386,7 +386,7 @@ MonoBehaviour:
     m_Name: Look
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 997807ea-1858-4823-b2e9-13b1001cedcf
+    m_Id: 7f620c08-6507-4b39-87d0-8bd864e8dcfe
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -395,7 +395,7 @@ MonoBehaviour:
     m_Name: Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 4c48b453-1d48-4c8a-a5e6-90667232732c
+    m_Id: 3f9ce506-7929-46d5-bfd1-99e929c99c6b
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -404,7 +404,7 @@ MonoBehaviour:
     m_Name: Pause
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: a24145b7-427e-4fe3-b3f1-f132f1e49237
+    m_Id: 6e6edb6c-8e31-49db-8c14-5afa663aab90
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_Name: Slide
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 189e115b-c1e4-4cb0-88f5-ab4cea1c921a
+    m_Id: 347631e6-e8cb-4711-9a7b-1dca12b27105
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -424,13 +424,12 @@ MonoBehaviour:
   decelerateSpeed: 0.75
   gravity: 30
   gravityScale: 1
-  jumpHeight: 1.5
+  jumpHeight: 1.4
   lookSpeedX: 0.2
   lookSpeedY: 0.2
   upperLookLimit: 80
   lowerLookLimit: 80
   playerCamera: {fileID: 0}
-  playerCameraHolder: {fileID: 0}
   characterController: {fileID: 0}
   forwardOrientation: {x: 0, y: 0, z: 0}
   moveDirection: {x: 0, y: 0, z: 0}
@@ -439,8 +438,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
-  playerFailed: 0
-  playerSucceed: 0
+  hasFailed: 0
+  hasSucceed: 0
   playerHud: {fileID: 0}
   slide: {fileID: 0}
   wallrun: {fileID: 0}
@@ -458,13 +457,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 0}
   angle: 0
-  baseSlideSpeed: 10
+  baseSlideSpeed: 12
   maxSlideSpeed: 30
-  downhillAcceleration: 5
-  uphillDeceleration: 8
+  downhillAcceleration: 70
+  uphillDeceleration: 45
   slideTimer: 1.5
-  slideCooldown: 1.8
-  slideForce: 0
+  slideCooldown: 1
+  slideForce: 1
   slideYScale: 0
   isSliding: 0
   slideReady: 0
@@ -555,10 +554,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isWallRunning: 0
-  wallrunForce: 0.15
-  wallrunGravity: 0.075
-  wallBounceForce: 1
-  wallRunCooldown: 0
+  wallrunForce: 7
+  wallrunGravity: 5
+  wallBounceForce: 2
+  wallRunCooldown: 0.5
   wallRunTimer: 0
   leftWallBouncer: {fileID: 0}
   rightWallBouncer: {fileID: 0}
@@ -639,7 +638,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeIntensity: 1
+  shakeIntensity: 0.05
   _camera: {fileID: 0}
   _cameraHolder: {fileID: 0}
   start: 0

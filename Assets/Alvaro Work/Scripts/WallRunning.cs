@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.Rendering;
 
 public class WallRunning : MonoBehaviour
@@ -9,9 +10,9 @@ public class WallRunning : MonoBehaviour
     public bool isWallRunning;
     public float wallrunForce = 7f;
     public float wallrunGravity = 5f;
-    private float maxWallRunCooldown = 1f;
-    private float maxWallRunTime = 2f;
-    [SerializeField] public float wallBounceForce = 2f;
+    private float maxWallRunCooldown;
+    private float maxWallRunTimer;
+    [SerializeField] public float wallBounceForce = 1.5f;
     [SerializeField] public float wallRunCooldown;
     [SerializeField] public float wallRunTimer;
 
@@ -35,8 +36,8 @@ public class WallRunning : MonoBehaviour
         leftWallBouncer = GameObject.Find("LeftBounce").GetComponent<Transform>();
         rightWallBouncer = GameObject.Find("RightBounce").GetComponent<Transform>();
 
-        wallRunCooldown = maxWallRunCooldown;
-        wallRunTimer = maxWallRunTime;
+        maxWallRunTimer = wallRunTimer;
+        maxWallRunCooldown = wallRunCooldown;
     }
 
 
@@ -60,23 +61,23 @@ public class WallRunning : MonoBehaviour
         else
         {
             ExitWallRun();
-            wallRunTimer = maxWallRunTime;
+            wallRunTimer = maxWallRunTimer;
         }
     }
 
 
-    private void ManageWallRunCooldown()
+    public void ManageWallRunCooldown()
     {
         // Once the player is off the wall
-        if(wallRunCooldown >= 0 && !isWallRunning)
+        if(!isWallRunning && !wallRunReady && wallRunCooldown >= 0)
         {
-            wallRunReady = false;
             wallRunCooldown -= 1f * Time.deltaTime;
         }
 
-        else if (isWallRunning )
+        else
         {
-            wallRunTimer = maxWallRunCooldown;
+            wallRunCooldown = maxWallRunCooldown;
+            wallRunReady = true;
         }
     }
 
@@ -86,16 +87,12 @@ public class WallRunning : MonoBehaviour
         onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.75f, wallLayer);
         onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.75f, wallLayer);
 
-        if(onRightWall)
+        if(!onRightWall && !onLeftWall && isWallRunning)
         {
-            wallNormal = rightWallHit.normal;
-        }
-        if(onLeftWall)
-        {
-            wallNormal = leftWallHit.normal;
+            BounceOffWall(0f);
         }
 
-        if((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded)
+        if ((onRightWall || onLeftWall) && !isWallRunning && !pm.isGrounded && wallRunReady)
         {
             //Debug.Log("SHOULD BE WALLRUNNING");
             CommenceWallRun();
@@ -116,8 +113,12 @@ public class WallRunning : MonoBehaviour
         }
         else if(onRightWall)
         {
-            wallJumpDirection= rightWallBouncer.transform.position;
+            wallJumpDirection = rightWallBouncer.transform.position;
             
+        }
+        else
+        {
+            wallJumpDirection = pm.forwardOrientation;
         }
 
         //wallJumpDirection.z = forwardDirection;
@@ -131,7 +132,7 @@ public class WallRunning : MonoBehaviour
     public void ExitWallRun()
     {
         isWallRunning = false;
-        //ManageWallRunCooldown();
+        wallRunReady = false;
     }
 
 
@@ -153,12 +154,6 @@ public class WallRunning : MonoBehaviour
             ExitWallRun();
             return;
         }
-
-        //if(pm.jumpAction.WasPerformedThisFrame())
-        //{
-        //    BounceOffWall(movementY);
-        //    return;
-        //}
 
         wallRunSpeed = wallrunForce;
         wallRunDirection = pm.forwardOrientation * wallRunSpeed;

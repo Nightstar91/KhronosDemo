@@ -47,7 +47,7 @@ public class FPSController : MonoBehaviour
     [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
-    public GameObject playerCameraHolder;
+    private GameObject playerCameraHolder;
     public CharacterController characterController;
     [SerializeField] public Vector3 forwardOrientation;
 
@@ -64,8 +64,8 @@ public class FPSController : MonoBehaviour
     public bool isGrounded = false;
     private bool isMoving = false;
     private bool isInAir = false;
-    public bool playerFailed = false;
-    public bool playerSucceed = false;
+    public bool hasFailed = false;
+    public bool hasSucceed = false;
 
     public PlayerHud playerHud;
     public Sliding slide;
@@ -107,6 +107,7 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
+        wallrun.ManageWallRunCooldown();
         forwardOrientation = transform.forward;
 
         switch (currentState)
@@ -214,7 +215,7 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_SLIDE:
-
+                HandleMouseLock();
                 if(slideAction.IsPressed())
                 {
                     slide.StartSlide();
@@ -250,9 +251,18 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_PAUSE;
                 }
 
+                if (jumpAction.WasPressedThisFrame())
+                {
+                    slide.isSliding = false;   // slide state off
+                    slide.StopSlide();
+                    currentState = PlayerState.STATE_JUMP;
+                }
+
                 break;
 
             case PlayerState.STATE_WALLRUN:
+                wallrun.CheckWallRun();
+                HandleMouseLock();
 
                 if (wallrun.isWallRunning)
                 {
@@ -260,11 +270,11 @@ public class FPSController : MonoBehaviour
 
                     if(wallrun.onLeftWall) // sway camera to the right
                     {
-                        cameraEffect.StartSwayCamera(-5f);
+                        cameraEffect.StartSwayCamera(-6.5f);
                     }
                     else if (wallrun.onRightWall) // sway camera to the left
                     {
-                        cameraEffect.StartSwayCamera(-5f);
+                        cameraEffect.StartSwayCamera(6.5f);
                     }
 
                     if(jumpAction.WasPressedThisFrame() && moveAction.ReadValue<Vector2>().x != 0)
@@ -306,8 +316,20 @@ public class FPSController : MonoBehaviour
                     break;  
 
             case PlayerState.STATE_DEAD:
+                FreezePlayer();
+                
+                if(jumpAction.WasPerformedThisFrame())
+                {
+                  
+                }
 
                 break;
+        }
+
+        // if at any point player failed the level
+        if (hasFailed)
+        {
+            currentState = PlayerState.STATE_DEAD;
         }
 
         // To make sure gravity is applied constantly
@@ -408,6 +430,12 @@ public class FPSController : MonoBehaviour
     }
 
 
+    private void FreezePlayer()
+    {
+        characterController.Move(Vector3.zero);
+    }
+
+
     public void IncreaseBaseSpeed(float speedAmount)
     {
         walkSpeed += speedAmount;
@@ -430,6 +458,10 @@ public class FPSController : MonoBehaviour
 
     public float GetVelocity()
     {
-        return velocity.magnitude;
+        Vector3 horizontalSpeed = new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
+
+        return horizontalSpeed.magnitude;
     }
+
+
 }
