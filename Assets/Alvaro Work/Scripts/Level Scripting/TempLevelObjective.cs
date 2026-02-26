@@ -3,27 +3,24 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using UnityEditor.Animations;
-using System.Diagnostics;
 
-public class LevelObjective : MonoBehaviour
+public class TempLevelObjective : MonoBehaviour
 {
 
     [Header("Level Objective Parameters")]
-    [SerializeField] public bool[] levelHasTimer;
     //[SerializeField] public bool levelHasCoin;
+    public bool levelHasTimer;
 
     [SerializeField] private static string currentLevelScene;
-    [SerializeField] private static int lvlScene;
 
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
-    [SerializeField] public float[] lvlTimes;
     private float levelOriginalTimer;
     private bool hasTimerCompleted; // This flag for failure state 
     private bool hasTimerStopped; // This flag for success state
     private bool isTimerRunning;
 
-    public Vector3 playerSpawnPoint;
+    public Transform playerSpawnPoint;
 
     //[Tooltip("Coin Amount Max will be automatically set by Coin Amount")]
     //[SerializeField] public int coinAmount;
@@ -33,28 +30,33 @@ public class LevelObjective : MonoBehaviour
 
 
     private FPSController player;
-    private LevelTransition lvlTrans;
+    private GameObject startTrigger;
+    private GameObject endTrigger;
 
     [SerializeField] TextMeshProUGUI objectiveText;
     GameObject objectiveHud;
 
     private void Awake()
     {
-        playerSpawnPoint = GameObject.Find("Player").transform.position;
-
-        Scene scene = SceneManager.GetActiveScene();
-        currentLevelScene = scene.name;
-        lvlScene = lvlTrans.GetComponent<LevelTransition>().FindScene();
+        player = GameObject.Find("Player").GetComponent<FPSController>();
+        startTrigger = GameObject.Find("LevelStartTrigger");
+        endTrigger = GameObject.Find("EndStartTrigger");
+        playerSpawnPoint = GameObject.Find("Player").transform; // Get the player position as soon as the scene loads
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
+    }
 
-        if (levelHasTimer[lvlScene])
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (levelHasTimer)
         {
             hasTimerCompleted = false;
             hasTimerStopped = false;
             isTimerRunning = false;
-            levelOriginalTimer = lvlTimes[lvlScene];
+            levelOriginalTimer = levelTimer;
         }
         else
         {
@@ -64,20 +66,13 @@ public class LevelObjective : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        player = GameObject.Find("Player").GetComponent<FPSController>();
-
-    }
-
 
     // Update is called once per frame
     void Update()
     {
-        if (levelHasTimer[lvlScene] && isTimerRunning)
+        if (levelHasTimer && isTimerRunning && !hasTimerStopped)
         {
-            TimerCountdown();
+            TimerTracker();
         }
         else
         {
@@ -95,19 +90,7 @@ public class LevelObjective : MonoBehaviour
         hasTimerCompleted = false;
         hasTimerStopped = false;
         isTimerRunning = false;
-        levelOriginalTimer = lvlTimes[lvlScene];
-    }
-
-
-    private string GetTimerString()
-    {
-        return string.Format("{0:F2}", levelTimer);
-    }
-
-
-    public void ResetCoin()
-    {
-
+        levelTimer = levelOriginalTimer;
     }
 
 
@@ -117,9 +100,9 @@ public class LevelObjective : MonoBehaviour
     }
 
 
-    public static void RestartPlayerPosition()
+    private void BeginCountdown()
     {
-        SceneManager.LoadScene(LevelObjective.currentLevelScene);
+        isTimerRunning = true;
     }
 
 
@@ -138,28 +121,53 @@ public class LevelObjective : MonoBehaviour
     }
 
 
-    private void TimerCountdown()
+    private void TimerTracker()
     {
         // Timer is ticking
         if (!hasTimerCompleted && !hasTimerStopped)
         {
             hasTimerCompleted = LevelCountdown();
         }
-        // Timer reached 0, player has failed
+        // Timer reached the end before timer stopped
+        else if (!hasTimerCompleted && hasTimerStopped)
+        {
+            return;
+        }
         else
         {
-            player.hasFailed = true;
+            player.hasFailed = false;
         }
     }
 
 
     private void DisplayObjectiveUI()
     {
-        if (levelHasTimer[lvlScene])
+        if (levelHasTimer)
         {
             objectiveText.text = string.Format("TIMER: {0:F2}", levelTimer);
         }
 
         return;
+    }
+
+
+    public void TriggerLevelStart()
+    {
+        BeginCountdown();
+    }
+
+
+    public void TriggerLevelEnd()
+    {
+        StopCountdown();
+    }
+
+    public void TriggerRestart()
+    {
+        ResetLevelTimer();
+        GameObject.Find("Player").transform.position = playerSpawnPoint.transform.position;
+        startTrigger.GetComponent<LevelTrigger>().triggerOnce = false;
+        endTrigger.GetComponent<LevelTrigger>().triggerOnce = false;
+        player.currentState = FPSController.PlayerState.STATE_IDLE;
     }
 }

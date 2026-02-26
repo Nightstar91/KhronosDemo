@@ -9,28 +9,27 @@ public class LevelTrigger : MonoBehaviour
         Finish
     }
 
-
-    [SerializeField] UnityEvent onTriggerEnter;
-    [SerializeField] UnityEvent onTriggerExit;
     [SerializeField] SpecialTriggerType triggerType;
     [SerializeField] public bool triggerOnce = false;
-
-
-    LevelObjective levelObjectiveController;
+    private BoxCollider triggerCollider;
+    
+    TempLevelObjective levelObjectiveController;
 
     private void Start()
     {
-        levelObjectiveController = GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>();
+        triggerCollider = GetComponent<BoxCollider>();
+        levelObjectiveController = GameObject.Find("LevelObjectiveController").GetComponent<TempLevelObjective>();
     }
 
     [Tooltip("Use this method for reseting trigger")]
     public void ResetTrigger()
     {
         triggerOnce = false;
+        triggerCollider.isTrigger = true; // so trigger can be passable again
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         // Validation steps
         if (other.tag != "Player") return;
@@ -39,14 +38,14 @@ public class LevelTrigger : MonoBehaviour
         if (!triggerOnce && triggerType == SpecialTriggerType.Start)
         {
             triggerOnce = true;
-            // Event to start the timer
+            levelObjectiveController.TriggerLevelStart();
         }
         if (!triggerOnce && triggerType == SpecialTriggerType.Finish)
         {
             triggerOnce = true;
-            // Event to end the timer
+            levelObjectiveController.TriggerLevelEnd();
         }
-    }
 
-    
+        triggerCollider.isTrigger = false; // Too lock player out like a one way door
+    }
 }
