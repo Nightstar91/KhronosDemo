@@ -40,7 +40,7 @@ public class LevelObjective : MonoBehaviour
 
     private void Awake()
     {
-        playerSpawnPoint = GameObject.Find("Player").GetComponent<Vector3>();
+        playerSpawnPoint = GameObject.Find("Player").transform.position;
 
         Scene scene = SceneManager.GetActiveScene();
         currentLevelScene = scene.name;
