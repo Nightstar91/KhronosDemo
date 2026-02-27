@@ -569,7 +569,7 @@ MonoBehaviour:
   wallrunForce: 7
   wallrunGravity: 5
   wallBounceForce: 2
-  wallRunCooldown: 0.4
+  wallRunCooldown: 0.3
   wallRunTimer: 0
   leftWallBouncer: {fileID: 0}
   rightWallBouncer: {fileID: 0}
