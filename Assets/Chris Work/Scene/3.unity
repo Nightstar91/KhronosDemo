@@ -1551,21 +1551,25 @@ PrefabInstance:
       propertyPath: slideForce
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3532926395716396089, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
+      propertyPath: slideCooldown
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3579688081978202162, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.04
+      value: 0.53312206
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.35
+      value: 2.4874551
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.01
+      value: -35.035
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14863,6 +14867,26 @@ PrefabInstance:
     - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: levelSelectValue
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Path
+      value: event:/Dialogue/LevelDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data1
+      value: -699568328
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data2
+      value: 1311523831
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data3
+      value: 131953073
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data4
+      value: 1657139841
       objectReference: {fileID: 0}
     - target: {fileID: 8322002821754022421, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: m_Name
