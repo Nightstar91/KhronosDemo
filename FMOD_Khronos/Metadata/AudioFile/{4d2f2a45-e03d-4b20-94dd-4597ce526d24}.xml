@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4d2f2a45-e03d-4b20-94dd-4597ce526d24}">
+		<property name="assetPath">
+			<value>Soundly Voice Designer, Davis.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.9005833333333335</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>
+		</relationship>
+	</object>
+</objects>
