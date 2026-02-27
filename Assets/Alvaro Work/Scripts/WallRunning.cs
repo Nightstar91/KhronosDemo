@@ -84,8 +84,8 @@ public class WallRunning : MonoBehaviour
 
     public void CheckWallRun()
     {
-        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.75f, wallLayer);
-        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.75f, wallLayer);
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.95f, wallLayer);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.95f, wallLayer);
 
         if(!onRightWall && !onLeftWall && isWallRunning)
         {

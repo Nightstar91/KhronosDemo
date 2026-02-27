@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Animations;
 using FMODUnity;
 using FMOD.Studio;
 
