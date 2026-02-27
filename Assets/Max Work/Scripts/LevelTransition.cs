@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
+using FMOD.Studio;
 
 public class LevelTransition : MonoBehaviour
 {
     public string[] allScenes;
     Scene currentScene;
     int Scene;
-
+    
     private void Start()
     {
         currentScene = SceneManager.GetActiveScene();
@@ -37,7 +39,7 @@ public class LevelTransition : MonoBehaviour
         {
             return;
         }
-
+       
         LoadScene(false);
     }
 
@@ -45,16 +47,19 @@ public class LevelTransition : MonoBehaviour
     {
         if (resuming)
         {
+            StopAllAudio();
             SceneManager.LoadScene(allScenes[PlayerPrefs.GetInt("Scene", 1)]);
             return;
         }
 
         if (Scene == allScenes.Length - 1)
         {
+            StopAllAudio();
             SceneManager.LoadScene(allScenes[0]);
         }
         else
         {
+            StopAllAudio();
             SceneManager.LoadScene(allScenes[Scene + 1]);
         }
     }
@@ -63,5 +68,10 @@ public class LevelTransition : MonoBehaviour
     {
         PlayerPrefs.SetInt("Scene", Scene);
         SceneManager.LoadScene("Main Menu");
+    }
+    private void StopAllAudio()
+    {
+        var masterBus = RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
