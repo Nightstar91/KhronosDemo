@@ -22,7 +22,7 @@ public class MainMenu : BasicMenu
         // Configure the Resume Button
         ConfigureResume();
 
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
