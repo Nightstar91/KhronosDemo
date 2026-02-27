@@ -62,6 +62,6 @@ public class LevelTransition : MonoBehaviour
     public void ReturnToMainMenu()
     {
         PlayerPrefs.SetInt("Scene", Scene);
-        SceneManager.LoadScene(allScenes[0]);
+        SceneManager.LoadScene("Main Menu");
     }
 }
