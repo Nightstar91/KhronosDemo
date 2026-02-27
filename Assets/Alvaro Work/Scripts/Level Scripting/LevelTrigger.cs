@@ -25,7 +25,7 @@ public class LevelTrigger : MonoBehaviour
     public void ResetTrigger()
     {
         triggerOnce = false;
-        triggerCollider.isTrigger = true; // so trigger can be passable again
+        //triggerCollider.isTrigger = true; // so trigger can be passable again
     }
 
 

@@ -50,7 +50,7 @@ public class TempLevelObjective : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<FPSController>();
         startTrigger = GameObject.Find("LevelStartTrigger");
-        endTrigger = GameObject.Find("EndStartTrigger");
+        endTrigger = GameObject.Find("LevelEndTrigger");
         playerSpawnPoint = GameObject.Find("Player").transform.position; // Get the player position as soon as the scene loads
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
@@ -178,8 +178,8 @@ public class TempLevelObjective : MonoBehaviour
     {
         player.playerHud.CloseResultPanel();
         GameObject.Find("Player").transform.position = playerSpawnPoint;
-        //startTrigger.GetComponent<LevelTrigger>().ResetTrigger();
-        //endTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        startTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        endTrigger.GetComponent<LevelTrigger>().ResetTrigger();
         player.hasFailed = false;
         objectiveText.text = string.Format("OBJECTIVE");
         ResetLevelTimer();
