@@ -191,7 +191,6 @@ public class FPSController : MonoBehaviour
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
                 slide.HandleSlideCooldown();
-                wallrun.CheckWallRun();
 
                 // Player landing
                 if (isGrounded && isInAir)
@@ -263,7 +262,6 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_WALLRUN:
-                wallrun.CheckWallRun();
                 HandleMouseLock();
 
                 if (wallrun.isWallRunning)
@@ -336,6 +334,15 @@ public class FPSController : MonoBehaviour
 
         
     }
+
+
+    //private void FixedUpdate()
+    //{
+    //    if (currentState == PlayerState.STATE_INAIR || currentState == PlayerState.STATE_WALLRUN)
+    //    {
+    //        wallrun.CheckWallRun();
+    //    }
+    //}
 
 
     private void OnEnable()

@@ -6,7 +6,7 @@ using static UnityEngine.Rendering.DebugUI.Table;
 public class CameraEffect : MonoBehaviour
 {
     [Header("Camera Bob Parameters")]
-    [Range(0, 0.1f)] public float amount = 0.005f;
+    [Range(0, 0.1f)] public float amount = 0.002f;
     [Range(1f, 30f)] public float frequency = 16f;
     [Range(10f, 100f)] public float smooth = 20f;
 
