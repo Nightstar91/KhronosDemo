@@ -5,7 +5,7 @@
 			<value>LevelDialogue</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a53762b8-2c87-495f-9d4f-a95bcaf8f9b2}</destination>
@@ -195,9 +195,6 @@
 		</property>
 	</object>
 	<object class="EventMixerGroup" id="{3bf9891b-c549-487f-95cc-4d9222ba0f35}">
-		<property name="volume">
-			<value>-6.5</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -214,7 +211,6 @@
 	<object class="MixerBusEffectChain" id="{2337ce8a-ffe9-456a-9211-3dd92536ca67}">
 		<relationship name="effects">
 			<destination>{3943acb8-f7a1-4e85-843f-f7de1423f9be}</destination>
-			<destination>{832dd1ae-461b-4b62-8082-b4dd6f4da1fa}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{5b586d35-5423-4b0f-b032-01afda4c61e0}" />
@@ -278,7 +274,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{05808842-ac4b-46b6-bbf2-a52c4e9fd63d}" />
 	<object class="MixerBusFader" id="{3943acb8-f7a1-4e85-843f-f7de1423f9be}" />
-	<object class="SpatialiserEffect" id="{832dd1ae-461b-4b62-8082-b4dd6f4da1fa}" />
 	<object class="ParameterProperty" id="{4e388efa-748f-4f36-a395-a1ac1d5e85d6}">
 		<relationship name="parameter">
 			<destination>{4085f1d1-479b-4f1b-8ed6-6e655299e082}</destination>

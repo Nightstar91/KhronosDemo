@@ -4887,6 +4887,26 @@ PrefabInstance:
       propertyPath: levelHasTimer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Path
+      value: event:/Dialogue/LevelDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data1
+      value: -699568328
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data2
+      value: 1311523831
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data3
+      value: 131953073
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
+      propertyPath: levelDialogue.Guid.Data4
+      value: 1657139841
+      objectReference: {fileID: 0}
     - target: {fileID: 8322002821754022421, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: m_Name
       value: LevelObjectiveController
@@ -11831,6 +11851,63 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &975637930
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 738316518372500905, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_Name
+      value: AMBCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.993254
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.31820536
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.519917
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318653393547556940, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: efbcd7edec8e99b408832f9f3055b6f6, type: 3}
 --- !u!43 &985372631
 Mesh:
   m_ObjectHideFlags: 0
@@ -23339,3 +23416,4 @@ SceneRoots:
   - {fileID: 1966654995}
   - {fileID: 480431104}
   - {fileID: 444084851}
+  - {fileID: 975637930}

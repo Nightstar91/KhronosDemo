@@ -12,8 +12,14 @@ public class TempLevelObjective : MonoBehaviour
     [Header("Level Objective Parameters")]
     //[SerializeField] public bool levelHasCoin;
     public bool levelHasTimer;
-
+  
     [SerializeField] private static string currentLevelScene;
+
+    [Header("Dialogue Parameters")]
+    [SerializeField] private int levelSelectValue; // Assign per level in Inspector
+    [SerializeField] private EventReference levelDialogue;
+    private EventInstance dialogueInstance;
+    private int honorValue = 0; // 0 = Neutral, 1 = Good, 2 = Bad
 
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
@@ -68,6 +74,8 @@ public class TempLevelObjective : MonoBehaviour
             levelTimer = -1;
             isTimerRunning = false;
         }
+
+        PlayDialogue(); //play once at level load
     }
 
 
@@ -160,6 +168,7 @@ public class TempLevelObjective : MonoBehaviour
     {
         StopCountdown();
         Honor();
+        PlayDialogue(); //play again after honor is determined
     }
 
 
@@ -183,19 +192,35 @@ public class TempLevelObjective : MonoBehaviour
 
     public void Honor()
     {
-        if(levelTimer > goodBoundary)
+        Debug.Log("Honor function called");
+        if (levelTimer > goodBoundary)
         {
-            //good dialogue
+            honorValue = 1; // Good
+            Debug.Log("Good Honor");
             return;
         }
         else if (levelTimer > aveBoundary)
         {
-            //average dialogue
+            Debug.Log("Neutral Honor");
+            honorValue = 0; // Neutral
             return;
         }
         else
         {
-            //bad dialogue
+            Debug.Log("Bad Honor");
+            honorValue = 2; // Bad
         }
+       
+       
+    }
+    private void PlayDialogue()
+    {
+        dialogueInstance = RuntimeManager.CreateInstance(levelDialogue);
+
+        dialogueInstance.setParameterByName("Honor", honorValue);
+        dialogueInstance.setParameterByName("LevelSelect", levelSelectValue);
+
+        dialogueInstance.start();
+        dialogueInstance.release();
     }
 }
