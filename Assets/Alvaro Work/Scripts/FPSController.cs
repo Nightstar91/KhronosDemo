@@ -86,6 +86,8 @@ public class FPSController : MonoBehaviour
         lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
         lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
         playerCamera.fieldOfView = PlayerPrefs.GetFloat("Fov", 50);
+
+        Time.timeScale = 1f;
     }
 
     private void Awake()
@@ -331,6 +333,8 @@ public class FPSController : MonoBehaviour
         // if at any point player failed the level
         if (hasFailed)
             currentState = PlayerState.STATE_DEAD;
+
+        
     }
 
 
