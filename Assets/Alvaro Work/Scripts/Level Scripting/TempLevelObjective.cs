@@ -23,7 +23,7 @@ public class TempLevelObjective : MonoBehaviour
 
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
-    public float levelOriginalTimer;
+    private float levelOriginalTimer;
     private bool hasTimerCompleted; // This flag for failure state 
     private bool hasTimerStopped; // This flag for success state
     private bool isTimerRunning;
@@ -67,6 +67,8 @@ public class TempLevelObjective : MonoBehaviour
             hasTimerStopped = false;
             isTimerRunning = false;
             levelOriginalTimer = levelTimer;
+
+            GetLvlBounds();
         }
         else
         {
