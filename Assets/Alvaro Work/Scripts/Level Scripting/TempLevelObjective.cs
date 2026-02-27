@@ -178,8 +178,8 @@ public class TempLevelObjective : MonoBehaviour
     {
         player.playerHud.CloseResultPanel();
         GameObject.Find("Player").transform.position = playerSpawnPoint;
-        startTrigger.GetComponent<LevelTrigger>().ResetTrigger();
-        endTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        //startTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        //endTrigger.GetComponent<LevelTrigger>().ResetTrigger();
         player.hasFailed = false;
         objectiveText.text = string.Format("OBJECTIVE");
         ResetLevelTimer();
