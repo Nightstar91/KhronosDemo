@@ -46,6 +46,6 @@ public class LevelTrigger : MonoBehaviour
             levelObjectiveController.TriggerLevelEnd();
         }
 
-        triggerCollider.isTrigger = false; // Too lock player out like a one way door
+        //triggerCollider.isTrigger = false; // Too lock player out like a one way door
     }
 }

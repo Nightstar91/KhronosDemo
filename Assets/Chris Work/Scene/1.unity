@@ -12073,6 +12073,75 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &1002199882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3155594765603562826, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155594765603562826, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155594765603562826, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_Size.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 86.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -129.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550003077330088575, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7910049056948311669, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
+      propertyPath: m_Name
+      value: LevelTransition
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de9f31ca3cc97c44698e9eb238d1f09a, type: 3}
 --- !u!43 &1037550007
 Mesh:
   m_ObjectHideFlags: 0
@@ -19277,7 +19346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1718869590}
   m_Layer: 0
-  m_Name: Cubes
+  m_Name: LevelGeometry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23417,3 +23486,4 @@ SceneRoots:
   - {fileID: 480431104}
   - {fileID: 444084851}
   - {fileID: 975637930}
+  - {fileID: 1002199882}

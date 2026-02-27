@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 2253657144165992448}
   - component: {fileID: 345082232071269033}
   - component: {fileID: 2255426338657542319}
+  - component: {fileID: 8591722803944757115}
   m_Layer: 5
   m_Name: PlayerUICanvas
   m_TagString: Untagged
@@ -249,6 +250,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8591722803944757115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665750266463396322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8834ae3954c4d9840a33dcf065e79886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allScenes: []
 --- !u!1 &1131873529641131625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2661,7 +2675,7 @@ PrefabInstance:
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8591722803944757115}
     - target: {fileID: 5897411462815874571, guid: 5359f87b7dc236944aac31d10325fac0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
