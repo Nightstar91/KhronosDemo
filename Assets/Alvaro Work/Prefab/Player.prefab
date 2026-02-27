@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 1918033911039066532}
   - component: {fileID: 7092659191918380624}
   - component: {fileID: 6923052254329296428}
+  - component: {fileID: 8505221195008512041}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -502,7 +503,6 @@ MonoBehaviour:
       Data3: 574209458
       Data4: -640744004
     Path: event:/PlayerCharacter/Slide
-  surfaceParameterName: SurfaceTerrain
   jumpEvent:
     Guid:
       Data1: -1274552257
@@ -510,6 +510,7 @@ MonoBehaviour:
       Data3: -1897926010
       Data4: -1026365580
     Path: event:/PlayerCharacter/Jump
+  surfaceParameterName: SurfaceTerrain
   stepInterval: 0.35
   minMoveSpeed: 0.1
   raycastDistance: 1.2
@@ -568,7 +569,7 @@ MonoBehaviour:
   wallrunForce: 7
   wallrunGravity: 5
   wallBounceForce: 2
-  wallRunCooldown: 0.5
+  wallRunCooldown: 0.4
   wallRunTimer: 0
   leftWallBouncer: {fileID: 0}
   rightWallBouncer: {fileID: 0}
@@ -620,6 +621,20 @@ MonoBehaviour:
       Data4: 1567317622
     Path: event:/PlayerCharacter/Wallrun
   footstepInterval: 0.35
+--- !u!114 &8505221195008512041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48146365474fa7e4c872405bb69e401d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
+  fallThreshold: -30
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0
