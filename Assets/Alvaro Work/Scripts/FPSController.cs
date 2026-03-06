@@ -320,7 +320,7 @@ public class FPSController : MonoBehaviour
                 playerHud.OpenResultPanel(hasFailed);
                 if(jumpAction.WasPerformedThisFrame())
                 {
-                    GameObject.Find("LevelObjectiveController").GetComponent<TempLevelObjective>().TriggerRestart();
+                    GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>().TriggerRestart();
                 }
 
                 break;
