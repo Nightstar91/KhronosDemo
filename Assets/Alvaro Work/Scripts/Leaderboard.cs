@@ -18,6 +18,7 @@ public class Leaderboard : MonoBehaviour
 
         Bubblesort(tempTimer);
         GetCurrentHighscore();
+        SetCurrentHighscore();
     }
 
 
@@ -26,13 +27,21 @@ public class Leaderboard : MonoBehaviour
         
         string message;
 
-        for (int i = 0; i < leaderboard.Length; i++)
+        for (int i = 0; i < leaderboard.Length - 1; i++)
         {
-            message = string.Format("{0} : {1}", i, leaderboard[i]);
+            message = string.Format("{0} : {1}", i + 1, leaderboard[i]);
             Debug.Log(message);
         }
 
         Debug.Log("END OF LEADERBOARD");
+    }
+
+
+    public void SetCurrentHighscore()
+    {
+        PlayerPrefs.SetFloat("FirstPlaceTimer", leaderboard[0]);
+        PlayerPrefs.SetFloat("SecondPlaceTimer", leaderboard[1]);
+        PlayerPrefs.SetFloat("ThirdPlaceTimer", leaderboard[2]);
     }
 
 
