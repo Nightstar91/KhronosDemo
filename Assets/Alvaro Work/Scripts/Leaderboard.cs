@@ -24,12 +24,13 @@ public class Leaderboard : MonoBehaviour
 
     private void GetCurrentHighscore()
     {
-        
         string message;
+        string timeFormatted;
 
         for (int i = 0; i < leaderboard.Length - 1; i++)
         {
-            message = string.Format("{0} : {1}", i + 1, leaderboard[i]);
+            timeFormatted = ConvertFloatToTime(leaderboard[i]);
+            message = string.Format("{0} : {1:F2}", i + 1, timeFormatted);
             Debug.Log(message);
         }
 
@@ -42,6 +43,19 @@ public class Leaderboard : MonoBehaviour
         PlayerPrefs.SetFloat("FirstPlaceTimer", leaderboard[0]);
         PlayerPrefs.SetFloat("SecondPlaceTimer", leaderboard[1]);
         PlayerPrefs.SetFloat("ThirdPlaceTimer", leaderboard[2]);
+    }
+
+
+    public string ConvertFloatToTime(float Conversion)
+    {
+        string output;
+
+        int minutes = Mathf.FloorToInt(Conversion / 60);
+        int seconds = Mathf.FloorToInt(Conversion % 60);
+
+        output = string.Format("{0}:{1}", minutes, seconds);
+
+        return output;
     }
 
 
@@ -73,6 +87,5 @@ public class Leaderboard : MonoBehaviour
             if (swapped == false)
                 break;
         }
-
     }
 }
