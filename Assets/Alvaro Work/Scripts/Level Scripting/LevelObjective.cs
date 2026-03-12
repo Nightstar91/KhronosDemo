@@ -15,10 +15,9 @@ public class LevelObjective : MonoBehaviour
     }
 
     [Header("Level Objective Parameters")]
-    //[SerializeField] public bool levelHasCoin;
     public bool levelHasTimer;
   
-    [SerializeField] private static string currentLevelScene;
+    //[SerializeField] private static string currentLevelScene;
 
     [Header("Dialogue Parameters")]
     [SerializeField] private int levelSelectValue; // Assign per level in Inspector
@@ -28,23 +27,13 @@ public class LevelObjective : MonoBehaviour
 
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
-    private float levelOriginalTimer;
-    private bool hasTimerCompleted; // This flag for failure state 
-    private bool hasTimerStopped; // This flag for success state
     private bool isTimerRunning;
+    public float firstPlaceTime;
 
     public Vector3 playerSpawnPoint;
 
-    //[Tooltip("Coin Amount Max will be automatically set by Coin Amount")]
-    //[SerializeField] public int coinAmount;
-    //private int coinAmountMax;
-    //private int coinOriginalAmount;
-    //private bool allCoinCollected;
-
-    private float goodBoundary;
-    private float aveBoundary;
-
     private FPSController player;
+    private Leaderboard leaderboard;
     private GameObject startTrigger;
     private GameObject endTrigger;
 
@@ -54,6 +43,7 @@ public class LevelObjective : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<FPSController>();
+        leaderboard = GetComponent<Leaderboard>(); 
         startTrigger = GameObject.Find("LevelStartTrigger");
         endTrigger = GameObject.Find("LevelEndTrigger");
         playerSpawnPoint = GameObject.Find("Player").transform.position; // Get the player position as soon as the scene loads
@@ -68,12 +58,9 @@ public class LevelObjective : MonoBehaviour
     {
         if (levelHasTimer)
         {
-            hasTimerCompleted = false;
-            hasTimerStopped = false;
             isTimerRunning = false;
-            levelOriginalTimer = levelTimer;
 
-            GetLvlBounds();
+            firstPlaceTime = leaderboard.GetFirstPlaceTime();
         }
         else
         {
@@ -89,62 +76,36 @@ public class LevelObjective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (levelHasTimer && isTimerRunning && !hasTimerStopped)
-        {
-            TimerTracker();
-        }
-        else
-        {
-            return;
-        }
-
+        LevelTimer();
         DisplayObjectiveUI();
     }
 
 
-    private bool LevelCountdown()
+    private void LevelTimer()
     {
-        if (levelTimer >= 0)
+        if (isTimerRunning)
         {
-            levelTimer -= 1 * Time.deltaTime;
-            return false;
-        }
-        else
-        {
-            levelTimer = 0;
-            return true;
-        }
-    }
-
-
-    private void TimerTracker()
-    {
-        // Timer is ticking
-        if (!hasTimerCompleted && !hasTimerStopped)
-        {
-            hasTimerCompleted = LevelCountdown();
+            levelTimer += 1 * Time.deltaTime;
         }
 
         else
         {
-            player.hasFailed = true;
+            return;
         }
     }
 
 
     public void ResetLevelTimer()
     {
-        levelTimer = levelOriginalTimer;
+        levelTimer = 0f;
 
-        hasTimerCompleted = false;
-        hasTimerStopped = false;
         isTimerRunning = false;
     }
 
 
     private void StopCountdown()
     {
-        hasTimerStopped = true;
+        isTimerRunning = false;
     }
 
 
@@ -158,7 +119,7 @@ public class LevelObjective : MonoBehaviour
     {
         if (levelHasTimer)
         {
-            objectiveText.text = string.Format("TIMER: {0:F2}", levelTimer);
+            objectiveText.text = string.Format("{0:F2}", levelTimer);
         }
 
         return;
@@ -191,22 +152,18 @@ public class LevelObjective : MonoBehaviour
         player.currentState = FPSController.PlayerState.STATE_IDLE;
     }
 
-    public void GetLvlBounds()
-    {
-        goodBoundary = levelOriginalTimer / 2;
-        aveBoundary = goodBoundary / 2;
-    }
+
 
     public void Honor()
     {
         Debug.Log("Honor function called");
-        if (levelTimer > goodBoundary)
+        if (levelTimer < firstPlaceTime)
         {
             honorValue = HonorValue.Good; // Good
             Debug.Log("Good Honor");
             return;
         }
-        else if (levelTimer > aveBoundary)
+        else if (levelTimer == firstPlaceTime)
         {
             Debug.Log("Neutral Honor");
             honorValue = HonorValue.Neutral; // Neutral
@@ -220,6 +177,8 @@ public class LevelObjective : MonoBehaviour
        
        
     }
+
+
     private void PlayDialogue()
     {
         int honorNumber = (int)honorValue;

@@ -3,6 +3,7 @@ using UnityEngine.Rendering;
 
 public class Leaderboard : MonoBehaviour
 {
+    // 0 being the fastest
     private float[] leaderboard = new float[4];
 
     [SerializeField] public float tempTimer;
@@ -12,13 +13,10 @@ public class Leaderboard : MonoBehaviour
         leaderboard[0] = PlayerPrefs.GetFloat("FirstPlaceTimer", 240);
         leaderboard[1] = PlayerPrefs.GetFloat("SecondPlaceTimer", 420);
         leaderboard[2] = PlayerPrefs.GetFloat("ThirdPlaceTimer", 600);
-        leaderboard[3] = tempTimer; // this is a temp variable to be used for bubble sorting
+        leaderboard[3] = 0f; // this is a temp variable to be used for bubble sorting
 
-        Debug.Log("START OF LEADERBOARD");
+        //Debug.Log("START OF LEADERBOARD");
 
-        Bubblesort(tempTimer);
-        GetCurrentHighscore();
-        SetCurrentHighscore();
     }
 
 
@@ -56,6 +54,43 @@ public class Leaderboard : MonoBehaviour
         output = string.Format("{0}:{1}", minutes, seconds);
 
         return output;
+    }
+
+
+    public float GetFirstPlaceTime()
+    {
+        Bubblesort();
+
+        return leaderboard[0];
+    }
+
+
+    private void Bubblesort()
+    {
+        int i, j;
+        float temp;
+        bool swapped;
+        for (i = 0; i < leaderboard.Length - 1; i++)
+        {
+            swapped = false;
+            for (j = 0; j < leaderboard.Length - i - 1; j++)
+            {
+                if (leaderboard[j] > leaderboard[j + 1])
+                {
+
+                    // Swap arr[j] and arr[j+1]
+                    temp = leaderboard[j];
+                    leaderboard[j] = leaderboard[j + 1];
+                    leaderboard[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+
+            // If no two elements were
+            // swapped by inner loop, then break
+            if (swapped == false)
+                break;
+        }
     }
 
 
