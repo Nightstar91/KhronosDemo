@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 
@@ -21,6 +22,8 @@ public class ObjectiveGate : MonoBehaviour
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
     [SerializeField] public string objectiveSearchID;
 
+    public string[] objects = new string[3];
+
     [Header("What kind of objective is it?")]
     [SerializeField] public ObjectiveType objectiveType;
 
@@ -37,14 +40,8 @@ public class ObjectiveGate : MonoBehaviour
     {
         if(objectiveType == ObjectiveType.Coin)
         {
-            for (Object.FindAnyObjectByType<Coin>().GroupID == objectiveSearchID.ToLower())
-            {
-                allCoin++;
-            }
-            else
-            {
-                return''
-            }
+            
+           
         }
         else if (objectiveType == ObjectiveType.Dummy)
         {
