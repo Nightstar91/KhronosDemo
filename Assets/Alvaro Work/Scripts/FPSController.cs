@@ -86,6 +86,8 @@ public class FPSController : MonoBehaviour
         lookSpeedX = PlayerPrefs.GetFloat("Sensitivity", 2);
         lookSpeedY = PlayerPrefs.GetFloat("Sensitivity", 2);
         playerCamera.fieldOfView = PlayerPrefs.GetFloat("Fov", 50);
+
+        Time.timeScale = 1f;
     }
 
     private void Awake()
@@ -189,7 +191,6 @@ public class FPSController : MonoBehaviour
                 HandleMouseLock();
                 HandleMovementInput(); // change to air movement
                 slide.HandleSlideCooldown();
-                wallrun.CheckWallRun();
 
                 // Player landing
                 if (isGrounded && isInAir)
@@ -261,7 +262,6 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_WALLRUN:
-                wallrun.CheckWallRun();
                 HandleMouseLock();
 
                 if (wallrun.isWallRunning)
@@ -317,24 +317,32 @@ public class FPSController : MonoBehaviour
 
             case PlayerState.STATE_DEAD:
                 FreezePlayer();
-                
+                playerHud.OpenResultPanel(hasFailed);
                 if(jumpAction.WasPerformedThisFrame())
                 {
-                    
+                    GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>().TriggerRestart();
                 }
 
                 break;
         }
+        // To make sure gravity is applied constantly
+        ApplyFinalMovements();
 
         // if at any point player failed the level
         if (hasFailed)
-        {
             currentState = PlayerState.STATE_DEAD;
-        }
 
-        // To make sure gravity is applied constantly
-        ApplyFinalMovements();
+        
     }
+
+
+    //private void FixedUpdate()
+    //{
+    //    if (currentState == PlayerState.STATE_INAIR || currentState == PlayerState.STATE_WALLRUN)
+    //    {
+    //        wallrun.CheckWallRun();
+    //    }
+    //}
 
 
     private void OnEnable()

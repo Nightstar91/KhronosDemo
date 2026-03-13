@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 1918033911039066532}
   - component: {fileID: 7092659191918380624}
   - component: {fileID: 6923052254329296428}
+  - component: {fileID: 8505221195008512041}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -280,6 +281,7 @@ Transform:
   - {fileID: 6579249693838351035}
   - {fileID: 6515307064633617927}
   - {fileID: 7032548914788931662}
+  - {fileID: 5854823985408306352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6793685005012485239
@@ -502,7 +504,6 @@ MonoBehaviour:
       Data3: 574209458
       Data4: -640744004
     Path: event:/PlayerCharacter/Slide
-  surfaceParameterName: SurfaceTerrain
   jumpEvent:
     Guid:
       Data1: -1274552257
@@ -510,6 +511,7 @@ MonoBehaviour:
       Data3: -1897926010
       Data4: -1026365580
     Path: event:/PlayerCharacter/Jump
+  surfaceParameterName: SurfaceTerrain
   stepInterval: 0.35
   minMoveSpeed: 0.1
   raycastDistance: 1.2
@@ -568,7 +570,7 @@ MonoBehaviour:
   wallrunForce: 7
   wallrunGravity: 5
   wallBounceForce: 2
-  wallRunCooldown: 0.5
+  wallRunCooldown: 0.3
   wallRunTimer: 0
   leftWallBouncer: {fileID: 0}
   rightWallBouncer: {fileID: 0}
@@ -587,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5db2e99e473794f9419e6960c88de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 4744736380823943419}
+  playerTransform: {fileID: 3427736701049334347}
   lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   headTurnEvent:
     Guid:
@@ -597,9 +599,9 @@ MonoBehaviour:
       Data4: -798527410
     Path: event:/PlayerCharacter/Neck Servo
   parameterName: TurnSpeed
-  turnThreshold: 100
+  turnThreshold: 150
   maxTurnSpeed: 600
-  smoothing: 10
+  smoothing: 15
 --- !u!114 &6923052254329296428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +622,51 @@ MonoBehaviour:
       Data4: 1567317622
     Path: event:/PlayerCharacter/Wallrun
   footstepInterval: 0.35
+--- !u!114 &8505221195008512041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579688081978202162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48146365474fa7e4c872405bb69e401d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
+  fallThreshold: -30
+--- !u!1 &4573018113567190394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5854823985408306352}
+  m_Layer: 0
+  m_Name: WallRunOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5854823985408306352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573018113567190394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.02736348, y: -0.24999714, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4744736380823943419}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5190449635080087764
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6dcbcb001bc6046927e3e27da4badc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0.005
+  amount: 0.002
   frequency: 16
   smooth: 20
   tiltAmount: 0.075

@@ -2,6 +2,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.Rendering;
+using static FPSController;
 
 public class WallRunning : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class WallRunning : MonoBehaviour
 
     [Header("Detection")]
     Vector3 wallNormal;
+    private Vector3 wallRunOrigin;
     public Transform leftWallBouncer;
     public Transform rightWallBouncer;
     private RaycastHit leftWallHit;
@@ -35,6 +37,7 @@ public class WallRunning : MonoBehaviour
         pm = GetComponent<FPSController>();
         leftWallBouncer = GameObject.Find("LeftBounce").GetComponent<Transform>();
         rightWallBouncer = GameObject.Find("RightBounce").GetComponent<Transform>();
+        wallRunOrigin = GameObject.Find("WallRunOrigin").transform.position;
 
         maxWallRunTimer = wallRunTimer;
         maxWallRunCooldown = wallRunCooldown;
@@ -81,11 +84,19 @@ public class WallRunning : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (pm.currentState == PlayerState.STATE_INAIR || pm.currentState == PlayerState.STATE_WALLRUN)
+        {
+            CheckWallRun();
+        }
+    }
+
 
     public void CheckWallRun()
     {
-        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.75f, wallLayer);
-        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 0.75f, wallLayer);
+        onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 1f, wallLayer);
+        onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallHit, 1f, wallLayer);
 
         if(!onRightWall && !onLeftWall && isWallRunning)
         {

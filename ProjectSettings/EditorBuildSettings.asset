@@ -7,13 +7,19 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Alvaro Work/Scenes/Main Menu.unity
-    guid: a59eef4003d2d8d409cc05d772ab6fc5
+    guid: 5042a951e6e254f408ed75dfda7e4fc8
   - enabled: 1
-    path: Assets/Chris Work/Scene/Level 1 (Old).unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Alvaro Work/Scenes/LevelDemo.unity
-    guid: 58ba1fe773adbb0408697ee68d0b470e
+    path: Assets/Chris Work/Scene/1.unity
+    guid: fa1642eb68704c9449be3607a8e9da71
+  - enabled: 1
+    path: Assets/Chris Work/Scene/2.unity
+    guid: 7c4c4e9d534786b4595e78349a43426b
+  - enabled: 1
+    path: Assets/Chris Work/Scene/3.unity
+    guid: f716a1ab283042c4d9201593f5aef698
+  - enabled: 1
+    path: Assets/Chris Work/Scene/4.unity
+    guid: 108eb15f8d3356c4591d61e45d9df8ab
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f04ff6965bbfdd84199b5305cf3d233c, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

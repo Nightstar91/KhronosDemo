@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CameraEffect : MonoBehaviour
 {
     [Header("Camera Bob Parameters")]
-    [Range(0, 0.1f)] public float amount = 0.005f;
+    [Range(0, 0.1f)] public float amount = 0.002f;
     [Range(1f, 30f)] public float frequency = 16f;
     [Range(10f, 100f)] public float smooth = 20f;
 
@@ -45,7 +44,7 @@ public class CameraEffect : MonoBehaviour
 
     void Update()
     {
-        if(!FPSController.playerHud.isPaused)
+        if(!FPSController.playerHud.isPaused && FPSController.currentState != FPSController.PlayerState.STATE_DEAD)
         {
             if(FPSController.currentState != FPSController.PlayerState.STATE_SLIDE || FPSController.currentState != FPSController.PlayerState.STATE_WALLRUN)
             {

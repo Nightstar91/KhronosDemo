@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4889902424112099352}
-  - component: {fileID: 5903487836260568066}
+  - component: {fileID: 5714606126859842433}
   m_Layer: 0
   m_Name: LevelObjectiveController
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5903487836260568066
+--- !u!114 &5714606126859842433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8322002821754022421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7be0619962b80f4e8a6e8d3b73334cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a6bb0f9d4daf6a4aaa4b2507a8803b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelObjective: 0
-  levelTimer: 100
-  coinAmount: 10
-  coinAmountMax: 0
+  levelHasTimer: 0
+  levelTimer: 0
+  playerSpawnPoint: {fileID: 0}
+  objectiveText: {fileID: 0}

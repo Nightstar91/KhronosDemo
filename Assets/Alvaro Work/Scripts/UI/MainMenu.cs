@@ -18,6 +18,12 @@ public class MainMenu : BasicMenu
         exitGameConfirmationPanel.SetActive(false);
 
         settingBackButton.SetActive(false);
+
+        // Configure the Resume Button
+        ConfigureResume();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 

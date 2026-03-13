@@ -3,12 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class BasicMenu : MonoBehaviour 
 {
-    public string mainMenuScene;
-    public string loadLevelScene;
-
     public bool exitConfirmCheck;
 
     public GameObject playGameButton;
+    public GameObject resumeGameButton;
     public GameObject exitGameButton;
     public GameObject settingButton;
     public GameObject settingBackButton;
@@ -21,12 +19,10 @@ public class BasicMenu : MonoBehaviour
 
     public virtual void Awake()
     {
-        mainMenuScene = "Main Menu";
-        loadLevelScene = "Level 1";
-
         exitConfirmCheck = false;
 
         playGameButton = GameObject.Find("PlayButton");
+        resumeGameButton = GameObject.Find("ResumeButton");
         exitGameButton = GameObject.Find("ExitButton");
         settingButton = GameObject.Find("SettingButton");
         settingBackButton = GameObject.Find("SettingBackButton");
@@ -36,20 +32,16 @@ public class BasicMenu : MonoBehaviour
 
         settingPanel = GameObject.Find("SettingPanel");
         exitGameConfirmationPanel = GameObject.Find("ExitGameConfirmationPanel");
+
+        
     }
-
-
-    public void PlayGame()
-    {
-        SceneManager.LoadScene(loadLevelScene);
-    }
-
 
     public virtual void CloseSetting()
     {
         settingPanel.SetActive(false);
 
         playGameButton.SetActive(true);
+        ConfigureResume();
         settingButton.SetActive(true);
         exitGameButton.SetActive(true);
         settingBackButton.SetActive(false);
@@ -61,6 +53,7 @@ public class BasicMenu : MonoBehaviour
         settingPanel.SetActive(true);
 
         playGameButton.SetActive(false);
+        resumeGameButton.SetActive(false);
         settingButton.SetActive(false);
         exitGameButton.SetActive(false);
         settingBackButton.SetActive(true);
@@ -82,6 +75,16 @@ public class BasicMenu : MonoBehaviour
         exitGameButton.SetActive(true);
     }
 
+    public virtual void ConfigureResume()
+    {
+        Debug.Log(PlayerPrefs.GetInt("Scene", 1));
+        resumeGameButton.SetActive(false);
+        if (PlayerPrefs.GetInt("Scene", 1) > 1)
+        {
+            resumeGameButton.SetActive(true);
+            return;
+        }
+    }
 
     public void ExitGame()
     {

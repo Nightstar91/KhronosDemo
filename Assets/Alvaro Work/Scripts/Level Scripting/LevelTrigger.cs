@@ -5,70 +5,47 @@ public class LevelTrigger : MonoBehaviour
 {
     public enum SpecialTriggerType 
     { 
-        None,
         Start,
         Finish
     }
 
-
-    [SerializeField] UnityEvent onTriggerEnter;
-    [SerializeField] UnityEvent onTriggerExit;
-    [SerializeField] public bool triggerOnce;
-
-    private sbyte triggerCounter;
-
+    [SerializeField] SpecialTriggerType triggerType;
+    [SerializeField] public bool triggerOnce = false;
+    private BoxCollider triggerCollider;
+    
     LevelObjective levelObjectiveController;
 
     private void Start()
     {
+        triggerCollider = GetComponent<BoxCollider>();
         levelObjectiveController = GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>();
     }
 
-    [Tooltip("Use this method for reseting trigger with triggeronce")]
+    [Tooltip("Use this method for reseting trigger")]
     public void ResetTrigger()
     {
-        if(triggerOnce)
-        {
-            triggerCounter = 0;
-        }
+        triggerOnce = false;
+        //triggerCollider.isTrigger = true; // so trigger can be passable again
     }
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void OnTriggerEnter(Collider other)
-    {
-        // Validation steps
-        if (other.tag != "Player") return;
-        if (triggerOnce && triggerCounter != 0) return;
-
-        if (triggerOnce)
-        {
-            triggerCounter++;
-            onTriggerEnter.Invoke();
-        }
-        else 
-        {
-            onTriggerEnter.Invoke();
-        }
-            
-    }
 
     private void OnTriggerExit(Collider other)
     {
         // Validation steps
         if (other.tag != "Player") return;
-        if (triggerOnce && triggerCounter != 0) return;
+        if (triggerOnce) return;
 
-        if (triggerOnce)
+        if (!triggerOnce && triggerType == SpecialTriggerType.Start)
         {
-            triggerCounter++;
-            onTriggerEnter.Invoke();
+            triggerOnce = true;
+            levelObjectiveController.TriggerLevelStart();
         }
-        else
+        if (!triggerOnce && triggerType == SpecialTriggerType.Finish)
         {
-            onTriggerEnter.Invoke();
+            triggerOnce = true;
+            levelObjectiveController.TriggerLevelEnd();
         }
+
+        //triggerCollider.isTrigger = false; // Too lock player out like a one way door
     }
-
-    
 }
