@@ -10,17 +10,22 @@ public class Leaderboard : MonoBehaviour
 
     private void Start()
     {
+        LoadLeaderBoard();
+    }
+
+
+    public void LoadLeaderBoard()
+    {
         leaderboard[0] = PlayerPrefs.GetFloat("FirstPlaceTimer", 240);
         leaderboard[1] = PlayerPrefs.GetFloat("SecondPlaceTimer", 420);
         leaderboard[2] = PlayerPrefs.GetFloat("ThirdPlaceTimer", 600);
         leaderboard[3] = 0f; // this is a temp variable to be used for bubble sorting
 
-        //Debug.Log("START OF LEADERBOARD");
-
+        Debug.Log($"Loaded: {leaderboard[0]}, {leaderboard[1]}, {leaderboard[2]}");
     }
 
 
-    private void GetCurrentHighscore()
+    private void GetCurrentHighscoreString()
     {
         string message;
         string timeFormatted;
@@ -51,7 +56,7 @@ public class Leaderboard : MonoBehaviour
         int minutes = Mathf.FloorToInt(Conversion / 60);
         int seconds = Mathf.FloorToInt(Conversion % 60);
 
-        output = string.Format("{0}:{1}", minutes, seconds);
+        output = string.Format("{0}:{1:F2}", minutes, seconds);
 
         return output;
     }
@@ -59,9 +64,11 @@ public class Leaderboard : MonoBehaviour
 
     public float GetFirstPlaceTime()
     {
+        LoadLeaderBoard();
         Bubblesort();
+        GetCurrentHighscoreString();
 
-        return leaderboard[0];
+        return leaderboard[3];
     }
 
 
