@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 125519578057063311}
   m_Layer: 0
   m_Name: ObjectiveGate
-  m_TagString: Untagged
+  m_TagString: Gate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,5 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d6e226cb1bffe42b91758df1cc548e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveGateName: 
-  coinToSearch: 
+  objectiveGateID: 
+  objectiveSearchID: 
+  objectiveType: 0

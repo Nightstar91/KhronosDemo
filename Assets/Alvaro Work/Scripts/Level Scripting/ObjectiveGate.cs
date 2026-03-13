@@ -11,7 +11,7 @@ public class ObjectiveGate : MonoBehaviour
         Dummy
     }
 
-    [SerializeField] public string objectiveGateName;
+    [SerializeField] public string objectiveGateID;
 
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
     [SerializeField] public string objectiveSearchID;
@@ -24,7 +24,7 @@ public class ObjectiveGate : MonoBehaviour
 
     // Coin related
     private int allCoin;
-    public int originalAllCoin;
+    private int originalAllCoin;
     private GameObject[] coinArray;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,7 +37,7 @@ public class ObjectiveGate : MonoBehaviour
             // Searching the entire array of gameobject with coin to search for a specific group assigned by the level designer
             foreach(GameObject coinObject in coinArray)
             {
-                if (coinObject.GetComponent<Coin>().GroupID == objectiveSearchID)
+                if (coinObject.GetComponent<Coin>().groupID == objectiveSearchID)
                 {
                     allCoin++;
                 }
@@ -58,6 +58,15 @@ public class ObjectiveGate : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (allCoin == 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+
     private void Reset()
     {
         if (objectiveType == ObjectiveType.Coin)
@@ -66,4 +75,9 @@ public class ObjectiveGate : MonoBehaviour
         }
     }
 
+
+    public void DecrementCoinCount()
+    {
+        allCoin--;
+    }
 }
