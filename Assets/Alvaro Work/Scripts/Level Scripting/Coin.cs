@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    [Header("This is to link to the door that will unlock once all the coins have been collected")]
-    [SerializeField] public string name;
+    [Header("This coin group ID to will be used for the GateObjective to see which group is counting toward for unlock")]
+    [SerializeField] public string nameGroup;
     private bool hasBeenCollected = false;
 
     private void OnTriggerEnter(Collider other)
