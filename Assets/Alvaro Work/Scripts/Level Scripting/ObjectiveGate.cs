@@ -11,41 +11,44 @@ public class ObjectiveGate : MonoBehaviour
         Dummy
     }
 
-    private class CoinData
-    {
-        public Coin bob;
-    }
-
-
     [SerializeField] public string objectiveGateName;
 
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
     [SerializeField] public string objectiveSearchID;
 
-    public string[] objects = new string[3];
-
     [Header("What kind of objective is it?")]
     [SerializeField] public ObjectiveType objectiveType;
 
     // Dummy related
-
+    bool hasDummyBeenRescue;
 
     // Coin related
     private int allCoin;
-    private int originalAllCoin;
-    private CoinData data;
+    public int originalAllCoin;
+    private GameObject[] coinArray;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if(objectiveType == ObjectiveType.Coin)
         {
-            
+            coinArray = GameObject.FindGameObjectsWithTag("Coin");
            
+            // Searching the entire array of gameobject with coin to search for a specific group assigned by the level designer
+            foreach(GameObject coinObject in coinArray)
+            {
+                if (coinObject.GetComponent<Coin>().GroupID == objectiveSearchID)
+                {
+                    allCoin++;
+                }
+            }
+
+            originalAllCoin = allCoin;
         }
         else if (objectiveType == ObjectiveType.Dummy)
         {
             //dummy parameters
+            hasDummyBeenRescue = false;
         }
         else
         {
@@ -54,9 +57,13 @@ public class ObjectiveGate : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Reset()
     {
-        
+        if (objectiveType == ObjectiveType.Coin)
+        {
+            allCoin = originalAllCoin;
+        }
     }
+
 }
