@@ -2,57 +2,65 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using FMODUnity;
+using FMOD.Studio;
 
 public class LevelObjective : MonoBehaviour
 {
+    public enum HonorValue
+    {
+        Neutral,
+        Good,
+        Bad
+    }
 
     [Header("Level Objective Parameters")]
-    [SerializeField] public bool[] levelHasTimer;
-    //[SerializeField] public bool levelHasCoin;
+    public bool levelHasTimer;
+  
+    //[SerializeField] private static string currentLevelScene;
 
-    [SerializeField] private static string currentLevelScene;
-    [SerializeField] private static int lvlScene;
+    [Header("Dialogue Parameters")]
+    [SerializeField] private int levelSelectValue; // Assign per level in Inspector
+    [SerializeField] private EventReference levelDialogue;
+    private EventInstance dialogueInstance;
+    private HonorValue honorValue = HonorValue.Neutral; // 0 = Neutral, 1 = Good, 2 = Bad
 
     [Header("Parameters for Level Timer")]
-    [SerializeField] public float levelTimer;
-    [SerializeField] public float[] lvlTimes;
-    private float levelOriginalTimer;
-    private bool hasTimerCompleted; // This flag for failure state 
-    private bool hasTimerStopped; // This flag for success state
+    private float levelTimer;
     private bool isTimerRunning;
+    public float firstPlaceTime;
 
     public Vector3 playerSpawnPoint;
 
-    //[Tooltip("Coin Amount Max will be automatically set by Coin Amount")]
-    //[SerializeField] public int coinAmount;
-    //private int coinAmountMax;
-    //private int coinOriginalAmount;
-    //private bool allCoinCollected;
-
-
     private FPSController player;
-    private GameObject lvlTrans;
+    private Leaderboard leaderboard;
+    private GameObject startTrigger;
+    private GameObject endTrigger;
 
     [SerializeField] TextMeshProUGUI objectiveText;
     GameObject objectiveHud;
 
     private void Awake()
     {
-        playerSpawnPoint = GameObject.Find("Player").transform.position;
-
-        Scene scene = SceneManager.GetActiveScene();
-        currentLevelScene = scene.name;
-        lvlScene = GameObject.Find("LevelTransition").GetComponent<LevelTransition>().FindScene();
+        player = GameObject.Find("Player").GetComponent<FPSController>();
+        leaderboard = GetComponent<Leaderboard>(); 
+        startTrigger = GameObject.Find("LevelStartTrigger");
+        endTrigger = GameObject.Find("LevelEndTrigger");
+        playerSpawnPoint = GameObject.Find("Player").transform.position; // Get the player position as soon as the scene loads
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
+    }
 
-        if (levelHasTimer[lvlScene])
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (levelHasTimer)
         {
-            hasTimerCompleted = false;
-            hasTimerStopped = false;
             isTimerRunning = false;
-            levelOriginalTimer = lvlTimes[lvlScene];
+
+            firstPlaceTime = leaderboard.GetFirstPlaceTime();
         }
         else
         {
@@ -60,104 +68,127 @@ public class LevelObjective : MonoBehaviour
             levelTimer = -1;
             isTimerRunning = false;
         }
-    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        player = GameObject.Find("Player").GetComponent<FPSController>();
-
+        PlayDialogue(); //play once at level load
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (levelHasTimer[lvlScene] && isTimerRunning)
+        LevelTimer();
+        DisplayObjectiveUI();
+    }
+
+
+    private void LevelTimer()
+    {
+        if (isTimerRunning)
         {
-            TimerCountdown();
+            levelTimer += 1 * Time.deltaTime;
         }
+
         else
         {
             return;
         }
-
-        DisplayObjectiveUI();
     }
 
 
     public void ResetLevelTimer()
     {
-        levelTimer = levelOriginalTimer;
+        levelTimer = 0f;
 
-        hasTimerCompleted = false;
-        hasTimerStopped = false;
         isTimerRunning = false;
-        levelOriginalTimer = lvlTimes[lvlScene];
-    }
-
-
-    private string GetTimerString()
-    {
-        return string.Format("{0:F2}", levelTimer);
-    }
-
-
-    public void ResetCoin()
-    {
-
     }
 
 
     private void StopCountdown()
     {
-        hasTimerStopped = true;
+        isTimerRunning = false;
     }
 
 
-    public static void RestartPlayerPosition()
+    private void BeginCountdown()
     {
-        SceneManager.LoadScene(currentLevelScene);
-    }
-
-
-    private bool LevelCountdown()
-    {
-        if (levelTimer >= 0)
-        {
-            levelTimer -= 1 * Time.deltaTime;
-            return false;
-        }
-        else
-        {
-            levelTimer = 0;
-            return true;
-        }
-    }
-
-
-    private void TimerCountdown()
-    {
-        // Timer is ticking
-        if (!hasTimerCompleted && !hasTimerStopped)
-        {
-            hasTimerCompleted = LevelCountdown();
-        }
-        // Timer reached 0, player has failed
-        else
-        {
-            player.hasFailed = true;
-        }
+        isTimerRunning = true;
     }
 
 
     private void DisplayObjectiveUI()
     {
-        if (levelHasTimer[lvlScene])
+        if (levelHasTimer)
         {
-            objectiveText.text = string.Format("TIMER: {0:F2}", levelTimer);
+            objectiveText.text = string.Format("{0:F2}", levelTimer);
         }
 
         return;
+    }
+
+
+    public void TriggerLevelStart()
+    {
+        BeginCountdown();
+    }
+
+
+    public void TriggerLevelEnd()
+    {
+        StopCountdown();
+        Honor();
+        PlayDialogue(); //play again after honor is determined
+    }
+
+
+    public void TriggerRestart()
+    {
+        player.playerHud.CloseResultPanel();
+        GameObject.Find("Player").transform.position = playerSpawnPoint;
+        startTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        endTrigger.GetComponent<LevelTrigger>().ResetTrigger();
+        player.hasFailed = false;
+        objectiveText.text = string.Format("OBJECTIVE");
+        ResetLevelTimer();
+        player.currentState = FPSController.PlayerState.STATE_IDLE;
+    }
+
+
+
+    public void Honor()
+    {
+        Debug.Log("Honor function called");
+        if (levelTimer < firstPlaceTime)
+        {
+            honorValue = HonorValue.Good; // Good
+            Debug.Log("Good Honor");
+            return;
+        }
+        else if (levelTimer == firstPlaceTime)
+        {
+            Debug.Log("Neutral Honor");
+            honorValue = HonorValue.Neutral; // Neutral
+            return;
+        }
+        else
+        {
+            Debug.Log("Bad Honor");
+            honorValue = HonorValue.Bad; // Bad
+        }
+       
+       
+    }
+
+
+    private void PlayDialogue()
+    {
+        int honorNumber = (int)honorValue;
+
+        dialogueInstance = RuntimeManager.CreateInstance(levelDialogue);
+
+        dialogueInstance.setParameterByName("Honor", honorNumber);
+        dialogueInstance.setParameterByName("LevelSelect", levelSelectValue);
+
+        dialogueInstance.start();
+        dialogueInstance.release();
     }
 }

@@ -13,12 +13,12 @@ public class LevelTrigger : MonoBehaviour
     [SerializeField] public bool triggerOnce = false;
     private BoxCollider triggerCollider;
     
-    TempLevelObjective levelObjectiveController;
+    LevelObjective levelObjectiveController;
 
     private void Start()
     {
         triggerCollider = GetComponent<BoxCollider>();
-        levelObjectiveController = GameObject.Find("LevelObjectiveController").GetComponent<TempLevelObjective>();
+        levelObjectiveController = GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>();
     }
 
     [Tooltip("Use this method for reseting trigger")]
