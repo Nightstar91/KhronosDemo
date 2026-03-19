@@ -70,7 +70,8 @@ public class ObjectiveGate : MonoBehaviour
         }
         else
         {
-            // litterally cooking nothing here
+            // literally cooking nothing here
+            gameObject.SetActive(false);
             return;
         }
     }
