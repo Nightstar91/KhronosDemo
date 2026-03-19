@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 
@@ -7,10 +8,12 @@ public class ObjectiveGate : MonoBehaviour
     public enum ObjectiveType
     {
         None,
+        DialogueLock,
         Coin,
         Dummy
     }
 
+    public TextMeshPro doorText;
     [SerializeField] public string objectiveGateID;
 
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
@@ -18,6 +21,9 @@ public class ObjectiveGate : MonoBehaviour
 
     [Header("What kind of objective is it?")]
     [SerializeField] public ObjectiveType objectiveType;
+
+    // DialogueLock related
+    bool hasDialogueCompleted;
 
     // Dummy related
     bool hasDummyBeenRescue;
@@ -27,9 +33,15 @@ public class ObjectiveGate : MonoBehaviour
     private int originalAllCoin;
     private GameObject[] coinArray;
 
+    private void Awake()
+    {
+        doorText = gameObject.GetComponentInChildren<TextMeshPro>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         if(objectiveType == ObjectiveType.Coin)
         {
             coinArray = GameObject.FindGameObjectsWithTag("Coin");
@@ -44,15 +56,21 @@ public class ObjectiveGate : MonoBehaviour
             }
 
             originalAllCoin = allCoin;
+            doorText.text = "Collect All Coins";
         }
         else if (objectiveType == ObjectiveType.Dummy)
         {
-            //dummy parameters
+            // dummy parameters
             hasDummyBeenRescue = false;
+        }
+        else if (objectiveType == ObjectiveType.DialogueLock)
+        {
+            hasDialogueCompleted = false;
+            doorText.text = "Await Instruction";
         }
         else
         {
-            // literally cooking nothing here
+            // litterally cooking nothing here
             return;
         }
     }
@@ -60,10 +78,21 @@ public class ObjectiveGate : MonoBehaviour
 
     private void Update()
     {
-        if (allCoin == 0)
+        if(objectiveType == ObjectiveType.Coin)
         {
-            gameObject.SetActive(false);
+            if (allCoin == 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
+        else if (objectiveType == ObjectiveType.DialogueLock)
+        {
+            if (hasDialogueCompleted == true)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        
     }
 
 
@@ -73,11 +102,21 @@ public class ObjectiveGate : MonoBehaviour
         {
             allCoin = originalAllCoin;
         }
+        else if(objectiveType == ObjectiveType.DialogueLock)
+        {
+            hasDialogueCompleted = false;
+        }
     }
 
 
     public void DecrementCoinCount()
     {
         allCoin--;
+    }
+
+
+    public void DialogueComplete()
+    {
+        hasDialogueCompleted = true;
     }
 }
