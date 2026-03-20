@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LabFloor
   - Coin
+  - Gate
   layers:
   - Default
   - TransparentFX

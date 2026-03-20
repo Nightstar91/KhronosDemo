@@ -16,7 +16,7 @@ PlayerSettings:
   productName: Khronos
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.5882353, g: 0.8745098, b: 0.89411765, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0.36862746, g: 1, b: 0.972549, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
