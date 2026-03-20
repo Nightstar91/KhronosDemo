@@ -114,6 +114,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{744d1b21-8d7d-4300-ad99-59982b54b8cd}" />
 	<object class="MultiSound" id="{a7bf4a55-ce84-40e5-bee1-66257de1a0ba}">
+		<property name="start">
+			<value>1</value>
+		</property>
 		<property name="name">
 			<value>Level 1 Dialogue</value>
 		</property>
@@ -127,7 +130,7 @@
 	</object>
 	<object class="MultiSound" id="{e018d5a9-2eb6-424c-b39e-aca991ccb908}">
 		<property name="start">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<property name="name">
 			<value>Level 2 Dialogue</value>
@@ -142,7 +145,7 @@
 	</object>
 	<object class="MultiSound" id="{7e705761-9818-4464-a9bb-31cf9a587dab}">
 		<property name="start">
-			<value>2</value>
+			<value>3</value>
 		</property>
 		<property name="name">
 			<value>Level 3 Dialogue</value>
@@ -157,7 +160,7 @@
 	</object>
 	<object class="MultiSound" id="{dd866245-c1fd-4685-886f-b233106c96e4}">
 		<property name="start">
-			<value>3</value>
+			<value>4</value>
 		</property>
 		<property name="name">
 			<value>Level 4 Dialogue</value>
@@ -172,7 +175,7 @@
 	</object>
 	<object class="MultiSound" id="{3e037bb5-a175-4200-9e6d-c841947e20a6}">
 		<property name="start">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<property name="playlistMode">
 			<value>3</value>
@@ -180,7 +183,7 @@
 	</object>
 	<object class="MultiSound" id="{a997fd8b-cd23-40bf-904d-4bbca23a1d54}">
 		<property name="start">
-			<value>5</value>
+			<value>6</value>
 		</property>
 		<property name="playlistMode">
 			<value>3</value>
@@ -188,7 +191,7 @@
 	</object>
 	<object class="MultiSound" id="{be2c66f7-2fb1-4679-9404-081624abe113}">
 		<property name="start">
-			<value>6</value>
+			<value>7</value>
 		</property>
 		<property name="playlistMode">
 			<value>3</value>

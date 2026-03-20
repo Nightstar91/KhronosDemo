@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collect all Coin
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cb3b1bb3160f974e912fc3621ebadfb, type: 2}
   m_sharedMaterial: {fileID: -5649659027497126171, guid: 0cb3b1bb3160f974e912fc3621ebadfb, type: 2}
@@ -298,6 +298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d6e226cb1bffe42b91758df1cc548e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveGateID: 
-  objectiveSearchID: 
-  objectiveType: 0
+  doorText: {fileID: 0}
+  objectiveGateID: Gate1
+  objectiveSearchID: 1
+  objectiveType: 2
+  dialogueEmitter: {fileID: 0}
