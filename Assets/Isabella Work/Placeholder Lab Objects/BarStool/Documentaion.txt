@@ -1,0 +1,10 @@
+Modeled in blender textured in SubstancePainter.
+
+
+Make sure the the barstool is set to static to ensure proper lighting and reflection with your Light Probes and Reflection Probes
+
+If you use this just give credit were its due. Thank you:))))))))
+
+if you need help please feel free to email me.
+
+Contact: simplemodelsforme@gmail.com 

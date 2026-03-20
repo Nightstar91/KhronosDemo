@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2fc2ebeb3bdeca24abee4cebc5b8a4ff
+timeCreated: 1516231720
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStoolDemoScene/Bar/Materials/Material_002.mat
+  uploadId: 367261

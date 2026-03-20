@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 652baff831d563d45bdf9533af400dc1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStoolDemoScene/Scenes/BarStool_DemoScene/LightingData.asset
+  uploadId: 367261

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 12d4d29a2c82fd84eaef0135bbceeb90
+timeCreated: 1515790053
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStoolDemoScene/Bar/Materials/BarCounterWall_material.mat
+  uploadId: 367261

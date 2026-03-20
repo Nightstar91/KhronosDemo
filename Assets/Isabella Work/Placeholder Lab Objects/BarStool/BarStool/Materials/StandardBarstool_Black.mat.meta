@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 796b15f9926c5f04197133168f8c0501
+timeCreated: 1535828234
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStool/Materials/StandardBarstool_Black.mat
+  uploadId: 367261

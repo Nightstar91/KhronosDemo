@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2b80bd9ecfe941d4597453c346f09336
+timeCreated: 1516074747
+licenseType: Store
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/Documentaion.txt
+  uploadId: 367261

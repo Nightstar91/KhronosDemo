@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0e6d7844e4fa287418fad2b505820266
+timeCreated: 1515544141
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStoolDemoScene/Scenes/BarStool_DemoScene.unity
+  uploadId: 367261

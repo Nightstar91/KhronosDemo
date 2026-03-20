@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 0c07dac273966184f891bdfcd490f84e
+timeCreated: 1515997215
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStoolDemoScene/Bar/Materials/beerneonsign-Material_004.mat
+  uploadId: 367261

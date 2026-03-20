@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7e0dc84c408f05548a9408863a4d7ff0
+timeCreated: 1516001210
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 98790
+  packageName: Bar Stool
+  packageVersion: 1.1
+  assetPath: Assets/BarStool/BarStoolDemoScene/Bar/Materials/BarFloorNormal.mat
+  uploadId: 367261
