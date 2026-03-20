@@ -2,6 +2,8 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
+using FMODUnity;
+using FMOD.Studio;
 
 public class ObjectiveGate : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class ObjectiveGate : MonoBehaviour
 
     [Header("What kind of objective is it?")]
     [SerializeField] public ObjectiveType objectiveType;
+
+    [SerializeField] private StudioEventEmitter dialogueEmitter;
 
     // DialogueLock related
     bool hasDialogueCompleted;
@@ -79,7 +83,7 @@ public class ObjectiveGate : MonoBehaviour
 
     private void Update()
     {
-        if(objectiveType == ObjectiveType.Coin)
+        if (objectiveType == ObjectiveType.Coin)
         {
             if (allCoin == 0)
             {
@@ -93,7 +97,6 @@ public class ObjectiveGate : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        
     }
 
 
