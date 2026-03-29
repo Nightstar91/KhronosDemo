@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' 0 | | | | 5 | | | | 10 | | | | 15 | | | | 20 | | | | 25 | | | | 30'
+  m_text: ' 0 | | | | 5 | | | | 10 | | | | 15 | | | | 20 | | | | 25'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9194d6f9708fa54d9eb96ca1a258bd3, type: 2}
   m_sharedMaterial: {fileID: -9058548055973362904, guid: a9194d6f9708fa54d9eb96ca1a258bd3, type: 2}
@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.3
+  m_fontSize: 24.35
   m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2060,7 +2060,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6835310298227773320}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 30
+  m_MaxValue: 25
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

@@ -423,7 +423,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   walkSpeed: 3
-  maxSpeed: 12
+  maxSpeed: 16
   sprintSpeed: 0.09
   decelerateSpeed: 0.75
   gravity: 30
