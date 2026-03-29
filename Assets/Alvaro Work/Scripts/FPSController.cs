@@ -15,7 +15,7 @@ public class FPSController : MonoBehaviour
         STATE_PAUSE,
         STATE_DEAD
     }
-    
+
     public PlayerState currentState = PlayerState.STATE_IDLE;
     public PlayerState previousState = PlayerState.STATE_IDLE;
 
@@ -31,8 +31,10 @@ public class FPSController : MonoBehaviour
 
     [Header("Movement Parameters")]
     [SerializeField] public float walkSpeed = 3f;
-    [SerializeField] float maxSpeed = 12f;
+    private float softMaxSpeed = 18f;
+    private float hardMaxSpeed = 25f;
     [SerializeField] float sprintSpeed = 0.09f;
+    [SerializeField] float sprintTimeSpeed = 0.1f;
     [SerializeField] float decelerateSpeed = 0.75f;
 
     [Header("Jumping Parameters")]
@@ -115,6 +117,7 @@ public class FPSController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.STATE_IDLE:
+                ResetSpeed();
                 HandleMouseLock();
                 slide.HandleSlideCooldown();
 
@@ -151,7 +154,7 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_IDLE;
                 }
 
-                if(isInAir)
+                if (isInAir)
                 {
                     currentState = PlayerState.STATE_INAIR;
                 }
@@ -176,7 +179,7 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_SLIDE;
                 }
 
-                break; 
+                break;
 
             // TODO: See if can make it so that air movement can be lessen
             case PlayerState.STATE_JUMP:
@@ -217,7 +220,7 @@ public class FPSController : MonoBehaviour
 
             case PlayerState.STATE_SLIDE:
                 HandleMouseLock();
-                if(slideAction.IsPressed())
+                if (slideAction.IsPressed())
                 {
                     slide.StartSlide();
                 }
@@ -268,7 +271,7 @@ public class FPSController : MonoBehaviour
                 {
                     wallrun.CommenceWallRun();
 
-                    if(wallrun.onLeftWall) // sway camera to the right
+                    if (wallrun.onLeftWall) // sway camera to the right
                     {
                         cameraEffect.StartSwayCamera(-6.5f);
                     }
@@ -277,7 +280,7 @@ public class FPSController : MonoBehaviour
                         cameraEffect.StartSwayCamera(6.5f);
                     }
 
-                    if(jumpAction.WasPressedThisFrame() && moveAction.ReadValue<Vector2>().x != 0)
+                    if (jumpAction.WasPressedThisFrame() && moveAction.ReadValue<Vector2>().x != 0)
                     {
                         wallrun.BounceOffWall(moveAction.ReadValue<Vector2>().x);
                         wallrun.ExitWallRun();
@@ -298,11 +301,11 @@ public class FPSController : MonoBehaviour
                 break;
 
             case PlayerState.STATE_PAUSE:
-                if(playerHud.isPaused)
+                if (playerHud.isPaused)
                 {
                     playerHud.PauseGame();
 
-                    if(pauseAction.WasPressedThisFrame())
+                    if (pauseAction.WasPressedThisFrame())
                     {
                         playerHud.isPaused = false;
                     }
@@ -313,12 +316,12 @@ public class FPSController : MonoBehaviour
                     currentState = previousState;
                     previousState = PlayerState.STATE_IDLE;
                 }
-                    break;  
+                break;
 
             case PlayerState.STATE_DEAD:
                 FreezePlayer();
                 playerHud.OpenResultPanel(hasFailed);
-                if(jumpAction.WasPerformedThisFrame())
+                if (jumpAction.WasPerformedThisFrame())
                 {
                     GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>().TriggerRestart();
                 }
@@ -332,7 +335,7 @@ public class FPSController : MonoBehaviour
         if (hasFailed)
             currentState = PlayerState.STATE_DEAD;
 
-        
+
     }
 
 
@@ -410,14 +413,26 @@ public class FPSController : MonoBehaviour
 
     private void GainSpeedCheck()
     {
-        if (walkSpeed < maxSpeed && isMoving)
-            walkSpeed = Mathf.SmoothDamp(walkSpeed, maxSpeed, ref sprintSpeed, 0.5f);
+        if (walkSpeed < softMaxSpeed && isMoving)
+        {
+            walkSpeed = Mathf.SmoothDamp(walkSpeed, softMaxSpeed, ref sprintSpeed, 0.5f);
 
-        else if (walkSpeed > maxSpeed && isMoving)
-            walkSpeed = maxSpeed;
+            if (Mathf.Abs(walkSpeed - softMaxSpeed) < 0.01f)
+            {
+                walkSpeed = softMaxSpeed;
+            }
+        }
+        else if (walkSpeed >= softMaxSpeed && isMoving)
+        {
+            walkSpeed = Mathf.Lerp(walkSpeed, hardMaxSpeed, Time.deltaTime * sprintTimeSpeed);
+        }
 
-        else
-            walkSpeed = originalWalkSpeed;
+    }
+
+
+    private void ResetSpeed()
+    {
+        walkSpeed = originalWalkSpeed;
     }
 
 
