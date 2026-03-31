@@ -236,9 +236,13 @@ public class FPSController : MonoBehaviour
 
                 if (slideAction.WasReleasedThisFrame())
                 {
-                    slide.isSliding = false;   // slide state off
-                    slide.StopSlide();
-                    currentState = PlayerState.STATE_RUNNING;
+                    if(!slide.CheckCeilingAbove())
+                    {
+                        slide.isSliding = false;   // slide state off
+                        slide.StopSlide();
+                        currentState = PlayerState.STATE_RUNNING;
+                    }
+                    
                 }
 
                 else if (!slide.isSliding)

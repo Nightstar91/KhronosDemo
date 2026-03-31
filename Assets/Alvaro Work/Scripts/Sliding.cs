@@ -61,6 +61,7 @@ public class Sliding : MonoBehaviour
         pm = GetComponent<FPSController>();
         playerObj = GameObject.Find("Player").GetComponent<Transform>();
     }
+    
 
     public void StartSlide()
     {
@@ -68,6 +69,7 @@ public class Sliding : MonoBehaviour
         currentSlideSpeed = baseSlideSpeed; // Initialize speed when starting slide (AI)
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
     }
+
 
     public void SlidingMovement()
     {
@@ -145,6 +147,10 @@ public class Sliding : MonoBehaviour
         {
             slideTimer = 1.5f;
         }
+        else if (CheckCeilingAbove())
+        {
+            return;
+        }
         else
         {
             isSliding = false;
@@ -199,6 +205,14 @@ public class Sliding : MonoBehaviour
         }
 
         return false;
+    }
+
+
+    public bool CheckCeilingAbove()
+    {
+        int layerMask = ~(1 << gameObject.layer);
+
+        return Physics.SphereCast(transform.position, cc.radius, Vector3.up, out _, cc.height, layerMask);
     }
 
 
