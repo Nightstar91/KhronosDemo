@@ -432,7 +432,8 @@ public class FPSController : MonoBehaviour
 
     private void ResetSpeed()
     {
-        walkSpeed = originalWalkSpeed;
+        //walkSpeed = originalWalkSpeed;
+        walkSpeed = Mathf.Lerp(walkSpeed, originalWalkSpeed, Time.deltaTime * 6f);
     }
 
 
