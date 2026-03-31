@@ -43,20 +43,21 @@ public class FPSController : MonoBehaviour
     [SerializeField] float jumpHeight = 1.5f;
 
     [Header("Look Parameters")]
-    [SerializeField, Range(0.1f, 1)] public float lookSpeedX = 0.2f;
-    [SerializeField, Range(0.1f, 1)] public float lookSpeedY = 0.2f;
-    [SerializeField, Range(1, 100)] private float upperLookLimit = 80f;
-    [SerializeField, Range(1, 100)] private float lowerLookLimit = 80f;
+    public float lookSpeedX;
+    public float lookSpeedY;
+    private float upperLookLimit = 80f;
+    private float lowerLookLimit = 80f;
 
     public Camera playerCamera;
     private GameObject playerCameraHolder;
     public CharacterController characterController;
-    [SerializeField] public Vector3 forwardOrientation;
+    public Vector3 forwardOrientation;
 
     private Vector3 velocity { get; set; }
     public Vector3 moveDirection;
     public Vector3 input;
     private Vector2 currentInput;
+    private Vector2 lastMoveDirection;
 
     private float rotationX = 0f;
 
@@ -64,7 +65,7 @@ public class FPSController : MonoBehaviour
 
     public LayerMask groundLayer;
     public bool isGrounded = false;
-    private bool isMoving = false;
+    public bool isMoving = false;
     private bool isInAir = false;
     public bool hasFailed = false;
     public bool hasSucceed = false;
@@ -370,14 +371,25 @@ public class FPSController : MonoBehaviour
 
     private void HandleMovementInput()
     {
+        Vector2 rawInput = moveAction.ReadValue<Vector2>();
+
         if (moveAction.IsPressed())
+        {
+            GainSpeedCheck();
             isMoving = true;
+            lastMoveDirection = rawInput;
+}
         else
-            isMoving = false;
+        {
+            ResetSpeed();
+            if (Mathf.Abs(walkSpeed - originalWalkSpeed) < 0.1f)
+            {
+                walkSpeed = originalWalkSpeed;
+                isMoving = false;
+            }
+        }
 
-        GainSpeedCheck();
-
-        currentInput = new Vector2(walkSpeed * moveAction.ReadValue<Vector2>().y, walkSpeed * moveAction.ReadValue<Vector2>().x);
+        currentInput = new Vector2(walkSpeed * lastMoveDirection.y, walkSpeed * lastMoveDirection.x);
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
