@@ -69,6 +69,7 @@ public class FPSController : MonoBehaviour
     private bool isInAir = false;
     public bool hasFailed = false;
     public bool hasSucceed = false;
+    public bool wantsToStopSliding = false;
 
     public PlayerHud playerHud;
     public Sliding slide;
@@ -236,15 +237,8 @@ public class FPSController : MonoBehaviour
 
                 if (slideAction.WasReleasedThisFrame())
                 {
-                    if(!slide.CheckCeilingAbove())
-                    {
-                        slide.isSliding = false;   // slide state off
-                        slide.StopSlide();
-                        currentState = PlayerState.STATE_RUNNING;
-                    }
-                    
+                    wantsToStopSliding = true;
                 }
-
                 else if (!slide.isSliding)
                 {
                     // natural slide finish
@@ -252,6 +246,13 @@ public class FPSController : MonoBehaviour
                     currentState = PlayerState.STATE_RUNNING;
                 }
 
+                if (!slide.CheckCeilingAbove() && wantsToStopSliding)
+                {
+                    wantsToStopSliding = false;
+                    slide.isSliding = false;   // slide state off
+                    slide.StopSlide();
+                    currentState = PlayerState.STATE_RUNNING;
+                }
 
                 if (pauseAction.WasPressedThisFrame() && !playerHud.isPaused)
                 {
