@@ -62,7 +62,7 @@
 			<destination>{2821b8e3-97be-4497-b892-2b5d7ef4ebeb}</destination>
 		</relationship>
 		<relationship name="modules">
-			<destination>{b95a062e-678f-4a36-ac42-55b9aaa6add2}</destination>
+			<destination>{6ecd9c00-9fc2-4238-87ec-c28f7d379095}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{2b36860b-c1b9-4ed2-ac42-b75d64490f42}</destination>
@@ -92,9 +92,9 @@
 	</object>
 	<object class="Timeline" id="{148703d5-b6ac-440e-b93f-009ad6e88786}">
 		<relationship name="modules">
-			<destination>{b95a062e-678f-4a36-ac42-55b9aaa6add2}</destination>
 			<destination>{407eb3e9-319d-413d-8b4d-b9802b24ace4}</destination>
 			<destination>{aee4cd76-b6ff-41e9-9c28-1242aa240948}</destination>
+			<destination>{6ecd9c00-9fc2-4238-87ec-c28f7d379095}</destination>
 		</relationship>
 	</object>
 	<object class="ParameterProxy" id="{0d20e29f-2a5c-4051-af41-b495e5b70514}">
@@ -127,12 +127,12 @@
 			<destination>{152eb9ea-c0dd-4139-9533-e6896ebdfb54}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{b95a062e-678f-4a36-ac42-55b9aaa6add2}">
+	<object class="SingleSound" id="{6ecd9c00-9fc2-4238-87ec-c28f7d379095}">
 		<property name="length">
-			<value>5.1399375000000003</value>
+			<value>11.632448979591837</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{f21abe56-a9de-4284-ac58-d719c66fd90e}</destination>
+			<destination>{7c9a7934-5024-4b51-b115-508868926185}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{2b36860b-c1b9-4ed2-ac42-b75d64490f42}">
@@ -300,7 +300,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>3.81469727e-06</value>
+			<value>-1</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{42bb5617-b119-477b-adf9-d9ad3eb22160}">
@@ -308,7 +308,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-55</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{bda0067e-6b33-4e56-9050-b109ada543c2}">
@@ -316,7 +316,7 @@
 			<value>2</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-55</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{8e342afb-715f-4775-9a07-82358c8b8836}">
