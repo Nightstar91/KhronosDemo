@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorText: {fileID: 0}
-  objectiveGateID: Gate1
-  objectiveSearchID: 1
-  objectiveType: 2
+  objectiveGateID: 
+  objectiveSearchID: 
+  objectiveType: 0
   dialogueEmitter: {fileID: 0}
