@@ -31,8 +31,8 @@ public class FPSController : MonoBehaviour
 
     [Header("Movement Parameters")]
     [SerializeField] public float walkSpeed = 3f;
-    private float softMaxSpeed = 18f;
-    private float hardMaxSpeed = 25f;
+    private const float softMaxSpeed = 11f;
+    private const float hardMaxSpeed = 17f;
     [SerializeField] float sprintSpeed = 0.09f;
     [SerializeField] float sprintTimeSpeed = 0.1f;
     [SerializeField] float decelerateSpeed = 0.75f;

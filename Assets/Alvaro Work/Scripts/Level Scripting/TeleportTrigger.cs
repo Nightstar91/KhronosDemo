@@ -3,13 +3,14 @@ using UnityEngine;
 public class TeleportTrigger : MonoBehaviour
 {
     private BoxCollider triggerCollider;
-    public Vector3 wayPoint;
+    [SerializeField] GameObject wayPointToTeleport;
+    private Vector3 spotToTeleport;
     public GameObject player;
 
     private void Awake()
     {
         //triggerCollider = GetComponent<BoxCollider>();
-        wayPoint = gameObject.transform.GetChild(0).transform.position;
+        spotToTeleport = new Vector3(wayPointToTeleport.transform.position.x, wayPointToTeleport.transform.position.y, wayPointToTeleport.transform.position.z);
         player = GameObject.Find("Player");
     }
 
@@ -19,6 +20,6 @@ public class TeleportTrigger : MonoBehaviour
         if (other.tag != "Player") return;
 
 
-        player.transform.position = wayPoint;
+        player.transform.position = spotToTeleport;
     }
 }
