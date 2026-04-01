@@ -11,8 +11,7 @@ public class ObjectiveGate : MonoBehaviour
     {
         None,
         DialogueLock,
-        Coin,
-        Dummy
+        Coin
     }
 
     public TextMeshPro doorText;
@@ -61,11 +60,6 @@ public class ObjectiveGate : MonoBehaviour
 
             originalAllCoin = allCoin;
             doorText.text = "Collect All Coins";
-        }
-        else if (objectiveType == ObjectiveType.Dummy)
-        {
-            // dummy parameters
-            hasDummyBeenRescue = false;
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
         {

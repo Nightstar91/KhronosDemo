@@ -5,7 +5,7 @@ public class TeleportTrigger : MonoBehaviour
     private BoxCollider triggerCollider;
     [SerializeField] GameObject wayPointToTeleport;
     private Vector3 spotToTeleport;
-    public GameObject player;
+    private GameObject player;
 
     private void Awake()
     {

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6bb0f9d4daf6a4aaa4b2507a8803b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelHasTimer: 1
+  levelHasTimer: 0
   levelSelectValue: 0
   levelDialogue:
     Guid:

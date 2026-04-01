@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 797484620084546740}
   - component: {fileID: 4463162442139040969}
   - component: {fileID: 2376913126212131554}
+  - component: {fileID: 2006570231976211787}
   m_Layer: 0
   m_Name: TeleportTrigger
   m_TagString: Untagged
@@ -67,4 +68,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPointToTeleport: {fileID: 0}
-  player: {fileID: 0}
+--- !u!114 &2006570231976211787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5274344187138788786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378cc05c9e8c44746a804e889413a9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 1, g: 0, b: 0.98838425, a: 0.3}
+  wireColor: {r: 0, g: 1, b: 0.085274935, a: 0.8}
