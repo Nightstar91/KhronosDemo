@@ -11,6 +11,8 @@ public class PlayerFootstepAudio : MonoBehaviour
     [SerializeField] private EventReference landEvent;      // The FMOD event for landings (event:/Player/Land)
     [SerializeField] private EventReference slideEvent;      // slide SFX event
     [SerializeField] private EventReference jumpEvent;      // jump SFX event
+    [SerializeField] private EventReference windEvent; // Wind loop event
+    [SerializeField] private string windIntensityParameter = "WindIntensity";
     [SerializeField] private string surfaceParameterName = "SurfaceTerrain";  // Name of the FMOD parameter that defines surface type
    
 
@@ -36,12 +38,18 @@ public class PlayerFootstepAudio : MonoBehaviour
     private float airTime = 0f;
     private float lastVerticalVelocity;
     private FPSController.PlayerState previousState;
+    private EventInstance windInstance;
+    private bool windPlaying; 
+   
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         previousPosition = transform.position;
         stepTimer = stepInterval;
+
+        windInstance = RuntimeManager.CreateInstance(windEvent);
+        windInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
     }
 
     void Update()
@@ -122,7 +130,29 @@ public class PlayerFootstepAudio : MonoBehaviour
                 ResetFootstepTimer();
             }
         }
+        // ===== WIND SOUND =====
+        float currentSpeed = playerController.GetVelocity();
+        float normalizedSpeed = Mathf.Clamp01(currentSpeed / 17f); // 17 = your hardMaxSpeed
 
+        if (speed > minMoveSpeed)
+        {
+            if (!windPlaying)
+            {
+                windInstance.start();
+                windPlaying = true;
+            }
+
+            windInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+            windInstance.setParameterByName(windIntensityParameter, normalizedSpeed);
+        }
+        else
+        {
+            if (windPlaying)
+            {
+                windInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                windPlaying = false;
+            }
+        }
         wasGrounded = isGrounded;
         previousPosition = transform.position;
     }
@@ -230,5 +260,9 @@ public class PlayerFootstepAudio : MonoBehaviour
 
         jumpInstance.start();
         jumpInstance.release();
+    }
+    private void OnDestroy()
+    {
+        windInstance.release();
     }
 }
