@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{6bea3b3a-2bce-49d2-ac54-c72268bdf6a1}">
+		<property name="assetPath">
+			<value>Scifi, Door, Door Open, Air Hiss SND72972 - Pitch 103.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.6628750000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>
+		</relationship>
+	</object>
+</objects>

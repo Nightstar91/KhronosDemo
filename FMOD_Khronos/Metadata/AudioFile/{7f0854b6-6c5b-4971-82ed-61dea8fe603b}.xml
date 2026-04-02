@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{7f0854b6-6c5b-4971-82ed-61dea8fe603b}">
+		<property name="assetPath">
+			<value>Designed, Vocal, Blowing Wind, Raw, Performance SND124672 - Pitch 150.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>13.649583333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -93,10 +93,9 @@
 			<value>1.5</value>
 		</property>
 		<property name="pitch">
-			<value>16</value>
+			<value>3.60000014</value>
 		</property>
 		<relationship name="sounds">
-			<destination>{bbc7ae17-0761-4c0a-9c42-28530ef93dd7}</destination>
 			<destination>{bbdb49f2-0491-492a-abc0-947fec80cfe1}</destination>
 			<destination>{94fa210f-535a-4e71-82a9-b0f77a4aa2c5}</destination>
 		</relationship>
@@ -125,11 +124,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{406c4f15-50a3-4ea1-aaa9-6bd557bae7ba}" />
 	<object class="MixerBusFader" id="{3c768e4c-dae9-43c4-a89d-e07cf0caa34f}" />
-	<object class="SingleSound" id="{bbc7ae17-0761-4c0a-9c42-28530ef93dd7}">
-		<relationship name="audioFile">
-			<destination>{e83a28c3-ced7-4ee5-a0f8-4c9831ef8ef5}</destination>
-		</relationship>
-	</object>
 	<object class="SingleSound" id="{bbdb49f2-0491-492a-abc0-947fec80cfe1}">
 		<relationship name="audioFile">
 			<destination>{7d6eff22-09e6-4981-8a55-f172b32a84cc}</destination>
@@ -143,9 +137,33 @@
 	<object class="MixerBusEffectChain" id="{a998165f-6bb1-4d78-9514-4f65eda153a1}">
 		<relationship name="effects">
 			<destination>{b04a3536-3689-4b7d-b494-bd3a9c7fff19}</destination>
+			<destination>{464cc429-d6be-4721-a003-f35ddd7dd261}</destination>
+			<destination>{8374ef6f-ee70-47da-89c8-63531d587c83}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{2987365b-1ee1-4925-b4ab-f24cb7cf1842}" />
 	<object class="MixerBusFader" id="{b7da525a-e64b-473f-a1a8-1abb0d699f50}" />
 	<object class="MixerBusFader" id="{b04a3536-3689-4b7d-b494-bd3a9c7fff19}" />
+	<object class="ThreeEQEffect" id="{464cc429-d6be-4721-a003-f35ddd7dd261}">
+		<property name="lowGain">
+			<value>5.5</value>
+		</property>
+		<property name="highGain">
+			<value>-10</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{8374ef6f-ee70-47da-89c8-63531d587c83}">
+		<property name="decayTime">
+			<value>2600</value>
+		</property>
+		<property name="lowShelfFrequency">
+			<value>430</value>
+		</property>
+		<property name="highCut">
+			<value>120</value>
+		</property>
+		<property name="wetLevel">
+			<value>-0.5</value>
+		</property>
+	</object>
 </objects>
