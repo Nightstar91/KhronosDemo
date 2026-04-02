@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6840481050150337218}
   - component: {fileID: 7489290615919389090}
   - component: {fileID: 3594456600980007343}
+  - component: {fileID: 3628962494597988565}
   m_Layer: 0
   m_Name: DialogueTrigger
   m_TagString: Untagged
@@ -131,3 +132,17 @@ MonoBehaviour:
   playOnce: 1
   parameterName: LevelSelect
   parameterValue: 1
+--- !u!114 &3628962494597988565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5312533553338408631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378cc05c9e8c44746a804e889413a9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 1, b: 0, a: 0.3}
+  wireColor: {r: 0, g: 1, b: 0, a: 0.8}
