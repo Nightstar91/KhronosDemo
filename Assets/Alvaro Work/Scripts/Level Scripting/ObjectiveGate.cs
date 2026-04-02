@@ -44,6 +44,7 @@ public class ObjectiveGate : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        determineType(this.gameObject.name);
 
         if(objectiveType == ObjectiveType.Coin)
         {
@@ -112,6 +113,21 @@ public class ObjectiveGate : MonoBehaviour
         }
     }
 
+    public void determineType(string name)
+    {
+        if (name.Contains("Dialogue") || name.Contains("dialogue"))
+        {
+            objectiveType = ObjectiveType.DialogueLock;
+        }
+        else if (name.Contains("Coin") || name.Contains("coin"))
+        {
+            objectiveType = ObjectiveType.Coin;
+        }
+        else
+        {
+            objectiveType = ObjectiveType.None;
+        }
+    }
 
     public void DecrementCoinCount()
     {
