@@ -26,10 +26,10 @@ public class ObjectiveGate : MonoBehaviour
     [SerializeField] private StudioEventEmitter dialogueEmitter;
 
     // DialogueLock related
-    bool hasDialogueCompleted;
-
-    // Dummy related
-    bool hasDummyBeenRescue;
+    [Header("Dialogue related")]
+    [SerializeField] public float dialogueTimer;
+    public bool hasDialogueStarted;
+    private bool hasDialogueCompleted;
 
     // Coin related
     private int allCoin;
@@ -63,6 +63,7 @@ public class ObjectiveGate : MonoBehaviour
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
         {
+            hasDialogueStarted = false;
             hasDialogueCompleted = false;
             doorText.text = "Await Instruction";
         }
@@ -86,7 +87,12 @@ public class ObjectiveGate : MonoBehaviour
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
         {
-            if (hasDialogueCompleted == true)
+            if (hasDialogueStarted)
+            {
+                DialogueCountdown();
+            }
+
+            if (hasDialogueCompleted)
             {
                 gameObject.SetActive(false);
             }
@@ -113,7 +119,27 @@ public class ObjectiveGate : MonoBehaviour
     }
 
 
-    public void DialogueComplete()
+    private void DialogueCountdown()
+    {
+        if(!hasDialogueCompleted && dialogueTimer >= 0)
+        {
+            dialogueTimer -= Time.deltaTime;
+        }
+        else
+        {
+            dialogueTimer = 0;
+            hasDialogueCompleted = true;
+        }
+    }
+
+
+    public void StartDialogue()
+    {
+        hasDialogueStarted = true;
+    }
+
+
+    private void DialogueComplete()
     {
         hasDialogueCompleted = true;
     }
