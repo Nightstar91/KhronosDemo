@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
 
         gameObject.SetActive(false);
         hasBeenCollected = true;
-        gateObject.GetComponent<ObjectiveGateTemp>().DecrementCoinCount();
+        gateObject.GetComponent<ObjectiveGate>().DecrementCoinCount();
     }
 
     private void ResetCoin()

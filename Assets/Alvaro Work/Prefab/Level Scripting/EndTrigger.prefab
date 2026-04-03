@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 762528763749772437}
   - component: {fileID: 839856637491751319}
   - component: {fileID: 3264614529288898603}
+  - component: {fileID: 4421697726743779657}
   m_Layer: 0
   m_Name: EndTrigger
   m_TagString: Untagged
@@ -68,3 +69,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerType: 1
   triggerOnce: 0
+--- !u!114 &4421697726743779657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823360409767825667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378cc05c9e8c44746a804e889413a9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 1, b: 0, a: 0.3}
+  wireColor: {r: 0, g: 1, b: 0, a: 0.8}

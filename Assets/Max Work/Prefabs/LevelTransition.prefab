@@ -68,7 +68,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allScenes:
   - Main Menu
-  - 1
-  - 2
-  - 3
-  - 4
+  - Tutorial
