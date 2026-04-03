@@ -22,7 +22,7 @@ public class FMODTriggerEvent : MonoBehaviour
     private bool hasPlayed = false;
     private bool eventFinishedFlag = false;
 
-    public UnityEvent startDialogueDoorUnlock;
+    public UnityEvent openDialogueDoor;
     public event Action OnEventFinished;
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +33,6 @@ public class FMODTriggerEvent : MonoBehaviour
         {
             PlayEvent();
             hasPlayed = true;
-            startDialogueDoorUnlock.Invoke();
         }
     }
 
@@ -61,6 +60,8 @@ public class FMODTriggerEvent : MonoBehaviour
             {
                 eventFinishedFlag = true;
                 Debug.Log($"FMOD Event finished: {soundEvent.Path}"); // Shows which event finished
+                openDialogueDoor.Invoke();
+
                 OnEventFinished?.Invoke();
             }
         }
