@@ -134,9 +134,11 @@ public class LevelObjective : MonoBehaviour
 
     public void TriggerLevelEnd()
     {
-        StopCountdown();
-        Honor();
-        PlayDialogue(); //play again after honor is determined
+
+
+        //StopCountdown();
+        //Honor();
+        //PlayDialogue(); //play again after honor is determined
     }
 
 

@@ -96,6 +96,8 @@ public class FPSController : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+
         moveAction = InputSystem.actions.FindAction("Move");
         lookAction = InputSystem.actions.FindAction("Look");
         jumpAction = InputSystem.actions.FindAction("Jump");

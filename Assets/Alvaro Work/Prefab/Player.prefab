@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6dcbcb001bc6046927e3e27da4badc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0.002
+  amount: 0.03
   frequency: 16
   smooth: 20
   tiltAmount: 0.075

@@ -11,8 +11,10 @@ public class WallRunning : MonoBehaviour
     public bool isWallRunning;
     public float wallrunForce = 7f;
     public float wallrunGravity = 5f;
+    private float wallRunCooldownWithPenalty;
     private float maxWallRunCooldown;
     private float maxWallRunTimer;
+    private const float cooldownPenalty = 0.25f;
     [SerializeField] public float wallBounceForce = 1.5f;
     [SerializeField] public float wallRunCooldown;
     [SerializeField] public float wallRunTimer;
@@ -41,6 +43,7 @@ public class WallRunning : MonoBehaviour
 
         maxWallRunTimer = wallRunTimer;
         maxWallRunCooldown = wallRunCooldown;
+        wallRunCooldownWithPenalty = wallRunCooldown;
     }
 
 
@@ -83,6 +86,7 @@ public class WallRunning : MonoBehaviour
             wallRunReady = true;
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -175,5 +179,11 @@ public class WallRunning : MonoBehaviour
         pm.characterController.Move(wallRunDirection * Time.deltaTime);
 
         return;
+    }
+
+
+    private void ResetWallrunCooldown()
+    {
+        wallRunCooldown = maxWallRunCooldown;
     }
 }

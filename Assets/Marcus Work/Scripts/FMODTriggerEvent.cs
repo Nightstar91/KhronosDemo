@@ -59,7 +59,7 @@ public class FMODTriggerEvent : MonoBehaviour
             if (state == PLAYBACK_STATE.STOPPED && !eventFinishedFlag)
             {
                 eventFinishedFlag = true;
-                Debug.Log($"FMOD Event finished: {soundEvent.Path}"); // Shows which event finished
+                //Debug.Log($"FMOD Event finished: {soundEvent.Path}"); // Shows which event finished
                 openDialogueDoor.Invoke();
 
                 OnEventFinished?.Invoke();
