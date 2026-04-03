@@ -126,14 +126,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: wallrunForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1918033911039066532, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
-      propertyPath: wallRunCooldown
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 3579688081978202162, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_Name
       value: Player
