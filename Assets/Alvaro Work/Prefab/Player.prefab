@@ -431,6 +431,8 @@ MonoBehaviour:
   jumpHeight: 1.4
   lookSpeedX: 0.2
   lookSpeedY: 0.2
+  upperLookLimit: 80
+  lowerLookLimit: 80
   playerCamera: {fileID: 0}
   characterController: {fileID: 0}
   forwardOrientation: {x: 0, y: 0, z: 0}
@@ -440,10 +442,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
-  isMoving: 0
   hasFailed: 0
   hasSucceed: 0
-  wantsToStopSliding: 0
   playerHud: {fileID: 0}
   slide: {fileID: 0}
   wallrun: {fileID: 0}
@@ -511,14 +511,6 @@ MonoBehaviour:
       Data3: -1897926010
       Data4: -1026365580
     Path: event:/PlayerCharacter/Jump
-  windEvent:
-    Guid:
-      Data1: -1400332604
-      Data2: 1196405396
-      Data3: 583432070
-      Data4: -670860211
-    Path: event:/PlayerCharacter/Wind
-  windIntensityParameter: WindIntensity
   surfaceParameterName: SurfaceTerrain
   stepInterval: 0.35
   minMoveSpeed: 0.1
