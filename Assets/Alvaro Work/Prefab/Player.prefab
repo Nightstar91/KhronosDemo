@@ -575,10 +575,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isWallRunning: 0
-  wallrunForce: 7
+  wallrunForce: 8
   wallrunGravity: 5
   wallBounceForce: 2
-  wallRunCooldown: 0.3
+  wallRunCooldown: 0.4
   wallRunTimer: 0
   leftWallBouncer: {fileID: 0}
   rightWallBouncer: {fileID: 0}
