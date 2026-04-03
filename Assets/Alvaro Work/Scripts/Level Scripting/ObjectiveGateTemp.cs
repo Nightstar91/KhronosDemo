@@ -15,7 +15,6 @@ public class ObjectiveGateTemp : MonoBehaviour
     }
     [HideInInspector]
     public TextMeshPro doorText;
-    [SerializeField] public string objectiveGateID;
 
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
     [SerializeField] public string objectiveSearchID;
