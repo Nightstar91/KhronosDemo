@@ -13,9 +13,8 @@ public class ObjectiveGate : MonoBehaviour
         DialogueLock,
         Coin
     }
-
+    [HideInInspector]
     public TextMeshPro doorText;
-    [SerializeField] public string objectiveGateID;
 
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
     [SerializeField] public string objectiveSearchID;
@@ -27,8 +26,6 @@ public class ObjectiveGate : MonoBehaviour
 
     // DialogueLock related
     [Header("Dialogue related")]
-    [SerializeField] public float dialogueTimer;
-    public bool hasDialogueStarted;
     private bool hasDialogueCompleted;
 
     // Coin related
@@ -44,14 +41,13 @@ public class ObjectiveGate : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        determineType(this.gameObject.name);
 
-        if(objectiveType == ObjectiveType.Coin)
+        if (objectiveType == ObjectiveType.Coin)
         {
             coinArray = GameObject.FindGameObjectsWithTag("Coin");
-           
+
             // Searching the entire array of gameobject with coin to search for a specific group assigned by the level designer
-            foreach(GameObject coinObject in coinArray)
+            foreach (GameObject coinObject in coinArray)
             {
                 if (coinObject.GetComponent<Coin>().groupID == objectiveSearchID)
                 {
@@ -64,7 +60,6 @@ public class ObjectiveGate : MonoBehaviour
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
         {
-            hasDialogueStarted = false;
             hasDialogueCompleted = false;
             doorText.text = "Await Instruction";
         }
@@ -88,11 +83,6 @@ public class ObjectiveGate : MonoBehaviour
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
         {
-            if (hasDialogueStarted)
-            {
-                DialogueCountdown();
-            }
-
             if (hasDialogueCompleted)
             {
                 gameObject.SetActive(false);
@@ -107,27 +97,12 @@ public class ObjectiveGate : MonoBehaviour
         {
             allCoin = originalAllCoin;
         }
-        else if(objectiveType == ObjectiveType.DialogueLock)
+        else if (objectiveType == ObjectiveType.DialogueLock)
         {
             hasDialogueCompleted = false;
         }
     }
 
-    public void determineType(string name)
-    {
-        if (name.Contains("Dialogue") || name.Contains("dialogue"))
-        {
-            objectiveType = ObjectiveType.DialogueLock;
-        }
-        else if (name.Contains("Coin") || name.Contains("coin"))
-        {
-            objectiveType = ObjectiveType.Coin;
-        }
-        else
-        {
-            objectiveType = ObjectiveType.None;
-        }
-    }
 
     public void DecrementCoinCount()
     {
@@ -135,27 +110,7 @@ public class ObjectiveGate : MonoBehaviour
     }
 
 
-    private void DialogueCountdown()
-    {
-        if(!hasDialogueCompleted && dialogueTimer >= 0)
-        {
-            dialogueTimer -= Time.deltaTime;
-        }
-        else
-        {
-            dialogueTimer = 0;
-            hasDialogueCompleted = true;
-        }
-    }
-
-
-    public void StartDialogue()
-    {
-        hasDialogueStarted = true;
-    }
-
-
-    private void DialogueComplete()
+    public void DialogueComplete()
     {
         hasDialogueCompleted = true;
     }
