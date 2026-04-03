@@ -23,7 +23,6 @@ public class FMODTriggerEvent : MonoBehaviour
     private bool eventFinishedFlag = false;
 
     public UnityEvent openDialogueDoor;
-    public UnityEvent startDialogueDoorUnlock;
     public event Action OnEventFinished;
 
     private void OnTriggerEnter(Collider other)
@@ -34,7 +33,6 @@ public class FMODTriggerEvent : MonoBehaviour
         {
             PlayEvent();
             hasPlayed = true;
-            startDialogueDoorUnlock.Invoke();
         }
     }
 
