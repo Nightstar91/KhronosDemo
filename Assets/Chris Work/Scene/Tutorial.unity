@@ -2028,7 +2028,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1512060843}
+  m_Mesh: {fileID: 648814075}
 --- !u!33 &19787685
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -57864,15 +57864,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 152.3583
+      value: 177.392
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 120.75183
+      value: 135.38
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -669.3054
+      value: -669.859
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -65620,8 +65620,12 @@ PrefabInstance:
       value: DialogueTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 12.269777
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.60293
+      value: -39.28
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -65629,7 +65633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.217
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -108599,7 +108603,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 2003641744}
+  m_Mesh: {fileID: 1653968451}
 --- !u!33 &1389861224
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -129022,15 +129026,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1513893315740532047, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.6666667
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1513893315740532047, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1513893315740532047, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -146.66666
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2228484998180759831, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_Pivot.x
@@ -129114,51 +129118,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2518328289091446903, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2518328289091446903, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -440
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2946824256551899499, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2946824256551899499, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -282.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4857777438337171013, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4857777438337171013, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -440
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6835310298227773320, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6835310298227773320, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -282.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402240367569660797, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.6666667
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402240367569660797, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402240367569660797, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.6666667
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402240367569660797, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 146.66669
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -145922,16 +145926,28 @@ PrefabInstance:
       value: DialogueTrigger (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.244241
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.789669
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.9575
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.227108
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.3945885
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 46.51474
+      value: 29.11
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -150626,7 +150642,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1070206288}
+  m_Mesh: {fileID: 758142162}
 --- !u!33 &2001897976
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -155563,16 +155579,24 @@ PrefabInstance:
       value: DialogueTrigger (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.463898
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.3504915
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 63.22902
+      value: 63.82
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 112.99983
+      value: 110.31
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -574.3607
+      value: -553.19
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalRotation.w
