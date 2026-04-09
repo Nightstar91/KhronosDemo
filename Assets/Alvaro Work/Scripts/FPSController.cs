@@ -178,7 +178,7 @@ public class FPSController : MonoBehaviour
                 }
 
                 //Condtional to transition to the slide state
-                if (slideAction.IsPressed() && slide.slideReady)
+                if (slideAction.IsPressed() && slide.slideReady && walkSpeed > 7)
                 {
                     currentState = PlayerState.STATE_SLIDE;
                 }
