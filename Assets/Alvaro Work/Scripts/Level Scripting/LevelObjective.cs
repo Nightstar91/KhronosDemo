@@ -26,7 +26,7 @@ public class LevelObjective : MonoBehaviour
     private HonorValue honorValue = HonorValue.Neutral; // 0 = Neutral, 1 = Good, 2 = Bad
 
     [Header("Parameters for Level Timer")]
-    private float levelTimer;
+    [SerializeField] public float levelTimer;
     private bool isTimerRunning;
     public float firstPlaceTime;
 
