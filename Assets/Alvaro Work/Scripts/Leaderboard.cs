@@ -5,6 +5,11 @@ public class Leaderboard : MonoBehaviour
 {
     // 0 being the fastest
     private float[] leaderboard = new float[4];
+    private string[] leaderboardName = new string[3];
+
+    private string playerInput = string.Empty;
+
+    private float[] firstPlaceLapTime = new float[4];
 
     [SerializeField] public float tempTimer;
 
@@ -17,11 +22,15 @@ public class Leaderboard : MonoBehaviour
     public void LoadLeaderBoard()
     {
         leaderboard[0] = PlayerPrefs.GetFloat("FirstPlaceTimer", 240);
+        leaderboardName[0] = PlayerPrefs.GetString("FirstPlaceName", "Dev1");
         leaderboard[1] = PlayerPrefs.GetFloat("SecondPlaceTimer", 420);
+        leaderboardName[1] = PlayerPrefs.GetString("FirstPlaceName", "Dev2");
         leaderboard[2] = PlayerPrefs.GetFloat("ThirdPlaceTimer", 600);
+        leaderboardName[2] = PlayerPrefs.GetString("FirstPlaceName", "Dev3");
+
         leaderboard[3] = 0f; // this is a temp variable to be used for bubble sorting
 
-        Debug.Log($"Loaded: {leaderboard[0]}, {leaderboard[1]}, {leaderboard[2]}");
+        Debug.Log($"Loaded: {leaderboard[0]}: {leaderboardName[0]}, {leaderboard[1]}: {leaderboardName[1]}, {leaderboard[2]}: {leaderboardName[2]}");
     }
 
 
