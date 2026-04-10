@@ -70857,7 +70857,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 125519578057063311, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: allCoin
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 125519578057063311, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: objectiveType
@@ -70909,7 +70909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
-      value: ObjectiveGate
+      value: ObjectiveGate1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
