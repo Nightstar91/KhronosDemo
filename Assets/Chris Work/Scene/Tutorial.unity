@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -3394,15 +3393,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.908123
+      value: -24.606
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9874554
+      value: 2.139
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.965
+      value: -6.938
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -91260,7 +91259,7 @@ GameObject:
   - component: {fileID: 1137351373}
   - component: {fileID: 1137351372}
   - component: {fileID: 1137351371}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148538,11 +148537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.789669
+      value: 8.297859
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5.9575
+      value: 14.302171
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -148550,11 +148549,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.1
+      value: 9.46
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.11
+      value: 31.23
       objectReference: {fileID: 0}
     - target: {fileID: 8747262706054321025, guid: f4071420aac79bd4ca5a72a3f96861d0, type: 3}
       propertyPath: m_LocalRotation.w
