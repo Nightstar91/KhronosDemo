@@ -10,6 +10,9 @@ public class Leaderboard : MonoBehaviour
     private string playerInput = string.Empty;
 
     public float[] firstPlaceLapTime = new float[4];
+    public float[] secondPlaceLapTime = new float[4];
+    public float[] thirdPlaceLapTime = new float[4];
+
     public static float[] currentLapTime = new float[4];
 
     [SerializeField] public float tempTimer;
@@ -25,6 +28,7 @@ public class Leaderboard : MonoBehaviour
         // First place position
         leaderboard[0] = PlayerPrefs.GetFloat("FirstPlaceTimer", 240);
         leaderboardName[0] = PlayerPrefs.GetString("FirstPlaceName", "Dev1");
+
         firstPlaceLapTime[0] = PlayerPrefs.GetFloat("FirstLapTime", 35);
         firstPlaceLapTime[1] = PlayerPrefs.GetFloat("SecondLapTime", 45);
         firstPlaceLapTime[2] = PlayerPrefs.GetFloat("ThirdLapTime", 65);

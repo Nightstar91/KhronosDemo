@@ -15082,6 +15082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 200420682}
+  - component: {fileID: 200420683}
   m_Layer: 0
   m_Name: WallRunSpawnPoint
   m_TagString: Untagged
@@ -15104,6 +15105,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1950054464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200420683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200420681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db859dd7986ecad49bf233f21de2b7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &208551482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37264,6 +37277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 501609799}
+  - component: {fileID: 501609800}
   m_Layer: 0
   m_Name: CoinLevelSpawnPoint
   m_TagString: Untagged
@@ -37279,13 +37293,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501609798}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.7071079}
   m_LocalPosition: {x: 211.5083, y: 135.49783, z: -668.9894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1643109407}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &501609800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501609798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db859dd7986ecad49bf233f21de2b7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &502080844
 Mesh:
   m_ObjectHideFlags: 0
@@ -100358,6 +100384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1252864249}
+  - component: {fileID: 1252864250}
   m_Layer: 0
   m_Name: JumpLevelRespawnPoint
   m_TagString: Untagged
@@ -100373,13 +100400,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252864248}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -102.47793, y: -6.382205, z: 120.95215}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000030547376}
+  m_LocalPosition: {x: -102.60293, y: -6.382205, z: 120.95215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1853233353}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1252864250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252864248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db859dd7986ecad49bf233f21de2b7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1253319604
 Mesh:
   m_ObjectHideFlags: 0
@@ -156531,6 +156570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026175028}
+  - component: {fileID: 2026175029}
   m_Layer: 0
   m_Name: SlidingLevelSpawnPoint
   m_TagString: Untagged
@@ -156553,6 +156593,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 520643749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2026175029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026175027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db859dd7986ecad49bf233f21de2b7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2032912092
 PrefabInstance:
   m_ObjectHideFlags: 0

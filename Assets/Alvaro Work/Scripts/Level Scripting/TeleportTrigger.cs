@@ -4,13 +4,13 @@ public class TeleportTrigger : MonoBehaviour
 {
     private BoxCollider triggerCollider;
     [SerializeField] GameObject wayPointToTeleport;
-    private Vector3 spotToTeleport;
+    private Transform spotToTeleport;
     private GameObject player;
 
     private void Awake()
     {
         //triggerCollider = GetComponent<BoxCollider>();
-        spotToTeleport = new Vector3(wayPointToTeleport.transform.position.x, wayPointToTeleport.transform.position.y, wayPointToTeleport.transform.position.z);
+        spotToTeleport = wayPointToTeleport.transform;
         player = GameObject.Find("Player");
     }
 
@@ -20,6 +20,7 @@ public class TeleportTrigger : MonoBehaviour
         if (other.tag != "Player") return;
 
 
-        player.transform.position = spotToTeleport;
+        player.transform.position = spotToTeleport.position;
+        player.transform.rotation = spotToTeleport.rotation;
     }
 }
