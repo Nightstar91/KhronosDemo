@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using FMODUnity;
 
 
 public class PlayerHud : BasicMenu
@@ -64,6 +65,7 @@ public class PlayerHud : BasicMenu
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+        RuntimeManager.StudioSystem.setParameterByName("Pause", 1f);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -85,6 +87,7 @@ public class PlayerHud : BasicMenu
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
+        RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
