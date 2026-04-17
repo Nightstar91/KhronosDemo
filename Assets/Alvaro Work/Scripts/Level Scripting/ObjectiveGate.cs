@@ -29,6 +29,7 @@ public class ObjectiveGate : MonoBehaviour
     private bool hasDialogueCompleted;
 
     // Coin related
+    [HideInInspector]
     public int allCoin;
     private int originalAllCoin;
     private GameObject[] coinArray;
