@@ -1,12 +1,15 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Leaderboard : MonoBehaviour
 {
+    TimeSpan time = TimeSpan.Zero;
+
     // 0 being the fastest
-    private float[] leaderboardTime = new float[4];
-    private string[] leaderboardName = new string[3];
+    public float[] leaderboardTime = new float[4];
+    public string[] leaderboardName = new string[3];
 
     public float[] firstPlaceLapTime = new float[4];
     public float[] secondPlaceLapTime = new float[4];
@@ -15,34 +18,34 @@ public class Leaderboard : MonoBehaviour
     // Related to the player score/time
     public float currentTime;
     public float[] currentLapTime = new float[4];
-    private string playerInput = string.Empty;
+    public string playerInput = string.Empty;
 
 
-    [SerializeField] TextMeshProUGUI firstPlaceTimeString;
-    [SerializeField] TextMeshProUGUI firstPlaceLapOneTime;
-    [SerializeField] TextMeshProUGUI firstPlaceLapTwoTime;
-    [SerializeField] TextMeshProUGUI firstPlaceLapThirdTime;
-    [SerializeField] TextMeshProUGUI firstPlaceLapFourTime;
-    [SerializeField] TextMeshProUGUI firstPlaceName;
+    [SerializeField] TextMeshProUGUI firstPlaceTimeText;
+    [SerializeField] TextMeshProUGUI firstPlaceLapOneTimeText;
+    [SerializeField] TextMeshProUGUI firstPlaceLapTwoTimeText;
+    [SerializeField] TextMeshProUGUI firstPlaceLapThreeTimeText;
+    [SerializeField] TextMeshProUGUI firstPlaceLapFourTimeText;
+    [SerializeField] TextMeshProUGUI firstPlaceNameText;
 
-    [SerializeField] TextMeshProUGUI secondPlaceTimeString;
-    [SerializeField] TextMeshProUGUI secondPlaceLapOneTime;
-    [SerializeField] TextMeshProUGUI secondPlaceLapTwoTime;
-    [SerializeField] TextMeshProUGUI secondPlaceLapThreeTime;
-    [SerializeField] TextMeshProUGUI secondPlaceLapFourTime;
-    [SerializeField] TextMeshProUGUI secondPlaceName;
+    [SerializeField] TextMeshProUGUI secondPlaceTimeText;
+    [SerializeField] TextMeshProUGUI secondPlaceLapOneTimeText;
+    [SerializeField] TextMeshProUGUI secondPlaceLapTwoTimeText;
+    [SerializeField] TextMeshProUGUI secondPlaceLapThreeTimeText;
+    [SerializeField] TextMeshProUGUI secondPlaceLapFourTimeText;
+    [SerializeField] TextMeshProUGUI secondPlaceNameText;
 
-    [SerializeField] TextMeshProUGUI thirdPlaceTimeString;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapOneTime;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapTwoTime;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapThreeTime;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapFourTime;
-    [SerializeField] TextMeshProUGUI fourthPlaceTimeString;
-    [SerializeField] TextMeshProUGUI thirdPlaceName;
+    [SerializeField] TextMeshProUGUI thirdPlaceTimeText;
+    [SerializeField] TextMeshProUGUI thirdPlaceLapOneTimeText;
+    [SerializeField] TextMeshProUGUI thirdPlaceLapTwoTimeText;
+    [SerializeField] TextMeshProUGUI thirdPlaceLapThreeTimeText;
+    [SerializeField] TextMeshProUGUI thirdPlaceLapFourTimeText;
+    [SerializeField] TextMeshProUGUI thirdPlaceNameText;
 
     private void Start()
     {
         LoadLeaderBoard();
+        DisplayCurrentLeaderboard();
     }
 
 
@@ -61,10 +64,10 @@ public class Leaderboard : MonoBehaviour
         leaderboardTime[1] = PlayerPrefs.GetFloat("SecondPlaceTimer", 420);
         leaderboardName[1] = PlayerPrefs.GetString("SecondPlaceName", "Dev2");
 
-        secondPlaceLapTime[0] = PlayerPrefs.GetFloat("2ndFirstLapTime");
-        secondPlaceLapTime[1] = PlayerPrefs.GetFloat("2ndSecondLapTime");
-        secondPlaceLapTime[2] = PlayerPrefs.GetFloat("2ndThirdLapTime");
-        secondPlaceLapTime[3] = PlayerPrefs.GetFloat("2ndFourthLapTime");
+        secondPlaceLapTime[0] = PlayerPrefs.GetFloat("2ndFirstLapTime", 65);
+        secondPlaceLapTime[1] = PlayerPrefs.GetFloat("2ndSecondLapTime", 85);
+        secondPlaceLapTime[2] = PlayerPrefs.GetFloat("2ndThirdLapTime", 105);
+        secondPlaceLapTime[3] = PlayerPrefs.GetFloat("2ndFourthLapTime", 160);
 
         // Third place
         leaderboardTime[2] = PlayerPrefs.GetFloat("ThirdPlaceTimer", 600);
@@ -75,9 +78,35 @@ public class Leaderboard : MonoBehaviour
         thirdPlaceLapTime[2] = PlayerPrefs.GetFloat("3rdThirdLapTime", 290);
         thirdPlaceLapTime[3] = PlayerPrefs.GetFloat("3rdFourthLapTime", 400);
 
-        Debug.Log($"Loaded: \n{leaderboardName[0]}: {leaderboardTime[0]}\n1st Lap:{firstPlaceLapTime[0]}  2nd Lap:{firstPlaceLapTime[1]}  3rd Lap:{firstPlaceLapTime[2]}  4th Lap:{firstPlaceLapTime[3]}, \n\n {leaderboardTime[1]}: {leaderboardName[1]}, \n {leaderboardTime[2]}: {leaderboardName[2]}");
+        //Debug.Log($"Loaded: \n{leaderboardName[0]}: {leaderboardTime[0]}\n1st Lap:{firstPlaceLapTime[0]}  2nd Lap:{firstPlaceLapTime[1]}  3rd Lap:{firstPlaceLapTime[2]}  4th Lap:{firstPlaceLapTime[3]}, \n\n {leaderboardTime[1]}: {leaderboardName[1]}, \n {leaderboardTime[2]}: {leaderboardName[2]}");
     }
 
+    public void DisplayCurrentLeaderboard()
+    {
+        // 1st place
+        firstPlaceTimeText.text = string.Format(ConvertFloatToTime(leaderboardTime[0]));
+        firstPlaceLapOneTimeText.text = ConvertFloatToTime(firstPlaceLapTime[0]);
+        firstPlaceLapTwoTimeText.text = ConvertFloatToTime(firstPlaceLapTime[1]);
+        firstPlaceLapThreeTimeText.text = ConvertFloatToTime(firstPlaceLapTime[2]);
+        firstPlaceLapFourTimeText.text = ConvertFloatToTime(firstPlaceLapTime[3]);
+        firstPlaceNameText.text = leaderboardName[0];
+
+        // 2nd place
+        secondPlaceTimeText.text = ConvertFloatToTime(leaderboardTime[1]);
+        secondPlaceLapOneTimeText.text = ConvertFloatToTime(secondPlaceLapTime[0]);
+        secondPlaceLapTwoTimeText.text = ConvertFloatToTime(secondPlaceLapTime[1]);
+        secondPlaceLapThreeTimeText.text = ConvertFloatToTime(secondPlaceLapTime[2]);
+        secondPlaceLapFourTimeText.text = ConvertFloatToTime(secondPlaceLapTime[3]);
+        secondPlaceNameText.text = leaderboardName[1];
+
+        // 3rd place
+        thirdPlaceTimeText.text = ConvertFloatToTime(leaderboardTime[2]);
+        thirdPlaceLapOneTimeText.text = ConvertFloatToTime(thirdPlaceLapTime[0]);
+        thirdPlaceLapTwoTimeText.text = ConvertFloatToTime(thirdPlaceLapTime[1]);
+        thirdPlaceLapThreeTimeText.text = ConvertFloatToTime(thirdPlaceLapTime[2]);
+        thirdPlaceLapFourTimeText.text = ConvertFloatToTime(thirdPlaceLapTime[3]);
+        thirdPlaceNameText.text = leaderboardName[2];
+    }
 
     private void GetCurrentHighscoreString()
     {
@@ -110,14 +139,15 @@ public class Leaderboard : MonoBehaviour
     }
 
 
-    public string ConvertFloatToTime(float Conversion)
+    public string ConvertFloatToTime(float conversion)
     {
+
         string output;
 
-        int minutes = Mathf.FloorToInt(Conversion / 60);
-        int seconds = Mathf.FloorToInt(Conversion % 60);
+        int minutes = Mathf.FloorToInt(conversion / 60);
+        int seconds = Mathf.FloorToInt(conversion % 60);
 
-        output = string.Format("{0}:{1:F2}", minutes, seconds);
+        output = string.Format("{0}:{1:D2}", minutes, seconds);
 
         return output;
     }
