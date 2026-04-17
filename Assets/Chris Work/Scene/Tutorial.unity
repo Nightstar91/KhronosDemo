@@ -3121,15 +3121,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.606
+      value: -1.24
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.139
+      value: -12.14
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.938
+      value: 229.53
       objectReference: {fileID: 0}
     - target: {fileID: 4744736380823943419, guid: f4d0c4e7f9768bd41bc1fbb445ab217e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -161693,6 +161693,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4999365281408595653, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
+      propertyPath: forceMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999365281408595653, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
+      propertyPath: launchForce
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999365281408595653, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
+      propertyPath: useLocalDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4999365281408595653, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
+      propertyPath: disableControlDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6054071509602400906, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
       propertyPath: m_Name
       value: JumpPad
@@ -161703,7 +161719,7 @@ PrefabInstance:
       objectReference: {fileID: 859361841}
     - target: {fileID: 6381719818032947310, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
       propertyPath: m_VersionIndex
-      value: 9122
+      value: 9128
       objectReference: {fileID: 0}
     - target: {fileID: 7938948395710757132, guid: bdbce3be7b87d044cb677633c576ce00, type: 3}
       propertyPath: m_Mesh
