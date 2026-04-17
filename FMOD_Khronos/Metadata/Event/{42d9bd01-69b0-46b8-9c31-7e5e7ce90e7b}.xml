@@ -293,10 +293,10 @@
 			<value>64</value>
 		</property>
 		<property name="highCut">
-			<value>7800</value>
+			<value>9000</value>
 		</property>
 		<property name="earlyLateMix">
-			<value>71</value>
+			<value>88</value>
 		</property>
 		<property name="wetLevel">
 			<value>-16.5</value>
@@ -358,7 +358,7 @@
 			<value>0.029126213592233011</value>
 		</property>
 		<property name="value">
-			<value>-19</value>
+			<value>-17.5</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{51934938-2586-40ca-bd82-e6b14a2e0947}">
@@ -366,7 +366,7 @@
 			<value>0.97999999999999998</value>
 		</property>
 		<property name="value">
-			<value>-5</value>
+			<value>-3.5</value>
 		</property>
 	</object>
 	<object class="AutomationCurve" id="{6d680164-363a-4079-bb06-7ac6689cf0c5}">
