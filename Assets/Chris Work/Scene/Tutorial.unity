@@ -3577,6 +3577,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
       value: JumpLevelEndingObjectiveGate
@@ -59575,6 +59583,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
       value: SlideLevelStartingObjectiveGate
@@ -76955,6 +76971,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
       value: JumpLevelStartingObjectiveGate
@@ -79866,6 +79890,14 @@ PrefabInstance:
     - target: {fileID: 529768337163633948, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
@@ -86977,6 +87009,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
       value: WallrunLevelStartingObjectiveGate
@@ -92755,6 +92795,14 @@ PrefabInstance:
     - target: {fileID: 529768337163633948, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
@@ -102402,6 +102450,14 @@ PrefabInstance:
     - target: {fileID: 529768337163633948, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
@@ -121927,6 +121983,14 @@ PrefabInstance:
     - target: {fileID: 529768337163633948, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650484843842149954, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7972507574013663186, guid: 9fd6fe3f5579d2e4e84ba8007c00b843, type: 3}
       propertyPath: m_Name
