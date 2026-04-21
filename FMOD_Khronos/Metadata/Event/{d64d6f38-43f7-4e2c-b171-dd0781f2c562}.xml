@@ -228,6 +228,9 @@
 		</relationship>
 	</object>
 	<object class="EventSound" id="{3ce423d8-5922-42c0-b7dd-ec2cb3e8d2a4}">
+		<property name="volume">
+			<value>4</value>
+		</property>
 		<relationship name="parameters">
 			<destination>{4e388efa-748f-4f36-a395-a1ac1d5e85d6}</destination>
 		</relationship>
@@ -236,11 +239,17 @@
 		</relationship>
 	</object>
 	<object class="EventSound" id="{20e68524-c10b-481f-a946-8891ed9ebd2e}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<relationship name="event">
 			<destination>{6334983a-8999-4242-9b71-0a60845def06}</destination>
 		</relationship>
 	</object>
 	<object class="EventSound" id="{3bd8d002-d740-4987-b170-488ae1675bf0}">
+		<property name="volume">
+			<value>4</value>
+		</property>
 		<relationship name="parameters">
 			<destination>{64c5c703-24db-43e2-a894-23705f41ec1b}</destination>
 		</relationship>
@@ -249,11 +258,17 @@
 		</relationship>
 	</object>
 	<object class="EventSound" id="{2fe74ab6-03da-4b09-8f5d-aeb6b4bb86ba}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<relationship name="event">
 			<destination>{28e34cf8-8a73-485b-af13-037c614dae99}</destination>
 		</relationship>
 	</object>
 	<object class="EventSound" id="{1a028354-f3e7-48f8-ba38-3635cc6ae520}">
+		<property name="volume">
+			<value>7.5</value>
+		</property>
 		<relationship name="parameters">
 			<destination>{d81863a8-64fc-47f6-ad82-745f47059551}</destination>
 		</relationship>
@@ -262,11 +277,17 @@
 		</relationship>
 	</object>
 	<object class="EventSound" id="{77c58215-6cb9-4134-94b3-55665e4985c6}">
+		<property name="volume">
+			<value>2.5</value>
+		</property>
 		<relationship name="event">
 			<destination>{177c5699-bb59-4740-8da4-29105e56a5f8}</destination>
 		</relationship>
 	</object>
 	<object class="EventSound" id="{ddab54e7-7bd1-4f33-9753-5bb7d6e643ac}">
+		<property name="volume">
+			<value>6.5</value>
+		</property>
 		<relationship name="parameters">
 			<destination>{19476a4f-9384-4fa0-963d-983fec638acb}</destination>
 		</relationship>
