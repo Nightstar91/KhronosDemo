@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{b15a7484-fefa-434d-80b5-2dd41211efa2}">
+		<property name="assetPath">
+			<value>MB_Olaf2.3_VO_40726.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>38.053673469387753</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{66a5f7c0-dafa-4896-b87b-860b86f9a5d7}</destination>
+		</relationship>
+	</object>
+</objects>
