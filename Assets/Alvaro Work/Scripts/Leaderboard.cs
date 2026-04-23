@@ -13,7 +13,7 @@ public class Leaderboard : MonoBehaviour
     string[] placePrefix = { "1st", "2nd", "3rd", "user" };
     string[] lapNames = { "First", "Second", "Third", "Fourth" };
 
-    public LeaderboardEntry[] leaderboard = new LeaderboardEntry[TOTAL_ENTRIES];
+    public LeaderboardEntry[] leaderboard;
 
 
     // Related to the player score/time
@@ -43,17 +43,31 @@ public class Leaderboard : MonoBehaviour
     [SerializeField] TextMeshProUGUI thirdPlaceLapFourTimeText;
     [SerializeField] TextMeshProUGUI thirdPlaceNameText;
 
-    [System.Serializable]
+    [SerializeField]
     public struct LeaderboardEntry
     {
         public string name;
         public float totalTime;
         public float[] lapTimes; // length = number of laps
+
+        public LeaderboardEntry(int lapCount)
+    {
+        name = "";
+        totalTime = 0f;
+        lapTimes = new float[lapCount];
+    }
+    }
+
+    private void Awake()
+    {
+        InitializeLeaderboard();
+        SetDefaultScore();
+        SaveLeaderBoard();
+        LoadLeaderBoard();
     }
 
     private void Start()
-    {
-        LoadLeaderBoard();
+    {   
         DisplayCurrentLeaderboard();
     }
 
@@ -71,6 +85,33 @@ public class Leaderboard : MonoBehaviour
                 string key = $"{placePrefix[i]}{lapNames[lap]}LapTime";
                 leaderboard[i].lapTimes[lap] = PlayerPrefs.GetFloat(key, 0f);
             }
+        }
+    }
+
+
+    public void SaveLeaderBoard()
+    {
+        for (int i = 0; i < TOTAL_ENTRIES; i++)
+        {
+            PlayerPrefs.SetString($"{placePrefix[i]}PlaceName", leaderboard[i].name);
+            PlayerPrefs.SetFloat($"{placePrefix[i]}PlaceTimer", leaderboard[i].totalTime);
+
+            for (int lap = 0; lap < TOTAL_LAPS; lap++)
+            {
+                string key = $"{placePrefix[i]}{lapNames[lap]}LapTime";
+                PlayerPrefs.SetFloat(key, leaderboard[i].lapTimes[lap]);
+            }
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    private void InitializeLeaderboard()
+    {
+        leaderboard = new LeaderboardEntry[TOTAL_ENTRIES];
+        for (int i = 0; i < TOTAL_ENTRIES; i++)
+        {
+            leaderboard[i] = new LeaderboardEntry(TOTAL_LAPS);
         }
     }
 
@@ -131,6 +172,20 @@ public class Leaderboard : MonoBehaviour
         leaderboard[0].lapTimes[3] = 95;
 
         //2nd
+        leaderboard[1].name = "Dev2";
+        leaderboard[1].totalTime = 420;
+        leaderboard[1].lapTimes[0] = 65;
+        leaderboard[1].lapTimes[1] = 85;
+        leaderboard[1].lapTimes[2] = 105;
+        leaderboard[1].lapTimes[3] = 160;
+
+        //3rd
+        leaderboard[2].name = "Dev3";
+        leaderboard[2].totalTime = 600;
+        leaderboard[2].lapTimes[0] = 95;
+        leaderboard[2].lapTimes[1] = 115;
+        leaderboard[2].lapTimes[2] = 155;
+        leaderboard[2].lapTimes[3] = 235;
     }
 
 
