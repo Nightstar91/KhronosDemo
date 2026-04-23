@@ -2,38 +2,26 @@
 
 public class SCController : MonoBehaviour
 {
-    public Transform pivot;
-    public Transform cameraHead;
-    public Transform playerCamera;
+    public Transform player;
+    public Transform head; // assign this child in Inspector
+    public float rotationSpeed = 5f;
 
-    private Quaternion initialOffset;
-
-    public float rotationSpeed = 2f;
-
-    void Start()
+    void LateUpdate()
     {
-        // Store difference between pivot and head at start
-        initialOffset = Quaternion.Inverse(pivot.rotation) * cameraHead.rotation;
-    }
+        Vector3 direction = player.position - head.position;
 
-    void Update()
-    {
-        if (!pivot || !cameraHead || !playerCamera) return;
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        Vector3 direction = playerCamera.position - pivot.position;
+            // Axis correction (swap Unity's assumption to your model's)
+            targetRotation *= Quaternion.Euler(0f, -90f, 0f);
 
-        if (direction.sqrMagnitude < 0.0001f)
-            return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction, pivot.up);
-
-        pivot.rotation = Quaternion.Slerp(
-            pivot.rotation,
-            targetRotation,
-            Time.deltaTime * rotationSpeed
-        );
-
-        // 🔑 KEY FIX: apply offset so it rotates around pivot correctly
-        cameraHead.SetPositionAndRotation(cameraHead.position, pivot.rotation);
+            head.rotation = Quaternion.Slerp(
+                head.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
     }
 }
