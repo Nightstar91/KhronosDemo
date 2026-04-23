@@ -24,7 +24,7 @@ public class PlayerHud : BasicMenu
         pauseMenu = GameObject.Find("Pausemenu");
         mainMenuButton = GameObject.Find("MainMenuButton");
         resumeButton = GameObject.Find("ResumeButton");
-        resultPanel = GameObject.Find("ResultPanel");
+        //resultPanel = GameObject.Find("ResultPanel");
 
     }
 
@@ -37,7 +37,7 @@ public class PlayerHud : BasicMenu
         speedoSlider = GameObject.Find("SpeedoSlider").GetComponent<Slider>();
 
 
-        resultPanel.SetActive(false);
+        //resultPanel.SetActive(false);
         settingPanel.SetActive(false);
         exitGameConfirmationPanel.SetActive(false);
         pauseMenu.SetActive(false);

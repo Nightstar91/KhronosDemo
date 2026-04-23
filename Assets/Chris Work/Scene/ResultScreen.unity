@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -5743,21 +5742,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d207e7df91a3cb47b966d764c5ac60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstPlaceLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  secondPlaceLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  thirdPlaceLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
+  leaderboard:
+  - name: 
+    totalTime: 0
+    lapTimes: []
+  - name: 
+    totalTime: 0
+    lapTimes: []
+  - name: 
+    totalTime: 0
+    lapTimes: []
+  - name: 
+    totalTime: 0
+    lapTimes: []
   currentTime: 0
   currentLapTime:
   - 0
@@ -9331,7 +9328,6 @@ GameObject:
   - component: {fileID: 1661302743}
   - component: {fileID: 1661302742}
   - component: {fileID: 1661302746}
-  - component: {fileID: 1661302745}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9413,58 +9409,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1661302745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661302741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d207e7df91a3cb47b966d764c5ac60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstPlaceLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  secondPlaceLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  thirdPlaceLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  currentTime: 0
-  currentLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  playerInput: 
-  firstPlaceTimeText: {fileID: 0}
-  firstPlaceLapOneTimeText: {fileID: 0}
-  firstPlaceLapTwoTimeText: {fileID: 0}
-  firstPlaceLapThreeTimeText: {fileID: 0}
-  firstPlaceLapFourTimeText: {fileID: 0}
-  firstPlaceNameText: {fileID: 0}
-  secondPlaceTimeText: {fileID: 0}
-  secondPlaceLapOneTimeText: {fileID: 0}
-  secondPlaceLapTwoTimeText: {fileID: 0}
-  secondPlaceLapThreeTimeText: {fileID: 0}
-  secondPlaceLapFourTimeText: {fileID: 0}
-  secondPlaceNameText: {fileID: 0}
-  thirdPlaceTimeText: {fileID: 0}
-  thirdPlaceLapOneTimeText: {fileID: 0}
-  thirdPlaceLapTwoTimeText: {fileID: 0}
-  thirdPlaceLapThreeTimeText: {fileID: 0}
-  thirdPlaceLapFourTimeText: {fileID: 0}
-  thirdPlaceNameText: {fileID: 0}
 --- !u!114 &1661302746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12187,7 +12131,6 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
 --- !u!114 &2075900959
 MonoBehaviour:
   m_ObjectHideFlags: 0
