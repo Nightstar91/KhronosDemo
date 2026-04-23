@@ -94,35 +94,52 @@ public class Leaderboard : MonoBehaviour
 
     public void DisplayCurrentLeaderboard()
     {
-        //// 1st place
-        //firstPlaceTimeText.text = 
-        //firstPlaceLapOneTimeText.text = 
-        //firstPlaceLapTwoTimeText.text = 
-        //firstPlaceLapThreeTimeText.text = 
-        //firstPlaceLapFourTimeText.text = 
-        //firstPlaceNameText.text = 
+        //1st place
+        firstPlaceTimeText.text = ConvertFloatToTime(leaderboard[0].totalTime);
+        firstPlaceLapOneTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[0]);
+        firstPlaceLapTwoTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[1]);
+        firstPlaceLapThreeTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[2]);
+        firstPlaceLapFourTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[3]);
+        firstPlaceNameText.text = leaderboard[0].name;
 
-        //// 2nd place
-        //secondPlaceTimeText.text = 
-        //secondPlaceLapOneTimeText.text = 
-        //secondPlaceLapTwoTimeText.text = 
-        //secondPlaceLapThreeTimeText.text = 
-        //secondPlaceLapFourTimeText.text = 
-        //secondPlaceNameText.text = 
+        // 2nd place
+        secondPlaceTimeText.text = ConvertFloatToTime(leaderboard[1].totalTime);
+        secondPlaceLapOneTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[0]);
+        secondPlaceLapTwoTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[1]);
+        secondPlaceLapThreeTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[2]);
+        secondPlaceLapFourTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[3]);
+        secondPlaceNameText.text = leaderboard[1].name;
 
-        //// 3rd place
-        //thirdPlaceTimeText.text = 
-        //thirdPlaceLapOneTimeText.text = 
-        //thirdPlaceLapTwoTimeText.text = 
-        //thirdPlaceLapThreeTimeText.text = 
-        //thirdPlaceLapFourTimeText.text = 
-        //thirdPlaceNameText.text = 
+        // 3rd place
+        thirdPlaceTimeText.text = ConvertFloatToTime(leaderboard[2].totalTime);
+        thirdPlaceLapOneTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[0]);
+        thirdPlaceLapTwoTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[1]);
+        thirdPlaceLapThreeTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[2]);
+        thirdPlaceLapFourTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[3]);
+        thirdPlaceNameText.text = leaderboard[2].name;
     }
 
 
-    public void SetCurrentHighscore()
+    public void SetDefaultScore()
     {
+        //1st
+        leaderboard[0].name = "Dev1";
+        leaderboard[0].totalTime = 240;
+        leaderboard[0].lapTimes[0] = 35;
+        leaderboard[0].lapTimes[1] = 45;
+        leaderboard[0].lapTimes[2] = 65;
+        leaderboard[0].lapTimes[3] = 95;
 
+        //2nd
+    }
+
+
+    public float GetThirdPlace()
+    {
+        LoadLeaderBoard();
+        Bubblesort(3);
+
+        return leaderboard[2].totalTime;
     }
 
 
@@ -139,27 +156,4 @@ public class Leaderboard : MonoBehaviour
         return output;
     }
 
-
-
-
-    private void ResetFloatArray(float[] arrayToReset)
-    {
-        for(int i = 0; arrayToReset.Length > i; i++)
-        {
-            arrayToReset[i] = 0;
-        }
-    }
-
-
-    private void AddLapTime(int positionInArray, float lapTime)
-    {
-        if(0 >= positionInArray && positionInArray <= currentLapTime.Length - 1)
-        {
-            currentLapTime[positionInArray] = lapTime;  
-        }
-        else
-        {
-            Debug.Log("NOT IN RANGE OF ARRAY (0-3)");
-        }
-    }
 }

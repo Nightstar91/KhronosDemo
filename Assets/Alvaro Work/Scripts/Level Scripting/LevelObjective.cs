@@ -28,7 +28,7 @@ public class LevelObjective : MonoBehaviour
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
     private bool isTimerRunning;
-    public float firstPlaceTime;
+    public float thirdPlaceTime;
 
     public Vector3 playerSpawnPoint;
 
@@ -60,7 +60,7 @@ public class LevelObjective : MonoBehaviour
         {
             isTimerRunning = false;
 
-            firstPlaceTime = leaderboard.GetFirstPlaceTime();
+            thirdPlaceTime = leaderboard.GetThirdPlace();
         }
         else
         {
@@ -159,13 +159,13 @@ public class LevelObjective : MonoBehaviour
     public void Honor()
     {
         Debug.Log("Honor function called");
-        if (levelTimer < firstPlaceTime)
+        if (levelTimer < thirdPlaceTime)
         {
             honorValue = HonorValue.Good; // Good
             Debug.Log("Good Honor");
             return;
         }
-        else if (levelTimer == firstPlaceTime)
+        else if (levelTimer == thirdPlaceTime)
         {
             Debug.Log("Neutral Honor");
             honorValue = HonorValue.Neutral; // Neutral
