@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -5351,71 +5352,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &366222653
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 14.5807
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -32.647686
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.0000009760261
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.0000009760261
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3246810262154187242, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_Name
-      value: Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 7746084686027082665, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: groupID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7746084686027082665, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: gateSearchID
-      value: Gate1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
 --- !u!43 &406950933
 Mesh:
   m_ObjectHideFlags: 0
@@ -9994,6 +9930,9 @@ MonoBehaviour:
   playOnce: 1
   parameterName: LevelSelect
   parameterValue: 1
+  openDialogueDoor:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &793678156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26612,71 +26551,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1001 &2111989189
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.740443
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -34.126503
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.000001013279
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.000001013279
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
-      objectReference: {fileID: 0}
-    - target: {fileID: 817085040632334140, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3246810262154187242, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: m_Name
-      value: Coin (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7746084686027082665, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: groupID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7746084686027082665, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
-      propertyPath: gateSearchID
-      value: Gate1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8b6a17cdafedf5641a09dda9c9620956, type: 3}
 --- !u!43 &2119177227
 Mesh:
   m_ObjectHideFlags: 0
@@ -27208,7 +27082,5 @@ SceneRoots:
   - {fileID: 1075956804567362667}
   - {fileID: 1740325049}
   - {fileID: 793678159}
-  - {fileID: 366222653}
-  - {fileID: 2111989189}
   - {fileID: 494352813}
   - {fileID: 1882033746}
