@@ -14,7 +14,6 @@ public class ObjectiveGate : MonoBehaviour
         Coin
     }
     [HideInInspector]
-    public TextMeshPro doorText;
 
     [Header("This would be the name of the groupID that can be found in the objective object BEWARE OF CAPS")]
     [SerializeField] public string objectiveSearchID;
@@ -34,9 +33,14 @@ public class ObjectiveGate : MonoBehaviour
     private int originalAllCoin;
     private GameObject[] coinArray;
 
+    // Animation related
+    BoxCollider colliderForDoor;
+    Animator animator;
+
     private void Awake()
     {
-        doorText = gameObject.GetComponentInChildren<TextMeshPro>();
+        colliderForDoor = GetComponent<BoxCollider>();
+        animator = gameObject.GetComponentInChildren<Animator>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -57,12 +61,10 @@ public class ObjectiveGate : MonoBehaviour
             }
 
             originalAllCoin = allCoin;
-            doorText.text = "Collect All Coins";
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
         {
             hasDialogueCompleted = false;
-            doorText.text = "Await Instruction";
         }
         else
         {
@@ -86,7 +88,8 @@ public class ObjectiveGate : MonoBehaviour
         {
             if (hasDialogueCompleted)
             {
-                gameObject.SetActive(false);
+                colliderForDoor.enabled = false;
+                animator.SetBool("IsOpen", true);
             }
         }
     }
