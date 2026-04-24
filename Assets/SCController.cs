@@ -6,6 +6,11 @@ public class SCController : MonoBehaviour
     public Transform head; // assign this child in Inspector
     public float rotationSpeed = 5f;
 
+
+    private void Start()
+    {
+        player = GameObject.Find("Player").transform;
+    }
     void LateUpdate()
     {
         Vector3 direction = player.position - head.position;
