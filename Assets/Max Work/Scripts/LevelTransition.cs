@@ -74,6 +74,11 @@ public class LevelTransition : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    public void GoToLeaderBoardScene()
+    {
+        SceneManager.LoadScene("ResultScreen");
+    }
+
 
     private void StopAllAudio()
     {

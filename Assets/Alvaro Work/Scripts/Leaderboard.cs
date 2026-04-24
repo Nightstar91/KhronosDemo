@@ -14,7 +14,7 @@ public class Leaderboard : MonoBehaviour
 
     public LeaderboardEntry[] leaderboard;
 
-    public bool canUserSubmit;
+    public bool canUserSubmit = false;
 
     // Related to the player score/time
     public float currentTime;
@@ -64,7 +64,6 @@ public class Leaderboard : MonoBehaviour
 
     private void Awake()
     {
-        TempScore.cameFromChallenge = true;
         InitializeLeaderboard();
         LoadLeaderBoard();
     }
@@ -73,6 +72,8 @@ public class Leaderboard : MonoBehaviour
     {   
         DisplayCurrentLeaderboard();
         ManipulateUserPanel();
+
+        TempScore.cameFromChallenge = false;
     }
 
 

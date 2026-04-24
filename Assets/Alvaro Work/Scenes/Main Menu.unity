@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1906,22 +1905,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 379958378216280652, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907104084841116113, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 0cb3b1bb3160f974e912fc3621ebadfb, type: 2}
-    - target: {fileID: 1907104084841116113, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -5649659027497126171, guid: 0cb3b1bb3160f974e912fc3621ebadfb, type: 2}
-    - target: {fileID: 1907104084841116113, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2846707717252500186, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1934,24 +1917,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3653943146163881844, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4416045198493938073, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4416045198493938073, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5993663305748631878, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5993663305748631878, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7268052003301966974, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
@@ -1966,20 +1933,12 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7268052003301966974, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7719613495336655235, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_Name
-      value: CrossFadeTransition
-      objectReference: {fileID: 0}
-    - target: {fileID: 7719613495336655235, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8120673417451966909, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 443768820}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 443768820}
     - target: {fileID: 9080466439185461733, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
@@ -2069,38 +2028,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7719613495336655235, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2142376396}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
---- !u!1 &2142376395 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7719613495336655235, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
-  m_PrefabInstance: {fileID: 2142376394}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2142376396
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142376395}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6d98a1eb1596ce946a9209c7859d07f2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
