@@ -224,7 +224,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 29.85
-  m_fontSizeBase: 14
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
@@ -1265,8 +1265,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1290,8 +1290,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1376,7 +1376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 178.46722, y: -18.21753}
+  m_AnchoredPosition: {x: 162.57367, y: -18.21753}
   m_SizeDelta: {x: 90, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &396025419
@@ -2927,7 +2927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 405, y: -178.21753}
+  m_AnchoredPosition: {x: 389.10645, y: -178.21753}
   m_SizeDelta: {x: 90, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &659198326
@@ -3115,7 +3115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 285, y: -18.21753}
+  m_AnchoredPosition: {x: 269.10645, y: -18.21753}
   m_SizeDelta: {x: 90, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &665397408
@@ -3529,7 +3529,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4621,7 +4621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.68994, y: -18.21753}
+  m_AnchoredPosition: {x: -49.583496, y: -18.21753}
   m_SizeDelta: {x: 90, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &929358582
@@ -5708,6 +5708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1159771885}
   - component: {fileID: 1159771886}
+  - component: {fileID: 1159771887}
   m_Layer: 0
   m_Name: LeaderBoardController
   m_TagString: Untagged
@@ -5742,19 +5743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d207e7df91a3cb47b966d764c5ac60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leaderboard:
-  - name: 
-    totalTime: 0
-    lapTimes: []
-  - name: 
-    totalTime: 0
-    lapTimes: []
-  - name: 
-    totalTime: 0
-    lapTimes: []
-  - name: 
-    totalTime: 0
-    lapTimes: []
+  canUserSubmit: 0
   currentTime: 0
   currentLapTime:
   - 0
@@ -5762,6 +5751,8 @@ MonoBehaviour:
   - 0
   - 0
   playerInput: 
+  SubmitPanel: {fileID: 586527435}
+  UserHeaderText: {fileID: 1303983530}
   firstPlaceTimeText: {fileID: 307098102}
   firstPlaceLapOneTimeText: {fileID: 200621768}
   firstPlaceLapTwoTimeText: {fileID: 1809424481}
@@ -5780,6 +5771,18 @@ MonoBehaviour:
   thirdPlaceLapThreeTimeText: {fileID: 951608045}
   thirdPlaceLapFourTimeText: {fileID: 1518868525}
   thirdPlaceNameText: {fileID: 1508360544}
+--- !u!114 &1159771887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159771884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fed3e19dae7f843843a2812fb8b4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1169165383
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,7 +6160,7 @@ GameObject:
   - component: {fileID: 1303983531}
   - component: {fileID: 1303983530}
   m_Layer: 5
-  m_Name: RecordText
+  m_Name: USERRecordHeaderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6180,7 +6183,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0.00012207031, y: -70.21753}
-  m_SizeDelta: {x: 500, y: 120}
+  m_SizeDelta: {x: 660, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1303983530
 MonoBehaviour:
@@ -6202,7 +6205,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dummy Text to display the max text
+  m_text: 'A brand new record!
+
+    Good job player!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cb3b1bb3160f974e912fc3621ebadfb, type: 2}
   m_sharedMaterial: {fileID: -5649659027497126171, guid: 0cb3b1bb3160f974e912fc3621ebadfb, type: 2}
@@ -6369,7 +6374,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -6730,7 +6735,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 14
+  m_GlobalPointSize: 80
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -6764,7 +6769,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -8115,7 +8120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 508.46722, y: -178.21753}
+  m_AnchoredPosition: {x: 492.57367, y: -178.21753}
   m_SizeDelta: {x: 90, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531800021
@@ -8523,7 +8528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296.31006, y: -178.21753}
+  m_AnchoredPosition: {x: 280.4165, y: -178.21753}
   m_SizeDelta: {x: 90, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571931605
@@ -9623,7 +9628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: -18.21753}
+  m_AnchoredPosition: {x: 59.106445, y: -18.21753}
   m_SizeDelta: {x: 90, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1680354561
@@ -10501,7 +10506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 615.00006, y: -178.21753}
+  m_AnchoredPosition: {x: 599.1065, y: -178.21753}
   m_SizeDelta: {x: 90, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1904311425
