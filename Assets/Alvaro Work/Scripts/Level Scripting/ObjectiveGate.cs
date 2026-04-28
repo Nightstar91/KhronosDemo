@@ -81,7 +81,8 @@ public class ObjectiveGate : MonoBehaviour
         {
             if (allCoin == 0)
             {
-                gameObject.SetActive(false);
+                colliderForDoor.enabled = false;
+                animator.SetBool("IsOpen", true);
             }
         }
         else if (objectiveType == ObjectiveType.DialogueLock)
