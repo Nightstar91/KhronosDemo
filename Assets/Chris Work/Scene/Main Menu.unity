@@ -6211,6 +6211,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 82.321, y: -265.039, z: -154.427}
+--- !u!114 &1578154495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3051230961876776706, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+  m_PrefabInstance: {fileID: 2142376394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa00444f2faf6754cb38d5bbd42de9d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1744851008
 GameObject:
   m_ObjectHideFlags: 0
@@ -6707,9 +6718,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 443768820}
     - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 443768820}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1578154495}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UIAudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311465280734577370, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9080466439185461733, guid: bdbfef20feac90645bad0f490c814af0, type: 3}
       propertyPath: m_Name
       value: MainMenuCanvas
