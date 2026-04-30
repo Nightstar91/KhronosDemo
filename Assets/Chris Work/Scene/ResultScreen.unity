@@ -5721,6 +5721,7 @@ GameObject:
   - component: {fileID: 1159771885}
   - component: {fileID: 1159771886}
   - component: {fileID: 1159771887}
+  - component: {fileID: 1159771888}
   m_Layer: 0
   m_Name: LeaderBoardController
   m_TagString: Untagged
@@ -5755,7 +5756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d207e7df91a3cb47b966d764c5ac60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canUserSubmit: 0
   currentTime: 0
   currentLapTime:
   - 0
@@ -5763,6 +5763,31 @@ MonoBehaviour:
   - 0
   - 0
   playerInput: 
+--- !u!114 &1159771887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159771884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fed3e19dae7f843843a2812fb8b4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1159771888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159771884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2071dfaa6b7229e48b0ca7a07e93062d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canUserSubmit: 0
   SubmitPanel: {fileID: 586527435}
   UserHeaderText: {fileID: 1303983530}
   firstPlaceTimeText: {fileID: 307098102}
@@ -5783,18 +5808,6 @@ MonoBehaviour:
   thirdPlaceLapThreeTimeText: {fileID: 951608045}
   thirdPlaceLapFourTimeText: {fileID: 1518868525}
   thirdPlaceNameText: {fileID: 1508360544}
---- !u!114 &1159771887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159771884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14fed3e19dae7f843843a2812fb8b4e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1169165383
 GameObject:
   m_ObjectHideFlags: 0
