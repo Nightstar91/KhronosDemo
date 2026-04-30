@@ -28,7 +28,14 @@ public class LevelObjective : MonoBehaviour
     [Header("Parameters for Level Timer")]
     [SerializeField] public float levelTimer;
     private bool isTimerRunning;
+
+    public float[] thirdplaceTimeData;
+
     public float thirdPlaceTime;
+    public float thirdPlaceLapOneTime;
+    public float thirdPlaceLapTwoTime;
+    public float thirdPlaceLapThreeTime;
+    public float thirdPlaceLapFourTime;
 
     public Vector3 playerSpawnPoint;
 
@@ -50,6 +57,9 @@ public class LevelObjective : MonoBehaviour
 
         objectiveText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
         objectiveHud = GameObject.Find("ObjectiveHUD");
+
+        thirdplaceTimeData = new float[5];
+        ;
     }
 
 
