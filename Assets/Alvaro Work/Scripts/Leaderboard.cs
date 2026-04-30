@@ -14,36 +14,12 @@ public class Leaderboard : MonoBehaviour
 
     public LeaderboardEntry[] leaderboard;
 
-    public bool canUserSubmit = false;
-
     // Related to the player score/time
     public float currentTime;
     public float[] currentLapTime = new float[4];
     public string playerInput = string.Empty;
 
-    [SerializeField] GameObject SubmitPanel;
-    [SerializeField] TextMeshProUGUI UserHeaderText;
-
-    [SerializeField] TextMeshProUGUI firstPlaceTimeText;
-    [SerializeField] TextMeshProUGUI firstPlaceLapOneTimeText;
-    [SerializeField] TextMeshProUGUI firstPlaceLapTwoTimeText;
-    [SerializeField] TextMeshProUGUI firstPlaceLapThreeTimeText;
-    [SerializeField] TextMeshProUGUI firstPlaceLapFourTimeText;
-    [SerializeField] TextMeshProUGUI firstPlaceNameText;
-
-    [SerializeField] TextMeshProUGUI secondPlaceTimeText;
-    [SerializeField] TextMeshProUGUI secondPlaceLapOneTimeText;
-    [SerializeField] TextMeshProUGUI secondPlaceLapTwoTimeText;
-    [SerializeField] TextMeshProUGUI secondPlaceLapThreeTimeText;
-    [SerializeField] TextMeshProUGUI secondPlaceLapFourTimeText;
-    [SerializeField] TextMeshProUGUI secondPlaceNameText;
-
-    [SerializeField] TextMeshProUGUI thirdPlaceTimeText;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapOneTimeText;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapTwoTimeText;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapThreeTimeText;
-    [SerializeField] TextMeshProUGUI thirdPlaceLapFourTimeText;
-    [SerializeField] TextMeshProUGUI thirdPlaceNameText;
+    
 
 
 
@@ -70,9 +46,6 @@ public class Leaderboard : MonoBehaviour
 
     private void Start()
     {   
-        DisplayCurrentLeaderboard();
-        ManipulateUserPanel();
-
         TempScore.cameFromChallenge = false;
     }
 
@@ -135,34 +108,6 @@ public class Leaderboard : MonoBehaviour
                 }
             }
         }
-    }
-
-
-    public void DisplayCurrentLeaderboard()
-    {
-        //1st place
-        firstPlaceTimeText.text = ConvertFloatToTime(leaderboard[0].totalTime);
-        firstPlaceLapOneTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[0]);
-        firstPlaceLapTwoTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[1]);
-        firstPlaceLapThreeTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[2]);
-        firstPlaceLapFourTimeText.text = ConvertFloatToTime(leaderboard[0].lapTimes[3]);
-        firstPlaceNameText.text = leaderboard[0].name;
-
-        // 2nd place
-        secondPlaceTimeText.text = ConvertFloatToTime(leaderboard[1].totalTime);
-        secondPlaceLapOneTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[0]);
-        secondPlaceLapTwoTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[1]);
-        secondPlaceLapThreeTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[2]);
-        secondPlaceLapFourTimeText.text = ConvertFloatToTime(leaderboard[1].lapTimes[3]);
-        secondPlaceNameText.text = leaderboard[1].name;
-
-        // 3rd place
-        thirdPlaceTimeText.text = ConvertFloatToTime(leaderboard[2].totalTime);
-        thirdPlaceLapOneTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[0]);
-        thirdPlaceLapTwoTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[1]);
-        thirdPlaceLapThreeTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[2]);
-        thirdPlaceLapFourTimeText.text = ConvertFloatToTime(leaderboard[2].lapTimes[3]);
-        thirdPlaceNameText.text = leaderboard[2].name;
     }
 
 
@@ -230,42 +175,6 @@ public class Leaderboard : MonoBehaviour
         leaderboard[3] = blankEntry;
 
         SaveLeaderBoard();
-    }
-
-    public void ManipulateUserPanel()
-    {
-        // For player coming from the main menu
-        if(!TempScore.cameFromChallenge && !canUserSubmit)
-        {
-            UserHeaderText.text = "This is the Leaderboard! Here is an example entry:";
-            SubmitPanel.SetActive(false);
-        }
-        // For player coming from the final level with a score but doesn't get record
-        else if (!canUserSubmit)
-        {
-            UserHeaderText.text = "No new record!\nBetter luck next time!";
-            SubmitPanel.SetActive(false);
-        }
-        // For player coming from the final level with a score but does get record
-        else if (canUserSubmit)
-        {
-            UserHeaderText.text = "A brand new record!\nGood job player!";
-        }
-
-    }
-
-
-    public string ConvertFloatToTime(float conversion)
-    {
-
-        string output;
-
-        int minutes = Mathf.FloorToInt(conversion / 60);
-        int seconds = Mathf.FloorToInt(conversion % 60);
-
-        output = string.Format("{0}:{1:D2}", minutes, seconds);
-
-        return output;
     }
 
 }
