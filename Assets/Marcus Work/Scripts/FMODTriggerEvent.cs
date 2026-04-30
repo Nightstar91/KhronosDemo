@@ -24,6 +24,13 @@ public class FMODTriggerEvent : MonoBehaviour
 
     public UnityEvent openDialogueDoor;
     public event Action OnEventFinished;
+    public SubtitleController subs;
+
+    private void Start()
+    {
+        subs = GameObject.Find("SubtitleUI").GetComponent<SubtitleController>();
+        subs.instance = instance;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
