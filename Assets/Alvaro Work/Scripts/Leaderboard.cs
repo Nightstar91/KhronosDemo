@@ -141,12 +141,20 @@ public class Leaderboard : MonoBehaviour
     }
 
 
-    public float GetThirdPlace()
+    public float[] GetThirdPlace()
     {
         LoadLeaderBoard();
         Bubblesort(3);
 
-        return leaderboard[2].totalTime;
+        float[] result = new float[5];
+
+        result[0] = leaderboard[2].lapTimes[0];
+        result[1] = leaderboard[2].lapTimes[1];
+        result[2] = leaderboard[2].lapTimes[2];
+        result[3] = leaderboard[2].lapTimes[3];
+        result[4] = leaderboard[2].totalTime;
+
+        return result;
     }
 
 

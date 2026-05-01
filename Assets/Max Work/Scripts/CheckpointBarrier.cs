@@ -4,61 +4,75 @@ using FMOD.Studio;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CheckpointBarrier : MonoBehaviour
+namespace CheckPointScript
 {
-    [Header("Checkpoint Times")]
-    List<float> CheckpointTime = new List<float>();
-    float[] CheckpointBest;
-    float checkpointTimer;
-
-    GameObject Checkpoint;
-    LevelObjective levelObjective;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class CheckpointBarrier : MonoBehaviour
     {
-        levelObjective = GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>();
-        Checkpoint.GetComponent<GameObject>();
-    }
-
-    private void Update()
-    {
-        ControlTimer(true, false);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag != "Player")
+        public enum Lap
         {
-            return;
+            First,
+            Second,
+            Third,
+            Fourth
         }
 
-        if (Checkpoint.name.Contains("1"))
+        [SerializeField] public Lap whichLap;
+        [SerializeField] public bool triggerOnce = false;
+
+        [Header("Checkpoint Times")]
+        List<float> CheckpointTime = new List<float>();
+        float[] CheckpointBest;
+        float checkpointTimer;
+
+        LevelObjective levelObjective;
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        void Start()
         {
-            CheckpointTime.Add(levelObjective.levelTimer);
+            levelObjective = GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>();
+        }
+
+        private void Update()
+        {
             ControlTimer(true, false);
         }
-        else
-        {
-            CheckpointTime.Add(checkpointTimer);
-            ControlTimer(false, true);
-        }
-    }
 
-    private void ControlTimer(bool firstTimer, bool newTimer)
-    {
-        if (firstTimer || !newTimer)
+        private void OnTriggerEnter(Collider other)
         {
-            checkpointTimer += 1 * Time.deltaTime;
+            if (other.tag != "Player") return;
+            if (triggerOnce) return;
+
+            if (whichLap == Lap.First)
+            {
+                CheckpointTime.Add(levelObjective.levelTimer);
+                ControlTimer(true, false);
+                triggerOnce = true;
+            }
+            else
+            {
+                CheckpointTime.Add(checkpointTimer);
+                ControlTimer(false, true);
+                triggerOnce = true;
+            }
         }
-        else if (checkpointTimer < 0)
+
+        private void ControlTimer(bool firstTimer, bool newTimer)
         {
-            checkpointTimer = 0;
-            return;
-        }
-        else
-        {
-            checkpointTimer = 0 * Time.deltaTime;
-            ControlTimer(false, false);
+            if (firstTimer || !newTimer)
+            {
+                checkpointTimer += 1 * Time.deltaTime;
+            }
+            else if (checkpointTimer < 0)
+            {
+                checkpointTimer = 0;
+                return;
+            }
+            else
+            {
+                checkpointTimer = 0 * Time.deltaTime;
+                ControlTimer(false, false);
+            }
         }
     }
 }
+

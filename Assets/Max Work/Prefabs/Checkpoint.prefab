@@ -79,5 +79,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378cc05c9e8c44746a804e889413a9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 0, g: 1, b: 0, a: 0.3}
+  gizmoColor: {r: 0, g: 0.9355762, b: 1, a: 0.29803923}
   wireColor: {r: 0, g: 1, b: 0, a: 0.8}

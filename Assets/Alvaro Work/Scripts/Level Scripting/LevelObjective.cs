@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 using FMODUnity;
 using FMOD.Studio;
+using CheckPointScript;
 
 public class LevelObjective : MonoBehaviour
 {
@@ -30,12 +31,6 @@ public class LevelObjective : MonoBehaviour
     private bool isTimerRunning;
 
     public float[] thirdplaceTimeData;
-
-    public float thirdPlaceTime;
-    public float thirdPlaceLapOneTime;
-    public float thirdPlaceLapTwoTime;
-    public float thirdPlaceLapThreeTime;
-    public float thirdPlaceLapFourTime;
 
     public Vector3 playerSpawnPoint;
 
@@ -66,15 +61,18 @@ public class LevelObjective : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        leaderboard.GetThirdPlace();
+
         if (levelHasTimer)
         {
             isTimerRunning = false;
 
-            thirdPlaceTime = leaderboard.GetThirdPlace();
+            // [0] = first lap, [2] = second lap, [3] = third lap, [4] = fourth lap, [5] = total time
+            thirdplaceTimeData = leaderboard.GetThirdPlace();
         }
         else
         {
-            objectiveHud.gameObject.SetActive(false); // turning off objective ui if there is no objective
+            objectiveHud.gameObject.SetActive(false); // turning off objective ui since there is no objective
             levelTimer = -1;
             isTimerRunning = false;
         }
@@ -144,9 +142,7 @@ public class LevelObjective : MonoBehaviour
 
     public void TriggerLevelEnd()
     {
-
-
-        //StopCountdown();
+        StopCountdown();
         //Honor();
         //PlayDialogue(); //play again after honor is determined
     }
@@ -164,18 +160,107 @@ public class LevelObjective : MonoBehaviour
         player.currentState = FPSController.PlayerState.STATE_IDLE;
     }
 
+    public void HonorForLapTime(CheckPointScript.CheckpointBarrier.Lap lap)
+    {
+        switch(lap)
+        {
+            case CheckpointBarrier.Lap.First:
+                Debug.Log("Honor function called");
+                if (levelTimer < thirdplaceTimeData[0])
+                {
+                    honorValue = HonorValue.Good; // Good
+                    Debug.Log("Good Honor");
+                    return;
+                }
+                else if (levelTimer == thirdplaceTimeData[0])
+                {
+                    Debug.Log("Neutral Honor");
+                    honorValue = HonorValue.Neutral; // Neutral
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Bad Honor");
+                    honorValue = HonorValue.Bad; // Bad
+                }
+                return;
+
+            case CheckpointBarrier.Lap.Second:
+                Debug.Log("Honor function called");
+                if (levelTimer < thirdplaceTimeData[1])
+                {
+                    honorValue = HonorValue.Good; // Good
+                    Debug.Log("Good Honor");
+                    return;
+                }
+                else if (levelTimer == thirdplaceTimeData[1])
+                {
+                    Debug.Log("Neutral Honor");
+                    honorValue = HonorValue.Neutral; // Neutral
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Bad Honor");
+                    honorValue = HonorValue.Bad; // Bad
+                }
+                return;
+
+            case CheckpointBarrier.Lap.Third:
+                Debug.Log("Honor function called");
+                if (levelTimer < thirdplaceTimeData[2])
+                {
+                    honorValue = HonorValue.Good; // Good
+                    Debug.Log("Good Honor");
+                    return;
+                }
+                else if (levelTimer == thirdplaceTimeData[2])
+                {
+                    Debug.Log("Neutral Honor");
+                    honorValue = HonorValue.Neutral; // Neutral
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Bad Honor");
+                    honorValue = HonorValue.Bad; // Bad
+                }
+                return;
+
+            case CheckpointBarrier.Lap.Fourth:
+                Debug.Log("Honor function called");
+                if (levelTimer < thirdplaceTimeData[3])
+                {
+                    honorValue = HonorValue.Good; // Good
+                    Debug.Log("Good Honor");
+                    return;
+                }
+                else if (levelTimer == thirdplaceTimeData[3])
+                {
+                    Debug.Log("Neutral Honor");
+                    honorValue = HonorValue.Neutral; // Neutral
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Bad Honor");
+                    honorValue = HonorValue.Bad; // Bad
+                }
+                return;
+        }
+    }
 
 
-    public void Honor()
+    public void HonorForTotalTime()
     {
         Debug.Log("Honor function called");
-        if (levelTimer < thirdPlaceTime)
+        if (levelTimer < thirdplaceTimeData[5])
         {
             honorValue = HonorValue.Good; // Good
             Debug.Log("Good Honor");
             return;
         }
-        else if (levelTimer == thirdPlaceTime)
+        else if (levelTimer == thirdplaceTimeData[5])
         {
             Debug.Log("Neutral Honor");
             honorValue = HonorValue.Neutral; // Neutral
