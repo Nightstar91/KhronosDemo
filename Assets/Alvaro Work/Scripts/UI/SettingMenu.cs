@@ -15,6 +15,9 @@ public class SettingMenu : MonoBehaviour
     public GameObject fovSlider;
     public GameObject fovText;
 
+    //Subtitle
+    [SerializeField] public int isSubtitleEnable; // 0 = false, 1 = true
+    public Toggle subtitleToggle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -26,6 +29,9 @@ public class SettingMenu : MonoBehaviour
         fovSlider = GameObject.Find("FOVSlider");
         fovText = GameObject.Find("SettingFOVAmountText");
         fovAmount = PlayerPrefs.GetFloat("Fov", 70);
+
+        subtitleToggle = GameObject.Find("SubtitleCheck").GetComponent<Toggle>();
+
 
         sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
         fovText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", fovAmount);
@@ -59,6 +65,16 @@ public class SettingMenu : MonoBehaviour
         SaveFOV();
     }
 
+    public void UpdateSubtitle()
+    {
+        if(subtitleToggle.isOn)
+            isSubtitleEnable = 1;
+        else 
+            isSubtitleEnable = 0;
+
+        SaveSubtitleCheck();
+    }
+
 
     [ContextMenu("Save")]
     private void SaveSensitivity()
@@ -72,6 +88,13 @@ public class SettingMenu : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Fov", fovAmount);
     }
+    
+
+    [ContextMenu("Save")]
+    private void SaveSubtitleCheck()
+    {
+        PlayerPrefs.SetInt("SubtitleBool", isSubtitleEnable);
+    }
 
 
     public float GetSensitivity()
@@ -82,5 +105,19 @@ public class SettingMenu : MonoBehaviour
     public float GetFOV()
     {
         return fovAmount;
+    }
+
+    public bool GetSubtitleCheck()
+    {
+        switch(isSubtitleEnable)
+        {
+            case 0:
+                return false;
+            case 1:
+                return true;
+
+            default:
+                return true;
+        }
     }
 }

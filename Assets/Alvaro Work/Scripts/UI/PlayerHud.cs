@@ -16,7 +16,9 @@ public class PlayerHud : BasicMenu
     public GameObject mainMenuButton;
     public GameObject resumeButton;
     public GameObject resultPanel;
+    public GameObject subtitlePanel;
     public bool isPaused = false;
+    public bool isSubtitleEnabled;
 
     public override void Awake()
     {
@@ -24,6 +26,7 @@ public class PlayerHud : BasicMenu
         pauseMenu = GameObject.Find("Pausemenu");
         mainMenuButton = GameObject.Find("MainMenuButton");
         resumeButton = GameObject.Find("ResumeButton");
+        subtitlePanel = GameObject.Find("SubtitleUI");
         //resultPanel = GameObject.Find("ResultPanel");
 
     }
@@ -51,6 +54,8 @@ public class PlayerHud : BasicMenu
     // Update is called once per frame
     void Update()
     {
+        
+
         UpdateSpeedometer();
     }
 
@@ -84,6 +89,12 @@ public class PlayerHud : BasicMenu
 
         // Updating the FOV
         player.playerCamera.fieldOfView = settingMenu.GetFOV();
+
+        // Updating the SubtitleCheck
+        if (settingMenu.GetSubtitleCheck())
+            OpenSubtitlePanel();
+        else
+            CloseSubtitlePanel();
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
@@ -132,6 +143,17 @@ public class PlayerHud : BasicMenu
         exitGameConfirmationPanel.SetActive(false);
         resumeButton.SetActive(true);
         exitGameButton.SetActive(true);
+    }
+
+    public void OpenSubtitlePanel()
+    {
+        subtitlePanel.SetActive(true);
+    }
+
+
+    public void CloseSubtitlePanel()
+    {
+        subtitlePanel.SetActive(false);
     }
 
 
