@@ -7452,6 +7452,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1603440317696798716, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603440317696798716, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603440317696798716, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603440317696798716, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2228484998180759831, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7617,6 +7633,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8402240367569660797, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635718887276149198, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635718887276149198, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635718887276149198, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -11987,6 +12015,7 @@ MonoBehaviour:
   openDialogueDoor:
     m_PersistentCalls:
       m_Calls: []
+  subs: {fileID: 0}
 --- !u!65 &793678156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15758,30 +15787,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1021448707 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8322002821754022421, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-  m_PrefabInstance: {fileID: 1819433472}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1021448710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021448707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d207e7df91a3cb47b966d764c5ac60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTime: 0
-  currentLapTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  playerInput: 
 --- !u!43 &1045588318
 Mesh:
   m_ObjectHideFlags: 0
@@ -27554,30 +27559,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      propertyPath: levelHasTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      propertyPath: levelDialogue.Path
-      value: event:/Dialogue/LevelDialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      propertyPath: levelDialogue.Guid.Data1
-      value: -699568328
-      objectReference: {fileID: 0}
-    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      propertyPath: levelDialogue.Guid.Data2
-      value: 1311523831
-      objectReference: {fileID: 0}
-    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      propertyPath: levelDialogue.Guid.Data3
-      value: 131953073
-      objectReference: {fileID: 0}
-    - target: {fileID: 5714606126859842433, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      propertyPath: levelDialogue.Guid.Data4
-      value: 1657139841
-      objectReference: {fileID: 0}
     - target: {fileID: 8322002821754022421, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
       propertyPath: m_Name
       value: LevelObjectiveController
@@ -27585,10 +27566,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8322002821754022421, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1021448710}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03155bdb37e776c45a0a99d2f18bb68e, type: 3}
 --- !u!43 &1849282498
 Mesh:

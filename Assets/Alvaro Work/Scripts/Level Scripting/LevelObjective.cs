@@ -35,7 +35,7 @@ public class LevelObjective : MonoBehaviour
     public Vector3 playerSpawnPoint;
 
     private FPSController player;
-    private Leaderboard leaderboard;
+    public Leaderboard leaderboard;
     private GameObject startTrigger;
     private GameObject endTrigger;
 

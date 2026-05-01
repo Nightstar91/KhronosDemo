@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4889902424112099352}
   - component: {fileID: 5714606126859842433}
+  - component: {fileID: 8776323469163889158}
   m_Layer: 0
   m_Name: LevelObjectiveController
   m_TagString: Untagged
@@ -44,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6bb0f9d4daf6a4aaa4b2507a8803b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelHasTimer: 0
+  levelHasTimer: 1
   levelSelectValue: 0
   levelDialogue:
     Guid:
@@ -54,6 +55,25 @@ MonoBehaviour:
       Data4: 1657139841
     Path: event:/Dialogue/LevelDialogue
   levelTimer: 0
-  thirdPlaceTime: 0
+  thirdplaceTimeData: []
   playerSpawnPoint: {x: 0, y: 0, z: 0}
   objectiveText: {fileID: 0}
+--- !u!114 &8776323469163889158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322002821754022421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d207e7df91a3cb47b966d764c5ac60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTime: 0
+  currentLapTime:
+  - 0
+  - 0
+  - 0
+  - 0
+  playerInput: 

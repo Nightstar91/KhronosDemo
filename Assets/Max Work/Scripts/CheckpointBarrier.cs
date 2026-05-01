@@ -20,8 +20,8 @@ namespace CheckPointScript
         [SerializeField] public bool triggerOnce = false;
 
         [Header("Checkpoint Times")]
-        List<float> CheckpointTime = new List<float>();
-        float[] CheckpointBest;
+        List<float> checkpointTime = new List<float>();
+
         float checkpointTimer;
 
         LevelObjective levelObjective;
@@ -42,15 +42,17 @@ namespace CheckPointScript
             if (other.tag != "Player") return;
             if (triggerOnce) return;
 
+
+            //if (Checkpoint.name.Contains("1"))
             if (whichLap == Lap.First)
             {
-                CheckpointTime.Add(levelObjective.levelTimer);
+                checkpointTime.Add(levelObjective.levelTimer);
                 ControlTimer(true, false);
                 triggerOnce = true;
             }
             else
             {
-                CheckpointTime.Add(checkpointTimer);
+                checkpointTime.Add(checkpointTimer);
                 ControlTimer(false, true);
                 triggerOnce = true;
             }
@@ -71,6 +73,15 @@ namespace CheckPointScript
             {
                 checkpointTimer = 0 * Time.deltaTime;
                 ControlTimer(false, false);
+            }
+        }
+
+        // NEED TO CHECK IF WORK
+        public void AddCheckpointTimeToLeaderboard()
+        {
+            for (int i = 0; i < checkpointTime.Count; i++)
+            {
+                levelObjective.leaderboard.newUserTime[i] = checkpointTime[i];
             }
         }
     }

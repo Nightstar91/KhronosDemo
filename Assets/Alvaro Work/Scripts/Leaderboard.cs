@@ -16,7 +16,7 @@ public class Leaderboard : MonoBehaviour
 
     // Related to the player score/time
     public float currentTime;
-    public float[] currentLapTime = new float[4];
+    public float[] newUserTime = new float[5];
     public string playerInput = string.Empty;
 
     
