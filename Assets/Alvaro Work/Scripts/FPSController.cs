@@ -12,8 +12,7 @@ public class FPSController : MonoBehaviour
         STATE_INAIR,
         STATE_SLIDE,
         STATE_WALLRUN,
-        STATE_PAUSE,
-        STATE_DEAD
+        STATE_PAUSE
     }
 
     public PlayerState currentState = PlayerState.STATE_IDLE;
@@ -325,23 +324,9 @@ public class FPSController : MonoBehaviour
                     previousState = PlayerState.STATE_IDLE;
                 }
                 break;
-
-            case PlayerState.STATE_DEAD:
-                FreezePlayer();
-                playerHud.OpenResultPanel(hasFailed);
-                if (jumpAction.WasPerformedThisFrame())
-                {
-                    GameObject.Find("LevelObjectiveController").GetComponent<LevelObjective>().TriggerRestart();
-                }
-
-                break;
         }
         // To make sure gravity is applied constantly
         ApplyFinalMovements();
-
-        // if at any point player failed the level
-        if (hasFailed)
-            currentState = PlayerState.STATE_DEAD;
 
 
     }
