@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 7972212662443952910}
   - component: {fileID: 3453783963767826055}
   - component: {fileID: 3089665425174926268}
+  - component: {fileID: 3860965882775315757}
   m_Layer: 5
   m_Name: SubtitleUI
   m_TagString: Untagged
@@ -233,5 +234,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72c0206e5576fa469261d3bbbcf1155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subtitles: []
   subs: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  Tutorial1Start:
+  - time: 0
+    text: Hello there, Zap. Welcome to the Khronos project. I am your personal testing
+      administrator who will ensure your peak performance.
+  - time: 7.25
+    text: 'Your task in these tests is simple: make your way to the other end of
+      the chamber and enter the Elevator to complete the portion of the test.'
+  - time: 14.75
+    text: During these tests, you will be required to implement various locomotive
+      techniques to reach the end of the chamber, but we must calibrate your motor
+      controls first.
+  - time: 23.5
+    text: Your compliance will be rewarded, and excellence is expected of you. We
+      will begin by calibrating your jumping capabilities.
+  - time: 31
+    text: When the door opens, you may begin the test. The door will open in 3, 2,
+      1.
+  Tutorial1End:
+  - time: 0
+    text: 'Initial Calibration Complete. Congratulations, Zap. Continue towards the
+      elevator to continue to the next test. '
+  Tutorial2Start:
+  - time: 0
+    text: This next test is designed to calibrate Energy Transference from your legs
+      into sliding.
+  - time: 4.6
+    text: To complete this test, you will be required to traverse under certain elements
+      of the chamber that are much too short for you to stand under.
+  - time: 11
+    text: "I\u2019d wish you luck, but you don\u2019t need it."
+  Tutorial2End:
+  - time: 0
+    text: "Sliding Functionality confirmed. You are displaying great skill thus far,
+      Zap. Let\u2019s hope you keep providing in these next tests."
+  - time: 6.8
+    text: Continue into the elevator when you are ready.
+  Tutorial3Start:
+  - time: 0
+    text: The next test you will perform will test the Mag-Lok technology interwoven
+      into your suit.
+  - time: 4.2
+    text: This will let you maintain horizontal momentum while suspended from the
+      ground, so long as you remain close to a wall.
+  - time: 10.4
+    text: You might have also noticed the electrified floor throughout the chamber.
+  - time: 14.4
+    text: Do not be alarmed. You will not come to harm should you come into contact
+      with them,
+  - time: 19.2
+    text: but it will force us to reset the chamber to retry the test. Do your best
+      to stay out of the electrified floor as much as you can.
+  Tutorial3End:
+  - time: 0
+    text: Mag-Lok synchronization tested and completed. This concludes with the Locomotive
+      portion of the test,
+  - time: 5.3
+    text: but we are not done here. Continue to the Elevator to begin the cognitive
+      portion of the test.
+  Tutorial4Start:
+  - time: 0
+    text: This is the cognitive test. Tokens have been hidden throughout the environment.
+  - time: 3.7
+    text: Obtain all tokens, and the door to exit the chamber will open. Have at
+      it, Zap.
+  Tutorial4End:
+  - time: 0
+    text: Cognitive test complete. Congratulations on finishing all preliminary tests.
+  - time: 4.6
+    text: There is one more test available for you, now that your locomotive and
+      cognitive faculties have been assessed and verified.
+  - time: 11
+    text: Proceed to the elevator to begin briefing on the Gauntlet.
+--- !u!225 &3860965882775315757
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850372389497426637}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

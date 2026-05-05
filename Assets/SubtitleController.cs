@@ -1,52 +1,183 @@
-using UnityEngine;
-using FMOD.Studio;
-using FMODUnity;
+using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class SubtitleController : MonoBehaviour
 {
     static public bool isActive;
-    public string[] subtitles;
-    public EventInstance instance;
-    private float lastValue = -1f;
+    [System.Serializable]
+    public class SubtitleEntry
+    {
+        public float time;
+        public string text;
+    }
 
-    public TextMeshPro subs;
+    public TMP_Text subs;
+    public CanvasGroup canvasGroup;
+
+    public SubtitleEntry[] Tutorial1Start;
+    public SubtitleEntry[] Tutorial1End;
+    public SubtitleEntry[] Tutorial2Start;
+    public SubtitleEntry[] Tutorial2End;
+    public SubtitleEntry[] Tutorial3Start;
+    public SubtitleEntry[] Tutorial3End;
+    public SubtitleEntry[] Tutorial4Start;
+    public SubtitleEntry[] Tutorial4End;
+
+    private bool used = false;
 
     private void Start()
     {
-        subs = GetComponentInChildren<TextMeshPro>();
+        subs = GetComponentInChildren<TMP_Text>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
+        subs.text = "";
     }
 
-    private void Update()
+    public void StartSubs(int subtitleType)
     {
-        instance.getParameterByName("SubtitleIndex", out float value);
-        Debug.Log(value);
+        int Type = 0;
 
-        if (value != lastValue)
+        // Given the parameter can only be the numbers 1-4,
+        // we use a switch and the private boolean to determine whether this is the beginning or ending dialogue.
+        // The boolean should be set to false by default.
+        switch (subtitleType)
         {
-            lastValue = value;
-            Debug.Log("Changed Subtitles");
-            ChangeSub((int)value);
+            default:
+                break;
+            case 1:
+                if (!used)
+                {
+                    Type = 1;
+                    used = true;
+                }
+                else
+                {
+                    Type = 2;
+                    used = false;
+                }
+                break;
+            case 2:
+                if (!used)
+                {
+                    Type = 3;
+                    used = true;
+                }
+                else
+                {
+                    Type = 4;
+                    used = false;
+                }
+                break;
+            case 3:
+                if (!used)
+                {
+                    Type = 5;
+                    used = true;
+                }
+                else
+                {
+                    Type = 6;
+                    used = false;
+                }
+                break;
+            case 4:
+                if (!used)
+                {
+                    Type = 7;
+                    used = true;
+                }
+                else
+                {
+                    Type = 8;
+                    used = false;
+                }
+                break;
+        }
+
+        // Now we use our new variable to start the coroutine.
+        switch (Type)
+        {
+            default:
+                break;
+            case 1:
+                StartCoroutine(TriggerSubtitles(Tutorial1Start));
+                break;
+            case 2:
+                StartCoroutine(TriggerSubtitles(Tutorial1End));
+                break;
+            case 3:
+                StartCoroutine(TriggerSubtitles(Tutorial2Start));
+                break;
+            case 4:
+                StartCoroutine(TriggerSubtitles(Tutorial2End));
+                break;
+            case 5:
+                StartCoroutine(TriggerSubtitles(Tutorial3Start));
+                break;
+            case 6:
+                StartCoroutine(TriggerSubtitles(Tutorial3End));
+                break;
+            case 7:
+                StartCoroutine(TriggerSubtitles(Tutorial4Start));
+                break;
+            case 8:
+                StartCoroutine(TriggerSubtitles(Tutorial4End));
+                break;
         }
     }
 
-    void ShowSub()
+    IEnumerator TriggerSubtitles(SubtitleEntry[] subtitles) 
     {
+        float elapsed = 0f;
+        int index = 0;
 
-    }
-
-    void HideSub()
-    {
-
-    }
-
-    void ChangeSub(int value)
-    {
-        if (!isActive)
+        while (index < subtitles.Length)
         {
-            return;
+            elapsed += Time.deltaTime;
+
+            if (elapsed >= subtitles[index].time)
+            {
+                ShowSubtitle(subtitles[index].text);
+                index++;
+            }
+
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeCanvasGroup(CanvasGroup group, float duration, bool fadeIn)
+    {
+        float startAlpha = group.alpha;
+        float endAlpha = fadeIn ? 1f : 0f;
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            group.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
+
+            yield return null;
         }
 
-        subs.text = subtitles[value];
+        group.alpha = endAlpha;
+    }
+
+    public void ShowSubtitle(string text)
+    {
+        if (canvasGroup.alpha == 0)
+        {
+            StartCoroutine(FadeCanvasGroup(canvasGroup, 0.25f, true));
+        }
+        subs.text = text;
+    }
+
+    public void HideSubtitle()
+    {
+        StartCoroutine(FadeCanvasGroup(canvasGroup, 1f, false));
     }
 }
