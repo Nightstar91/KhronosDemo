@@ -18,18 +18,20 @@ public class FMODTriggerEvent : MonoBehaviour
     [Tooltip("The value to set the parameter to when triggered.")]
     public float parameterValue = 0f;
 
+    [Header("SubtitleController")]
+    [Tooltip("The subtitle code itself")]
+    public SubtitleController subs;
+
     private EventInstance instance;
     private bool hasPlayed = false;
     private bool eventFinishedFlag = false;
 
     public UnityEvent openDialogueDoor;
     public event Action OnEventFinished;
-    public SubtitleController subs;
 
     private void Start()
     {
         subs = GameObject.Find("SubtitleUI").GetComponent<SubtitleController>();
-        subs.instance = instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,6 +56,7 @@ public class FMODTriggerEvent : MonoBehaviour
         }
 
         instance.start();
+        subs.StartSubs((int)parameterValue);
     }
 
     private void Update()
