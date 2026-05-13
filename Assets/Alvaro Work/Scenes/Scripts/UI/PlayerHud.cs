@@ -71,13 +71,18 @@ public class PlayerHud : BasicMenu
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         RuntimeManager.StudioSystem.setParameterByName("Pause", 1f);
-
+        if (FMODTriggerEvent.ActiveDialogue != null)
+        {
+            FMODTriggerEvent.ActiveDialogue.PauseDialogue();
+        }
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         player.moveAction.Disable();
         player.jumpAction.Disable();
         player.slideAction.Disable();
+
+        isPaused = true;
     }
 
 
@@ -99,7 +104,10 @@ public class PlayerHud : BasicMenu
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
         RuntimeManager.StudioSystem.setParameterByName("Pause", 0f);
-
+        if (FMODTriggerEvent.ActiveDialogue != null)
+        {
+            FMODTriggerEvent.ActiveDialogue.ResumeDialogue();
+        }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

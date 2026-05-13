@@ -26,7 +26,7 @@ public class SubtitleController : MonoBehaviour
     public SubtitleEntry[] Tutorial4End;
 
     private bool used = false;
-
+    private bool paused = false;
     private void Start()
     {
         subs = GetComponentInChildren<TMP_Text>();
@@ -128,13 +128,20 @@ public class SubtitleController : MonoBehaviour
         }
     }
 
-    IEnumerator TriggerSubtitles(SubtitleEntry[] subtitles) 
+    IEnumerator TriggerSubtitles(SubtitleEntry[] subtitles)
     {
         float elapsed = 0f;
         int index = 0;
 
         while (index < subtitles.Length)
         {
+            
+            if (paused)
+            {
+                yield return null;
+                continue;
+            }
+
             elapsed += Time.deltaTime;
 
             if (elapsed >= subtitles[index].time)
@@ -156,7 +163,18 @@ public class SubtitleController : MonoBehaviour
 
         while (time < duration)
         {
+            // =========================
+            // ADDED
+            // Freeze fade while paused
+            // =========================
+            if (paused)
+            {
+                yield return null;
+                continue;
+            }
+
             time += Time.deltaTime;
+
             float t = time / duration;
 
             group.alpha = Mathf.Lerp(startAlpha, endAlpha, t);
@@ -169,13 +187,25 @@ public class SubtitleController : MonoBehaviour
 
     public void ShowSubtitle(string text)
     {
-        if (canvasGroup.alpha == 0)
-        {
-            StartCoroutine(FadeCanvasGroup(canvasGroup, 0.25f, true));
-        }
+        StopCoroutine("FadeOutRoutine");
+
+        StartCoroutine(FadeCanvasGroup(canvasGroup, 0.25f, true));
+
         subs.text = text;
     }
+    public void PauseSubtitles()
+    {
+        paused = true;
+    }
 
+    public void ResumeSubtitles()
+    {
+        paused = false;
+        if (!string.IsNullOrEmpty(subs.text))
+        {
+            canvasGroup.alpha = 1f;
+        }
+    }
     public void HideSubtitle()
     {
         StartCoroutine(FadeCanvasGroup(canvasGroup, 1f, false));

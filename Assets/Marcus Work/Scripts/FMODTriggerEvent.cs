@@ -28,7 +28,7 @@ public class FMODTriggerEvent : MonoBehaviour
 
     public UnityEvent openDialogueDoor;
     public event Action OnEventFinished;
-
+    public static FMODTriggerEvent ActiveDialogue;
     private void Start()
     {
         subs = GameObject.Find("SubtitleUI").GetComponent<SubtitleController>();
@@ -47,6 +47,8 @@ public class FMODTriggerEvent : MonoBehaviour
 
     private void PlayEvent()
     {
+        ActiveDialogue = this;
+
         instance = RuntimeManager.CreateInstance(soundEvent);
 
         // Set the FMOD parameter before starting
@@ -58,7 +60,31 @@ public class FMODTriggerEvent : MonoBehaviour
         instance.start();
         subs.StartSubs((int)parameterValue);
     }
+    public void PauseDialogue()
+    {
+        if (instance.isValid())
+        {
+            instance.setPaused(true);
+        }
 
+        if (subs != null)
+        {
+            subs.PauseSubtitles();
+        }
+    }
+
+    public void ResumeDialogue()
+    {
+        if (instance.isValid())
+        {
+            instance.setPaused(false);
+        }
+
+        if (subs != null)
+        {
+            subs.ResumeSubtitles();
+        }
+    }
     private void Update()
     {
         if (instance.isValid())
@@ -73,12 +99,20 @@ public class FMODTriggerEvent : MonoBehaviour
                 openDialogueDoor.Invoke();
 
                 OnEventFinished?.Invoke();
+                if (ActiveDialogue == this)
+                {
+                    ActiveDialogue = null;
+                }
             }
         }
     }
 
     private void OnDestroy()
     {
+        if (ActiveDialogue == this)
+        {
+            ActiveDialogue = null;
+        }
         if (instance.isValid())
         {
             instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
