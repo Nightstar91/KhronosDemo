@@ -99,7 +99,7 @@ public class PlayerHud : BasicMenu
         if (settingMenu.GetSubtitleCheck())
             OpenSubtitlePanel();
         else
-            CloseSubtitlePanel();
+           // CloseSubtitlePanel();
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;

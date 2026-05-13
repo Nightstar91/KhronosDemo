@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -154640,20 +154639,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1699408085}
+      objectReference: {fileID: 1699408087}
     - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UpdateSubtitle
+      value: CloseSubtitlePanel
       objectReference: {fileID: 0}
     - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: SettingMenu, Assembly-CSharp
+      value: PlayerHud, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayerHud, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8548685702938615727, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -154664,15 +154675,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
---- !u!114 &1699408085 stripped
+--- !u!114 &1699408087 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2572694069025550162, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7863384187396744726, guid: 1ee8ec378d201c441bb26ad3fc20c595, type: 3}
   m_PrefabInstance: {fileID: 1699408084}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b500c0ae046af3c4b856d8f540a1b7d3, type: 3}
+  m_Script: {fileID: 11500000, guid: bba4d051a3e440d4da79d2eec7fd0858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1700999628 stripped
