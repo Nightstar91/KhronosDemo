@@ -30,7 +30,7 @@ public class SettingMenu : MonoBehaviour
         fovText = GameObject.Find("SettingFOVAmountText");
         fovAmount = PlayerPrefs.GetFloat("Fov", 70);
 
-        subtitleToggle = GameObject.Find("SubtitleCheck").GetComponent<Toggle>();
+        //subtitleToggle = GameObject.Find("SubtitleCheck").GetComponent<Toggle>();
 
 
         sensitivityText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", sensitivityAmount);
@@ -40,7 +40,7 @@ public class SettingMenu : MonoBehaviour
         fovSlider.GetComponent<Slider>().value = fovAmount;
 
         isSubtitleEnable = PlayerPrefs.GetInt("SubtitleBool", 1);
-        subtitleToggle.SetIsOnWithoutNotify(isSubtitleEnable == 1);
+        //subtitleToggle.SetIsOnWithoutNotify(isSubtitleEnable == 1);
     }
 
 
