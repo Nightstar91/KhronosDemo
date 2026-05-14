@@ -37,7 +37,10 @@ public class SettingMenu : MonoBehaviour
         fovText.GetComponent<TextMeshProUGUI>().text = string.Format("{0}", fovAmount);
 
         sensitivitySlider.GetComponent<Slider>().value = sensitivityAmount * 100;
-        fovSlider.GetComponent<Slider>().value = fovAmount; 
+        fovSlider.GetComponent<Slider>().value = fovAmount;
+
+        isSubtitleEnable = PlayerPrefs.GetInt("SubtitleBool", 1);
+        subtitleToggle.SetIsOnWithoutNotify(isSubtitleEnable == 1);
     }
 
 
@@ -65,13 +68,10 @@ public class SettingMenu : MonoBehaviour
         SaveFOV();
     }
 
+
     public void UpdateSubtitle()
     {
-        if(subtitleToggle.isOn)
-            isSubtitleEnable = 1;
-        else 
-            isSubtitleEnable = 0;
-
+        isSubtitleEnable = subtitleToggle.isOn ? 1 : 0;
         SaveSubtitleCheck();
     }
 

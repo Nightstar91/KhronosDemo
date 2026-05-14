@@ -20,6 +20,8 @@ public class PlayerHud : BasicMenu
     public bool isPaused = false;
     public bool isSubtitleEnabled;
 
+    private SubtitleController subtitleController;
+
     public override void Awake()
     {
         base.Awake();
@@ -49,6 +51,13 @@ public class PlayerHud : BasicMenu
         player.moveAction.Enable();
         player.jumpAction.Enable();
         player.slideAction.Enable();
+
+        subtitleController = FindObjectOfType<SubtitleController>();
+
+        //if (settingMenu.GetSubtitleCheck())
+        //    OpenSubtitlePanel();
+        //else
+        //    CloseSubtitlePanel();
     }
 
     // Update is called once per frame
@@ -94,12 +103,6 @@ public class PlayerHud : BasicMenu
 
         // Updating the FOV
         player.playerCamera.fieldOfView = settingMenu.GetFOV();
-
-        // Updating the SubtitleCheck
-        if (settingMenu.GetSubtitleCheck())
-            OpenSubtitlePanel();
-        else
-           // CloseSubtitlePanel();
 
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
@@ -153,16 +156,22 @@ public class PlayerHud : BasicMenu
         exitGameButton.SetActive(true);
     }
 
-    public void OpenSubtitlePanel()
-    {
-        subtitlePanel.SetActive(true);
-    }
+    //public void OpenSubtitlePanel()
+    //{
+    //    subtitlePanel.SetActive(true);
+
+    //    if (subtitleController != null)
+    //        subtitleController.EnableSubtitles();
+    //}
 
 
-    public void CloseSubtitlePanel()
-    {
-        subtitlePanel.SetActive(false);
-    }
+    //public void CloseSubtitlePanel()
+    //{
+    //    subtitlePanel.SetActive(false);
+
+    //    if (subtitleController != null)
+    //        subtitleController.DisableSubtitles();
+    //}
 
 
     public void OpenResultPanel(bool failed)

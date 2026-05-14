@@ -37,6 +37,8 @@ public class SubtitleController : MonoBehaviour
     // =========================
     private Coroutine subtitleRoutine;
 
+    private bool subtitlesEnabled = true;
+
     private void Start()
     {
         subs = GetComponentInChildren<TMP_Text>();
@@ -44,6 +46,8 @@ public class SubtitleController : MonoBehaviour
 
         canvasGroup.alpha = 0f;
         subs.text = "";
+
+        subtitlesEnabled = PlayerPrefs.GetInt("SubtitleBool", 1) == 1;
     }
 
     public void StartSubs(int subtitleType)
@@ -155,6 +159,8 @@ public class SubtitleController : MonoBehaviour
 
     public void ShowSubtitle(string text)
     {
+        if (!subtitlesEnabled) return;
+
         // ensure fade-in always triggers correctly
         if (canvasGroup.alpha <= 0.01f)
         {
@@ -163,6 +169,22 @@ public class SubtitleController : MonoBehaviour
 
         subs.text = text;
     }
+
+
+    public void EnableSubtitles()
+    {
+        subtitlesEnabled = true;
+
+        if (!string.IsNullOrEmpty(subs.text))
+            StartCoroutine(FadeCanvasGroup(canvasGroup, 0.25f, true));
+    }
+
+    public void DisableSubtitles()
+    {
+        subtitlesEnabled = false;
+        HideSubtitle();
+    }
+
 
     public void HideSubtitle()
     {
