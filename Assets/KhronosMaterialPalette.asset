@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KhronosMaterialPalette
   m_EditorClassIdentifier: 
   array:
-  - {fileID: 2100000, guid: 2e7fcea51f77ec346a09c532dae8d7f7, type: 2}
+  - {fileID: 2100000, guid: 004186736e8153044aa09d263c6aeddc, type: 2}
   - {fileID: 2100000, guid: 02c9db519bae39f4d9ee55bac531cb5c, type: 2}
   - {fileID: 2100000, guid: 31c534afd88ad0842a8e66b76c189e6a, type: 2}
   - {fileID: 2100000, guid: b78028de33abc7342aecf218faa5d182, type: 2}
@@ -23,4 +23,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: bd20f2e5a297907469e174bc8580b1bc, type: 2}
   - {fileID: 2100000, guid: b7e914a3953272249b24cec99bda1846, type: 2}
   - {fileID: 2100000, guid: 2cce6f576c16af440a49ade6b3e94597, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 004186736e8153044aa09d263c6aeddc, type: 2}
