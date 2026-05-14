@@ -171,21 +171,6 @@ public class SubtitleController : MonoBehaviour
     }
 
 
-    public void EnableSubtitles()
-    {
-        subtitlesEnabled = true;
-
-        if (!string.IsNullOrEmpty(subs.text))
-            StartCoroutine(FadeCanvasGroup(canvasGroup, 0.25f, true));
-    }
-
-    public void DisableSubtitles()
-    {
-        subtitlesEnabled = false;
-        HideSubtitle();
-    }
-
-
     public void HideSubtitle()
     {
         StartCoroutine(FadeCanvasGroup(canvasGroup, 1f, false));
