@@ -36,7 +36,8 @@ Transform:
   m_LocalPosition: {x: -74.97461, y: -18.48651, z: 332.7114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 890645338157668004}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6381719818032947310
@@ -311,7 +312,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054071509602400906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -395,8 +396,7 @@ MonoBehaviour:
   launchForce: 95
   launchDirection: {x: 0, y: 1.1, z: 1}
   useLocalDirection: 0
-  forceMode: 2
-  characterControllerImpulseDuration: 0.35
+  disableControlDuration: 1
 --- !u!65 &158283344608406697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -440,6 +440,81 @@ MonoBehaviour:
   playOnce: 1
   parameterName: LevelSelect
   parameterValue: 0
-  startDialogueDoorUnlock:
+  subs: {fileID: 0}
+  openDialogueDoor:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &853023429543309647
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2131051784681857926}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.025390625
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.335
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.16171265
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000027269125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+      propertyPath: m_Name
+      value: Jump Pad 2 V2.0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+--- !u!4 &890645338157668004 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31d2e67e79c610145bdbd408879c35bc, type: 3}
+  m_PrefabInstance: {fileID: 853023429543309647}
+  m_PrefabAsset: {fileID: 0}

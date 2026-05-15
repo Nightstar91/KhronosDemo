@@ -70,8 +70,7 @@ MonoBehaviour:
   allScenes:
   - Main Menu
   - Tutorial
-  - Challenge
-  - ResultScreen
+  - EndDemo
 --- !u!114 &6580556048806354418
 MonoBehaviour:
   m_ObjectHideFlags: 0

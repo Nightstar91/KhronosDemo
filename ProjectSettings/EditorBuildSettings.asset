@@ -12,11 +12,8 @@ EditorBuildSettings:
     path: Assets/Chris Work/Scene/Tutorial.unity
     guid: 25c3ce7e315f0aa42977fbefa1613f48
   - enabled: 1
-    path: Assets/Chris Work/Scene/Challenge.unity
-    guid: 09430660270157747b2aae7edcbff361
-  - enabled: 1
-    path: Assets/Chris Work/Scene/ResultScreen.unity
-    guid: ef4dbfe4e05d9054ebe12d5684665264
+    path: Assets/Chris Work/Scene/EndDemo.unity
+    guid: 68e43c827048e7e4bbaa387f0e49b8ee
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f04ff6965bbfdd84199b5305cf3d233c, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

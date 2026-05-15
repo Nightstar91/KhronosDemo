@@ -9,6 +9,8 @@ public class MainMenu : BasicMenu
     public override void Awake()
     {
         base.Awake();
+
+        settingBackButton.SetActive(false);
     }
 
     private void Start()
